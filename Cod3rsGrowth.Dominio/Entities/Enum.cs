@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Cod3rsGrowth.Dominio
+namespace Cod3rsGrowth.Dominio.Entities
 {
     enum Enum : int
     {
@@ -12,6 +12,7 @@ namespace Cod3rsGrowth.Dominio
         Preto = 2,
         Branco = 3,
         Vermelho = 4,
-        Prata = 5
+        Prata = 5,
+        Azul = 6
     }
 }
