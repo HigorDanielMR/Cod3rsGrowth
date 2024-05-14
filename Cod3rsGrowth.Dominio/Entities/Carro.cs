@@ -4,10 +4,12 @@ namespace Cod3rsGrowth.Dominio.Entities
 {
     class Carro
     {
+        public int Id { get; set; }
+        public Marcas marca { get; set; }
         public string Modelo { get; set; }
-        public int ID { get; set; }
-        public decimal ValorDoVeiculo { get; set; }
-        public bool Disponivel { get; set; }
         public Cores Cor { get; set; }
+        public decimal ValorDoVeiculo { get; set; }
+        public bool Flex { get; set; }
+        public bool Disponivel { get; set; }
     }
 }

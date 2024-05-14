@@ -2,13 +2,14 @@
 {
     class Venda
     {
-        public string Nome { get; set; }
-        public DateTime DataDeNascimento { get; set; }
-        public string Telefone { get; set; }
-        public string CPF { get; set; }
         public int Id { get; set; }
-        public int Total { get; set; }
-        public List<Carro> VendaVeiculo { get; set; }
+        public string Nome { get; set; }
+        public string Cpf { get; set; }
+        public string Email { get; set; }
+        public string Telefone { get; set; }
+        public List<Carro> ItensVendidos { get; set; }
         public DateTime DataDeCompra { get; set; }
+        public decimal ValorTotal { get; set; }
+        public bool Pago { get; set; }
     }
 }
