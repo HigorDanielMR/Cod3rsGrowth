@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Dominio.Enums
 {
-    enum Cores : int
+    public enum Cores : int
     {
         Grafite = 1,
         Preto = 2,

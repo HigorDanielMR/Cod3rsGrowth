@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Dominio.Entities
 {
-    class Car
+    class Carro
     {
         public string Modelo { get; set; }
         public int ID { get; set; }
