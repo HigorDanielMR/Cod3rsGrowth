@@ -1,4 +1,6 @@
-﻿namespace Cod3rsGrowth.Dominio.Entities
+﻿using Cod3rsGrowth.Dominio.Enums;
+
+namespace Cod3rsGrowth.Dominio.Entities
 {
     class Car
     {
@@ -7,6 +9,6 @@
         public DateTime DataDeCompra { get; set; }
         public decimal ValorDoVeiculo { get; set; }
         public bool Disponivel { get; set; }
-        public Enum Cores { get; set; }
+        public Cores Cores { get; set; }
     }
 }
