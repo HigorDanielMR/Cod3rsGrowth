@@ -1,12 +1,12 @@
 ﻿namespace Cod3rsGrowth.Dominio.Enums
 {
-    public enum Cores : int
+    public enum Cores
     {
-        Grafite = 1,
-        Preto = 2,
-        Branco = 3,
-        Vermelho = 4,
-        Prata = 5,
-        Azul = 6
+        Grafite,
+        Preto,
+        Branco,
+        Vermelho,
+        Prata,
+        Azul
     }
 }
