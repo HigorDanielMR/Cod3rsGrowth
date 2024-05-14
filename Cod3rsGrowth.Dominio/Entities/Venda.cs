@@ -8,7 +8,7 @@
         public string CPF { get; set; }
         public int Id { get; set; }
         public int Total { get; set; }
-        public List<Carro> VendaVeiculos { get; set; }
+        public List<Carro> VendaVeiculo { get; set; }
         public DateTime DataDeCompra { get; set; }
     }
 }
