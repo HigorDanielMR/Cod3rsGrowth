@@ -7,6 +7,7 @@
         public DateTime DataDeRetirada { get; set; }
         public DateTime DataDeEntrega { get; set; }
         public double ValorDoAluguel { get; set; }
+        public bool Alugado { get; set; }
         public Enum Cores { get; set; }
     }
 }
