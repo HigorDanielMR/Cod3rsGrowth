@@ -10,16 +10,5 @@
         public int Total { get; set; }
         public List<Carro> CarrinhoDeCompra { get; set; }
         public DateTime DataDeCompra { get; set; }
-
-        public Vendas(string nome, DateTime dataDeNascimento, string telefone, string cPF, int id, int total, DateTime dataDeCompra)
-        {
-            Nome = nome;
-            DataDeNascimento = dataDeNascimento;
-            Telefone = telefone;
-            CPF = cPF;
-            Id = id;
-            Total = total;
-            DataDeCompra = dataDeCompra;
-        }
     }
 }
