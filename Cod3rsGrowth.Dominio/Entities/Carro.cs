@@ -10,6 +10,5 @@ namespace Cod3rsGrowth.Dominio.Entities
         public Cores Cor { get; set; }
         public decimal ValorDoVeiculo { get; set; }
         public bool Flex { get; set; }
-        public bool Disponivel { get; set; }
     }
 }
