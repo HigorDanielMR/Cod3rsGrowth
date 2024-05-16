@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Dominio.Enums
 {
-    enum Marcas
+    public enum Marcas
     {
         Toyota,
         Honda,
