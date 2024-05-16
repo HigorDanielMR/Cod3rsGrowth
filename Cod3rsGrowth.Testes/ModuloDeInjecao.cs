@@ -1,6 +1,11 @@
-﻿namespace Cod3rsGrowth.Testes
+﻿using Microsoft.Extensions.DependencyInjection;
+
+namespace Cod3rsGrowth.Testes
 {
-    class ModuloDeInjecao
+    public static class ModuloDeInjecao
     {
+        public static void BindService(ServiceCollection servicos)
+        {
+        }
     }
 }
