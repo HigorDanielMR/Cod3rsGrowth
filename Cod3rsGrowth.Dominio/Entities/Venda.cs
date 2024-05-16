@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Dominio.Entities
 {
-    class Venda
+    public class Venda
     {
         public int Id { get; set; }
         public string Nome { get; set; }
