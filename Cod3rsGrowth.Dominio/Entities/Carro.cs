@@ -2,7 +2,7 @@
 
 namespace Cod3rsGrowth.Dominio.Entities
 {
-    class Carro
+    public class Carro
     {
         public int Id { get; set; }
         public Marcas Marca { get; set; }
@@ -10,5 +10,6 @@ namespace Cod3rsGrowth.Dominio.Entities
         public Cores Cor { get; set; }
         public decimal ValorDoVeiculo { get; set; }
         public bool Flex { get; set; }
+
     }
 }
