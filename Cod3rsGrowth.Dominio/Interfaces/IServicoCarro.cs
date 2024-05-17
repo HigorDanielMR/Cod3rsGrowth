@@ -2,5 +2,6 @@
 {
     public interface IServicoCarro
     {
+        public void CriarCarro();
     }
 }

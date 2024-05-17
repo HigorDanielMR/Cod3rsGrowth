@@ -2,5 +2,6 @@
 {
     public interface IServicoVenda
     {
+        public void CriarVenda();
     }
 }
