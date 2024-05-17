@@ -1,6 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Entities;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Testes
 {

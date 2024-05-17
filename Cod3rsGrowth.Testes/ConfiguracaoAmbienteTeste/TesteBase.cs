@@ -1,5 +1,4 @@
-﻿using Xunit.Microsoft.DependencyInjection;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
 {
