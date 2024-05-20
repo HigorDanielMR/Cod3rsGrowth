@@ -1,32 +1,53 @@
-﻿using Cod3rsGrowth.Testes;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Cod3rsGrowth.Dominio.Entities;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Microsoft.Extensions.DependencyInjection;
 using Xunit;
-using Cod3rsGrowth.Infra.Interfaces;
-using Cod3rsGrowth.Infra.Repositorios;
 
 
 public class Teste : TesteBase
 {
-    private IRepositorio _repositorioMock;
+    private readonly IServicoCarro _servicoCarro;
+
     public Teste()
     {
-        _repositorioMock = ServiceProvider.GetService<IRepositorio>();
+        _servicoCarro = ServiceProvider.GetService<IServicoCarro>()
+            ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoCarro)}]");
     }
+
     [Fact]
-    public void CriarCarroECriarVenda()
+    public void ObterTodos_deve_retornar_lista_vazia()
     {
-        var listaSingleton = _repositorioMock.ObterTodos();
+        //arrange
 
-        var listaCarro = listaSingleton.RepositorioCarro;
-        var listaVenda = listaSingleton.RepositorioVenda;
-        var pagamento = false;
+        //act
+        var carros = _servicoCarro.ObterTodos();
 
-        if (listaVenda[0].ValorTotal == listaCarro[0].ValorDoVeiculo)
+        //asset
+        Assert.NotNull(carros);
+        Assert.Equal(0, carros?.Count);
+    }
+
+    [Fact]
+    public void Criar_deve_salvar_Carro_dentro_do_banco()
+    {
+        //arrange
+        var carro = new Carro()
         {
-            pagamento = true;
-        }
+            Cor = Cores.Azul,
+            Marca = Marcas.Honda,
+            Modelo = "asdf",
+            ValorDoVeiculo = 12000
+        };
 
-        Assert.Equal(true, pagamento);
+        _servicoCarro.Criar(carro);
+
+        //act
+        var carros = _servicoCarro.ObterTodos();
+
+        //asset
+        Assert.NotNull(carros);
+        Assert.Equal(1, carros?.Count);
     }
 }

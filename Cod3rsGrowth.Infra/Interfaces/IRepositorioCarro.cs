@@ -3,8 +3,9 @@ using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Infra.Interfaces
 {
-    public interface IRepositorio
+    public interface IRepositorioCarro
     {
-        public ListaSingleton ObterTodos();
+        List<Carro> ObterTodos();
+        void Criar(Carro carro);
     }
 }
