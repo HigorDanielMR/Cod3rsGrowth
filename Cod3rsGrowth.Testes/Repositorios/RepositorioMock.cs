@@ -11,28 +11,12 @@ namespace Cod3rsGrowth.Testes
 
         public RepositorioMock()
         {
-            Carro carro = new()
-            {
-                Id = 1,
-                Marca = Marcas.Honda,
-                Modelo = "Civic",
-                Cor = Cores.Grafite,
-                ValorDoVeiculo = 100000,
-                Flex = true
-            };
+            Carro carro = new Carro();
+            carro.ValorDoVeiculo = 100000;
             Singleton.RepositorioCarro.Add(carro);
 
-            Venda venda = new()
-            {
-                Id = 1,
-                Nome = "Civic",
-                Cpf = "8181818",
-                Email = "email",
-                Telefone = "919191919",
-                DataDeCompra = DateTime.Now,
-                ValorTotal = 1000000,
-                Pago = true
-            };
+            Venda venda = new Venda();
+            venda.ValorTotal = 100000;
             Singleton.RepositorioVenda.Add(venda);
         }
 
