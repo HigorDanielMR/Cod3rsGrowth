@@ -4,10 +4,10 @@ namespace Cod3rsGrowth.Dominio.Interfaces
 {
     public interface IServicoCarro
     {
-        public List<Carro> ObterTodos();
-        public void Criar(Carro carro);
-        public void ObterCarroPorId();
-        public void EditarCarro();
-        public void RemoverCarro();
+        List<Carro> ObterTodos();
+        void Criar(Carro carro);
+        void ObterCarroPorId();
+        void EditarCarro();
+        void RemoverCarro();
     }
 }

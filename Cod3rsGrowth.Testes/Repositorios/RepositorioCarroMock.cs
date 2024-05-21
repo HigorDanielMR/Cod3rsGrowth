@@ -7,10 +7,6 @@ namespace Cod3rsGrowth.Testes
 {
     public class RepositorioCarroMock : IRepositorioCarro
     {
-        public RepositorioCarroMock()
-        {
-        }
-
         public List<Carro> RepositorioCarro = ListaSingleton.Instance.RepositorioCarro;
 
         public List<Carro> ObterTodos()

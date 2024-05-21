@@ -7,10 +7,6 @@ namespace Cod3rsGrowth.Testes
 {
     public class RepositorioVendaMock : IRepositorioVenda
     {
-        public RepositorioVendaMock()
-        {
-        }
-
         public List<Venda> RepositorioVenda = ListaSingleton.Instance.RepositorioVenda;
 
         public List<Venda> ObterTodos()

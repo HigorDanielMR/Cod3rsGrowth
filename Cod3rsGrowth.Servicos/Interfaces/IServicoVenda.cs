@@ -4,10 +4,10 @@ namespace Cod3rsGrowth.Dominio.Interfaces
 {
     public interface IServicoVenda
     {
-        public List<Venda> ObterTodos();
-        public void Criar(Venda venda);
-        public void ObterVendaPorId();
-        public void EditarVenda();
-        public void RemoverVenda();
+        List<Venda> ObterTodos();
+        void Criar(Venda venda);
+        void ObterVendaPorId();
+        void EditarVenda();
+        void RemoverVenda();
     }
 }
