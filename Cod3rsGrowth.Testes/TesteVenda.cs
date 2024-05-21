@@ -41,7 +41,7 @@ namespace Cod3rsGrowth.Testes
 
             //asset
             Assert.NotNull(vendas);
-            Assert.Equal(0, vendas?.Count);
+            Assert.Equivalent(0, vendas?.Count);
         }
 
         [Fact]
