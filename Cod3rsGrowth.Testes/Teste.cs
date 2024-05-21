@@ -9,11 +9,15 @@ using Xunit;
 public class Teste : TesteBase
 {
     private readonly IServicoCarro _servicoCarro;
+    private readonly IServicoVenda _servicoVenda;
 
     public Teste()
     {
         _servicoCarro = ServiceProvider.GetService<IServicoCarro>()
             ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoCarro)}]");
+
+        _servicoVenda = ServiceProvider.GetService<IServicoVenda>()
+            ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoVenda)}]");
     }
 
     [Fact]
@@ -23,10 +27,14 @@ public class Teste : TesteBase
 
         //act
         var carros = _servicoCarro.ObterTodos();
+        var vendas = _servicoVenda.ObterTodos();
 
         //asset
         Assert.NotNull(carros);
         Assert.Equal(0, carros?.Count);
+
+        Assert.NotNull(vendas);
+        Assert.Equal(0, vendas?.Count);
     }
 
     [Fact]
@@ -41,13 +49,28 @@ public class Teste : TesteBase
             ValorDoVeiculo = 12000
         };
 
+        var venda = new Venda()
+        {
+            Nome = "Higor",
+            Cpf = "0808916812868971",
+            Email = "jhlkajshlhasl@",
+            Telefone = "09029097102012",
+            DataDeCompra = DateTime.Now,
+            ValorTotal = 12000
+        };
+
         _servicoCarro.Criar(carro);
+        _servicoVenda.Criar(venda);
 
         //act
         var carros = _servicoCarro.ObterTodos();
+        var vendas = _servicoVenda.ObterTodos();
 
         //asset
         Assert.NotNull(carros);
         Assert.Equal(1, carros?.Count);
+
+        Assert.NotNull(vendas);
+        Assert.Equal(1, vendas?.Count);
     }
 }

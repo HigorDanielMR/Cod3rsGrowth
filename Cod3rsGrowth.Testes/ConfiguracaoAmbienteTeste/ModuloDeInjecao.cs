@@ -13,6 +13,7 @@ namespace Cod3rsGrowth.Testes
             servicos.AddScoped<IServicoVenda, ServicoVenda>();
 
             servicos.AddScoped<IRepositorioCarro, RepositorioCarroMock>();
+            servicos.AddScoped<IRepositorioVenda, RepositorioVendaMock>();
         }
     }
 }
