@@ -3,7 +3,6 @@ using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using Cod3rsGrowth.Dominio.Services;
 using Cod3rsGrowth.Dominio.Enums;
 
 namespace Cod3rsGrowth.Testes
@@ -20,7 +19,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterTodos_deve_retornar_o_tipo_da_lista()
+        public void ObterTodosVaiNoBancoDeDadosEDeveRetornarTipoDaLista()
         {
             //arrange
 
@@ -33,38 +32,23 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterTodos_deve_retornar_lista_vazia()
+        public void ObterTodosVaiNoBancoDeDadosEDeveRetornarListaComDados()
         {
             //arrange
 
             //act
-            var carros = _servicoCarro.ObterTodos();
-
-            //asset
-            Assert.NotNull(carros);
-            Assert.Equal(0, carros?.Count);
-        }
-
-        [Fact]
-        public void ObterTodos_deve_retornar_lista_com_dados()
-        {
-            //arrange
-
-            //act
-            var carros = _servicoCarro.ObterTodos();
             var novocarro = new Carro
             {
                 Modelo = "Civic",
                 Marca = Marcas.Honda,
                 ValorDoVeiculo = 100
             };
-            carros.Add(novocarro);
+            _servicoCarro.Criar(novocarro);
+            var carros = _servicoCarro.ObterTodos().FirstOrDefault();
 
             //asset
             Assert.NotNull(carros);
-            Assert.Equivalent(novocarro.Modelo, carros[0].Modelo);
-            Assert.Equivalent(novocarro.Marca, carros[0].Marca);
-            Assert.Equivalent(novocarro.ValorDoVeiculo, carros[0].ValorDoVeiculo);
+            Assert.Equivalent(novocarro, carros);
         }
     }
 }
