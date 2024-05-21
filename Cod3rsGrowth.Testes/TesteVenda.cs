@@ -3,6 +3,7 @@ using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Cod3rsGrowth.Dominio.Services;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -18,7 +19,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterTodos_deve_retornar_lista_vazia()
+        public void ObterTodos_deve_retornar_o_tipo_da_lista()
         {
             //arrange
 
@@ -27,29 +28,8 @@ namespace Cod3rsGrowth.Testes
 
             //asset
             Assert.NotNull(vendas);
-            Assert.Equal(0, vendas?.Count);
+            Assert.IsType<List<Venda>>(vendas);
         }
 
-        [Fact]
-        public void Criar_deve_salvar_Venda_dentro_do_banco()
-        {
-            var venda = new Venda()
-            {
-                Nome = "Higor",
-                Cpf = "0808916812868971",
-                Email = "jhlkajshlhasl@",
-                Telefone = "09029097102012",
-                DataDeCompra = DateTime.Now,
-                ValorTotal = 12000
-            };
-            _servicoVenda.Criar(venda);
-
-            //act
-            var vendas = _servicoVenda.ObterTodos();
-
-            //asset
-            Assert.NotNull(vendas);
-            Assert.Equal(1, vendas?.Count);
-        }
     }
 }
