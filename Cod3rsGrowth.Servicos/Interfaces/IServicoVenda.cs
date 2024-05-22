@@ -6,7 +6,7 @@ namespace Cod3rsGrowth.Dominio.Interfaces
     {
         List<Venda> ObterTodos();
         void Criar(Venda venda);
-        void ObterVendaPorId();
+        Venda ObterVendaPorId(int id);
         void EditarVenda();
         void RemoverVenda();
     }

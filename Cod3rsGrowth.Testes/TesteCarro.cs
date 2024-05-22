@@ -4,17 +4,23 @@ using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cod3rsGrowth.Testes
 {
 
     public class TesteCarro : TesteBase
     {
-        private readonly IServicoCarro CarregarServico;
+        private IServicoCarro _servicoCarro;
 
         public TesteCarro()
         {
-            CarregarServico = ServiceProvider.GetService<IServicoCarro>()
+             CarregarServico();
+        }
+
+        private void CarregarServico()
+        {
+            _servicoCarro = ServiceProvider.GetService<IServicoCarro>()
                 ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoCarro)}]");
         }
 
@@ -24,7 +30,7 @@ namespace Cod3rsGrowth.Testes
             //arrange
 
             //act
-            var carros = CarregarServico.ObterTodos();
+            var carros = _servicoCarro.ObterTodos();
 
             //asset
             Assert.NotNull(carros);
@@ -46,8 +52,8 @@ namespace Cod3rsGrowth.Testes
                 Cor = Cores.Branco,
                 Flex = true
             };
-            CarregarServico.Criar(novocarro);
-            var carros = CarregarServico.ObterTodos();
+            _servicoCarro.Criar(novocarro);
+            var carros = _servicoCarro.ObterTodos();
 
             List<Carro> listaTesteMock = new List<Carro>();
             listaTesteMock.Add(novocarro);
@@ -55,6 +61,43 @@ namespace Cod3rsGrowth.Testes
             //asset
             Assert.NotNull(carros);
             Assert.Equivalent(listaTesteMock, carros);
+        }
+
+        [Fact]
+        public void ObterPorId_ComDadosDisponiveis_DeveRetornarONomeDoCarroConformeOId()
+        {
+
+            //arrange
+            var Id1 = 291;
+            var Id2 = 762;
+            //act
+            var carro1 = new Carro
+            {
+                Id = 291,
+                Modelo = "Golf GTI",
+                Cor = Cores.Branco,
+                Flex= true,
+                ValorDoVeiculo = 100,
+                Marca = Marcas.Volkswagem
+            };
+            var carro2 = new Carro
+            {
+                Id = 762,
+                Modelo = "Civic",
+                Cor = Cores.Preto,
+                Flex = true,
+                ValorDoVeiculo = 100,
+                Marca = Marcas.Honda
+            };
+            _servicoCarro.Criar(carro1);
+            _servicoCarro.Criar(carro2);
+
+            var resultado1 = _servicoCarro.ObterCarroPorId(Id1);
+            var resultado2 = _servicoCarro.ObterCarroPorId(Id2);
+
+            //asset
+            Assert.Equal(carro1, resultado1);
+            Assert.Equal(carro2, resultado2);
         }
     }
 }

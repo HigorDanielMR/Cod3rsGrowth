@@ -3,17 +3,23 @@ using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Cod3rsGrowth.Dominio.Enums;
 
 namespace Cod3rsGrowth.Testes
 {
 
     public class TesteVenda : TesteBase
     {
-        private readonly IServicoVenda CarregarServico;
+        private IServicoVenda _servicoVenda;
 
         public TesteVenda()
         {
-            CarregarServico = ServiceProvider.GetService<IServicoVenda>()
+            CarregarServico();
+        }
+
+        private void CarregarServico()
+        {
+            _servicoVenda = ServiceProvider.GetService<IServicoVenda>()
                ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoVenda)}]");
         }
 
@@ -23,7 +29,7 @@ namespace Cod3rsGrowth.Testes
             //arrange
 
             //act
-            var vendas = CarregarServico.ObterTodos();
+            var vendas = _servicoVenda.ObterTodos();
 
             //asset
             Assert.NotNull(vendas);
@@ -59,8 +65,8 @@ namespace Cod3rsGrowth.Testes
                 DataDeCompra = DateTime.Now,
                 ValorTotal = 100
             };
-            CarregarServico.Criar(novavenda);
-            var vendas = CarregarServico.ObterTodos();
+            _servicoVenda.Criar(novavenda);
+            var vendas = _servicoVenda.ObterTodos();
 
             List<Venda> listaTesteMock = new List<Venda>();
             listaTesteMock.Add(novavenda);
@@ -68,6 +74,54 @@ namespace Cod3rsGrowth.Testes
             //asset
             Assert.NotNull(vendas);
             Assert.Equivalent(listaTesteMock, vendas);
+        }
+
+        [Fact]
+        public void ObterPorId_ComDadosDisponiveis_DeveRetornarONomeDoCarroConformeOId()
+        {
+
+            //arrange
+            var Id1 = 291;
+            var Id2 = 762;
+            //act
+            var venda1 = new Venda
+            {
+                Id = 291,
+                Nome = "Higor",
+                Cpf = "651651616",
+                DataDeCompra = DateTime.Now,
+                Email = "51313153@6323.com",
+                ItensVendidos = new List<Carro>
+                {
+                    new Carro
+                    {
+                        Id = 762,
+                        Modelo = "Civic",
+                        Cor = Cores.Preto,
+                        Flex = true,
+                        ValorDoVeiculo = 100,
+                        Marca = Marcas.Honda
+                    }                    
+                },
+                Pago = true,
+                Telefone = "65651651651",
+                ValorTotal = 100
+            };
+            var venda2 = new Venda
+            {
+                Id = 762,
+                Nome = "Daniel"
+            };
+            _servicoVenda.Criar(venda1);
+            _servicoVenda.Criar(venda2);
+            var novasVendas = new List<Venda>() { venda1, venda2 };
+
+            var resultado1 = _servicoVenda.ObterVendaPorId(291);
+            var resultado2 = _servicoVenda.ObterVendaPorId(762);
+
+            //asset
+            Assert.Equal(venda1, resultado1);
+            Assert.Equal(venda2, resultado2);
         }
     }
 }

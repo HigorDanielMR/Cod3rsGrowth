@@ -6,25 +6,25 @@ namespace Cod3rsGrowth.Dominio.Services
 {
     public class ServicoCarro : IServicoCarro
     {
-        private readonly IRepositorioCarro _repositorioCarro;
+        private readonly IRepositorioCarro RepositorioCarro;
         public ServicoCarro(IRepositorioCarro repositorioCarro)
         {
-            _repositorioCarro = repositorioCarro;
+            RepositorioCarro = repositorioCarro;
         }
 
         public List<Carro> ObterTodos()
         {
-            return _repositorioCarro.ObterTodos();
+            return RepositorioCarro.ObterTodos();
         }
 
-        public void ObterCarroPorId()
+        public Carro ObterCarroPorId(int id)
         {
-            return;
+            return RepositorioCarro.ObterCarroPorId(id);
         }
 
         public void Criar(Carro carro)
         {
-            _repositorioCarro.Criar(carro);
+            RepositorioCarro.Criar(carro);
         }
 
         public void EditarCarro()

@@ -14,6 +14,19 @@ namespace Cod3rsGrowth.Testes
             return RepositorioVenda;
         }
 
+        public Venda ObterVendaPorId(int id)
+        {
+            int i = 0;
+            for (i = 0; i < RepositorioVenda.Count; i++)
+            {
+                if (RepositorioVenda[i].Id == id)
+                {
+                    break;
+                }
+            }
+            return RepositorioVenda[i];
+        }
+
         public void Criar(Venda venda)
         {
             RepositorioVenda.Add(venda);
