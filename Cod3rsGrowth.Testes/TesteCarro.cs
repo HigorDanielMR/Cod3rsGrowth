@@ -1,30 +1,30 @@
 ﻿using Xunit;
 using Cod3rsGrowth.Dominio.Entities;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using Cod3rsGrowth.Dominio.Enums;
 
 namespace Cod3rsGrowth.Testes
 {
 
     public class TesteCarro : TesteBase
     {
-        private readonly IServicoCarro _servicoCarro;
+        private readonly IServicoCarro CarregarServico;
 
         public TesteCarro()
         {
-            _servicoCarro = ServiceProvider.GetService<IServicoCarro>()
+            CarregarServico = ServiceProvider.GetService<IServicoCarro>()
                 ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoCarro)}]");
         }
 
         [Fact]
-        public void ObterTodosVaiNoBancoDeDadosEDeveRetornarTipoDaLista()
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarListaComTipoCarro()
         {
             //arrange
 
             //act
-            var carros = _servicoCarro.ObterTodos();
+            var carros = CarregarServico.ObterTodos();
 
             //asset
             Assert.NotNull(carros);
@@ -32,23 +32,29 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterTodosVaiNoBancoDeDadosEDeveRetornarListaComDados()
+        public void ObterTodos_ComDadosDisponiveis_DeveRetornarUmaListaDeCarro()
         {
             //arrange
 
             //act
             var novocarro = new Carro
             {
+                Id = 2,
                 Modelo = "Civic",
                 Marca = Marcas.Honda,
-                ValorDoVeiculo = 100
+                ValorDoVeiculo = 100,
+                Cor = Cores.Branco,
+                Flex = true
             };
-            _servicoCarro.Criar(novocarro);
-            var carros = _servicoCarro.ObterTodos().FirstOrDefault();
+            CarregarServico.Criar(novocarro);
+            var carros = CarregarServico.ObterTodos();
+
+            List<Carro> listaTesteMock = new List<Carro>();
+            listaTesteMock.Add(novocarro);
 
             //asset
             Assert.NotNull(carros);
-            Assert.Equivalent(novocarro, carros);
+            Assert.Equivalent(listaTesteMock, carros);
         }
     }
 }
