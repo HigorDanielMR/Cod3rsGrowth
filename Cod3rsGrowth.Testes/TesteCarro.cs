@@ -5,6 +5,8 @@ using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using System.ComponentModel.DataAnnotations;
+using Cod3rsGrowth.Dominio.Services;
+using Cod3rsGrowth.Testes.Excessoes;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -45,7 +47,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novocarro = new Carro
             {
-                Id = 2,
+                Id = 0,
                 Modelo = "Civic",
                 Marca = Marcas.Honda,
                 ValorDoVeiculo = 100,
@@ -68,12 +70,12 @@ namespace Cod3rsGrowth.Testes
         {
 
             //arrange
-            var Id1 = 291;
-            var Id2 = 762;
+            var Id1 = 1;
+            var Id2 = 2;
             //act
             var carro1 = new Carro
             {
-                Id = 291,
+                Id = 1,
                 Modelo = "Golf GTI",
                 Cor = Cores.Branco,
                 Flex= true,
@@ -82,7 +84,7 @@ namespace Cod3rsGrowth.Testes
             };
             var carro2 = new Carro
             {
-                Id = 762,
+                Id = 2,
                 Modelo = "Civic",
                 Cor = Cores.Preto,
                 Flex = true,
@@ -98,6 +100,67 @@ namespace Cod3rsGrowth.Testes
             //asset
             Assert.Equal(carro1, resultado1);
             Assert.Equal(carro2, resultado2);
+        }
+
+        [Fact]
+        public void ObterPorId_ComDadosDisponiveis_DeveRetornarOTipoDoObjetoCarro()
+        {
+
+            //arrange
+            var Id1 = 3;
+            //act
+            var carro1 = new Carro
+            {
+                Id = 3,
+                Modelo = "Golf GTI",
+                Cor = Cores.Branco,
+                Flex = true,
+                ValorDoVeiculo = 100,
+                Marca = Marcas.Volkswagem
+            };
+            _servicoCarro.Criar(carro1);
+
+            var resultadoDaBusca = _servicoCarro.ObterCarroPorId(Id1);
+
+            Assert.IsType<Carro>(resultadoDaBusca);
+        }
+
+        [Fact]
+        public void ObterPorId_ComDadosDisponiveis_DeveRetornarExcessaoPorIdNaoEncontrado()
+        {
+
+            //arrange
+            var Id1 = 212;
+            var Id2 = 555;
+            //act
+            var carro1 = new Carro
+            {
+                Id = 4,
+                Modelo = "Golf GTI",
+                Cor = Cores.Branco,
+                Flex = true,
+                ValorDoVeiculo = 100,
+                Marca = Marcas.Volkswagem
+            };
+            var carro2 = new Carro
+            {
+                Id = 5,
+                Modelo = "Civic",
+                Cor = Cores.Preto,
+                Flex = true,
+                ValorDoVeiculo = 100,
+                Marca = Marcas.Honda
+            };
+            
+            _servicoCarro.Criar(carro1);
+            _servicoCarro.Criar(carro2);
+
+            var exception = Assert.Throws<MinhasExcessoes>(() => _servicoCarro.ObterCarroPorId(Id1));
+            var exception2 = Assert.Throws<MinhasExcessoes>(() => _servicoCarro.ObterCarroPorId(Id2));
+
+            //asset
+            Assert.Equal("Id não encontrado", exception.Message);
+            Assert.Equal("Id não encontrado", exception2.Message);
         }
     }
 }
