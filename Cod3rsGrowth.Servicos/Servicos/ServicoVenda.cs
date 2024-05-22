@@ -6,25 +6,25 @@ namespace Cod3rsGrowth.Dominio.Services
 {
     public class ServicoVenda : IServicoVenda
     {
-        private readonly IRepositorioVenda RepositorioVenda;
+        private readonly IRepositorioVenda _repositorioVenda;
         public ServicoVenda(IRepositorioVenda repositorioVenda)
         {
-            RepositorioVenda = repositorioVenda;
+            _repositorioVenda = repositorioVenda;
         }
 
         public List<Venda> ObterTodos()
         {
-            return RepositorioVenda.ObterTodos();
+            return _repositorioVenda.ObterTodos();
         }
 
         public Venda ObterVendaPorId(int id)
         {
-            return RepositorioVenda.ObterVendaPorId(id);
+            return _repositorioVenda.ObterVendaPorId(id);
         }
 
         public void Criar(Venda venda)
         {
-            RepositorioVenda.Criar(venda);
+            _repositorioVenda.Criar(venda);
         }
 
         public void EditarVenda()

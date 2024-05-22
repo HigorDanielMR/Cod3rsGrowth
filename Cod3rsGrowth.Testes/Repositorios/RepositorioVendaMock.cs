@@ -7,29 +7,29 @@ namespace Cod3rsGrowth.Testes
 {
     public class RepositorioVendaMock : IRepositorioVenda
     {
-        public List<Venda> RepositorioVenda = ListaSingleton.Instance.RepositorioVenda;
+        private List<Venda> _repositorioVenda = ListaSingleton.Instance.RepositorioVenda;
 
         public List<Venda> ObterTodos()
         {
-            return RepositorioVenda;
+            return _repositorioVenda;
         }
 
         public Venda ObterVendaPorId(int id)
         {
             int i = 0;
-            for (i = 0; i < RepositorioVenda.Count; i++)
+            for (i = 0; i < _repositorioVenda.Count; i++)
             {
-                if (RepositorioVenda[i].Id == id)
+                if (_repositorioVenda[i].Id == id)
                 {
                     break;
                 }
             }
-            return RepositorioVenda[i];
+            return _repositorioVenda[i];
         }
 
         public void Criar(Venda venda)
         {
-            RepositorioVenda.Add(venda);
+            _repositorioVenda.Add(venda);
         }
     }
 }
