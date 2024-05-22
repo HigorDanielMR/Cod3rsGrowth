@@ -1,6 +1,7 @@
-﻿using Cod3rsGrowth.Dominio.Servicos;
+﻿using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Microsoft.Extensions.DependencyInjection;
+using Cod3rsGrowth.Dominio.Services;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -10,6 +11,9 @@ namespace Cod3rsGrowth.Testes
         {
             servicos.AddScoped<IServicoCarro, ServicoCarro>();
             servicos.AddScoped<IServicoVenda, ServicoVenda>();
+
+            servicos.AddScoped<IRepositorioCarro, RepositorioCarroMock>();
+            servicos.AddScoped<IRepositorioVenda, RepositorioVendaMock>();
         }
     }
 }

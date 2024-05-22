@@ -1,4 +1,4 @@
-﻿namespace Cod3rsGrowth.Infra
+﻿namespace Servicos
 {
     public class Class1
     {
