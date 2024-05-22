@@ -17,9 +17,9 @@ namespace Cod3rsGrowth.Dominio.Services
             return _repositorioVenda.ObterTodos();
         }
 
-        public Venda ObterVendaPorId(int id)
+        public Venda ObterVendaPorId(int IdDoItem)
         {
-            return _repositorioVenda.ObterVendaPorId(id);
+            return _repositorioVenda.ObterVendaPorId(IdDoItem);
         }
 
         public void Criar(Venda venda)

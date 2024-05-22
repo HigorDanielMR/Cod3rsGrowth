@@ -7,6 +7,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
     {
         List<Venda> ObterTodos();
         void Criar(Venda venda);
-        Venda ObterVendaPorId(int id);
+        Venda ObterVendaPorId(int IdDoItem);
     }
 }

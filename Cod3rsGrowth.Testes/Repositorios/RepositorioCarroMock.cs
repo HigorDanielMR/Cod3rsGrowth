@@ -14,17 +14,18 @@ namespace Cod3rsGrowth.Testes
             return _repositorioCarro;
         }
 
-        public Carro ObterCarroPorId(int id)
+        public Carro ObterCarroPorId(int IdDeBusca)
         {
-            int i = 0;
-            for (i = 0; i < _repositorioCarro.Count; i++)
+            Carro IdDoItem = new Carro();
+            foreach(var item in _repositorioCarro)
             {
-                if (_repositorioCarro[i].Id == id)
+                if (IdDeBusca == item.Id)
                 {
-                    break;
+                    IdDoItem = item;
+                    return IdDoItem;
                 }
             }
-            return _repositorioCarro[i];
+            return IdDoItem;
         }
 
         public void Criar(Carro carro)

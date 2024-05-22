@@ -14,17 +14,18 @@ namespace Cod3rsGrowth.Testes
             return _repositorioVenda;
         }
 
-        public Venda ObterVendaPorId(int id)
+        public Venda ObterVendaPorId(int IdDeBusca)
         {
-            int i = 0;
-            for (i = 0; i < _repositorioVenda.Count; i++)
+            Venda IdDoItem = new Venda();
+            foreach (var item in _repositorioVenda)
             {
-                if (_repositorioVenda[i].Id == id)
+                if (IdDeBusca == item.Id)
                 {
-                    break;
+                    IdDoItem = item;
+                    return IdDoItem;
                 }
             }
-            return _repositorioVenda[i];
+            return IdDoItem;
         }
 
         public void Criar(Venda venda)
