@@ -16,8 +16,7 @@ namespace Cod3rsGrowth.Testes
 
         public Venda ObterVendaPorId(int IdDeBusca)
         {
-            Venda vendaEncontrado = _repositorioVenda.Find(objeto => objeto.Id == IdDeBusca);
-            return vendaEncontrado;
+            return _repositorioVenda.Find(objeto => objeto.Id == IdDeBusca);
         }
 
         public void Criar(Venda venda)

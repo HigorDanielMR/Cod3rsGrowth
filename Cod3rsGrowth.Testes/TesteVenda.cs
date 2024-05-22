@@ -110,7 +110,25 @@ namespace Cod3rsGrowth.Testes
             var venda2 = new Venda
             {
                 Id = 762,
-                Nome = "Daniel"
+                Nome = "Daniel",
+                Cpf = "848941651615",
+                DataDeCompra = DateTime.Now,
+                Email = "ahshlahs@asa.com",
+                ItensVendidos= new List<Carro>
+                {
+                    new Carro
+                    {
+                        Id = 291,
+                        Modelo = "Golf GTI",
+                        Cor = Cores.Branco,
+                        Flex= true,
+                        ValorDoVeiculo = 100,
+                        Marca = Marcas.Volkswagem
+                    }
+                },
+                Pago = true,
+                Telefone = "01209091212",
+                ValorTotal = 100
             };
             _servicoVenda.Criar(venda1);
             _servicoVenda.Criar(venda2);
