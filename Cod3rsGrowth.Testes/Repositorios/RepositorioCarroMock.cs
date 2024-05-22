@@ -16,16 +16,8 @@ namespace Cod3rsGrowth.Testes
 
         public Carro ObterCarroPorId(int IdDeBusca)
         {
-            Carro IdDoItem = new Carro();
-            foreach(var item in _repositorioCarro)
-            {
-                if (IdDeBusca == item.Id)
-                {
-                    IdDoItem = item;
-                    return IdDoItem;
-                }
-            }
-            return IdDoItem;
+            Carro carroEncontrado = _repositorioCarro.Find(objeto => objeto.Id == IdDeBusca);
+            return carroEncontrado;
         }
 
         public void Criar(Carro carro)
