@@ -77,7 +77,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarONomeDoCarroConformeOId()
+        public void ObterPorId_ComDadosDisponiveis_DeveRetornarAVendaConformeOId()
         {
 
             //arrange
@@ -114,10 +114,9 @@ namespace Cod3rsGrowth.Testes
             };
             _servicoVenda.Criar(venda1);
             _servicoVenda.Criar(venda2);
-            var novasVendas = new List<Venda>() { venda1, venda2 };
 
-            var resultado1 = _servicoVenda.ObterVendaPorId(291);
-            var resultado2 = _servicoVenda.ObterVendaPorId(762);
+            var resultado1 = _servicoVenda.ObterVendaPorId(Id1);
+            var resultado2 = _servicoVenda.ObterVendaPorId(Id2);
 
             //asset
             Assert.Equal(venda1, resultado1);

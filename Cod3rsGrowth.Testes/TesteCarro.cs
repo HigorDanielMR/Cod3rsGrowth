@@ -64,7 +64,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarONomeDoCarroConformeOId()
+        public void ObterPorId_ComDadosDisponiveis_DeveRetornarOCarroConformeOId()
         {
 
             //arrange
