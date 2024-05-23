@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Testes
         public Carro ObterCarroPorId(int IdDeBusca)
         {
             return _repositorioCarro.Find(objeto => objeto.Id == IdDeBusca)
-                ?? throw new Exception("Id não encontrado.");
+                ?? throw new Exception($"O carro com ID {IdDeBusca} não foi encontrado");
         }
 
         public void Criar(Carro carro)

@@ -64,7 +64,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarOCarroConformeOId()
+        public void ObterPorId_ComIdExistente_DeveRetornarCarroEsperado()
         {
 
             //arrange
@@ -101,7 +101,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarOTipoDoObjetoCarro()
+        public void ObterPorId_ComIdExistente_DeveRetornarObjetoDoTipoCarro()
         {
 
             //arrange
@@ -124,7 +124,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarExcessaoPorIdNaoEncontrado()
+        public void ObterPorId_ComIdInexistente_DeveLancarExcecaoObjetoNaoEncontrado()
         {
 
             //arrange
@@ -156,8 +156,8 @@ namespace Cod3rsGrowth.Testes
             var exception2 = Assert.Throws<Exception>(() => _servicoCarro.ObterCarroPorId(Id2));
 
             //asset
-            Assert.Equal("Id não encontrado.", exception.Message);
-            Assert.Equal("Id não encontrado.", exception2.Message);
+            Assert.Equal($"O carro com ID {Id1} não foi encontrado", exception.Message);
+            Assert.Equal($"O carro com ID {Id2} não foi encontrado", exception2.Message);
         }
     }
 }

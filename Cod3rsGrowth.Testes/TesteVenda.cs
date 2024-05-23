@@ -77,7 +77,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarAVendaConformeOId()
+        public void ObterPorId_ComIdExistente_DeveRetornarVendaEsperada()
         {
 
             //arrange
@@ -145,7 +145,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarOTipoDoObjetoVenda()
+        public void ObterPorId_ComIdExistente_DeveRetornarObjetoDoTipoVenda()
         {
 
             //arrange
@@ -182,7 +182,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void ObterPorId_ComDadosDisponiveis_DeveRetornarExcessaoPorIdNaoEncontrado()
+        public void ObterPorId_ComIdInexistente_DeveLancarExcecaoObjetoNaoEncontrado()
         {
 
             //arrange
@@ -242,8 +242,8 @@ namespace Cod3rsGrowth.Testes
             var exception2 = Assert.Throws<Exception>(() => _servicoVenda.ObterVendaPorId(Id2));
 
             //asset
-            Assert.Equal("Id não encontrado.", exception.Message);
-            Assert.Equal("Id não encontrado.", exception2.Message);
+            Assert.Equal($"A venda com ID {Id1} não foi encontrado", exception.Message);
+            Assert.Equal($"A venda com ID {Id2} não foi encontrado", exception2.Message);
         }
     }
 }
