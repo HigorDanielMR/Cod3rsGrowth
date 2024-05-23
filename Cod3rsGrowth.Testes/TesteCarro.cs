@@ -4,9 +4,7 @@ using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using System.ComponentModel.DataAnnotations;
 using Cod3rsGrowth.Dominio.Services;
-using Cod3rsGrowth.Testes.Excessoes;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -154,13 +152,12 @@ namespace Cod3rsGrowth.Testes
             
             _servicoCarro.Criar(carro1);
             _servicoCarro.Criar(carro2);
-
-            var exception = Assert.Throws<MinhasExcessoes>(() => _servicoCarro.ObterCarroPorId(Id1));
-            var exception2 = Assert.Throws<MinhasExcessoes>(() => _servicoCarro.ObterCarroPorId(Id2));
+            var exception = Assert.Throws<Exception>(() => _servicoCarro.ObterCarroPorId(Id1));
+            var exception2 = Assert.Throws<Exception>(() => _servicoCarro.ObterCarroPorId(Id2));
 
             //asset
-            Assert.Equal("Id não encontrado", exception.Message);
-            Assert.Equal("Id não encontrado", exception2.Message);
+            Assert.Equal("Id não encontrado.", exception.Message);
+            Assert.Equal("Id não encontrado.", exception2.Message);
         }
     }
 }

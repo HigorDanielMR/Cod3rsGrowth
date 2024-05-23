@@ -1,6 +1,5 @@
 ﻿using Xunit;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Testes.Excessoes;
 using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
@@ -239,12 +238,12 @@ namespace Cod3rsGrowth.Testes
             _servicoVenda.Criar(venda1);
             _servicoVenda.Criar(venda2);
 
-            var exception = Assert.Throws<MinhasExcessoes>(() => _servicoVenda.ObterVendaPorId(Id1));
-            var exception2 = Assert.Throws<MinhasExcessoes>(() => _servicoVenda.ObterVendaPorId(Id2));
+            var exception = Assert.Throws<Exception>(() => _servicoVenda.ObterVendaPorId(Id1));
+            var exception2 = Assert.Throws<Exception>(() => _servicoVenda.ObterVendaPorId(Id2));
 
             //asset
-            Assert.Equal("Id não encontrado", exception.Message);
-            Assert.Equal("Id não encontrado", exception2.Message);
+            Assert.Equal("Id não encontrado.", exception.Message);
+            Assert.Equal("Id não encontrado.", exception2.Message);
         }
     }
 }

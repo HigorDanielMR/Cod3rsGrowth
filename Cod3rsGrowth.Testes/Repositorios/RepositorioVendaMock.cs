@@ -1,8 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
-using Cod3rsGrowth.Testes.Excessoes;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -17,15 +15,8 @@ namespace Cod3rsGrowth.Testes
 
         public Venda ObterVendaPorId(int IdDeBusca)
         {
-            var resultadoDabusca = _repositorioVenda.Find(objeto => objeto.Id == IdDeBusca);
-            if (resultadoDabusca == null)
-            {
-                throw new MinhasExcessoes("Id não encontrado");
-            }
-            else
-            {
-                return resultadoDabusca;
-            }
+            return _repositorioVenda.Find(objeto => objeto.Id == IdDeBusca)
+                ?? throw new Exception("Id não encontrado.");
         }
 
         public void Criar(Venda venda)
