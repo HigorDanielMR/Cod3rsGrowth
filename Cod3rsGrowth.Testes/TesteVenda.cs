@@ -4,6 +4,8 @@ using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Cod3rsGrowth.Dominio.Services;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -137,6 +139,161 @@ namespace Cod3rsGrowth.Testes
             var exception = Assert.Throws<Exception>(() => _servicoVenda.ObterPorId(IdDeBusca));
             //asset
             Assert.Equal($"A venda com ID {IdDeBusca} não foi encontrada", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoAVenda_DeveRetornarExceptionEsperadaParaNome()
+        {
+            //arrange
+
+            var novaVenda = new Venda
+            {
+                Cpf = "333.333.333-33",
+                Email = "51313153@6323.com",
+                ItensVendidos = new List<Carro>
+                {
+                    new Carro
+                    {
+                        Id = 23,
+                        Modelo = "Golf GTI",
+                        Cor = Cores.Branco,
+                        Flex= true,
+                        ValorDoVeiculo = 100,
+                        Marca = Marcas.Volkswagem
+                    }
+                },
+                Pago = true,
+                Telefone = "62983052721",
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+
+            Assert.Equivalent("Campo nome não preenchido.", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaCpf()
+        {
+            //arrange
+            var novaVenda = new Venda
+            {
+                Nome = "Higor",
+                Email = "higordaniel@gmail.com",
+                ItensVendidos = new List<Carro>
+                {
+                    new Carro
+                    {
+                        Id = 23,
+                        Modelo = "Golf GTI",
+                        Cor = Cores.Branco,
+                        Flex= true,
+                        ValorDoVeiculo = 100,
+                        Marca = Marcas.Volkswagem
+                    }
+                },
+                Pago = true,
+                Telefone = "65651651651",
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+
+            Assert.Equivalent("Campo cpf não preenchido", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaFlex()
+        {
+            //arrange
+            var novaVenda = new Venda
+            {
+                Nome = "Higor",
+                Cpf = "651651616",
+                ItensVendidos = new List<Carro>
+                {
+                    new Carro
+                    {
+                        Id = 23,
+                        Modelo = "Golf GTI",
+                        Cor = Cores.Branco,
+                        Flex= true,
+                        ValorDoVeiculo = 100,
+                        Marca = Marcas.Volkswagem
+                    }
+                },
+                Pago = true,
+                Telefone = "65651651651",
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+
+            Assert.Equivalent("Campo e-mail não preenchido.", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaTelefone()
+        {
+            //arrange
+            var novaVenda = new Venda
+            {
+                Nome = "Higor",
+                Cpf = "651651616",
+                Email = "51313153@6323.com",
+                ItensVendidos = new List<Carro>
+                {
+                    new Carro
+                    {
+                        Id = 23,
+                        Modelo = "Golf GTI",
+                        Cor = Cores.Branco,
+                        Flex= true,
+                        ValorDoVeiculo = 100,
+                        Marca = Marcas.Volkswagem
+                    }
+                },
+                Pago = true,
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+
+            Assert.Equivalent("Campo telefone não preenchido.", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaItensVendidos()
+        {
+            //arrange
+            var novaVenda = new Venda
+            {
+                Nome = "Higor",
+                Cpf = "651651616",
+                Email = "51313153@6323.com",
+                ItensVendidos = new List<Carro>
+                {
+                    new Carro
+                    {
+                        Cor = Cores.Branco,
+                        Flex= true,
+                        ValorDoVeiculo = 100,
+                        Marca = Marcas.Volkswagem
+                    }
+                },
+                Pago = true,
+                Telefone = "65651651651",
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+
+            Assert.Equivalent("Campo modelo não preenchido.", exception.Message);
         }
     }
 }

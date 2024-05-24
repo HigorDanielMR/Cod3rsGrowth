@@ -4,6 +4,7 @@ using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using FluentValidation;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -110,6 +111,98 @@ namespace Cod3rsGrowth.Testes
             var exception = Assert.Throws<Exception>(() => _servicoCarro.ObterPorId(IdDeBusca));
             //asset
             Assert.Equal($"O carro com ID {IdDeBusca} não foi encontrado", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaModelo()
+        {
+            //arrange
+            var novoCarro = new Carro
+            {
+                Modelo = "a",
+                Cor = Cores.Branco,
+                Flex = true,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = 1000
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+
+            Assert.Equivalent("Modelo inválido, precisa ter no mínimo 2 caracteres.", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaCor()
+        {
+            //arrange
+            var novoCarro = new Carro
+            {
+                Modelo = "C180",
+                Flex = true,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = 1000
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+
+            Assert.Equivalent("Campo cor não preenchido.", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaFlex()
+        {
+            //arrange
+            var novoCarro = new Carro
+            {
+                Modelo = "C180",
+                Cor = Cores.Branco,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = 1000
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+
+            Assert.Equivalent("Campo flex não preenchido.", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaMarca()
+        {
+            //arrange
+            var novoCarro = new Carro
+            {
+                Modelo = "C180",
+                Cor = Cores.Branco,
+                Flex = true,
+                ValorDoVeiculo = 1000
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+
+            Assert.Equivalent("Campo marca não preenchido.", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaValorDoVeiculo()
+        {
+            //arrange
+            var novoCarro = new Carro
+            {
+                Modelo = "C180",
+                Cor = Cores.Branco,
+                Flex = true,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = -1
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+
+            Assert.Equivalent("O valor do veiculo deve ser maior que zero.", exception.Message);
         }
     }
 }
