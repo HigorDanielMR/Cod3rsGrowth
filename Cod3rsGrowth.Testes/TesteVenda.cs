@@ -11,10 +11,12 @@ namespace Cod3rsGrowth.Testes
     public class TesteVenda : TesteBase
     {
         private IServicoVenda _servicoVenda;
+        private List<Venda> _listaMock;
 
         public TesteVenda()
         {
             CarregarServico();
+            _listaMock = InicializarDadosMock();
         }
 
         private void CarregarServico()
@@ -84,22 +86,21 @@ namespace Cod3rsGrowth.Testes
         {
             //arrange
             //act
-            var vendas = _servicoVenda.ObterTodos();
+            var vendasDoBanco = _servicoVenda.ObterTodos();
             //asset
-            Assert.NotNull(vendas);
-            Assert.IsType<List<Venda>>(vendas);
+            Assert.NotNull(vendasDoBanco);
+            Assert.IsType<List<Venda>>(vendasDoBanco);
         }
 
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarUmaListaDeVendas()
         {
             //arrange
-            List<Venda> listaTesteMock = InicializarDadosMock();
             //act
-            var listaTesteBanco = _servicoVenda.ObterTodos();
+            var vendasDoBanco = _servicoVenda.ObterTodos();
             //asset
-            Assert.NotNull(listaTesteBanco);
-            Assert.Equivalent(listaTesteMock, listaTesteBanco);
+            Assert.NotNull(vendasDoBanco);
+            Assert.Equivalent(_listaMock, vendasDoBanco);
         }
 
         [Fact]
@@ -107,9 +108,9 @@ namespace Cod3rsGrowth.Testes
         {
             //arrange
             var IdBusca = 1;
-            var vendaMock = InicializarDadosMock().FirstOrDefault();
             //act
-            var vendaDoBanco = _servicoVenda.ObterVendaPorId(IdBusca);
+            var vendaMock = _listaMock[0];
+            var vendaDoBanco = _servicoVenda.ObterPorId(IdBusca);
             //asset
             Assert.NotNull(vendaDoBanco);
             Assert.Equivalent(vendaMock, vendaDoBanco);
@@ -119,23 +120,23 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarObjetoDoTipoVenda()
         {
             //arrange
-            var Id1 = 2;
+            var IdDeBusca = 2;
             //act
-            var listaCarroMock = InicializarDadosMock();
-            var resultadoDaBusca = _servicoVenda.ObterVendaPorId(Id1);
+            _listaMock.FirstOrDefault();
+            var vendaDoTipoEsperado = _servicoVenda.ObterPorId(IdDeBusca);
             //asset
-            Assert.IsType<Venda>(resultadoDaBusca);
+            Assert.IsType<Venda>(vendaDoTipoEsperado);
         }
 
         [Fact]
         public void ObterPorId_ComIdInexistente_DeveLancarExcecaoObjetoNaoEncontrado()
         {
             //arrange
-            var Id1 = 765;
+            var IdDeBusca = 765;
             //act
-            var exception = Assert.Throws<Exception>(() => _servicoVenda.ObterVendaPorId(Id1));
+            var exception = Assert.Throws<Exception>(() => _servicoVenda.ObterPorId(IdDeBusca));
             //asset
-            Assert.Equal($"A venda com ID {Id1} não foi encontrada", exception.Message);
+            Assert.Equal($"A venda com ID {IdDeBusca} não foi encontrada", exception.Message);
         }
     }
 }

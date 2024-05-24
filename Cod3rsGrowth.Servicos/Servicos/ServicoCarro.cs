@@ -17,9 +17,9 @@ namespace Cod3rsGrowth.Dominio.Services
             return _repositorioCarro.ObterTodos();
         }
 
-        public Carro ObterCarroPorId(int IdDoItem)
+        public Carro ObterPorId(int IdDoItem)
         {
-            return _repositorioCarro.ObterCarroPorId(IdDoItem);
+            return _repositorioCarro.ObterPorId(IdDoItem);
         }
 
         public void Criar(Carro carro)

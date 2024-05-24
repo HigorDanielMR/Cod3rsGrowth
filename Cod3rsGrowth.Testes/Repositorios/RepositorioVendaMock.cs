@@ -13,7 +13,7 @@ namespace Cod3rsGrowth.Testes
             return _repositorioVenda;
         }
 
-        public Venda ObterVendaPorId(int IdDeBusca)
+        public Venda ObterPorId(int IdDeBusca)
         {
             return _repositorioVenda.Find(objeto => objeto.Id == IdDeBusca)
                 ?? throw new Exception($"A venda com ID {IdDeBusca} não foi encontrada");

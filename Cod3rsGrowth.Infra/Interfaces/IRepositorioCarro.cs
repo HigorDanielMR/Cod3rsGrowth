@@ -7,6 +7,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
     {
         List<Carro> ObterTodos();
         void Criar(Carro carro);
-        Carro ObterCarroPorId(int IdDoItem);
+        Carro ObterPorId(int IdDoItem);
     }
 }

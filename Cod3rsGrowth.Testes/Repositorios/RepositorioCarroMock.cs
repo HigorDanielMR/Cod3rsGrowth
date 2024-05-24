@@ -13,7 +13,7 @@ namespace Cod3rsGrowth.Testes
             return _repositorioCarro;
         }
 
-        public Carro ObterCarroPorId(int IdDeBusca)
+        public Carro ObterPorId(int IdDeBusca)
         {
             return _repositorioCarro.Find(objeto => objeto.Id == IdDeBusca)
                 ?? throw new Exception($"O carro com ID {IdDeBusca} não foi encontrado");

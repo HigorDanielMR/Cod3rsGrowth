@@ -11,10 +11,12 @@ namespace Cod3rsGrowth.Testes
     public class TesteCarro : TesteBase
     {
         private IServicoCarro _servicoCarro;
+        private List<Carro> _listaMock;
 
         public TesteCarro()
         {
             CarregarServico();
+            _listaMock = InicializarDadosMock();
         }
 
         private void CarregarServico()
@@ -59,56 +61,55 @@ namespace Cod3rsGrowth.Testes
         {
             //arrange
             //act
-            var carros = _servicoCarro.ObterTodos();
+            var carrosDoBanco = _servicoCarro.ObterTodos();
             //asset
-            Assert.NotNull(carros);
-            Assert.IsType<List<Carro>>(carros);
+            Assert.NotNull(carrosDoBanco);
+            Assert.IsType<List<Carro>>(carrosDoBanco);
         }
 
         [Fact]
         public void ObterTodos_ComDadosDisponiveis_DeveRetornarUmaListaDeCarro()
         {
             //arrange
-            var listaTesteMock = InicializarDadosMock();
             //act
-            var carros = _servicoCarro.ObterTodos();
+            var carrosDoBanco = _servicoCarro.ObterTodos();
             //asset
-            Assert.NotNull(carros);
-            Assert.Equivalent(listaTesteMock, carros);
+            Assert.NotNull(carrosDoBanco);
+            Assert.Equivalent(_listaMock, carrosDoBanco);
         }
 
         [Fact]
         public void ObterPorId_ComIdExistente_DeveRetornarCarroEsperado()
         {
             //arrange
-            var Id1 = 1;
-            var listaMockCarro = InicializarDadosMock().FirstOrDefault();
+            var IdDeBusca = 1;
             //act
-            var carroDoBanco = _servicoCarro.ObterCarroPorId(Id1);
+            var carroMock = _listaMock[0];
+            var carroDoBanco = _servicoCarro.ObterPorId(IdDeBusca);
             //asset
-            Assert.Equivalent(listaMockCarro, carroDoBanco);
+            Assert.Equivalent(carroMock, carroDoBanco);
         }
 
         [Fact]
         public void ObterPorId_ComIdExistente_DeveRetornarObjetoDoTipoCarro()
         {
             //arrange
-            var Id1 = 2;
+            var IdDeBusca = 2;
             //act
-            var resultadoDaBusca = _servicoCarro.ObterCarroPorId(Id1);
+            var carroDoTipoEsperado = _servicoCarro.ObterPorId(IdDeBusca);
             //asset
-            Assert.IsType<Carro>(resultadoDaBusca);
+            Assert.IsType<Carro>(carroDoTipoEsperado);
         }
 
         [Fact]
         public void ObterPorId_ComIdInexistente_DeveLancarExcecaoObjetoNaoEncontrado()
         {
             //arrange
-            var Id1 = 212;
+            var IdDeBusca = 212;
             //act
-            var exception = Assert.Throws<Exception>(() => _servicoCarro.ObterCarroPorId(Id1));
+            var exception = Assert.Throws<Exception>(() => _servicoCarro.ObterPorId(IdDeBusca));
             //asset
-            Assert.Equal($"O carro com ID {Id1} não foi encontrado", exception.Message);
+            Assert.Equal($"O carro com ID {IdDeBusca} não foi encontrado", exception.Message);
         }
     }
 }
