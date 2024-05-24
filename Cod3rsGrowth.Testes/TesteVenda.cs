@@ -109,7 +109,7 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var IdBusca = 1;
             //act
-            var vendaMock = _listaMock[0];
+            var vendaMock = _listaMock.FirstOrDefault();
             var vendaDoBanco = _servicoVenda.ObterPorId(IdBusca);
             //asset
             Assert.NotNull(vendaDoBanco);

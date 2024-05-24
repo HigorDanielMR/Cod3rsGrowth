@@ -84,7 +84,7 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var IdDeBusca = 1;
             //act
-            var carroMock = _listaMock[0];
+            var carroMock = _listaMock.FirstOrDefault();
             var carroDoBanco = _servicoCarro.ObterPorId(IdDeBusca);
             //asset
             Assert.Equivalent(carroMock, carroDoBanco);
