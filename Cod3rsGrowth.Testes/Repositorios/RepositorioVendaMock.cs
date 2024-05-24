@@ -1,5 +1,4 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
 
@@ -7,16 +6,22 @@ namespace Cod3rsGrowth.Testes
 {
     public class RepositorioVendaMock : IRepositorioVenda
     {
-        public List<Venda> RepositorioVenda = ListaSingleton.Instance.RepositorioVenda;
+        private List<Venda> _repositorioVenda = ListaSingleton.Instance.RepositorioVenda;
 
         public List<Venda> ObterTodos()
         {
-            return RepositorioVenda;
+            return _repositorioVenda;
+        }
+
+        public Venda ObterPorId(int IdDeBusca)
+        {
+            return _repositorioVenda.Find(objeto => objeto.Id == IdDeBusca)
+                ?? throw new Exception($"A venda com ID {IdDeBusca} não foi encontrada");
         }
 
         public void Criar(Venda venda)
         {
-            RepositorioVenda.Add(venda);
+            _repositorioVenda.Add(venda);
         }
     }
 }
