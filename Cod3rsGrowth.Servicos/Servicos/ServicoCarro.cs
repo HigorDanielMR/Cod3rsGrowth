@@ -9,11 +9,11 @@ namespace Cod3rsGrowth.Dominio.Services
     public class ServicoCarro : IServicoCarro
     {
         private readonly IRepositorioCarro _repositorioCarro;
-        private ValidacoesCarro _validacaoCarro;
-        public ServicoCarro(IRepositorioCarro repositorioCarro, ValidacoesCarro validacaoCarro)
+        private ValidacoesCarro _validadorCarro;
+        public ServicoCarro(IRepositorioCarro repositorioCarro, ValidacoesCarro validadorCarro)
         {
             _repositorioCarro = repositorioCarro;
-            _validacaoCarro = validacaoCarro;
+            _validadorCarro = validadorCarro;
         }
 
         public List<Carro> ObterTodos()
@@ -28,18 +28,17 @@ namespace Cod3rsGrowth.Dominio.Services
 
         public void Criar(Carro carro)
         {
-            var resultado = _validacaoCarro.Validate(carro);
-            if (resultado.IsValid)
+            var resultado = _validadorCarro.Validate(carro);
+            var erros = "";
+            if (!resultado.IsValid)
             {
-                _repositorioCarro.Criar(carro);
-            }
-            else
-            {
-                foreach(var falhas in resultado.Errors)
+                foreach (var falhas in resultado.Errors)
                 {
-                    throw new ValidationException(falhas.ErrorMessage);
+                    erros += falhas.ErrorMessage + " ";
                 }
+                throw new ValidationException(erros);
             }
+            _repositorioCarro.Criar(carro);
         }
 
         public void EditarCarro()

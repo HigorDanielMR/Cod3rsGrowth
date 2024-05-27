@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
+using FluentValidation.Validators;
 using System.ComponentModel.DataAnnotations;
 
 namespace Cod3rsGrowth.Dominio.Services
@@ -9,11 +10,11 @@ namespace Cod3rsGrowth.Dominio.Services
     public class ServicoVenda : IServicoVenda
     {
         private readonly IRepositorioVenda _repositorioVenda;
-        private ValidacoesVenda _validacaoVenda;
+        private ValidacoesVenda _validadorVenda;
         public ServicoVenda(IRepositorioVenda repositorioVenda, ValidacoesVenda validacaoVenda)
         {
             _repositorioVenda = repositorioVenda;
-            _validacaoVenda = validacaoVenda;
+            _validadorVenda = validacaoVenda;
         }
 
         public List<Venda> ObterTodos()
@@ -28,13 +29,15 @@ namespace Cod3rsGrowth.Dominio.Services
 
         public void Criar(Venda venda)
         {
-            var resultado = _validacaoVenda.Validate(venda);
+            var resultado = _validadorVenda.Validate(venda);
+            var erros = "";
             if (!resultado.IsValid)
             {
                 foreach(var falhas in resultado.Errors)
                 {
-                    throw new ValidationException(falhas.ErrorMessage);
+                    erros += falhas.ErrorMessage + " ";
                 }
+                throw new ValidationException(erros);
             }
             _repositorioVenda.Criar(venda);
         }

@@ -33,7 +33,7 @@ namespace Cod3rsGrowth.Testes
                 {
                     Id = 1,
                     Nome = "Higor",
-                    Cpf = "651651616",
+                    Cpf = "714.696.331-40",
                     Email = "51313153@6323.com",
                     ItensVendidos = new List<Carro>
                     {
@@ -55,7 +55,7 @@ namespace Cod3rsGrowth.Testes
                 {
                     Id = 2,
                     Nome = "Daniel",
-                    Cpf = "848941651615",
+                    Cpf = "124.454.878-77",
                     Email = "ahshlahs@asa.com",
                     ItensVendidos = new List<Carro>
                     {
@@ -148,7 +148,7 @@ namespace Cod3rsGrowth.Testes
 
             var novaVenda = new Venda
             {
-                Cpf = "333.333.333-33",
+                Cpf = "888.999.333-22",
                 Email = "51313153@6323.com",
                 ItensVendidos = new List<Carro>
                 {
@@ -170,7 +170,7 @@ namespace Cod3rsGrowth.Testes
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
 
-            Assert.Equivalent("Campo nome não preenchido.", exception.Message);
+            Assert.Equivalent("Campo nome não preenchido. ", exception.Message);
         }
 
         [Fact]
@@ -181,6 +181,7 @@ namespace Cod3rsGrowth.Testes
             {
                 Nome = "Higor",
                 Email = "higordaniel@gmail.com",
+                Cpf = "111.111.111-11",
                 ItensVendidos = new List<Carro>
                 {
                     new Carro
@@ -201,7 +202,7 @@ namespace Cod3rsGrowth.Testes
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
 
-            Assert.Equivalent("Campo cpf não preenchido", exception.Message);
+            Assert.Equivalent("Formato CPF inválido. ", exception.Message);
         }
 
         [Fact]
@@ -211,7 +212,7 @@ namespace Cod3rsGrowth.Testes
             var novaVenda = new Venda
             {
                 Nome = "Higor",
-                Cpf = "651651616",
+                Cpf = "714.696.331-40",
                 ItensVendidos = new List<Carro>
                 {
                     new Carro
@@ -232,7 +233,7 @@ namespace Cod3rsGrowth.Testes
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
 
-            Assert.Equivalent("Campo e-mail não preenchido.", exception.Message);
+            Assert.Equivalent("Campo e-mail não preenchido. ", exception.Message);
         }
 
         [Fact]
@@ -242,7 +243,7 @@ namespace Cod3rsGrowth.Testes
             var novaVenda = new Venda
             {
                 Nome = "Higor",
-                Cpf = "651651616",
+                Cpf = "651.687.998-74",
                 Email = "51313153@6323.com",
                 ItensVendidos = new List<Carro>
                 {
@@ -256,6 +257,7 @@ namespace Cod3rsGrowth.Testes
                         Marca = Marcas.Volkswagem
                     }
                 },
+                Telefone = "516516512",
                 Pago = true,
                 ValorTotal = 100
             };
@@ -263,7 +265,7 @@ namespace Cod3rsGrowth.Testes
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
 
-            Assert.Equivalent("Campo telefone não preenchido.", exception.Message);
+            Assert.Equivalent("Formato de telefone inválido. ", exception.Message);
         }
 
         [Fact]
@@ -273,8 +275,8 @@ namespace Cod3rsGrowth.Testes
             var novaVenda = new Venda
             {
                 Nome = "Higor",
-                Cpf = "651651616",
-                Email = "51313153@6323.com",
+                Cpf = "111.111.111-11",
+                Email = "513131536323.com",
                 ItensVendidos = new List<Carro>
                 {
                     new Carro
@@ -286,14 +288,14 @@ namespace Cod3rsGrowth.Testes
                     }
                 },
                 Pago = true,
-                Telefone = "65651651651",
+                Telefone = "(65)65161651",
                 ValorTotal = 100
             };
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
 
-            Assert.Equivalent("Campo modelo não preenchido.", exception.Message);
+            Assert.Equivalent("Formato CPF inválido. Formato de e-mail inválido. Formato de telefone inválido. Campo modelo não preenchido. ", exception.Message);
         }
     }
 }

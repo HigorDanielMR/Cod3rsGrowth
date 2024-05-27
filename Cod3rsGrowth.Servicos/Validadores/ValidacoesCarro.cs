@@ -9,8 +9,7 @@ namespace Cod3rsGrowth.Servicos.Validadores
         public ValidacoesCarro()
         {
             RuleFor(carro => carro.Modelo)
-                .NotNull().WithMessage("Campo modelo não preenchido.")
-                .NotEmpty().WithMessage("Modelo inválido, precisa ter no mínimo 2 caracteres.")
+                .NotEmpty().WithMessage("Campo modelo não preenchido.")
                 .Length(2, 60).WithMessage("Modelo inválido, precisa ter no mínimo 2 caracteres.");
 
             RuleFor(carro => carro.Marca)
@@ -26,7 +25,6 @@ namespace Cod3rsGrowth.Servicos.Validadores
                 .GreaterThan(0).WithMessage("O valor do veiculo deve ser maior que zero.");
 
             RuleFor(carro => carro.Flex)
-                .NotNull().WithMessage("Campo flex não preenchido.")
                 .NotEmpty().WithMessage("Campo flex não preenchido.");
         }
     }
