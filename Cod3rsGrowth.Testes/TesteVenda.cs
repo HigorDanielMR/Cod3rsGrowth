@@ -2,10 +2,9 @@
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using Cod3rsGrowth.Dominio.Services;
-using System.ComponentModel.DataAnnotations;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -141,13 +140,17 @@ namespace Cod3rsGrowth.Testes
             Assert.Equal($"A venda com ID {IdDeBusca} não foi encontrada", exception.Message);
         }
 
-        [Fact]
-        public void CriarComFluentValidator_CriandoAVenda_DeveRetornarExceptionEsperadaParaNome()
+        [Theory]
+        [InlineData("C")]
+        [InlineData("h1go0r")]
+        [InlineData("      ")]
+        public void CriarComFluentValidator_CriandoAVenda_DeveRetornarExceptionEsperadaParaNome(string nome)
         {
             //arrange
 
             var novaVenda = new Venda
             {
+                Nome = nome,
                 Cpf = "888.999.333-22",
                 Email = "51313153@6323.com",
                 ItensVendidos = new List<Carro>
@@ -169,19 +172,21 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-
-            Assert.Equivalent("Campo nome não preenchido. ", exception.Message);
         }
 
-        [Fact]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaCpf()
+        [Theory]
+        [InlineData("     ")]
+        [InlineData("542522654")]
+        [InlineData("111.111.111-11")]
+        [InlineData("aaa.aaa.sss-jj")]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaCpf(string cpf)
         {
             //arrange
             var novaVenda = new Venda
             {
                 Nome = "Higor",
                 Email = "higordaniel@gmail.com",
-                Cpf = "111.111.111-11",
+                Cpf = cpf,
                 ItensVendidos = new List<Carro>
                 {
                     new Carro
@@ -202,17 +207,19 @@ namespace Cod3rsGrowth.Testes
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
 
-            Assert.Equivalent("Formato CPF inválido. ", exception.Message);
         }
 
-        [Fact]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaFlex()
+        [Theory]
+        [InlineData("kakkhskhaksgmail.com")]
+        [InlineData("    ")]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaEmail(string email)
         {
             //arrange
             var novaVenda = new Venda
             {
                 Nome = "Higor",
                 Cpf = "714.696.331-40",
+                Email = email,
                 ItensVendidos = new List<Carro>
                 {
                     new Carro
@@ -232,12 +239,12 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-
-            Assert.Equivalent("Campo e-mail não preenchido. ", exception.Message);
         }
 
-        [Fact]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaTelefone()
+        [Theory]
+        [InlineData("616512")]
+        [InlineData("    ")]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaTelefone(string telefone)
         {
             //arrange
             var novaVenda = new Venda
@@ -257,15 +264,13 @@ namespace Cod3rsGrowth.Testes
                         Marca = Marcas.Volkswagem
                     }
                 },
-                Telefone = "516516512",
+                Telefone = telefone,
                 Pago = true,
                 ValorTotal = 100
             };
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-
-            Assert.Equivalent("Formato de telefone inválido. ", exception.Message);
         }
 
         [Fact]

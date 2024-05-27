@@ -9,6 +9,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public List<Carro> RepositorioCarro { get; set; } = new List<Carro> { };
         public List<Venda> RepositorioVenda { get; set; } = new List<Venda> { };
 
+        
+
         private ListaSingleton(){}
 
         public static ListaSingleton Instance

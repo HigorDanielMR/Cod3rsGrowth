@@ -1,9 +1,9 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
+﻿using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
-using FluentValidation.Validators;
 using System.ComponentModel.DataAnnotations;
+using System.Xml;
 
 namespace Cod3rsGrowth.Dominio.Services
 {
@@ -30,9 +30,9 @@ namespace Cod3rsGrowth.Dominio.Services
         public void Criar(Venda venda)
         {
             var resultado = _validadorVenda.Validate(venda);
-            var erros = "";
             if (!resultado.IsValid)
             {
+                var erros = "";
                 foreach(var falhas in resultado.Errors)
                 {
                     erros += falhas.ErrorMessage + " ";
@@ -42,6 +42,12 @@ namespace Cod3rsGrowth.Dominio.Services
             _repositorioVenda.Criar(venda);
         }
 
+        public int ObterNovoId()
+        {
+            var id = _repositorioVenda.ObterTodos().Last().Id + 1;
+
+            return id;
+        }
         public void EditarVenda()
         {
             return;

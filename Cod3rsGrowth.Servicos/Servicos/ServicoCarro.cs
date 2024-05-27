@@ -1,8 +1,8 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using FluentValidation;
 using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.Entities;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
-using FluentValidation;
 
 namespace Cod3rsGrowth.Dominio.Services
 {
@@ -40,7 +40,12 @@ namespace Cod3rsGrowth.Dominio.Services
             }
             _repositorioCarro.Criar(carro);
         }
+        public int ObterNovoId()
+        {
+            var id = _repositorioCarro.ObterTodos().Last().Id + 1;
 
+            return id;
+        }
         public void EditarCarro()
         {
             return;

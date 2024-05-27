@@ -1,14 +1,12 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
-using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.Testes
 {
     public class RepositorioVendaMock : IRepositorioVenda
     {
         private List<Venda> _repositorioVenda = ListaSingleton.Instance.RepositorioVenda;
-        private ValidacoesVenda _validacaoVenda;
 
         public List<Venda> ObterTodos()
         {

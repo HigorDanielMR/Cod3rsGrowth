@@ -2,7 +2,7 @@
 {
     public enum Cores
     {
-        Grafite,
+        Grafite = 1,
         Preto,
         Branco,
         Vermelho,

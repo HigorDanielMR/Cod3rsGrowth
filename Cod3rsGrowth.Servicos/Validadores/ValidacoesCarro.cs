@@ -1,6 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
-using FluentValidation;
-using FluentValidation.Validators;
+﻿using FluentValidation;
+using Cod3rsGrowth.Dominio.Entities;
 
 namespace Cod3rsGrowth.Servicos.Validadores
 {

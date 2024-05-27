@@ -1,5 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
-using FluentValidation;
+﻿using FluentValidation;
+using Cod3rsGrowth.Dominio.Entities;
 using System.Text.RegularExpressions;
 
 namespace Cod3rsGrowth.Servicos.Validadores

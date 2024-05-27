@@ -7,6 +7,7 @@ namespace Cod3rsGrowth.Dominio.Interfaces
         List<Carro> ObterTodos();
         void Criar(Carro carro);
         Carro ObterPorId(int IdDoItem);
+        int ObterNovoId();
         void EditarCarro();
         void RemoverCarro();
     }
