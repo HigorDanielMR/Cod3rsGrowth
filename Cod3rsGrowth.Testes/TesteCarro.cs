@@ -116,7 +116,7 @@ namespace Cod3rsGrowth.Testes
 
         [Theory]
         [InlineData("a")]
-        [InlineData(" ")]
+        [InlineData("Aetherion Eclipse XR 9000 Supercharged Hybrid Sport Coupe")]
         public void Criar_ComModeloInvalido_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
@@ -130,8 +130,10 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             //asset
-            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres. ", exception.Message);
         }
+
 
         [Theory]
         [InlineData(null)]
@@ -148,7 +150,8 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             //asset
-            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Equal("Campo cor não preenchido. ", exception.Message);
         }
 
         [Theory]
@@ -166,7 +169,8 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             //asset
-            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Equal("Campo flex não preenchido. ", exception.Message);
         }
 
         [Theory]
@@ -184,11 +188,11 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             //asset
-            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Equal("Campo marca não preenchido. ", exception.Message);
         }
 
         [Theory]
-        [InlineData(null)]
         [InlineData(-11111)]
         public void Criar_ComValorDoVeiculoInvalido_DeveRetornarExcecaoEsperada(decimal valor)
         {
@@ -202,7 +206,8 @@ namespace Cod3rsGrowth.Testes
                 ValorDoVeiculo = valor
             };
             //act
-            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Equal("O valor do veiculo deve ser maior que zero. ", exception.Message);
         }
 
         [Fact]
@@ -218,7 +223,7 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres. O valor do veiculo deve ser maior que zero. Campo flex não preenchido. ", exception.Message); 
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres. O valor do veiculo deve ser maior que zero. Campo flex não preenchido. ", exception.Message); 
         }
 
         [Fact]

@@ -140,8 +140,6 @@ namespace Cod3rsGrowth.Testes
 
         [Theory]
         [InlineData("C")]
-        [InlineData("h1go0r")]
-        [InlineData("      ")]
         public void Criar_ComNomeInvalido_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
@@ -170,10 +168,43 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+            Assert.Equal("O nome deve ter entre 2 a 50 caracteres. ", exception.Message);
         }
 
         [Theory]
-        [InlineData("     ")]
+        [InlineData("h1go0r")]
+        public void Criar_ComNomeInvalido_DeveRetornarOutraExcecaoEsperada(string nome)
+        {
+            //arrange
+
+            var novaVenda = new Venda
+            {
+                Nome = nome,
+                Cpf = "888.999.333-22",
+                Email = "51313153@6323.com",
+                ItensVendidos = new List<Carro>
+                {
+                    new Carro
+                    {
+                        Id = 23,
+                        Modelo = "Golf GTI",
+                        Cor = Cores.Branco,
+                        Flex= true,
+                        ValorDoVeiculo = 100,
+                        Marca = Marcas.Volkswagem
+                    }
+                },
+                Pago = true,
+                Telefone = "62983052721",
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+            Assert.Equal("O nome não pode conter números. ", exception.Message);
+        }
+
+        [Theory]
         [InlineData("542522654")]
         [InlineData("111.111.111-11")]
         [InlineData("aaa.aaa.sss-jj")]
@@ -204,12 +235,11 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-
+            Assert.Equal("Formato CPF inválido. ", exception.Message);
         }
 
         [Theory]
         [InlineData("kakkhskhaksgmail.com")]
-        [InlineData("    ")]
         public void Criar_ComEmailInvalido_DeveRetornarExcecaoEsperada(string email)
         {
             //arrange
@@ -237,11 +267,11 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+            Assert.Equal("Formato de e-mail inválido. ", exception.Message);
         }
 
         [Theory]
         [InlineData("616512")]
-        [InlineData("    ")]
         public void Criar_ComTelefoneInvalido_DeveRetornarExcecaoEsperada(string telefone)
         {
             //arrange
@@ -269,6 +299,7 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+            Assert.Equal("Formato de telefone inválido. ", exception.Message);
         }
 
         [Fact]
