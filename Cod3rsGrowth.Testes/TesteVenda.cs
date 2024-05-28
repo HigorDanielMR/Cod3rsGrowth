@@ -5,6 +5,7 @@ using Cod3rsGrowth.Dominio.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Cod3rsGrowth.Dominio.Services;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -301,6 +302,40 @@ namespace Cod3rsGrowth.Testes
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
 
             Assert.Equivalent("Formato CPF inválido. Formato de e-mail inválido. Formato de telefone inválido. Campo modelo não preenchido. ", exception.Message);
+        }
+
+        [Fact]
+        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarVendaEsperado()
+        {
+            //arrange
+            var novaVenda = new Venda
+            {
+                Id = _servicoVenda.ObterNovoId(),
+                Nome = "Higor",
+                Cpf = "213.344.567-98",
+                Email = "higordaniel@.com",
+                ItensVendidos = new List<Carro>
+                {
+                    new Carro
+                    {
+                        Id = _servicoVenda.ObterNovoId(),
+                        Modelo = "C180",
+                        Cor = Cores.Branco,
+                        Flex = true,
+                        Marca = Marcas.Bmw,
+                        ValorDoVeiculo = 100
+                    }
+                },
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
+            //act
+            _servicoVenda.Criar(novaVenda);
+            var vendaEsperada = _servicoVenda.ObterTodos().Last();
+
+            //asset
+            Assert.Equivalent(novaVenda, vendaEsperada);
         }
     }
 }
