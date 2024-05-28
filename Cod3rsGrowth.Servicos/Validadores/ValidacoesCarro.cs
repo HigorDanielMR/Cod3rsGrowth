@@ -13,11 +13,11 @@ namespace Cod3rsGrowth.Servicos.Validadores
 
             RuleFor(carro => carro.Marca)
                 .NotEmpty().WithMessage("Campo marca não preenchido.")
-                .IsInEnum().WithMessage("Esse valor é inválido.");
+                .IsInEnum().WithMessage("Essa marca é inválida.");
 
             RuleFor(carro => carro.Cor)
                 .NotEmpty().WithMessage("Campo cor não preenchido.")
-                .IsInEnum().WithMessage("Esse valor é inválido.");
+                .IsInEnum().WithMessage("Essa cor é inválido.");
 
             RuleFor(carro => carro.ValorDoVeiculo)
                 .NotEmpty().WithMessage("Campo valor do veiculo não preenchido.")

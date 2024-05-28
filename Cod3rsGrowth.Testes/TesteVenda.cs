@@ -142,7 +142,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("C")]
         [InlineData("h1go0r")]
         [InlineData("      ")]
-        public void CriarComFluentValidator_CriandoAVenda_DeveRetornarExceptionEsperadaParaNome(string nome)
+        public void Criar_ComNomeInvalido_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
 
@@ -177,7 +177,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("542522654")]
         [InlineData("111.111.111-11")]
         [InlineData("aaa.aaa.sss-jj")]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaCpf(string cpf)
+        public void Criar_ComCpfInvalido_DeveRetornarExcecaoEsperada(string cpf)
         {
             //arrange
             var novaVenda = new Venda
@@ -210,7 +210,7 @@ namespace Cod3rsGrowth.Testes
         [Theory]
         [InlineData("kakkhskhaksgmail.com")]
         [InlineData("    ")]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaEmail(string email)
+        public void Criar_ComEmailInvalido_DeveRetornarExcecaoEsperada(string email)
         {
             //arrange
             var novaVenda = new Venda
@@ -242,7 +242,7 @@ namespace Cod3rsGrowth.Testes
         [Theory]
         [InlineData("616512")]
         [InlineData("    ")]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaTelefone(string telefone)
+        public void Criar_ComTelefoneInvalido_DeveRetornarExcecaoEsperada(string telefone)
         {
             //arrange
             var novaVenda = new Venda
@@ -272,7 +272,7 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaItensVendidos()
+        public void Criar_ComCpfInvalidoEmailInvalidoETelefoneInvalido_DeveRetornarExcecaoEsperada()
         {
             //arrange
             var novaVenda = new Venda
@@ -302,14 +302,14 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarVendaEsperado()
+        public void Criar_ComVendacriada_DeveRetornarVendaEsperada()
         {
             //arrange
             var novaVenda = new Venda
             {
                 Nome = "Higor",
                 Cpf = "213.344.567-98",
-                Email = "higordaniel@.com",
+                Email = "higordaniel@gmail.com",
                 ItensVendidos = new List<Carro>
                 {
                     new Carro

@@ -117,7 +117,7 @@ namespace Cod3rsGrowth.Testes
         [Theory]
         [InlineData("a")]
         [InlineData(" ")]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaModelo(string nome)
+        public void Criar_ComModeloInvalido_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
             var novoCarro = new Carro
@@ -130,12 +130,12 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             //asset
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
         }
 
         [Theory]
         [InlineData(null)]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaCor(Cores cor)
+        public void Criar_ComCorInvalida_DeveRetornarExcecaoEsperada(Cores cor)
         {
             //arrange
             var novoCarro = new Carro
@@ -148,12 +148,12 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             //asset
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
         }
 
         [Theory]
         [InlineData(null)]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaFlex(bool flex)
+        public void Criar_ComFlexInvalido_DeveRetornarExcecao(bool flex)
         {
             //arrange
             var novoCarro = new Carro
@@ -166,12 +166,12 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             //asset
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
         }
 
         [Theory]
         [InlineData(null)]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaMarca(Marcas marca)
+        public void Criar_ComMarcaInvalida_DeveRetornarExcecaoEsperada(Marcas marca)
         {
             //arrange
             var novoCarro = new Carro
@@ -184,13 +184,13 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             //asset
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
         }
 
         [Theory]
         [InlineData(null)]
         [InlineData(-11111)]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarExceptionEsperadaParaValorDoVeiculo(decimal valor)
+        public void Criar_ComValorDoVeiculoInvalido_DeveRetornarExcecaoEsperada(decimal valor)
         {
             //arrange
             var novoCarro = new Carro
@@ -202,12 +202,27 @@ namespace Cod3rsGrowth.Testes
                 ValorDoVeiculo = valor
             };
             //act
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-
+            Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
         }
 
         [Fact]
-        public void CriarComFluentValidator_CriandoOCarro_DeveRetornarVeiculoEsperado()
+        public void Criar_ComValorDoVeiculoInvalidoModeloInvalidoEFlexInvalido_DeveRetornarExcecaoEsperada()
+        {
+            //arrange
+            var novoCarro = new Carro
+            {
+                Modelo = "a",
+                Cor = Cores.Branco,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = -11
+            };
+            //act
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres. O valor do veiculo deve ser maior que zero. Campo flex não preenchido. ", exception.Message); 
+        }
+
+        [Fact]
+        public void Criar_ComCarroCriado_DeveRetornarCarroEsperado()
         {
             //arrange
             var novoCarro = new Carro
