@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Cod3rsGrowth.Dominio.Services;
+using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -31,7 +32,6 @@ namespace Cod3rsGrowth.Testes
             List<Venda> listaDeVendas = new List<Venda> {
                 new Venda
                 {
-                    Id = 1,
                     Nome = "Higor",
                     Cpf = "714.696.331-40",
                     Email = "51313153@6323.com",
@@ -39,7 +39,6 @@ namespace Cod3rsGrowth.Testes
                     {
                         new Carro
                         {
-                            Id = 23,
                             Modelo = "Golf GTI",
                             Cor = Cores.Branco,
                             Flex= true,
@@ -53,7 +52,6 @@ namespace Cod3rsGrowth.Testes
                 },
                 new Venda
                 {
-                    Id = 2,
                     Nome = "Daniel",
                     Cpf = "124.454.878-77",
                     Email = "ahshlahs@asa.com",
@@ -61,7 +59,6 @@ namespace Cod3rsGrowth.Testes
                     {
                         new Carro
                         {
-                            Id = 777,
                             Modelo = "Civic",
                             Cor = Cores.Preto,
                             Flex = true,
@@ -109,7 +106,7 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarVendaEsperada()
         {
             //arrange
-            var IdBusca = 1;
+            var IdBusca = 0;
             //act
             var vendaMock = _listaMock.FirstOrDefault();
             var vendaDoBanco = _servicoVenda.ObterPorId(IdBusca);
@@ -122,7 +119,7 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarObjetoDoTipoVenda()
         {
             //arrange
-            var IdDeBusca = 2;
+            var IdDeBusca = 0;
             //act
             _listaMock.FirstOrDefault();
             var vendaDoTipoEsperado = _servicoVenda.ObterPorId(IdDeBusca);
@@ -310,7 +307,6 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var novaVenda = new Venda
             {
-                Id = _servicoVenda.ObterNovoId(),
                 Nome = "Higor",
                 Cpf = "213.344.567-98",
                 Email = "higordaniel@.com",
@@ -318,7 +314,6 @@ namespace Cod3rsGrowth.Testes
                 {
                     new Carro
                     {
-                        Id = _servicoVenda.ObterNovoId(),
                         Modelo = "C180",
                         Cor = Cores.Branco,
                         Flex = true,
@@ -335,7 +330,7 @@ namespace Cod3rsGrowth.Testes
             var vendaEsperada = _servicoVenda.ObterTodos().Last();
 
             //asset
-            Assert.Equivalent(novaVenda, vendaEsperada);
+            Assert.Equal(novaVenda, vendaEsperada);
         }
     }
 }

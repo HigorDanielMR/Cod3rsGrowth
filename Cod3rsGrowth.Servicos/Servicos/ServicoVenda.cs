@@ -41,13 +41,6 @@ namespace Cod3rsGrowth.Dominio.Services
             }
             _repositorioVenda.Criar(venda);
         }
-
-        public int ObterNovoId()
-        {
-            var id = _repositorioVenda.ObterTodos().Last().Id + 1;
-
-            return id;
-        }
         public void EditarVenda()
         {
             return;

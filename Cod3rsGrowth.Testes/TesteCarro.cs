@@ -5,6 +5,7 @@ using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -85,7 +86,7 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var IdDeBusca = 1;
             //act
-            var carroMock = _listaMock.FirstOrDefault();
+            var carroMock = _listaMock[IdDeBusca];
             var carroDoBanco = _servicoCarro.ObterPorId(IdDeBusca);
             //asset
             Assert.Equivalent(carroMock, carroDoBanco);
@@ -95,7 +96,7 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarObjetoDoTipoCarro()
         {
             //arrange
-            var IdDeBusca = 2;
+            var IdDeBusca = 1;
             //act
             var carroDoTipoEsperado = _servicoCarro.ObterPorId(IdDeBusca);
             //asset
@@ -211,7 +212,6 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var novoCarro = new Carro
             {
-                Id = _servicoCarro.ObterNovoId(),
                 Modelo = "C180",
                 Cor = Cores.Branco,
                 Flex = true,
@@ -223,7 +223,7 @@ namespace Cod3rsGrowth.Testes
             var carroEsperado = _servicoCarro.ObterTodos().Last();
 
             //asset
-            Assert.Equivalent(novoCarro, carroEsperado);
+            Assert.Equal(novoCarro, carroEsperado);
         }
     }
 }
