@@ -168,7 +168,7 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-            Assert.Equal("O nome deve ter entre 2 a 50 caracteres. ", exception.Message);
+            Assert.Equal("O nome deve ter entre 2 a 50 caracteres.", exception.Message);
         }
 
         [Theory]
@@ -201,7 +201,7 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-            Assert.Equal("O nome não pode conter números. ", exception.Message);
+            Assert.Equal("O nome não pode conter números.", exception.Message);
         }
 
         [Theory]
@@ -235,7 +235,7 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-            Assert.Equal("Formato CPF inválido. ", exception.Message);
+            Assert.Equal("Formato CPF inválido.", exception.Message);
         }
 
         [Theory]
@@ -267,7 +267,7 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-            Assert.Equal("Formato de e-mail inválido. ", exception.Message);
+            Assert.Equal("Formato de e-mail inválido.", exception.Message);
         }
 
         [Theory]
@@ -299,7 +299,7 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-            Assert.Equal("Formato de telefone inválido. ", exception.Message);
+            Assert.Equal("Formato de telefone inválido.", exception.Message);
         }
 
         [Fact]

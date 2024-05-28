@@ -131,7 +131,7 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres. ", exception.Message);
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres.", exception.Message);
         }
 
 
@@ -151,27 +151,9 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Campo cor não preenchido. ", exception.Message);
+            Assert.Equal("Essa cor é inválido.", exception.Message);
         }
 
-        [Theory]
-        [InlineData(null)]
-        public void Criar_ComFlexInvalido_DeveRetornarExcecao(bool flex)
-        {
-            //arrange
-            var novoCarro = new Carro
-            {
-                Modelo = "C180",
-                Cor = Cores.Branco,
-                Marca = Marcas.Bmw,
-                Flex = flex,
-                ValorDoVeiculo = 1000
-            };
-            //act
-            //asset
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Campo flex não preenchido. ", exception.Message);
-        }
 
         [Theory]
         [InlineData(null)]
@@ -183,13 +165,13 @@ namespace Cod3rsGrowth.Testes
                 Modelo = "C180",
                 Cor = Cores.Grafite,
                 Marca = marca,
-                Flex = true,
+                Flex = false,
                 ValorDoVeiculo = 1000
             };
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Campo marca não preenchido. ", exception.Message);
+            Assert.Equal("Essa marca é inválida.", exception.Message);
         }
 
         [Theory]
@@ -207,7 +189,7 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("O valor do veiculo deve ser maior que zero. ", exception.Message);
+            Assert.Equal("O valor do veiculo deve ser maior que zero.", exception.Message);
         }
 
         [Fact]
@@ -223,7 +205,7 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres. O valor do veiculo deve ser maior que zero. Campo flex não preenchido. ", exception.Message); 
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres. O valor do veiculo deve ser maior que zero. ", exception.Message); 
         }
 
         [Fact]

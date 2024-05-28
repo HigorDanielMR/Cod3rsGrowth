@@ -9,23 +9,19 @@ namespace Cod3rsGrowth.Servicos.Validadores
         public ValidacoesVenda()
         {
             RuleFor(venda => venda.Nome)
-                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Campo nome não preenchido.")
                 .Length(3, 50).WithMessage("O nome deve ter entre 2 a 50 caracteres.")
                 .Matches("^[a-zA-ZÀ-ú ]+$").WithMessage("O nome não pode conter números.");
 
             RuleFor(venda => venda.Cpf)
-                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Campo cpf não preenchido")
                 .Must(ValidarCpf).WithMessage("Formato CPF inválido.");
 
             RuleFor(venda => venda.Email)
-                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Campo e-mail não preenchido.")
                 .EmailAddress().WithMessage("Formato de e-mail inválido.");
 
             RuleFor(venda => venda.Telefone)
-                .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Campo telefone não preenchido.")
                 .Must(ValidarTelefone).WithMessage("Formato de telefone inválido.");
 

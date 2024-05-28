@@ -34,7 +34,14 @@ namespace Cod3rsGrowth.Dominio.Services
             {
                 foreach (var falhas in resultado.Errors)
                 {
-                    erros += falhas.ErrorMessage + " ";
+                    if(resultado.Errors.Count > 1)
+                    {
+                        erros += falhas.ErrorMessage + " ";
+                    }
+                    else
+                    {
+                        erros += falhas.ErrorMessage;
+                    }
                 }
                 throw new ValidationException(erros);
             }
