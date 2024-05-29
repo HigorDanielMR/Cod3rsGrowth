@@ -1,4 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {

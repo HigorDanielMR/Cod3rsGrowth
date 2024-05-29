@@ -7,6 +7,7 @@ namespace Cod3rsGrowth.Testes
     public class RepositorioCarroMock : IRepositorioCarro
     {
         private List<Carro> _repositorioCarro = ListaSingleton.Instance.RepositorioCarro;
+        private int _novoId = 0;
 
         public List<Carro> ObterTodos()
         {
@@ -21,6 +22,8 @@ namespace Cod3rsGrowth.Testes
 
         public void Criar(Carro carro)
         {
+            carro.Id = _novoId;
+            _novoId++;
             _repositorioCarro.Add(carro);
         }
     }
