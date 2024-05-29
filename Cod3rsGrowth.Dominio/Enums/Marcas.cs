@@ -2,7 +2,7 @@
 {
     public enum Marcas
     {
-        Toyota = 1,
+        Toyota,
         Honda,
         Hyundai,
         Volkswagem,

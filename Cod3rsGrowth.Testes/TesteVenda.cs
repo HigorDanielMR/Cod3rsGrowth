@@ -35,17 +35,6 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Higor",
                     Cpf = "714.696.331-40",
                     Email = "51313153@6323.com",
-                    ItensVendidos = new List<Carro>
-                    {
-                        new Carro
-                        {
-                            Modelo = "Golf GTI",
-                            Cor = Cores.Branco,
-                            Flex= true,
-                            ValorDoVeiculo = 100,
-                            Marca = Marcas.Volkswagem
-                        }
-                    },
                     Pago = true,
                     Telefone = "65651651651",
                     ValorTotal = 100
@@ -55,17 +44,6 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Daniel",
                     Cpf = "124.454.878-77",
                     Email = "ahshlahs@asa.com",
-                    ItensVendidos = new List<Carro>
-                    {
-                        new Carro
-                        {
-                            Modelo = "Civic",
-                            Cor = Cores.Preto,
-                            Flex = true,
-                            ValorDoVeiculo = 100,
-                            Marca = Marcas.Honda
-                        }
-                    },
                     Pago = true,
                     Telefone = "01209091212",
                     ValorTotal = 100
@@ -139,8 +117,10 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Theory]
-        [InlineData("C")]
-        public void Criar_ComNomeInvalido_DeveRetornarExcecaoEsperada(string nome)
+        [InlineData(null)]
+        [InlineData("       ")]
+        [InlineData("")]
+        public void Criar_ComNomeVazio_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
 
@@ -149,18 +129,6 @@ namespace Cod3rsGrowth.Testes
                 Nome = nome,
                 Cpf = "888.999.333-22",
                 Email = "51313153@6323.com",
-                ItensVendidos = new List<Carro>
-                {
-                    new Carro
-                    {
-                        Id = 23,
-                        Modelo = "Golf GTI",
-                        Cor = Cores.Branco,
-                        Flex= true,
-                        ValorDoVeiculo = 100,
-                        Marca = Marcas.Volkswagem
-                    }
-                },
                 Pago = true,
                 Telefone = "62983052721",
                 ValorTotal = 100
@@ -168,11 +136,34 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-            Assert.Equal("O nome deve ter entre 2 a 50 caracteres.", exception.Message);
+            Assert.Equal("Campo nome não preenchido.", exception.Message);
+        }
+
+
+        [Fact]
+        public void Criar_ComNomeExcedendoValorMaximo_DeveRetornarExcecaoEsperada()
+        {
+            //arrange
+
+            var novaVenda = new Venda
+            {
+                Nome = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                Cpf = "888.999.333-22",
+                Email = "51313153@6323.com",
+                Pago = true,
+                Telefone = "62983052721",
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+            Assert.Equal("O nome deve ter no máximo 100 caracteres.", exception.Message);
         }
 
         [Theory]
         [InlineData("h1go0r")]
+        [InlineData("!@#$%¨&*()_`{}^:>|")]
+        [InlineData("🐱‍👤🐱‍👤🐱‍👤🐱‍👤")]
         public void Criar_ComNomeInvalido_DeveRetornarOutraExcecaoEsperada(string nome)
         {
             //arrange
@@ -182,18 +173,6 @@ namespace Cod3rsGrowth.Testes
                 Nome = nome,
                 Cpf = "888.999.333-22",
                 Email = "51313153@6323.com",
-                ItensVendidos = new List<Carro>
-                {
-                    new Carro
-                    {
-                        Id = 23,
-                        Modelo = "Golf GTI",
-                        Cor = Cores.Branco,
-                        Flex= true,
-                        ValorDoVeiculo = 100,
-                        Marca = Marcas.Volkswagem
-                    }
-                },
                 Pago = true,
                 Telefone = "62983052721",
                 ValorTotal = 100
@@ -201,7 +180,30 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-            Assert.Equal("O nome não pode conter números.", exception.Message);
+            Assert.Equal("O nome deve conter apenas letras.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("       ")]
+        [InlineData("")]
+        public void Criar_ComCpfVazio_DeveRetornarExcecaoEsperada(string cpf)
+        {
+            //arrange
+
+            var novaVenda = new Venda
+            {
+                Nome = "nome",
+                Cpf = cpf,
+                Email = "51313153@6323.com",
+                Pago = true,
+                Telefone = "62983052721",
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+            Assert.Equal("Campo cpf não preenchido.", exception.Message);
         }
 
         [Theory]
@@ -216,18 +218,6 @@ namespace Cod3rsGrowth.Testes
                 Nome = "Higor",
                 Email = "higordaniel@gmail.com",
                 Cpf = cpf,
-                ItensVendidos = new List<Carro>
-                {
-                    new Carro
-                    {
-                        Id = 23,
-                        Modelo = "Golf GTI",
-                        Cor = Cores.Branco,
-                        Flex= true,
-                        ValorDoVeiculo = 100,
-                        Marca = Marcas.Volkswagem
-                    }
-                },
                 Pago = true,
                 Telefone = "65651651651",
                 ValorTotal = 100
@@ -239,7 +229,34 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Theory]
+        [InlineData(null)]
+        [InlineData("       ")]
+        [InlineData("")]
+        public void Criar_ComEmailVazio_DeveRetornarExcecaoEsperada(string email)
+        {
+            //arrange
+
+            var novaVenda = new Venda
+            {
+                Nome = "nome",
+                Cpf = "888.999.333-22",
+                Email = email,
+                Pago = true,
+                Telefone = "62983052721",
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+            Assert.Equal("Campo e-mail não preenchido.", exception.Message);
+        }
+
+        [Theory]
         [InlineData("kakkhskhaksgmail.com")]
+        [InlineData("@gmail.com")]
+        [InlineData("@gmail")]
+        [InlineData("hashas.br")]
+        [InlineData("@gmail.com.br")]
         public void Criar_ComEmailInvalido_DeveRetornarExcecaoEsperada(string email)
         {
             //arrange
@@ -248,18 +265,6 @@ namespace Cod3rsGrowth.Testes
                 Nome = "Higor",
                 Cpf = "714.696.331-40",
                 Email = email,
-                ItensVendidos = new List<Carro>
-                {
-                    new Carro
-                    {
-                        Id = 23,
-                        Modelo = "Golf GTI",
-                        Cor = Cores.Branco,
-                        Flex= true,
-                        ValorDoVeiculo = 100,
-                        Marca = Marcas.Volkswagem
-                    }
-                },
                 Pago = true,
                 Telefone = "65651651651",
                 ValorTotal = 100
@@ -271,7 +276,33 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Theory]
+        [InlineData(null)]
+        [InlineData("    ")]
+        [InlineData("")]
+        public void Criar_ComTelefoneVazio_DeveRetornarExcecaoEsperada(string telefone)
+        {
+            //arrange
+
+            var novaVenda = new Venda
+            {
+                Nome = "Higor",
+                Cpf = "888.999.333-22",
+                Email = "51313153@6323.com",
+                Pago = true,
+                Telefone = telefone,
+                ValorTotal = 100
+            };
+            //act
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
+            Assert.Equal("Campo telefone não preenchido.", exception.Message);
+        }
+
+        [Theory]
         [InlineData("616512")]
+        [InlineData("(98)9802-1488")]
+        [InlineData("(98)98021488")]
+        [InlineData("989802-1488")]
         public void Criar_ComTelefoneInvalido_DeveRetornarExcecaoEsperada(string telefone)
         {
             //arrange
@@ -280,18 +311,6 @@ namespace Cod3rsGrowth.Testes
                 Nome = "Higor",
                 Cpf = "651.687.998-74",
                 Email = "51313153@6323.com",
-                ItensVendidos = new List<Carro>
-                {
-                    new Carro
-                    {
-                        Id = 23,
-                        Modelo = "Golf GTI",
-                        Cor = Cores.Branco,
-                        Flex= true,
-                        ValorDoVeiculo = 100,
-                        Marca = Marcas.Volkswagem
-                    }
-                },
                 Telefone = telefone,
                 Pago = true,
                 ValorTotal = 100
@@ -302,38 +321,9 @@ namespace Cod3rsGrowth.Testes
             Assert.Equal("Formato de telefone inválido.", exception.Message);
         }
 
+        
         [Fact]
-        public void Criar_ComCpfInvalidoEmailInvalidoETelefoneInvalido_DeveRetornarExcecaoEsperada()
-        {
-            //arrange
-            var novaVenda = new Venda
-            {
-                Nome = "Higor",
-                Cpf = "111.111.111-11",
-                Email = "513131536323.com",
-                ItensVendidos = new List<Carro>
-                {
-                    new Carro
-                    {
-                        Cor = Cores.Branco,
-                        Flex= true,
-                        ValorDoVeiculo = 100,
-                        Marca = Marcas.Volkswagem
-                    }
-                },
-                Pago = true,
-                Telefone = "(65)65161651",
-                ValorTotal = 100
-            };
-            //act
-            //asset
-            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Criar(novaVenda));
-
-            Assert.Equivalent("Formato CPF inválido. Formato de e-mail inválido. Formato de telefone inválido. Campo modelo não preenchido. ", exception.Message);
-        }
-
-        [Fact]
-        public void Criar_ComVendacriada_DeveRetornarVendaEsperada()
+        public void Criar_ComDadosValidos_DeveCriarComSucesso()
         {
             //arrange
             var novaVenda = new Venda
@@ -341,17 +331,6 @@ namespace Cod3rsGrowth.Testes
                 Nome = "Higor",
                 Cpf = "213.344.567-98",
                 Email = "higordaniel@gmail.com",
-                ItensVendidos = new List<Carro>
-                {
-                    new Carro
-                    {
-                        Modelo = "C180",
-                        Cor = Cores.Branco,
-                        Flex = true,
-                        Marca = Marcas.Bmw,
-                        ValorDoVeiculo = 100
-                    }
-                },
                 Pago = true,
                 Telefone = "(65)65161-1651",
                 ValorTotal = 100
