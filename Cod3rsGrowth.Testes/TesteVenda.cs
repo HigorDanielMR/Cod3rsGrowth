@@ -257,6 +257,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("@gmail")]
         [InlineData("hashas.br")]
         [InlineData("@gmail.com.br")]
+        [InlineData("gmail.com.br@")]
         public void Criar_ComEmailInvalido_DeveRetornarExcecaoEsperada(string email)
         {
             //arrange
