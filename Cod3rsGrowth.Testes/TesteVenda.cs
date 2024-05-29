@@ -164,7 +164,7 @@ namespace Cod3rsGrowth.Testes
         [InlineData("h1go0r")]
         [InlineData("!@#$%¨&*()_`{}^:>|")]
         [InlineData("🐱‍👤🐱‍👤🐱‍👤🐱‍👤")]
-        public void Criar_ComNomeInvalido_DeveRetornarOutraExcecaoEsperada(string nome)
+        public void Criar_ComNomeInvalido_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
 
