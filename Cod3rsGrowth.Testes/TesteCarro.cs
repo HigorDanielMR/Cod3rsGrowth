@@ -85,7 +85,7 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarCarroEsperado()
         {
             //arrange
-            var IdDeBusca = 1;
+            var IdDeBusca = 0;
             //act
             var carroMock = _listaMock[IdDeBusca];
             var carroDoBanco = _servicoCarro.ObterPorId(IdDeBusca);
@@ -208,6 +208,72 @@ namespace Cod3rsGrowth.Testes
 
             //asset
             Assert.Equal(novoCarro, carroEsperado);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("")]
+        [InlineData("      ")]
+        public void Editar_ComModeloVazio_DeveRetornarExcessaoEsperada(string modelo)
+        {
+            var IdDaEdicao = 1;
+            //arrange
+            var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
+
+            novoCarro.Modelo = modelo;
+            novoCarro.Cor = Cores.Branco;
+            novoCarro.Flex = true;
+            novoCarro.Marca = Marcas.Bmw;
+            novoCarro.ValorDoVeiculo = 10000;
+
+            //act
+
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
+            //asset
+            Assert.Equal("Campo modelo não preenchido.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData("a")]
+        [InlineData("Aetherion Eclipse XR 9000 Supercharged Hybrid Sport Coupe")]
+        public void Editar_ComModeloInvalido_DeveRetornarExcessaoEsperada(string modelo)
+        {
+            var IdDaEdicao = 1;
+            //arrange
+            var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
+
+            novoCarro.Modelo = modelo;
+            novoCarro.Cor = Cores.Branco;
+            novoCarro.Flex = true;
+            novoCarro.Marca = Marcas.Bmw;
+            novoCarro.ValorDoVeiculo = 10000;
+
+            //act
+
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
+            //asset
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres.", exception.Message);
+        }
+
+        [Fact]
+        public void Editar_ComDadosValidos_DeveEditarComSucesso()
+        {
+            var IdDaEdicao = 1;
+            //arrange
+            var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
+
+            novoCarro.Modelo = "C180";
+            novoCarro.Cor = Cores.Branco;
+            novoCarro.Flex = true;
+            novoCarro.Marca = Marcas.Bmw;
+            novoCarro.ValorDoVeiculo = 10000;
+
+            //act
+            _servicoCarro.Editar(novoCarro);
+            var carroDoBanco = _servicoCarro.ObterTodos()[IdDaEdicao];
+
+            //asset
+            Assert.Equal(novoCarro, carroDoBanco);
         }
     }
 }

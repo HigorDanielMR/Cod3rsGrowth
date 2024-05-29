@@ -48,9 +48,26 @@ namespace Cod3rsGrowth.Dominio.Services
             }
             _repositorioVenda.Criar(venda);
         }
-        public void EditarVenda()
+        public void Editar(Venda venda)
         {
-            return;
+            var resultado = _validadorVenda.Validate(venda);
+            if (!resultado.IsValid)
+            {
+                var erros = "";
+                foreach (var falhas in resultado.Errors)
+                {
+                    if (resultado.Errors.Count > 1)
+                    {
+                        erros += falhas.ErrorMessage + " ";
+                    }
+                    else
+                    {
+                        erros += falhas.ErrorMessage;
+                    }
+                }
+                throw new ValidationException(erros);
+            }
+                _repositorioVenda.Editar(venda);
         }
 
         public void RemoverVenda()

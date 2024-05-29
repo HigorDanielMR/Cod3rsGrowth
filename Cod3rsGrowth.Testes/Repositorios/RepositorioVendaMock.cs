@@ -26,5 +26,19 @@ namespace Cod3rsGrowth.Testes
             _novoId++;
             _repositorioVenda.Add(venda);
         }
+
+        public void Editar(Venda venda)
+        {
+            var listaDoBanco = ObterTodos();
+            var indexDesejado = venda.Id;
+
+            if (venda.Nome != null) listaDoBanco[indexDesejado].Nome = venda.Nome;
+            if (venda.Email != null) listaDoBanco[indexDesejado].Email = venda.Email;
+            if (venda.Cpf != null) listaDoBanco[indexDesejado].Cpf = venda.Cpf;
+            if (venda.Telefone != null) listaDoBanco[indexDesejado].Telefone = venda.Telefone;
+
+            listaDoBanco[venda.Id] = venda;
+            _repositorioVenda = listaDoBanco;
+        }
     }
 }

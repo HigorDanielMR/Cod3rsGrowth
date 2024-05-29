@@ -26,5 +26,16 @@ namespace Cod3rsGrowth.Testes
             _novoId++;
             _repositorioCarro.Add(carro);
         }
+
+        public void Editar(Carro carro)
+        {
+            var listaDoBanco = ObterTodos();
+            var indexDesejado = carro.Id;
+
+            if (carro.Modelo != null) listaDoBanco[indexDesejado].Modelo = carro.Modelo;
+
+            listaDoBanco[carro.Id] = carro;
+            _repositorioCarro = listaDoBanco;
+        }
     }
 }

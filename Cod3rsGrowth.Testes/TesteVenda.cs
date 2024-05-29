@@ -343,5 +343,27 @@ namespace Cod3rsGrowth.Testes
             //asset
             Assert.Equal(novaVenda, vendaEsperada);
         }
+
+        [Fact]
+        public void Editar_ComDadosValidos_DeveEditarComSucesso()
+        {
+            var IdDaEdicao = 1;
+            //arrange
+            var novaVenda = _servicoVenda.ObterPorId(IdDaEdicao);
+
+            novaVenda.Nome = "higor";
+            novaVenda.Cpf = "213.344.567-90";
+            novaVenda.Email = "higordaniel@gmail.com";
+            novaVenda.Pago = true;
+            novaVenda.Telefone = "(65)65161-1651";
+            novaVenda.ValorTotal = 100;
+
+            //act
+            _servicoVenda.Editar(novaVenda);
+            var vendaDoBanco = _servicoVenda.ObterTodos()[IdDaEdicao];
+
+            //asset
+            Assert.Equal(novaVenda, vendaDoBanco);
+        }
     }
 }
