@@ -1,16 +1,19 @@
 ﻿using Xunit;
 using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Interfaces;
-using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Cod3rsGrowth.Dominio.Services;
+using FluentValidation;
+using System.Runtime.Serialization;
+using static System.Runtime.InteropServices.JavaScript.JSType;
+using System.Runtime.ConstrainedExecution;
 
 namespace Cod3rsGrowth.Testes
 {
 
     public class TesteVenda : TesteBase
     {
-        private IServicoVenda _servicoVenda;
+        private ServicoVenda _servicoVenda;
         private List<Venda> _listaMock;
 
         public TesteVenda()
@@ -21,8 +24,9 @@ namespace Cod3rsGrowth.Testes
 
         private void CarregarServico()
         {
-            _servicoVenda = ServiceProvider.GetService<IServicoVenda>()
-               ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoVenda)}]");
+            _servicoVenda = ServiceProvider.GetService<ServicoVenda>()
+               ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoVenda)}]");
+        
         }
         private List<Venda> InicializarDadosMock()
         {
@@ -41,6 +45,16 @@ namespace Cod3rsGrowth.Testes
                     Nome = "Daniel",
                     Cpf = "124.454.878-77",
                     Email = "ahshlahs@asa.com",
+                    Pago = true,
+                    Telefone = "01209091212",
+                    ValorTotal = 100
+                },
+                new Venda
+                {
+                    Nome = "Higor Daniel",
+                    Cpf = "124.454.878-77",
+                    Email = "ahshlahs@asa.com",
+                    DataDeCompra = new DateTime(2024, 5, 10),
                     Pago = true,
                     Telefone = "01209091212",
                     ValorTotal = 100
@@ -83,7 +97,7 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var IdBusca = 0;
             //act
-            var vendaMock = _listaMock.FirstOrDefault();
+            var vendaMock = _listaMock[IdBusca];
             var vendaDoBanco = _servicoVenda.ObterPorId(IdBusca);
             //asset
             Assert.NotNull(vendaDoBanco);
@@ -334,8 +348,7 @@ namespace Cod3rsGrowth.Testes
                 ValorTotal = 100
             };
             //act
-            _servicoVenda.Criar(novaVenda);
-            var vendaEsperada = _servicoVenda.ObterTodos().Last();
+            var vendaEsperada = _servicoVenda.Criar(novaVenda); ;
 
             //asset
             Assert.Equal(novaVenda, vendaEsperada);
@@ -348,16 +361,18 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComNomeVazio_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = nome;
-            novaVenda.Cpf = "213.344.567-90";
-            novaVenda.Email = "higordaniel@gmail.com";
-            novaVenda.Pago = true;
-            novaVenda.Telefone = "(65)65161-1651";
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = nome,
+                Cpf = "213.344.567-90",
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
 
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             //asset
@@ -369,16 +384,18 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComNomeExcedendoValorMaximo_DeveRetornarExcecaoEsperada()
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
-            novaVenda.Cpf = "213.344.567-90";
-            novaVenda.Email = "higordaniel@gmail.com";
-            novaVenda.Pago = true;
-            novaVenda.Telefone = "(65)65161-1651";
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+                Cpf = "213.344.567-90",
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             Assert.Equal("O nome deve ter no máximo 100 caracteres.", exception.Message);
@@ -391,16 +408,18 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComNomeInvalido_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = nome;
-            novaVenda.Cpf = "213.344.567-90";
-            novaVenda.Email = "higordaniel@gmail.com";
-            novaVenda.Pago = true;
-            novaVenda.Telefone = "(65)65161-1651";
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = nome,
+                Cpf = "213.344.567-90",
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             Assert.Equal("O nome deve conter apenas letras.", exception.Message);
@@ -413,16 +432,18 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComCpfVazio_DeveRetornarExcecaoEsperada(string cpf)
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = "nome";
-            novaVenda.Cpf = cpf;
-            novaVenda.Email = "higordaniel@gmail.com";
-            novaVenda.Pago = true;
-            novaVenda.Telefone = "(65)65161-1651";
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "higor",
+                Cpf = cpf,
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             Assert.Equal("Campo cpf não preenchido.", exception.Message);
@@ -435,16 +456,18 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComCpfInvalido_DeveRetornarExcecaoEsperada(string cpf)
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = "nome";
-            novaVenda.Cpf = cpf;
-            novaVenda.Email = "higordaniel@gmail.com";
-            novaVenda.Pago = true;
-            novaVenda.Telefone = "(65)65161-1651";
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "higor",
+                Cpf = cpf,
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             Assert.Equal("Formato CPF inválido.", exception.Message);
@@ -457,16 +480,18 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComEmailVazio_DeveRetornarExcecaoEsperada(string email)
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = "nome";
-            novaVenda.Cpf = "213.344.567-90";
-            novaVenda.Email = email;
-            novaVenda.Pago = true;
-            novaVenda.Telefone = "(65)65161-1651";
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "higor",
+                Cpf = "213.344.567-90",
+                Email = email,
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             Assert.Equal("Campo e-mail não preenchido.", exception.Message);
@@ -482,16 +507,18 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComEmailInvalido_DeveRetornarExcecaoEsperada(string email)
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = "nome";
-            novaVenda.Cpf = "213.344.567-90";
-            novaVenda.Email = email;
-            novaVenda.Pago = true;
-            novaVenda.Telefone = "(65)65161-1651";
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "higor",
+                Cpf = "213.344.567-90",
+                Email = email,
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             Assert.Equal("Formato de e-mail inválido.", exception.Message);
@@ -504,16 +531,18 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComTelefoneVazio_DeveRetornarExcecaoEsperada(string telefone)
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = "nome";
-            novaVenda.Cpf = "213.344.567-90";
-            novaVenda.Email = "higordaniel@gmail.com";
-            novaVenda.Pago = true;
-            novaVenda.Telefone = telefone;
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "higor",
+                Cpf = "213.344.567-90",
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = telefone,
+                ValorTotal = 100
+            };
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             Assert.Equal("Campo telefone não preenchido.", exception.Message);
@@ -527,38 +556,62 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComTelefoneInvalido_DeveRetornarExcecaoEsperada(string telefone)
         {
             //arrange
-            var IdDeEdicao = 1;
             //act
-            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
-
-            novaVenda.Nome = "nome";
-            novaVenda.Cpf = "213.344.567-90";
-            novaVenda.Email = "higordaniel@gmail.com";
-            novaVenda.Pago = true;
-            novaVenda.Telefone = telefone;
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "higor",
+                Cpf = "213.344.567-90",
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = telefone,
+                ValorTotal = 100
+            };
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
             Assert.Equal("Formato de telefone inválido.", exception.Message);
         }
 
         [Fact]
+        public void Editar_ComDataDeCompraInvalida_DeveRetornarExcecaoEsperada()
+        {
+            //arrange
+            //act
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "higor",
+                Cpf = "213.344.567-90",
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2023, 05, 20),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("Uma venda concluida não pode ter a data alterada.", exception.Message);
+        }
+
+        [Fact]
         public void Editar_ComDadosValidos_DeveEditarComSucesso()
         {
-            var IdDaEdicao = 1;
             //arrange
-            var novaVenda = _servicoVenda.ObterPorId(IdDaEdicao);
-
-            novaVenda.Nome = "higor";
-            novaVenda.Cpf = "213.344.567-90";
-            novaVenda.Email = "higordaniel@gmail.com";
-            novaVenda.Pago = true;
-            novaVenda.Telefone = "(65)65161-1651";
-            novaVenda.ValorTotal = 100;
+            var novaVenda = new Venda
+            {
+                Id = 2,
+                Nome = "higor",
+                Cpf = "213.344.567-90",
+                Email = "higordaniel@gmail.com",
+                DataDeCompra = new DateTime(2024, 5, 10),
+                Pago = true,
+                Telefone = "(65)65161-1651",
+                ValorTotal = 100
+            };
 
             //act
-            _servicoVenda.Editar(novaVenda);
-            var vendaDoBanco = _servicoVenda.ObterTodos()[IdDaEdicao];
+            var vendaDoBanco = _servicoVenda.Editar(novaVenda);
 
             //asset
             Assert.Equal(novaVenda, vendaDoBanco);

@@ -21,23 +21,25 @@ namespace Cod3rsGrowth.Testes
                 ?? throw new Exception($"O carro com ID {IdDeBusca} não foi encontrado");
         }
 
-        public void Criar(Carro carro)
+        public Carro Criar(Carro carro)
         {
             carro.Id = _novoId;
             _novoId++;
             _repositorioCarro.Add(carro);
+            return carro;
         }
 
-        public void Editar(Carro carro)
+        public Carro Editar(Carro carro)
         {
-            var listaDoBanco = ObterTodos();
-            var indexDesejado = carro.Id;
+            var carroDoBanco = ObterPorId(carro.Id);
+            var indexDesejado = _repositorioCarro.FindIndex(carroD => carroD.Id == carro.Id);
 
-            listaDoBanco[indexDesejado].Modelo = carro.Modelo
+            carroDoBanco.Modelo = carro.Modelo
                 ?? throw new ValidationException();
 
-            listaDoBanco[carro.Id] = carro;
-            _repositorioCarro = listaDoBanco;
+            carroDoBanco = carro;
+            _repositorioCarro[indexDesejado] = carro;
+            return _repositorioCarro[indexDesejado];
         }
     }
 }

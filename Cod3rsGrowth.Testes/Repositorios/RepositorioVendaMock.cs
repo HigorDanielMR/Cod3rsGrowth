@@ -21,29 +21,31 @@ namespace Cod3rsGrowth.Testes
                 ?? throw new Exception($"A venda com ID {IdDeBusca} não foi encontrada");
         }
 
-        public void Criar(Venda venda)
+        public Venda Criar(Venda venda)
         {
             venda.Id = _novoId;
             _novoId++;
             _repositorioVenda.Add(venda);
+            return venda;
         }
 
-        public void Editar(Venda venda)
+        public Venda Editar(Venda venda)
         {
-            var listaDoBanco = ObterTodos();
-            var indexDesejado = venda.Id;
+            var vendaDoBanco = ObterPorId(venda.Id);
+            var indexDesejado = _repositorioVenda.FindIndex(vendaX => vendaX.Id == venda.Id);
 
-            listaDoBanco[indexDesejado].Nome = venda.Nome
+            vendaDoBanco.Nome = venda.Nome
                 ?? throw new ValidationException();
-            listaDoBanco[indexDesejado].Email = venda.Email
+            vendaDoBanco.Email = venda.Email
                 ?? throw new ValidationException();
-            listaDoBanco[indexDesejado].Cpf = venda.Cpf
+            vendaDoBanco.Cpf = venda.Cpf
                 ?? throw new ValidationException();
-            listaDoBanco[indexDesejado].Telefone = venda.Telefone
+            vendaDoBanco.Telefone = venda.Telefone
                 ?? throw new ValidationException();
 
-            listaDoBanco[venda.Id] = venda;
-            _repositorioVenda = listaDoBanco;
+            vendaDoBanco = venda;
+            _repositorioVenda[indexDesejado] = venda;
+            return _repositorioVenda[indexDesejado];
         }
     }
 }

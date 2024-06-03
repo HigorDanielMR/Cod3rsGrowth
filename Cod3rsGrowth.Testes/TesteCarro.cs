@@ -2,10 +2,8 @@
 using FluentValidation;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Interfaces;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using Cod3rsGrowth.Infra.Repositorios;
 using Cod3rsGrowth.Dominio.Services;
 
 namespace Cod3rsGrowth.Testes
@@ -13,7 +11,7 @@ namespace Cod3rsGrowth.Testes
 
     public class TesteCarro : TesteBase
     {
-        private IServicoCarro _servicoCarro;
+        private ServicoCarro _servicoCarro;
         private List<Carro> _listaMock;
 
         public TesteCarro()
@@ -24,8 +22,8 @@ namespace Cod3rsGrowth.Testes
 
         private void CarregarServico()
         {
-            _servicoCarro = ServiceProvider.GetService<IServicoCarro>()
-                ?? throw new Exception($"Erro ao obter servico [{nameof(IServicoCarro)}]");
+            _servicoCarro = ServiceProvider.GetService<ServicoCarro>()
+                ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoCarro)}]");
         }
 
         private List<Carro> InicializarDadosMock()
@@ -34,7 +32,6 @@ namespace Cod3rsGrowth.Testes
             {
                 new Carro
                 {
-                    Id = 1,
                     Modelo = "Golf GTI",
                     Cor = Cores.Branco,
                     Flex = true,
@@ -43,12 +40,19 @@ namespace Cod3rsGrowth.Testes
                 },
                 new Carro
                 {
-                    Id = 2,
                     Modelo = "Civic",
                     Cor = Cores.Preto,
                     Flex = true,
                     ValorDoVeiculo = 100,
                     Marca = Marcas.Honda
+                },
+                new Carro
+                {
+                    Modelo = "Gol",
+                    Cor = Cores.Preto,
+                    Flex = true,
+                    ValorDoVeiculo = 100,
+                    Marca = Marcas.Volkswagem
                 }
             };
 
@@ -134,7 +138,7 @@ namespace Cod3rsGrowth.Testes
             //act
             //asset
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Contains("Campo modelo não preenchido.", exception.Message);
+            Assert.Equivalent("Campo modelo não preenchido.", exception.Message);
         }
 
         [Theory]
@@ -187,7 +191,7 @@ namespace Cod3rsGrowth.Testes
             };
             //act
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres. O valor do veiculo deve ser maior que zero. ", exception.Message); 
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres. O valor do veiculo deve ser maior que zero. ", exception.Message);
         }
 
         [Fact]
@@ -203,8 +207,8 @@ namespace Cod3rsGrowth.Testes
                 ValorDoVeiculo = 100
             };
             //act
-            _servicoCarro.Criar(novoCarro);
-            var carroEsperado = _servicoCarro.ObterTodos().Last();
+            
+            var carroEsperado = _servicoCarro.Criar(novoCarro);
 
             //asset
             Assert.Equal(novoCarro, carroEsperado);
@@ -216,15 +220,16 @@ namespace Cod3rsGrowth.Testes
         [InlineData("      ")]
         public void Editar_ComModeloVazio_DeveRetornarExcessaoEsperada(string modelo)
         {
-            var IdDaEdicao = 1;
             //arrange
-            var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
-
-            novoCarro.Modelo = modelo;
-            novoCarro.Cor = Cores.Branco;
-            novoCarro.Flex = true;
-            novoCarro.Marca = Marcas.Bmw;
-            novoCarro.ValorDoVeiculo = 10000;
+            var novoCarro = new Carro
+            {
+                Id = 2,
+                Modelo = modelo,
+                Cor = Cores.Branco,
+                Flex = true,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = 111
+            };
 
             //act
 
@@ -239,15 +244,16 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComModeloInvalido_DeveRetornarExcessaoEsperada(string modelo)
         {
             //arrange
-            var IdDaEdicao = 1;
             //act
-            var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
-
-            novoCarro.Modelo = modelo;
-            novoCarro.Cor = Cores.Branco;
-            novoCarro.Flex = true;
-            novoCarro.Marca = Marcas.Bmw;
-            novoCarro.ValorDoVeiculo = 10000;
+            var novoCarro = new Carro
+            {
+                Id = 2,
+                Modelo = modelo,
+                Cor = Cores.Branco,
+                Flex = true,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = 111
+            };
 
 
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
@@ -259,15 +265,16 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComValorDoVeiculoInvalido_DeveRetornarExcesaoEsperada()
         {
             //arrange
-            var IdDaEdicao = 1;
             //act
-            var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
-
-            novoCarro.Modelo = "C180";
-            novoCarro.Cor = Cores.Branco;
-            novoCarro.Flex = true;
-            novoCarro.Marca = Marcas.Bmw;
-            novoCarro.ValorDoVeiculo = -111;
+            var novoCarro = new Carro
+            {
+                Id = 2,
+                Modelo = "C180",
+                Cor = Cores.Branco,
+                Flex = true,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = -111
+            };
 
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
             //Assert
@@ -277,19 +284,18 @@ namespace Cod3rsGrowth.Testes
         [Fact]
         public void Editar_ComDadosValidos_DeveEditarComSucesso()
         {
-            var IdDaEdicao = 1;
             //arrange
-            var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
-
-            novoCarro.Modelo = "C180";
-            novoCarro.Cor = Cores.Branco;
-            novoCarro.Flex = true;
-            novoCarro.Marca = Marcas.Bmw;
-            novoCarro.ValorDoVeiculo = 10000;
-
             //act
-            _servicoCarro.Editar(novoCarro);
-            var carroDoBanco = _servicoCarro.ObterTodos()[IdDaEdicao];
+            var novoCarro = new Carro
+            {
+                Id = 2,
+                Modelo = "C180",
+                Cor = Cores.Branco,
+                Flex = true,
+                Marca = Marcas.Bmw,
+                ValorDoVeiculo = 10000
+            };
+            var carroDoBanco = _servicoCarro.Editar(novoCarro);
 
             //asset
             Assert.Equal(novoCarro, carroDoBanco);

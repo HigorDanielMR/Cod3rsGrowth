@@ -5,8 +5,8 @@ namespace Cod3rsGrowth.Infra.Interfaces
     public interface IRepositorioCarro
     {
         List<Carro> ObterTodos();
-        void Criar(Carro carro);
+        Carro Criar(Carro carro);
         Carro ObterPorId(int IdDoItem);
-        void Editar(Carro carro);
+        Carro Editar(Carro carro);
     }
 }

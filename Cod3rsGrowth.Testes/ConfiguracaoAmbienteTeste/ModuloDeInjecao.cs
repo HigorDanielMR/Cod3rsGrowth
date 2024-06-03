@@ -1,6 +1,5 @@
 ﻿using Cod3rsGrowth.Dominio.Services;
 using Cod3rsGrowth.Infra.Interfaces;
-using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,8 +12,8 @@ namespace Cod3rsGrowth.Testes
             servicos.AddScoped<ValidacoesCarro>();
             servicos.AddScoped<ValidacoesVenda>();
 
-            servicos.AddScoped<IServicoCarro, ServicoCarro>();
-            servicos.AddScoped<IServicoVenda, ServicoVenda>();
+            servicos.AddScoped<ServicoCarro>();
+            servicos.AddScoped<ServicoVenda>();
 
             servicos.AddScoped<IRepositorioCarro, RepositorioCarroMock>();
             servicos.AddScoped<IRepositorioVenda, RepositorioVendaMock>();

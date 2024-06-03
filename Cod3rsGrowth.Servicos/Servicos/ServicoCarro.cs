@@ -1,12 +1,11 @@
 ﻿using FluentValidation;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.Dominio.Services
 {
-    public class ServicoCarro : IServicoCarro
+    public class ServicoCarro
     {
         private readonly IRepositorioCarro _repositorioCarro;
         private ValidacoesCarro _validadorCarro;
@@ -26,7 +25,7 @@ namespace Cod3rsGrowth.Dominio.Services
             return _repositorioCarro.ObterPorId(IdDoItem);
         }
 
-        public void Criar(Carro carro)
+        public Carro Criar(Carro carro)
         {
             var resultado = _validadorCarro.Validate(carro);
             var erros = "";
@@ -45,10 +44,10 @@ namespace Cod3rsGrowth.Dominio.Services
                 }
                 throw new ValidationException(erros);
             }
-            _repositorioCarro.Criar(carro);
+            return _repositorioCarro.Criar(carro);
         }
         
-        public void Editar(Carro carro)
+        public Carro Editar(Carro carro)
         {
             var resultado = _validadorCarro.Validate(carro);
             var erros = "";
@@ -67,7 +66,7 @@ namespace Cod3rsGrowth.Dominio.Services
                 }
                 throw new ValidationException(erros);
             }
-            _repositorioCarro.Editar(carro);
+            return _repositorioCarro.Editar(carro);
         }
 
         public void RemoverCarro()

@@ -1,13 +1,14 @@
 ﻿using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
 using System.ComponentModel.DataAnnotations;
-using System.Xml;
+using System;
+using FluentValidation;
+using ValidationException = FluentValidation.ValidationException;
 
 namespace Cod3rsGrowth.Dominio.Services
 {
-    public class ServicoVenda : IServicoVenda
+    public class ServicoVenda
     {
         private readonly IRepositorioVenda _repositorioVenda;
         private ValidacoesVenda _validadorVenda;
@@ -27,7 +28,7 @@ namespace Cod3rsGrowth.Dominio.Services
             return _repositorioVenda.ObterPorId(IdDoItem);
         }
 
-        public void Criar(Venda venda)
+        public Venda Criar(Venda venda)
         {
             var resultado = _validadorVenda.Validate(venda);
             if (!resultado.IsValid)
@@ -46,11 +47,11 @@ namespace Cod3rsGrowth.Dominio.Services
                 }
                 throw new ValidationException(erros);
             }
-            _repositorioVenda.Criar(venda);
+            return _repositorioVenda.Criar(venda);
         }
-        public void Editar(Venda venda)
+        public Venda Editar(Venda venda)
         {
-            var resultado = _validadorVenda.Validate(venda);
+            var resultado = _validadorVenda.Validate(venda, options => options.IncludeRuleSets("Editar").IncludeRulesNotInRuleSet());
             if (!resultado.IsValid)
             {
                 var erros = "";
@@ -67,7 +68,7 @@ namespace Cod3rsGrowth.Dominio.Services
                 }
                 throw new ValidationException(erros);
             }
-                _repositorioVenda.Editar(venda);
+                return _repositorioVenda.Editar(venda);
         }
 
         public void RemoverVenda()
