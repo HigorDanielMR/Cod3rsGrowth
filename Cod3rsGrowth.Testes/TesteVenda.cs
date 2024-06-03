@@ -1,12 +1,9 @@
 ﻿using Xunit;
-using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using Cod3rsGrowth.Dominio.Services;
-using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -32,7 +29,7 @@ namespace Cod3rsGrowth.Testes
             List<Venda> listaDeVendas = new List<Venda> {
                 new Venda
                 {
-                    Nome = "Higor",
+                    Nome = "higor",
                     Cpf = "714.696.331-40",
                     Email = "51313153@6323.com",
                     Pago = true,
@@ -342,6 +339,207 @@ namespace Cod3rsGrowth.Testes
 
             //asset
             Assert.Equal(novaVenda, vendaEsperada);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("       ")]
+        [InlineData("")]
+        public void Editar_ComNomeVazio_DeveRetornarExcecaoEsperada(string nome)
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = nome;
+            novaVenda.Cpf = "213.344.567-90";
+            novaVenda.Email = "higordaniel@gmail.com";
+            novaVenda.Pago = true;
+            novaVenda.Telefone = "(65)65161-1651";
+            novaVenda.ValorTotal = 100;
+
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            //asset
+            Assert.Equal("Campo nome não preenchido.", exception.Message);
+        }
+
+
+        [Fact]
+        public void Editar_ComNomeExcedendoValorMaximo_DeveRetornarExcecaoEsperada()
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa";
+            novaVenda.Cpf = "213.344.567-90";
+            novaVenda.Email = "higordaniel@gmail.com";
+            novaVenda.Pago = true;
+            novaVenda.Telefone = "(65)65161-1651";
+            novaVenda.ValorTotal = 100;
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("O nome deve ter no máximo 100 caracteres.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData("h1go0r")]
+        [InlineData("!@#$%¨&*()_`{}^:>|")]
+        [InlineData("🐱‍👤🐱‍👤🐱‍👤🐱‍👤")]
+        public void Editar_ComNomeInvalido_DeveRetornarExcecaoEsperada(string nome)
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = nome;
+            novaVenda.Cpf = "213.344.567-90";
+            novaVenda.Email = "higordaniel@gmail.com";
+            novaVenda.Pago = true;
+            novaVenda.Telefone = "(65)65161-1651";
+            novaVenda.ValorTotal = 100;
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("O nome deve conter apenas letras.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("       ")]
+        [InlineData("")]
+        public void Editar_ComCpfVazio_DeveRetornarExcecaoEsperada(string cpf)
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = "nome";
+            novaVenda.Cpf = cpf;
+            novaVenda.Email = "higordaniel@gmail.com";
+            novaVenda.Pago = true;
+            novaVenda.Telefone = "(65)65161-1651";
+            novaVenda.ValorTotal = 100;
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("Campo cpf não preenchido.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData("542522654")]
+        [InlineData("111.111.111-11")]
+        [InlineData("aaa.aaa.sss-jj")]
+        public void Editar_ComCpfInvalido_DeveRetornarExcecaoEsperada(string cpf)
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = "nome";
+            novaVenda.Cpf = cpf;
+            novaVenda.Email = "higordaniel@gmail.com";
+            novaVenda.Pago = true;
+            novaVenda.Telefone = "(65)65161-1651";
+            novaVenda.ValorTotal = 100;
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("Formato CPF inválido.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("       ")]
+        [InlineData("")]
+        public void Editar_ComEmailVazio_DeveRetornarExcecaoEsperada(string email)
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = "nome";
+            novaVenda.Cpf = "213.344.567-90";
+            novaVenda.Email = email;
+            novaVenda.Pago = true;
+            novaVenda.Telefone = "(65)65161-1651";
+            novaVenda.ValorTotal = 100;
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("Campo e-mail não preenchido.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData("kakkhskhaksgmail.com")]
+        [InlineData("@gmail.com")]
+        [InlineData("@gmail")]
+        [InlineData("hashas.br")]
+        [InlineData("@gmail.com.br")]
+        [InlineData("gmail.com.br@")]
+        public void Editar_ComEmailInvalido_DeveRetornarExcecaoEsperada(string email)
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = "nome";
+            novaVenda.Cpf = "213.344.567-90";
+            novaVenda.Email = email;
+            novaVenda.Pago = true;
+            novaVenda.Telefone = "(65)65161-1651";
+            novaVenda.ValorTotal = 100;
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("Formato de e-mail inválido.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData(null)]
+        [InlineData("    ")]
+        [InlineData("")]
+        public void Editar_ComTelefoneVazio_DeveRetornarExcecaoEsperada(string telefone)
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = "nome";
+            novaVenda.Cpf = "213.344.567-90";
+            novaVenda.Email = "higordaniel@gmail.com";
+            novaVenda.Pago = true;
+            novaVenda.Telefone = telefone;
+            novaVenda.ValorTotal = 100;
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("Campo telefone não preenchido.", exception.Message);
+        }
+
+        [Theory]
+        [InlineData("616512")]
+        [InlineData("(98)9802-1488")]
+        [InlineData("(98)98021488")]
+        [InlineData("989802-1488")]
+        public void Editar_ComTelefoneInvalido_DeveRetornarExcecaoEsperada(string telefone)
+        {
+            //arrange
+            var IdDeEdicao = 1;
+            //act
+            var novaVenda = _servicoVenda.ObterPorId(IdDeEdicao);
+
+            novaVenda.Nome = "nome";
+            novaVenda.Cpf = "213.344.567-90";
+            novaVenda.Email = "higordaniel@gmail.com";
+            novaVenda.Pago = true;
+            novaVenda.Telefone = telefone;
+            novaVenda.ValorTotal = 100;
+            //asset
+            var exception = Assert.Throws<ValidationException>(() => _servicoVenda.Editar(novaVenda));
+            Assert.Equal("Formato de telefone inválido.", exception.Message);
         }
 
         [Fact]

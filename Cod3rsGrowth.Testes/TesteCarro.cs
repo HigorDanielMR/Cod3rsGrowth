@@ -238,8 +238,9 @@ namespace Cod3rsGrowth.Testes
         [InlineData("Aetherion Eclipse XR 9000 Supercharged Hybrid Sport Coupe")]
         public void Editar_ComModeloInvalido_DeveRetornarExcessaoEsperada(string modelo)
         {
-            var IdDaEdicao = 1;
             //arrange
+            var IdDaEdicao = 1;
+            //act
             var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
 
             novoCarro.Modelo = modelo;
@@ -248,11 +249,29 @@ namespace Cod3rsGrowth.Testes
             novoCarro.Marca = Marcas.Bmw;
             novoCarro.ValorDoVeiculo = 10000;
 
-            //act
 
             var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
             //asset
             Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres.", exception.Message);
+        }
+
+        [Fact]
+        public void Editar_ComValorDoVeiculoInvalido_DeveRetornarExcesaoEsperada()
+        {
+            //arrange
+            var IdDaEdicao = 1;
+            //act
+            var novoCarro = _servicoCarro.ObterPorId(IdDaEdicao);
+
+            novoCarro.Modelo = "C180";
+            novoCarro.Cor = Cores.Branco;
+            novoCarro.Flex = true;
+            novoCarro.Marca = Marcas.Bmw;
+            novoCarro.ValorDoVeiculo = -111;
+
+            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
+            //Assert
+            Assert.Equal("O valor do veiculo deve ser maior que zero.", exception.Message);
         }
 
         [Fact]

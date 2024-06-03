@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -32,7 +33,8 @@ namespace Cod3rsGrowth.Testes
             var listaDoBanco = ObterTodos();
             var indexDesejado = carro.Id;
 
-            if (carro.Modelo != null) listaDoBanco[indexDesejado].Modelo = carro.Modelo;
+            listaDoBanco[indexDesejado].Modelo = carro.Modelo
+                ?? throw new ValidationException();
 
             listaDoBanco[carro.Id] = carro;
             _repositorioCarro = listaDoBanco;

@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
+using System.ComponentModel.DataAnnotations;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -32,10 +33,14 @@ namespace Cod3rsGrowth.Testes
             var listaDoBanco = ObterTodos();
             var indexDesejado = venda.Id;
 
-            if (venda.Nome != null) listaDoBanco[indexDesejado].Nome = venda.Nome;
-            if (venda.Email != null) listaDoBanco[indexDesejado].Email = venda.Email;
-            if (venda.Cpf != null) listaDoBanco[indexDesejado].Cpf = venda.Cpf;
-            if (venda.Telefone != null) listaDoBanco[indexDesejado].Telefone = venda.Telefone;
+            listaDoBanco[indexDesejado].Nome = venda.Nome
+                ?? throw new ValidationException();
+            listaDoBanco[indexDesejado].Email = venda.Email
+                ?? throw new ValidationException();
+            listaDoBanco[indexDesejado].Cpf = venda.Cpf
+                ?? throw new ValidationException();
+            listaDoBanco[indexDesejado].Telefone = venda.Telefone
+                ?? throw new ValidationException();
 
             listaDoBanco[venda.Id] = venda;
             _repositorioVenda = listaDoBanco;
