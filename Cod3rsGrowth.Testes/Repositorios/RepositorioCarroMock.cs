@@ -2,13 +2,14 @@
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
 using System.ComponentModel.DataAnnotations;
+using System.Net.WebSockets;
 
 namespace Cod3rsGrowth.Testes
 {
     public class RepositorioCarroMock : IRepositorioCarro
     {
         private List<Carro> _repositorioCarro = ListaSingleton.Instance.RepositorioCarro;
-        private int _novoId = 0;
+        private int _novoId = 1;
 
         public List<Carro> ObterTodos()
         {
@@ -29,17 +30,17 @@ namespace Cod3rsGrowth.Testes
             return carro;
         }
 
-        public Carro Editar(Carro carro)
+        public Carro Editar(Carro carroAtualizado)
         {
-            var carroDoBanco = ObterPorId(carro.Id);
-            var indexDesejado = _repositorioCarro.FindIndex(carroD => carroD.Id == carro.Id);
+            var carroDesejado = ObterPorId(carroAtualizado.Id);
 
-            carroDoBanco.Modelo = carro.Modelo
-                ?? throw new ValidationException();
+            carroDesejado.Modelo = carroAtualizado.Modelo;
+            carroDesejado.Cor = carroAtualizado.Cor;
+            carroDesejado.Flex = carroAtualizado.Flex;
+            carroDesejado.Marca = carroAtualizado.Marca;
+            carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
-            carroDoBanco = carro;
-            _repositorioCarro[indexDesejado] = carro;
-            return _repositorioCarro[indexDesejado];
+            return carroDesejado;
         }
     }
 }

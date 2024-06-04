@@ -4,13 +4,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Cod3rsGrowth.Dominio.Services;
 using FluentValidation;
-using System.Runtime.Serialization;
-using static System.Runtime.InteropServices.JavaScript.JSType;
-using System.Runtime.ConstrainedExecution;
 
 namespace Cod3rsGrowth.Testes
 {
-
     public class TesteVenda : TesteBase
     {
         private ServicoVenda _servicoVenda;
@@ -95,9 +91,9 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarVendaEsperada()
         {
             //arrange
-            var IdBusca = 0;
+            var IdBusca = 1;
             //act
-            var vendaMock = _listaMock[IdBusca];
+            var vendaMock = _listaMock.FirstOrDefault();
             var vendaDoBanco = _servicoVenda.ObterPorId(IdBusca);
             //asset
             Assert.NotNull(vendaDoBanco);
@@ -108,9 +104,9 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarObjetoDoTipoVenda()
         {
             //arrange
-            var IdDeBusca = 0;
+            var IdDeBusca = 1;
             //act
-            _listaMock.FirstOrDefault();
+            var veenda = _listaMock.FirstOrDefault();
             var vendaDoTipoEsperado = _servicoVenda.ObterPorId(IdDeBusca);
             //asset
             Assert.IsType<Venda>(vendaDoTipoEsperado);
@@ -364,7 +360,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = nome,
                 Cpf = "213.344.567-90",
                 Email = "higordaniel@gmail.com",
@@ -387,7 +383,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
                 Cpf = "213.344.567-90",
                 Email = "higordaniel@gmail.com",
@@ -411,7 +407,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = nome,
                 Cpf = "213.344.567-90",
                 Email = "higordaniel@gmail.com",
@@ -435,7 +431,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "higor",
                 Cpf = cpf,
                 Email = "higordaniel@gmail.com",
@@ -459,7 +455,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "higor",
                 Cpf = cpf,
                 Email = "higordaniel@gmail.com",
@@ -483,7 +479,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "higor",
                 Cpf = "213.344.567-90",
                 Email = email,
@@ -510,7 +506,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "higor",
                 Cpf = "213.344.567-90",
                 Email = email,
@@ -534,7 +530,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "higor",
                 Cpf = "213.344.567-90",
                 Email = "higordaniel@gmail.com",
@@ -559,7 +555,7 @@ namespace Cod3rsGrowth.Testes
             //act
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "higor",
                 Cpf = "213.344.567-90",
                 Email = "higordaniel@gmail.com",
@@ -600,7 +596,7 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "higor",
                 Cpf = "213.344.567-90",
                 Email = "higordaniel@gmail.com",
@@ -614,7 +610,7 @@ namespace Cod3rsGrowth.Testes
             var vendaDoBanco = _servicoVenda.Editar(novaVenda);
 
             //asset
-            Assert.Equal(novaVenda, vendaDoBanco);
+            Assert.Equivalent(novaVenda, vendaDoBanco);
         }
     }
 }

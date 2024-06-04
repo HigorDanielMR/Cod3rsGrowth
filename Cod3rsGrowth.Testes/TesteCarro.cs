@@ -8,7 +8,6 @@ using Cod3rsGrowth.Dominio.Services;
 
 namespace Cod3rsGrowth.Testes
 {
-
     public class TesteCarro : TesteBase
     {
         private ServicoCarro _servicoCarro;
@@ -89,9 +88,9 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarCarroEsperado()
         {
             //arrange
-            var IdDeBusca = 0;
+            var IdDeBusca = 1;
             //act
-            var carroMock = _listaMock[IdDeBusca];
+            var carroMock = _listaMock.FirstOrDefault();
             var carroDoBanco = _servicoCarro.ObterPorId(IdDeBusca);
             //asset
             Assert.Equivalent(carroMock, carroDoBanco);
@@ -298,7 +297,7 @@ namespace Cod3rsGrowth.Testes
             var carroDoBanco = _servicoCarro.Editar(novoCarro);
 
             //asset
-            Assert.Equal(novoCarro, carroDoBanco);
+            Assert.Equivalent(novoCarro, carroDoBanco);
         }
     }
 }

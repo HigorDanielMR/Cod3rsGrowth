@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Testes
     public class RepositorioVendaMock : IRepositorioVenda
     {
         private List<Venda> _repositorioVenda = ListaSingleton.Instance.RepositorioVenda;
-        private int _novoId = 0;
+        private int _novoId = 1;
 
         public List<Venda> ObterTodos()
         {
@@ -29,23 +29,19 @@ namespace Cod3rsGrowth.Testes
             return venda;
         }
 
-        public Venda Editar(Venda venda)
+        public Venda Editar(Venda vendaAtualizada)
         {
-            var vendaDoBanco = ObterPorId(venda.Id);
-            var indexDesejado = _repositorioVenda.FindIndex(vendaX => vendaX.Id == venda.Id);
+            var vendaDesejada = ObterPorId(vendaAtualizada.Id);
 
-            vendaDoBanco.Nome = venda.Nome
-                ?? throw new ValidationException();
-            vendaDoBanco.Email = venda.Email
-                ?? throw new ValidationException();
-            vendaDoBanco.Cpf = venda.Cpf
-                ?? throw new ValidationException();
-            vendaDoBanco.Telefone = venda.Telefone
-                ?? throw new ValidationException();
+            vendaDesejada.Nome = vendaAtualizada.Nome;
+            vendaDesejada.Cpf = vendaAtualizada.Cpf;
+            vendaDesejada.Email = vendaAtualizada.Email;
+            vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
+            vendaDesejada.Pago = vendaAtualizada.Pago;
+            vendaDesejada.Telefone =  vendaAtualizada.Telefone;
+            vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
 
-            vendaDoBanco = venda;
-            _repositorioVenda[indexDesejado] = venda;
-            return _repositorioVenda[indexDesejado];
+            return vendaDesejada;
         }
     }
 }
