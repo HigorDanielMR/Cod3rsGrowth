@@ -50,20 +50,9 @@ namespace Cod3rsGrowth.Dominio.Services
         public Carro Editar(Carro carro)
         {
             var resultado = _validadorCarro.Validate(carro);
-            var erros = "";
             if (!resultado.IsValid)
             {
-                foreach (var falhas in resultado.Errors)
-                {
-                    if (resultado.Errors.Count > 1)
-                    {
-                        erros += falhas.ErrorMessage + " ";
-                    }
-                    else
-                    {
-                        erros += falhas.ErrorMessage;
-                    }
-                }
+                var erros = string.Join(Environment.NewLine, resultado.Errors.Select(x => x.ErrorMessage));
                 throw new ValidationException(erros);
             }
             return _repositorioCarro.Editar(carro);

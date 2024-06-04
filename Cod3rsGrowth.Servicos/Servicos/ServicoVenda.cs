@@ -54,18 +54,7 @@ namespace Cod3rsGrowth.Dominio.Services
             var resultado = _validadorVenda.Validate(venda, options => options.IncludeRuleSets("Editar").IncludeRulesNotInRuleSet());
             if (!resultado.IsValid)
             {
-                var erros = "";
-                foreach (var falhas in resultado.Errors)
-                {
-                    if (resultado.Errors.Count > 1)
-                    {
-                        erros += falhas.ErrorMessage + " ";
-                    }
-                    else
-                    {
-                        erros += falhas.ErrorMessage;
-                    }
-                }
+                var erros = string.Join(Environment.NewLine, resultado.Errors.Select(x => x.ErrorMessage));
                 throw new ValidationException(erros);
             }
                 return _repositorioVenda.Editar(venda);
