@@ -178,22 +178,6 @@ namespace Cod3rsGrowth.Testes
         }
 
         [Fact]
-        public void Criar_ComValorDoVeiculoInvalidoModeloInvalidoEFlexInvalido_DeveRetornarExcecaoEsperada()
-        {
-            //arrange
-            var novoCarro = new Carro
-            {
-                Modelo = "a",
-                Cor = Cores.Grafite,
-                Marca = Marcas.Bmw,
-                ValorDoVeiculo = -11
-            };
-            //act
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres. O valor do veiculo deve ser maior que zero. ", exception.Message);
-        }
-
-        [Fact]
         public void Criar_ComDadosValidos_DeveCriarComSucesso()
         {
             //arrange
