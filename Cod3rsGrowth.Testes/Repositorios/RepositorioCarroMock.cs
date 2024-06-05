@@ -1,8 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
-using System.ComponentModel.DataAnnotations;
-using System.Net.WebSockets;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -41,6 +39,11 @@ namespace Cod3rsGrowth.Testes
             carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
             return carroDesejado;
+        }
+        public void Remover(Carro carro)
+        {
+            var carroDesejado = ObterPorId(carro.Id);
+            _repositorioCarro.Remove(carro);
         }
     }
 }
