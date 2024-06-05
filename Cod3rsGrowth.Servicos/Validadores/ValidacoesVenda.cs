@@ -1,13 +1,17 @@
 ﻿using FluentValidation;
 using Cod3rsGrowth.Dominio.Entities;
 using System.Text.RegularExpressions;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Servicos.Validadores
 {
     public class ValidacoesVenda : AbstractValidator<Venda>
-    {
-        public ValidacoesVenda()
+    {   
+        private readonly IRepositorioVenda _repositorio;
+        public ValidacoesVenda(IRepositorioVenda repositorio)
         {
+            _repositorio = repositorio;
+
             RuleFor(venda => venda.Nome)
                 .Cascade(CascadeMode.Stop)
                 .NotEmpty().WithMessage("Campo nome não preenchido.")
@@ -29,6 +33,12 @@ namespace Cod3rsGrowth.Servicos.Validadores
                 .NotEmpty().WithMessage("Campo telefone não preenchido.")
                 .Must(ValidarTelefone).WithMessage("Formato de telefone inválido.");
 
+            RuleSet("Editar", () =>
+            {
+                RuleFor(venda => venda)
+                    .Must(ValidarDataDeCompra)
+                    .WithMessage("Uma venda concluida não pode ter a data alterada.");
+            });
         }
 
         private bool ValidarCpf(string cpf)
@@ -56,6 +66,12 @@ namespace Cod3rsGrowth.Servicos.Validadores
             var regex = new Regex(@"\(?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})");
 
             return regex.IsMatch(telefone);
+        }
+
+        private bool ValidarDataDeCompra(Venda venda)
+        {
+            var vendaDobanco = _repositorio.ObterPorId(venda.Id);
+            return venda.DataDeCompra == vendaDobanco.DataDeCompra ? true : false;
         }
     }
 }

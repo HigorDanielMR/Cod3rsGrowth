@@ -1,13 +1,15 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
+using System.ComponentModel.DataAnnotations;
+using System.Net.WebSockets;
 
 namespace Cod3rsGrowth.Testes
 {
     public class RepositorioCarroMock : IRepositorioCarro
     {
         private List<Carro> _repositorioCarro = ListaSingleton.Instance.RepositorioCarro;
-        private int _novoId = 0;
+        private int _novoId = 1;
 
         public List<Carro> ObterTodos()
         {
@@ -20,11 +22,25 @@ namespace Cod3rsGrowth.Testes
                 ?? throw new Exception($"O carro com ID {IdDeBusca} não foi encontrado");
         }
 
-        public void Criar(Carro carro)
+        public Carro Criar(Carro carro)
         {
             carro.Id = _novoId;
             _novoId++;
             _repositorioCarro.Add(carro);
+            return carro;
+        }
+
+        public Carro Editar(Carro carroAtualizado)
+        {
+            var carroDesejado = ObterPorId(carroAtualizado.Id);
+
+            carroDesejado.Modelo = carroAtualizado.Modelo;
+            carroDesejado.Cor = carroAtualizado.Cor;
+            carroDesejado.Flex = carroAtualizado.Flex;
+            carroDesejado.Marca = carroAtualizado.Marca;
+            carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
+
+            return carroDesejado;
         }
     }
 }
