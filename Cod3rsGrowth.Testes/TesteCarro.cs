@@ -280,8 +280,8 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var carroDesejado = _listaMock.FirstOrDefault();
             //act
-            _servicoCarro.Remover(carroDesejado);
-            var excessao = Assert.Throws<Exception>(() => _servicoCarro.Remover(carroDesejado));
+            _servicoCarro.Remover(carroDesejado.Id);
+            var excessao = Assert.Throws<Exception>(() => _servicoCarro.Remover(carroDesejado.Id));
             //asset
             Assert.Equal($"O carro com ID {carroDesejado.Id} não foi encontrado", excessao.Message);
         }

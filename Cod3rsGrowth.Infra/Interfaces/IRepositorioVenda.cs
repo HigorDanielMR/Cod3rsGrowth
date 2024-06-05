@@ -8,6 +8,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
         Venda Criar(Venda venda);
         Venda ObterPorId(int IdDoItem);
         Venda Editar(Venda venda);
-        void Remover(Venda venda);
+        void Remover(int IdDeRemocao);
     }
 }

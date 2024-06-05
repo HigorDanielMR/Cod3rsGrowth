@@ -47,9 +47,9 @@ namespace Cod3rsGrowth.Dominio.Services
             return _repositorioVenda.Editar(venda);
         }
 
-        public void Remover(Venda venda)
+        public void Remover(int IdDeRemocao)
         {
-            _repositorioVenda.Remover(venda);
+            _repositorioVenda.Remover(IdDeRemocao);
         }
     }
 }

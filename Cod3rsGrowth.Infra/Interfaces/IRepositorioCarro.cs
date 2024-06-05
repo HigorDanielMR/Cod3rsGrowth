@@ -8,6 +8,6 @@ namespace Cod3rsGrowth.Infra.Interfaces
         Carro Criar(Carro carro);
         Carro ObterPorId(int IdDoItem);
         Carro Editar(Carro carro);
-        void Remover(Carro carro);
+        void Remover(int IdDeRemocao);
     }
 }

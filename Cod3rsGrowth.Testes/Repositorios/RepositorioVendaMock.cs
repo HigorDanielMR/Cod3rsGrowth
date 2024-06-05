@@ -42,10 +42,10 @@ namespace Cod3rsGrowth.Testes
             return vendaDesejada;
         }
 
-        public void Remover(Venda venda)
+        public void Remover(int IdDeRemocao)
         {
-            var vendaDesejado = ObterPorId(venda.Id);
-            _repositorioVenda.Remove(venda);
+            var vendaDesejada = ObterPorId(IdDeRemocao);
+            _repositorioVenda.Remove(vendaDesejada);
         }
     }
 }

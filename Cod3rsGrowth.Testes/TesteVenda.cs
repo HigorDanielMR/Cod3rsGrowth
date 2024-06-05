@@ -602,8 +602,8 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var vendaDesejada = _listaMock.FirstOrDefault();
             //act
-            _servicoVenda.Remover(vendaDesejada);
-            var excessao = Assert.Throws<Exception>(() => _servicoVenda.Remover(vendaDesejada));
+            _servicoVenda.Remover(vendaDesejada.Id);
+            var excessao = Assert.Throws<Exception>(() => _servicoVenda.Remover(vendaDesejada.Id));
             //asset
             Assert.Equal($"A venda com ID {vendaDesejada.Id} não foi encontrada", excessao.Message);
         }
