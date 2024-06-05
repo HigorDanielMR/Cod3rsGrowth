@@ -1,7 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
-using System.ComponentModel.DataAnnotations;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -42,6 +41,12 @@ namespace Cod3rsGrowth.Testes
             vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
 
             return vendaDesejada;
+        }
+
+        public void Remover(Venda venda)
+        {
+            var vendaDesejado = ObterPorId(venda.Id);
+            _repositorioVenda.Remove(venda);
         }
     }
 }

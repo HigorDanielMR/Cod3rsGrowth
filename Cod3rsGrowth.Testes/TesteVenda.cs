@@ -1,9 +1,9 @@
 ﻿using Xunit;
+using FluentValidation;
 using Cod3rsGrowth.Dominio.Entities;
+using Cod3rsGrowth.Dominio.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using Cod3rsGrowth.Dominio.Services;
-using FluentValidation;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -15,6 +15,7 @@ namespace Cod3rsGrowth.Testes
         public TesteVenda()
         {
             CarregarServico();
+            _servicoVenda.ObterTodos().Clear();
             _listaMock = InicializarDadosMock();
         }
 
@@ -611,6 +612,22 @@ namespace Cod3rsGrowth.Testes
 
             //asset
             Assert.Equivalent(novaVenda, vendaDoBanco);
+        }
+
+        [Fact]
+        public void Remover_ComDadosValidosNoBanco_DeveRemoverComSucesso()
+        {
+            //arrange
+
+            //act
+            var vendaDesejada = _listaMock.FirstOrDefault();
+
+            _servicoVenda.Remover(vendaDesejada);
+
+            var exception = Assert.Throws<Exception>(() => _servicoVenda.Remover(vendaDesejada));
+
+            //asset
+            Assert.Equal($"A venda com ID {vendaDesejada.Id} não foi encontrada", exception.Message);
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using Xunit;
 using FluentValidation;
 using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Services;
 using Cod3rsGrowth.Dominio.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using Cod3rsGrowth.Dominio.Services;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -16,6 +16,7 @@ namespace Cod3rsGrowth.Testes
         public TesteCarro()
         {
             CarregarServico();
+            _servicoCarro.ObterTodos().Clear();
             _listaMock = InicializarDadosMock();
         }
 
@@ -282,6 +283,24 @@ namespace Cod3rsGrowth.Testes
 
             //asset
             Assert.Equivalent(novoCarro, carroDoBanco);
+        }
+
+        [Fact]
+        public void Remover_ComDadosValidosNoBanco_DeveRemoverComSucesso()
+        {
+            //arrange
+
+            //act
+            var carroDesejado = _listaMock.FirstOrDefault();
+
+            _servicoCarro.Remover(carroDesejado);
+
+            var excessaoEsperada = $"O carro com ID {carroDesejado.Id} não foi encontrado";
+
+            var exception = Assert.Throws<Exception>(() => _servicoCarro.Remover(carroDesejado));
+
+            //asset
+            Assert.Equal(excessaoEsperada, exception.Message);
         }
     }
 }
