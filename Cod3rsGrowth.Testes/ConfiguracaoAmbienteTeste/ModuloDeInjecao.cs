@@ -1,5 +1,6 @@
-﻿using Cod3rsGrowth.Dominio.Servicos;
-using Cod3rsGrowth.Dominio.Interfaces;
+﻿using Cod3rsGrowth.Dominio.Services;
+using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Servicos.Validadores;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.Testes
@@ -8,8 +9,14 @@ namespace Cod3rsGrowth.Testes
     {
         public static void BindService(ServiceCollection servicos)
         {
-            servicos.AddScoped<IServicoCarro, ServicoCarro>();
-            servicos.AddScoped<IServicoVenda, ServicoVenda>();
+            servicos.AddScoped<ValidacoesCarro>();
+            servicos.AddScoped<ValidacoesVenda>();
+
+            servicos.AddScoped<ServicoCarro>();
+            servicos.AddScoped<ServicoVenda>();
+
+            servicos.AddScoped<IRepositorioCarro, RepositorioCarroMock>();
+            servicos.AddScoped<IRepositorioVenda, RepositorioVendaMock>();
         }
     }
 }
