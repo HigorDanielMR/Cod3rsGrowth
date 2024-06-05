@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Testes
         {
             CarregarServico();
             _servicoCarro.ObterTodos().Clear();
-            _listaMock = InicializarDadosMock();
+            _listaMock = InicializandoDadosMock();
         }
 
         private void CarregarServico()
@@ -26,11 +26,11 @@ namespace Cod3rsGrowth.Testes
                 ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoCarro)}]");
         }
 
-        private List<Carro> InicializarDadosMock()
+        private List<Carro> InicializandoDadosMock()
         {
             List<Carro> listaDeCarros = new List<Carro>
             {
-                new Carro
+                new()
                 {
                     Modelo = "Golf GTI",
                     Cor = Cores.Branco,
@@ -38,7 +38,7 @@ namespace Cod3rsGrowth.Testes
                     ValorDoVeiculo = 100,
                     Marca = Marcas.Volkswagem
                 },
-                new Carro
+                new()
                 {
                     Modelo = "Civic",
                     Cor = Cores.Preto,
@@ -46,7 +46,7 @@ namespace Cod3rsGrowth.Testes
                     ValorDoVeiculo = 100,
                     Marca = Marcas.Honda
                 },
-                new Carro
+                new()
                 {
                     Modelo = "Gol",
                     Cor = Cores.Preto,
@@ -55,10 +55,9 @@ namespace Cod3rsGrowth.Testes
                     Marca = Marcas.Volkswagem
                 }
             };
-
-            foreach (var car in listaDeCarros)
+            foreach (var carro in listaDeCarros)
             {
-                _servicoCarro.Criar(car);
+                _servicoCarro.Criar(carro);
             }
             return listaDeCarros;
         }
@@ -70,7 +69,6 @@ namespace Cod3rsGrowth.Testes
             //act
             var carrosDoBanco = _servicoCarro.ObterTodos();
             //asset
-            Assert.NotNull(carrosDoBanco);
             Assert.IsType<List<Carro>>(carrosDoBanco);
         }
 
@@ -81,7 +79,6 @@ namespace Cod3rsGrowth.Testes
             //act
             var carrosDoBanco = _servicoCarro.ObterTodos();
             //asset
-            Assert.NotNull(carrosDoBanco);
             Assert.Equivalent(_listaMock, carrosDoBanco);
         }
 
@@ -89,10 +86,10 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarCarroEsperado()
         {
             //arrange
-            var IdDeBusca = 1;
-            //act
+            var idDeBusca = 1;
             var carroMock = _listaMock.FirstOrDefault();
-            var carroDoBanco = _servicoCarro.ObterPorId(IdDeBusca);
+            //act
+            var carroDoBanco = _servicoCarro.ObterPorId(idDeBusca);
             //asset
             Assert.Equivalent(carroMock, carroDoBanco);
         }
@@ -101,9 +98,9 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdExistente_DeveRetornarObjetoDoTipoCarro()
         {
             //arrange
-            var IdDeBusca = 1;
+            var idDeBusca = 1;
             //act
-            var carroDoTipoEsperado = _servicoCarro.ObterPorId(IdDeBusca);
+            var carroDoTipoEsperado = _servicoCarro.ObterPorId(idDeBusca);
             //asset
             Assert.IsType<Carro>(carroDoTipoEsperado);
         }
@@ -112,21 +109,20 @@ namespace Cod3rsGrowth.Testes
         public void ObterPorId_ComIdInexistente_DeveLancarExcecaoObjetoNaoEncontrado()
         {
             //arrange
-            var IdDeBusca = 212;
+            var idDeBusca = 212;
             //act
-            var exception = Assert.Throws<Exception>(() => _servicoCarro.ObterPorId(IdDeBusca));
+            var excessao = Assert.Throws<Exception>(() => _servicoCarro.ObterPorId(idDeBusca));
             //asset
-            Assert.Equal($"O carro com ID {IdDeBusca} não foi encontrado", exception.Message);
+            Assert.Equal($"O carro com ID {idDeBusca} não foi encontrado", excessao.Message);
         }
 
         [Theory]
+        [InlineData("")]
         [InlineData(null)]
         [InlineData("       ")]
-        [InlineData("")]
         public void Criar_ComModeloVazio_DeveRetornarExcecaoEsperada(string nome)
         {
             //arrange
-
             var novoCarro = new Carro
             {
                 Modelo = nome,
@@ -136,9 +132,9 @@ namespace Cod3rsGrowth.Testes
                 ValorDoVeiculo = 1000
             };
             //act
+            var excessao = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
             //asset
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equivalent("Campo modelo não preenchido.", exception.Message);
+            Assert.Equivalent("Campo modelo não preenchido.", excessao.Message);
         }
 
         [Theory]
@@ -156,9 +152,9 @@ namespace Cod3rsGrowth.Testes
                 ValorDoVeiculo = 1000
             };
             //act
+            var excessao = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
             //asset
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres.", exception.Message);
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres.", excessao.Message);
         }
 
         [Fact]
@@ -174,8 +170,9 @@ namespace Cod3rsGrowth.Testes
                 ValorDoVeiculo = -11111
             };
             //act
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
-            Assert.Equal("O valor do veiculo deve ser maior que zero.", exception.Message);
+            var excessao = Assert.Throws<ValidationException>(() => _servicoCarro.Criar(novoCarro));
+            //asset
+            Assert.Equal("O valor do veiculo deve ser maior que zero.", excessao.Message);
         }
 
         [Fact]
@@ -191,16 +188,14 @@ namespace Cod3rsGrowth.Testes
                 ValorDoVeiculo = 100
             };
             //act
-            
             var carroEsperado = _servicoCarro.Criar(novoCarro);
-
             //asset
             Assert.Equal(novoCarro, carroEsperado);
         }
 
         [Theory]
-        [InlineData(null)]
         [InlineData("")]
+        [InlineData(null)]
         [InlineData("      ")]
         public void Editar_ComModeloVazio_DeveRetornarExcessaoEsperada(string modelo)
         {
@@ -214,12 +209,10 @@ namespace Cod3rsGrowth.Testes
                 Marca = Marcas.Bmw,
                 ValorDoVeiculo = 111
             };
-
             //act
-
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
+            var excessao = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
             //asset
-            Assert.Equal("Campo modelo não preenchido.", exception.Message);
+            Assert.Equal("Campo modelo não preenchido.", excessao.Message);
         }
 
         [Theory]
@@ -228,7 +221,6 @@ namespace Cod3rsGrowth.Testes
         public void Editar_ComModeloInvalido_DeveRetornarExcessaoEsperada(string modelo)
         {
             //arrange
-            //act
             var novoCarro = new Carro
             {
                 Id = 2,
@@ -238,18 +230,16 @@ namespace Cod3rsGrowth.Testes
                 Marca = Marcas.Bmw,
                 ValorDoVeiculo = 111
             };
-
-
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
+            //act
+            var excessao = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
             //asset
-            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres.", exception.Message);
+            Assert.Equal("Modelo inválido, precisa ter no mínimo 2 caracteres e no maximo 50 caracteres.", excessao.Message);
         }
 
         [Fact]
         public void Editar_ComValorDoVeiculoInvalido_DeveRetornarExcesaoEsperada()
         {
             //arrange
-            //act
             var novoCarro = new Carro
             {
                 Id = 2,
@@ -259,17 +249,16 @@ namespace Cod3rsGrowth.Testes
                 Marca = Marcas.Bmw,
                 ValorDoVeiculo = -111
             };
-
-            var exception = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
+            //act
+            var excessao = Assert.Throws<ValidationException>(() => _servicoCarro.Editar(novoCarro));
             //Assert
-            Assert.Equal("O valor do veiculo deve ser maior que zero.", exception.Message);
+            Assert.Equal("O valor do veiculo deve ser maior que zero.", excessao.Message);
         }
 
         [Fact]
         public void Editar_ComDadosValidos_DeveEditarComSucesso()
         {
             //arrange
-            //act
             var novoCarro = new Carro
             {
                 Id = 2,
@@ -279,8 +268,8 @@ namespace Cod3rsGrowth.Testes
                 Marca = Marcas.Bmw,
                 ValorDoVeiculo = 10000
             };
+            //act
             var carroDoBanco = _servicoCarro.Editar(novoCarro);
-
             //asset
             Assert.Equivalent(novoCarro, carroDoBanco);
         }
@@ -289,18 +278,12 @@ namespace Cod3rsGrowth.Testes
         public void Remover_ComDadosValidosNoBanco_DeveRemoverComSucesso()
         {
             //arrange
-
-            //act
             var carroDesejado = _listaMock.FirstOrDefault();
-
+            //act
             _servicoCarro.Remover(carroDesejado);
-
-            var excessaoEsperada = $"O carro com ID {carroDesejado.Id} não foi encontrado";
-
-            var exception = Assert.Throws<Exception>(() => _servicoCarro.Remover(carroDesejado));
-
+            var excessao = Assert.Throws<Exception>(() => _servicoCarro.Remover(carroDesejado));
             //asset
-            Assert.Equal(excessaoEsperada, exception.Message);
+            Assert.Equal($"O carro com ID {carroDesejado.Id} não foi encontrado", excessao.Message);
         }
     }
 }

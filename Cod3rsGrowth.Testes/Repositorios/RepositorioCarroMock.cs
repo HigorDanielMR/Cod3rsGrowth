@@ -8,7 +8,6 @@ namespace Cod3rsGrowth.Testes
     {
         private List<Carro> _repositorioCarro = ListaSingleton.Instance.RepositorioCarro;
         private int _novoId = 1;
-
         public List<Carro> ObterTodos()
         {
             return _repositorioCarro;
@@ -16,7 +15,7 @@ namespace Cod3rsGrowth.Testes
 
         public Carro ObterPorId(int IdDeBusca)
         {
-            return _repositorioCarro.Find(objeto => objeto.Id == IdDeBusca)
+            return _repositorioCarro.Find(carro => carro.Id == IdDeBusca)
                 ?? throw new Exception($"O carro com ID {IdDeBusca} não foi encontrado");
         }
 

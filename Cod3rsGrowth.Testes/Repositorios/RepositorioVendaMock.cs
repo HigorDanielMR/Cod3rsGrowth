@@ -8,7 +8,6 @@ namespace Cod3rsGrowth.Testes
     {
         private List<Venda> _repositorioVenda = ListaSingleton.Instance.RepositorioVenda;
         private int _novoId = 1;
-
         public List<Venda> ObterTodos()
         {
             return _repositorioVenda;
@@ -16,7 +15,7 @@ namespace Cod3rsGrowth.Testes
 
         public Venda ObterPorId(int IdDeBusca)
         {
-            return _repositorioVenda.Find(objeto => objeto.Id == IdDeBusca)
+            return _repositorioVenda.Find(venda => venda.Id == IdDeBusca)
                 ?? throw new Exception($"A venda com ID {IdDeBusca} não foi encontrada");
         }
 
