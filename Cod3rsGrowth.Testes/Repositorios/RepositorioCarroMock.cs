@@ -39,10 +39,13 @@ namespace Cod3rsGrowth.Testes
 
             return carroDesejado;
         }
-        public void Remover(int IdDeRemocao)
+        public bool Remover(int IdDeRemocao)
         {
             var carroDesejado = ObterPorId(IdDeRemocao);
+            if (carroDesejado == null) return false;
+
             _repositorioCarro.Remove(carroDesejado);
+            return true;
         }
     }
 }
