@@ -2,7 +2,6 @@
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Servicos.Validadores;
-using ValidationException = FluentValidation.ValidationException;
 
 namespace Cod3rsGrowth.Dominio.Services
 {
@@ -48,9 +47,9 @@ namespace Cod3rsGrowth.Dominio.Services
             return _repositorioVenda.Editar(venda);
         }
 
-        public void Remover(Venda venda)
+        public void Remover(int IdDeRemocao)
         {
-            _repositorioVenda.Remover(venda);
+           _repositorioVenda.Remover(IdDeRemocao);
         }
     }
 }

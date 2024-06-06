@@ -64,7 +64,6 @@ namespace Cod3rsGrowth.Servicos.Validadores
         private bool ValidarTelefone(string telefone)
         {
             var regex = new Regex(@"\(?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})");
-
             return regex.IsMatch(telefone);
         }
 

@@ -8,7 +8,6 @@ namespace Cod3rsGrowth.Testes
     {
         private List<Venda> _repositorioVenda = ListaSingleton.Instance.RepositorioVenda;
         private int _novoId = 1;
-
         public List<Venda> ObterTodos()
         {
             return _repositorioVenda;
@@ -16,7 +15,7 @@ namespace Cod3rsGrowth.Testes
 
         public Venda ObterPorId(int IdDeBusca)
         {
-            return _repositorioVenda.Find(objeto => objeto.Id == IdDeBusca)
+            return _repositorioVenda.Find(venda => venda.Id == IdDeBusca)
                 ?? throw new Exception($"A venda com ID {IdDeBusca} não foi encontrada");
         }
 
@@ -43,10 +42,11 @@ namespace Cod3rsGrowth.Testes
             return vendaDesejada;
         }
 
-        public void Remover(Venda venda)
+        public void Remover(int Id)
         {
-            var vendaDesejado = ObterPorId(venda.Id);
-            _repositorioVenda.Remove(venda);
+            var vendaDesejada = _repositorioVenda.Find(c => c.Id == Id);
+            if (vendaDesejada != null) _repositorioVenda.Remove(vendaDesejada);
+            else throw new Exception($"A venda com ID {Id} não foi encontrada");
         }
     }
 }
