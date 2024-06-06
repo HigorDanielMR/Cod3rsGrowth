@@ -4,23 +4,20 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     public sealed class ListaSingleton
     {
-        private static ListaSingleton? _instance;
+        private static readonly Lazy<ListaSingleton> _instance =
+            new Lazy<ListaSingleton>(() => new ListaSingleton());
 
-        public List<Carro> RepositorioCarro { get; set; } = new List<Carro> { };
-        public List<Venda> RepositorioVenda { get; set; } = new List<Venda> { };
+        public List<Carro> RepositorioCarro { get; } = new List<Carro>();
+        public List<Venda> RepositorioVenda { get; } = new List<Venda>();
 
-        private ListaSingleton(){}
+        private ListaSingleton() { }
 
-        public static ListaSingleton Instance
+        public static ListaSingleton Instance => _instance.Value;
+
+        public void Clear()
         {
-            get
-            {
-                if (_instance == null)
-                {
-                    _instance = new ListaSingleton();
-                }
-                return _instance;
-            }
+            RepositorioCarro.Clear();
+            RepositorioVenda.Clear();
         }
     }
 }
