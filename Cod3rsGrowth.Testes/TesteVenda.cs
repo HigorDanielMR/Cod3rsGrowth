@@ -139,7 +139,6 @@ namespace Cod3rsGrowth.Testes
             Assert.Equal("Campo nome não preenchido.", excessao.Message);
         }
 
-
         [Fact]
         public void Criar_ComNomeExcedendoValorMaximo_DeveRetornarExcecaoEsperada()
         {
@@ -316,7 +315,6 @@ namespace Cod3rsGrowth.Testes
             //asset
             Assert.Equal("Formato de telefone inválido.", excessao.Message);
         }
-
 
         [Fact]
         public void Criar_ComDadosValidos_DeveCriarComSucesso()
