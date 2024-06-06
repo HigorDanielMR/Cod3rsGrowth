@@ -17,7 +17,7 @@ namespace Cod3rsGrowth.Testes
         {
             CarregarServico();
             _servicoCarro.ObterTodos().Clear();
-            _listaMock = InicializandoDadosMock();
+            _listaMock = InicializarDadosMock();
         }
 
         private void CarregarServico()
@@ -26,7 +26,7 @@ namespace Cod3rsGrowth.Testes
                 ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoCarro)}]");
         }
 
-        private List<Carro> InicializandoDadosMock()
+        private List<Carro> InicializarDadosMock()
         {
             List<Carro> listaDeCarros = new List<Carro>
             {

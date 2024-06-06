@@ -15,14 +15,14 @@ namespace Cod3rsGrowth.Testes
         {
             CarregarServico();
             _servicoVenda.ObterTodos().Clear();
-            _listaMock = InicializandoDadosMock();
+            _listaMock = InicializarDadosMock();
         }
         private void CarregarServico()
         {
             _servicoVenda = ServiceProvider.GetService<ServicoVenda>()
                ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoVenda)}]");
         }
-        private List<Venda> InicializandoDadosMock()
+        private List<Venda> InicializarDadosMock()
         {
             List<Venda> listaDeVendas = new List<Venda> 
             {
