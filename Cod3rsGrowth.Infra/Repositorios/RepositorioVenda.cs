@@ -1,7 +1,7 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
+﻿using LinqToDB;
+using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.MeuContextoDeDado;
-using LinqToDB;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
