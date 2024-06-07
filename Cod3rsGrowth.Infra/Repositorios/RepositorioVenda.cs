@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Infra.MeuContextoDeDado;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -7,7 +8,13 @@ namespace Cod3rsGrowth.Infra.Repositorios
     {
         public List<Venda> ObterTodos()
         {
-            return ObterTodos();
+            var db = new MeuDataContext();
+
+            var query = from p in db.Vendas
+                        where p.Id > 0
+                        select p;
+
+            return query.ToList();
         }
 
         public Venda ObterPorId(int IdDeBusca)

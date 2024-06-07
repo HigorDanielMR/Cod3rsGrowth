@@ -1,5 +1,4 @@
 ﻿using LinqToDB;
-using LinqToDB.Common;
 using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.MeuContextoDeDado;
@@ -14,7 +13,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             var query = from p in db.Carros
                         where p.Id > 0
-                        orderby p.Modelo descending
                         select p;
 
             return query.ToList();
