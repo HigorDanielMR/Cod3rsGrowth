@@ -34,6 +34,22 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Editar(Carro carroAtualizado)
         {
+            var carroDesejado = _db.Carros.FirstOrDefault(carro => carro.Id == carroAtualizado.Id);
+
+            if (carroDesejado != null)
+            {
+                carroDesejado.Modelo = carroAtualizado.Modelo;
+                carroDesejado.Cor = carroAtualizado.Cor;
+                carroDesejado.Flex = carroAtualizado.Flex;
+                carroDesejado.Marca = carroAtualizado.Marca;
+                carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
+
+                _db.Update(carroAtualizado);
+            }
+            else
+            {
+                throw new Exception($"Carro com ID {carroAtualizado.Id} não encontrado.");
+            }
             return carroAtualizado;
         }
         public void Remover(int Id)
