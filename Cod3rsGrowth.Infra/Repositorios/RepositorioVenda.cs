@@ -34,6 +34,23 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Venda Editar(Venda vendaAtualizada)
         {
+            var vendaDesejada = _db.Vendas.FirstOrDefault(venda => venda.Id == vendaAtualizada.Id);
+            if (vendaDesejada != null)
+            {
+                vendaDesejada.Nome = vendaAtualizada.Nome;
+                vendaDesejada.Cpf = vendaAtualizada.Cpf;
+                vendaDesejada.Email = vendaAtualizada.Email;
+                vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
+                vendaDesejada.Pago = vendaAtualizada.Pago;
+                vendaDesejada.Telefone = vendaAtualizada.Telefone;
+                vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
+
+                _db.Update(vendaDesejada);
+            }
+            else
+            {
+                throw new Exception($"Venda com ID {vendaDesejada.Id} não encontrada.");
+            }
             return vendaAtualizada;
         }
         public void Remover(int Id)
