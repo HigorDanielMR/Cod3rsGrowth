@@ -1,4 +1,5 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
+﻿using LinqToDB;
+using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.MeuContextoDeDado;
 
@@ -6,13 +7,15 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     class RepositorioVenda : IRepositorio<Venda>
     {
-        public List<Venda> ObterTodos()
+        private MeuDataContext _db;
+        public RepositorioVenda(MeuDataContext meuDataContext)
         {
-            var db = new MeuDataContext();
-
-            var query = from p in db.Vendas
-                        where p.Id > 0
-                        select p;
+            _db = meuDataContext;
+        }
+        public List<Venda> ObterTodos(Venda venda)
+        {
+            IQueryable<Venda> vendas = Filtro(_db.Vendas.ToList(), venda);
+            var query = vendas;
 
             return query.ToList();
         }
@@ -24,7 +27,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Venda Criar(Venda venda)
         {
-            return venda;
+            int idDaVendaNoBanco = _db.InsertWithInt32Identity(venda);
+
+            return ObterPorId(idDaVendaNoBanco);
         }
 
         public Venda Editar(Venda vendaAtualizada)
@@ -33,6 +38,28 @@ namespace Cod3rsGrowth.Infra.Repositorios
         }
         public void Remover(int Id)
         {
+        }
+
+        private static IQueryable<Venda> Filtro(List<Venda> vendas, Venda venda)
+        {
+            var query = vendas.AsQueryable();
+
+            if (venda.Nome != null)
+                query = query.Where(d => d.Nome == venda.Nome);
+
+            if (venda.Cpf != null)
+                query = query.Where(d => d.Cpf == venda.Cpf);
+
+            if (venda.DataDeCompra != null)
+                query = query.Where(d => d.DataDeCompra == venda.DataDeCompra);
+
+            if (venda.Telefone != null)
+                query = query.Where(d => d.Telefone == venda.Telefone);
+
+            if (venda.Email != null)
+                query = query.Where(d => d.Email == venda.Email);
+
+            return query;
         }
     }
 }

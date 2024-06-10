@@ -13,6 +13,7 @@ namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
         private IServiceCollection ObterServiceCollection()
         {
             var servicos = new ServiceCollection();
+            ModuloDeInjecaoInfra.BindService(servicos);
             ModuloDeInjecao.BindService(servicos);
             return servicos;
         }
