@@ -23,7 +23,14 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro ObterPorId(int IdDeBusca)
         {
-            return ObterPorId(IdDeBusca);
+            var query = from p in _db.Carros
+                        where p.Id == IdDeBusca
+                        select p;
+
+            var resultado = query.FirstOrDefault()
+                ?? throw new Exception($"Carro com ID {IdDeBusca} não encontrado.");
+
+            return resultado;
         }
 
         public Carro Criar(Carro carro)

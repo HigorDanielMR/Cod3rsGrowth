@@ -22,7 +22,14 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Venda ObterPorId(int IdDeBusca)
         {
-            return ObterPorId(IdDeBusca);
+            var query = from p in _db.Vendas
+                        where p.Id == IdDeBusca
+                        select p;
+
+            var resultado = query.FirstOrDefault()
+                ?? throw new Exception($"Carro com ID {IdDeBusca} não encontrado.");
+
+            return resultado;
         }
 
         public Venda Criar(Venda venda)
