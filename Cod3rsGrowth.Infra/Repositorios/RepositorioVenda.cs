@@ -12,11 +12,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             _db = meuDataContext;
         }
-        public List<Venda> ObterTodos()
+        public List<Venda> ObterTodos(Venda venda)
         {
-            var query = from p in _db.Vendas
-                        where p.Id > 0
-                        select p;
+            IQueryable<Venda> vendas = Filtro(_db.Vendas.ToList(), venda);
+            var query = vendas;
 
             return query.ToList();
         }
@@ -39,6 +38,28 @@ namespace Cod3rsGrowth.Infra.Repositorios
         }
         public void Remover(int Id)
         {
+        }
+
+        private static IQueryable<Venda> Filtro(List<Venda> vendas, Venda venda)
+        {
+            var query = vendas.AsQueryable();
+
+            if (venda.Nome != null)
+                query = query.Where(d => d.Nome == venda.Nome);
+
+            if (venda.Cpf != null)
+                query = query.Where(d => d.Cpf == venda.Cpf);
+
+            if (venda.DataDeCompra != null)
+                query = query.Where(d => d.DataDeCompra == venda.DataDeCompra);
+
+            if (venda.Telefone != null)
+                query = query.Where(d => d.Telefone == venda.Telefone);
+
+            if (venda.Email != null)
+                query = query.Where(d => d.Email == venda.Email);
+
+            return query;
         }
     }
 }
