@@ -54,6 +54,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
         }
         public void Remover(int Id)
         {
+            _db.Carros
+                .Where(carro => carro.Id == Id)
+                .Delete();
         }
 
         private static IQueryable<Carro> Filtro(List<Carro> carros, Carro carro)

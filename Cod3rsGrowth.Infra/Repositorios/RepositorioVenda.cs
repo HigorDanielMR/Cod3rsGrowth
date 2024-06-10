@@ -55,6 +55,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
         }
         public void Remover(int Id)
         {
+            _db.Vendas
+                .Where(venda => venda.Id == Id)
+                .Delete();
         }
 
         private static IQueryable<Venda> Filtro(List<Venda> vendas, Venda venda)
