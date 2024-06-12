@@ -1,4 +1,4 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {

@@ -1,3 +1,8 @@
+using FluentMigrator.Runner;
+using Cod3rsGrowth.Infra.CriacaoDasTabelas;
+using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
+
 namespace Cod3rsGrowth.forms
 {
     internal static class Program
@@ -12,6 +17,33 @@ namespace Cod3rsGrowth.forms
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new Form1());
+
+            using (var serviceProvider = CreateServices())
+            using (var scope = serviceProvider.CreateScope())
+            {
+                UpdateDataBase(scope.ServiceProvider);
+            }
+        }
+
+        private static ServiceProvider CreateServices()
+        {
+            var conectionstring = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
+
+            return new ServiceCollection()
+                .AddFluentMigratorCore()
+                .ConfigureRunner(rb => rb
+                    .AddSqlServer()
+                    .WithGlobalConnectionString(conectionstring)
+                    .ScanIn(typeof(CriandoTabelas).Assembly).For.Migrations())
+                .AddLogging(lb => lb.AddFluentMigratorConsole())
+                .BuildServiceProvider(false);
+        }
+
+            private static void UpdateDataBase(IServiceProvider serviceProvider)
+        {
+            var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
+
+            runner.MigrateUp();
         }
     }
 }
