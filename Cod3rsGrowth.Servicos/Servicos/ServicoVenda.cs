@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using Cod3rsGrowth.Infra.Interfaces;
-using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Servicos.Validadores;
+using Cod3rsGrowth.Dominio.Entidades;
 
-namespace Cod3rsGrowth.Dominio.Services
+namespace Cod3rsGrowth.Servicos.Servicos
 {
     public class ServicoVenda
     {
@@ -15,9 +15,9 @@ namespace Cod3rsGrowth.Dominio.Services
             _validadorVenda = validacaoVenda;
         }
 
-        public List<Venda> ObterTodos()
+        public List<Venda> ObterTodos(FiltroVenda venda)
         {
-            return _repositorioVenda.ObterTodos();
+            return _repositorioVenda.ObterTodos(venda);
         }
 
         public Venda ObterPorId(int IdDoItem)
@@ -49,7 +49,7 @@ namespace Cod3rsGrowth.Dominio.Services
 
         public void Remover(int IdDeRemocao)
         {
-           _repositorioVenda.Remover(IdDeRemocao);
+            _repositorioVenda.Remover(IdDeRemocao);
         }
     }
 }

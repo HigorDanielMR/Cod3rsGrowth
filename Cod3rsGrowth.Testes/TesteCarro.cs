@@ -1,10 +1,10 @@
 ﻿using Xunit;
 using FluentValidation;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio.Services;
-using Cod3rsGrowth.Dominio.Entities;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -12,11 +12,11 @@ namespace Cod3rsGrowth.Testes
     {
         private ServicoCarro _servicoCarro;
         private List<Carro> _listaMock;
-
+        private readonly FiltroCarro _carro;
         public TesteCarro()
         {
             CarregarServico();
-            _servicoCarro.ObterTodos().Clear();
+            _servicoCarro.ObterTodos(_carro).Clear();
             _listaMock = InicializarDadosMock();
         }
 
@@ -67,7 +67,7 @@ namespace Cod3rsGrowth.Testes
         {
             //arrange
             //act
-            var carrosDoBanco = _servicoCarro.ObterTodos();
+            var carrosDoBanco = _servicoCarro.ObterTodos(_carro);
             //asset
             Assert.IsType<List<Carro>>(carrosDoBanco);
         }
@@ -77,7 +77,7 @@ namespace Cod3rsGrowth.Testes
         {
             //arrange
             //act
-            var carrosDoBanco = _servicoCarro.ObterTodos();
+            var carrosDoBanco = _servicoCarro.ObterTodos(_carro);
             //asset
             Assert.Equivalent(_listaMock, carrosDoBanco);
         }

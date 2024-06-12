@@ -1,10 +1,8 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
-
-namespace Cod3rsGrowth.Dominio.Interfaces
+﻿namespace Cod3rsGrowth.Dominio.Interfaces
 {
-    public interface IRepositorio<T>
+    public interface IRepositorio<T, TFiltro> where TFiltro : IFiltro
     {
-        List<T> ObterTodos(T objeto);
+        List<T> ObterTodos(TFiltro filtro);
         T Criar(T objeto);
         T ObterPorId(int IdDoItem);
         T Editar(T objeto);

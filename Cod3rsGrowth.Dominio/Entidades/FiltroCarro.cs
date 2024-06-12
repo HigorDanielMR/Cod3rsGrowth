@@ -1,8 +1,9 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Dominio.Entidades
 {
-    public class Carro
+    public class FiltroCarro : IFiltro
     {
         public int Id { get; set; }
         public Marcas Marca { get; set; }
@@ -10,6 +11,5 @@ namespace Cod3rsGrowth.Dominio.Entidades
         public Cores Cor { get; set; }
         public decimal ValorDoVeiculo { get; set; }
         public bool Flex { get; set; }
-
     }
 }

@@ -1,20 +1,21 @@
 ﻿using LinqToDB;
-using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.MeuContextoDeDado;
+using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    class RepositorioVenda : IRepositorio<Venda>
+    class RepositorioVenda : IRepositorioVenda
     {
         private MeuDataContext _db;
         public RepositorioVenda(MeuDataContext meuDataContext)
         {
             _db = meuDataContext;
         }
-        public List<Venda> ObterTodos(Venda venda)
+        public List<Venda> ObterTodos(FiltroVenda filtro)
         {
-            IQueryable<Venda> vendas = Filtro(_db.Vendas.ToList(), venda);
+            IQueryable<Venda> vendas = Filtro(_db.Vendas.ToList(), filtro);
             var query = vendas;
 
             return query.ToList();
@@ -67,7 +68,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 .Delete();
         }
 
-        private static IQueryable<Venda> Filtro(List<Venda> vendas, Venda venda)
+        private static IQueryable<Venda> Filtro(List<Venda> vendas, FiltroVenda venda)
         {
             var query = vendas.AsQueryable();
 

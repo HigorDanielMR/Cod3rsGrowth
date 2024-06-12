@@ -1,11 +1,13 @@
 ﻿using LinqToDB;
-using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.MeuContextoDeDado;
+using Cod3rsGrowth.Dominio.Entidades;
+using System.Text.Json;
+using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    class RepositorioCarro : IRepositorio<Carro>
+    class RepositorioCarro : IRepositorioCarro
     {
         private MeuDataContext _db;
 
@@ -14,9 +16,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _db = meuDataContext;
         }
 
-        public List<Carro> ObterTodos(Carro carro)
+        public List<Carro> ObterTodos(FiltroCarro filtro)
         {
-            IQueryable<Carro> carros = Filtro(_db.Carros.ToList(), carro);
+            IQueryable<Carro> carros = Filtro(_db.Carros.ToList(), filtro);
             var query = carros;
             return query.ToList();
         }
@@ -35,8 +37,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            int idDoCarroNoBnco = _db.InsertWithInt32Identity(carro);
-            return ObterPorId(idDoCarroNoBnco);
+            int idDoCarroNoBanco = _db.InsertWithInt32Identity(carro);
+            return ObterPorId(idDoCarroNoBanco);
         }
 
         public Carro Editar(Carro carroAtualizado)
@@ -66,7 +68,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 .Delete();
         }
 
-        private static IQueryable<Carro> Filtro(List<Carro> carros, Carro carro)
+        private static IQueryable<Carro> Filtro(List<Carro> carros, FiltroCarro carro)
         {
             var query = carros.AsQueryable();
 
