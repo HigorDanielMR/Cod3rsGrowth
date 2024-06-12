@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using Cod3rsGrowth.Infra.Interfaces;
-using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Servicos.Validadores;
+using Cod3rsGrowth.Dominio.Entidades;
 
-namespace Cod3rsGrowth.Dominio.Services
+namespace Cod3rsGrowth.Servicos.Servicos
 {
     public class ServicoCarro
     {
@@ -15,9 +15,9 @@ namespace Cod3rsGrowth.Dominio.Services
             _validadorCarro = validadorCarro;
         }
 
-        public List<Carro> ObterTodos()
+        public List<Carro> ObterTodos(FiltroCarro carro)
         {
-            return _repositorioCarro.ObterTodos();
+            return _repositorioCarro.ObterTodos(carro);
         }
 
         public Carro ObterPorId(int IdDoItem)
