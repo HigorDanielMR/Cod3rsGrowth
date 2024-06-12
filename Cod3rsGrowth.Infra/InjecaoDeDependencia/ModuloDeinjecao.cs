@@ -8,6 +8,7 @@ namespace Cod3rsGrowth.Infra.InjecaoDeDependencia
         public static void BindService(ServiceCollection servicos)
         {
             servicos.AddScoped<MeuDataContext>();
+
         }
     }
 }

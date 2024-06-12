@@ -11,6 +11,7 @@
   <ItemGroup>
     <PackageReference Include="FluentMigrator.Runner.Core" Version="5.2.0" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>

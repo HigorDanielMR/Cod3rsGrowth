@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
     {
         private List<Venda> _repositorioVenda = ListaSingleton.Instance.RepositorioVenda;
         private int _novoId = 1;
-        public List<Venda> ObterTodos(Venda venda)
+        public List<Venda> ObterTodos(FiltroVenda venda)
         {
             return _repositorioVenda;
         }

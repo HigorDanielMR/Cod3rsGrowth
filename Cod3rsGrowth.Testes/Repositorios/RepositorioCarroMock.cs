@@ -8,7 +8,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
     {
         private List<Carro> _repositorioCarro = ListaSingleton.Instance.RepositorioCarro;
         private int _novoId = 1;
-        public List<Carro> ObterTodos(Carro carro)
+        public List<Carro> ObterTodos(FiltroCarro carro)
         {
             return _repositorioCarro;
         }

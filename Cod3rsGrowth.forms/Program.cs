@@ -1,9 +1,7 @@
-using System;
-using System.Linq;
 using FluentMigrator.Runner;
 using Cod3rsGrowth.Infra.CriacaoDasTabelas;
-using FluentMigrator.Runner.Initialization;
 using Microsoft.Extensions.DependencyInjection;
+using System.Configuration;
 
 namespace Cod3rsGrowth.forms
 {
@@ -29,17 +27,19 @@ namespace Cod3rsGrowth.forms
 
         private static ServiceProvider CreateServices()
         {
+            var conectionstring = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
+
             return new ServiceCollection()
                 .AddFluentMigratorCore()
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
-                    .WithGlobalConnectionString("Data Source=INVENT020\\SQLEXPRESS;Initial Catalog=Cod3rsGrowthBD;Persist Security Info=True;User ID=sa;Password=sap@123;Trust Server Certificate=True")
+                    .WithGlobalConnectionString(conectionstring)
                     .ScanIn(typeof(CriandoTabelas).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
                 .BuildServiceProvider(false);
         }
 
-        private static void UpdateDataBase(IServiceProvider serviceProvider)
+            private static void UpdateDataBase(IServiceProvider serviceProvider)
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
 

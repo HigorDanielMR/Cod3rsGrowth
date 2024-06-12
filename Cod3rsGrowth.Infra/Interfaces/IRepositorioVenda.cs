@@ -3,12 +3,7 @@ using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Interfaces
 {
-    public interface IRepositorioVenda : IRepositorio<Venda>
+    public interface IRepositorioVenda : IRepositorio<Venda, FiltroVenda>
     {
-        List<Venda> ObterTodos(Venda venda);
-        Venda Criar(Venda venda);
-        Venda ObterPorId(int IdDoItem);
-        Venda Editar(Venda venda);
-        void Remover(int IdDeRemocao);
     }
 }

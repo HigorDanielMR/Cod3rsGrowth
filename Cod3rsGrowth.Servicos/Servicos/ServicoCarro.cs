@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Servicos.Servicos
             _validadorCarro = validadorCarro;
         }
 
-        public List<Carro> ObterTodos(Carro carro)
+        public List<Carro> ObterTodos(FiltroCarro carro)
         {
             return _repositorioCarro.ObterTodos(carro);
         }

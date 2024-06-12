@@ -15,7 +15,7 @@ namespace Cod3rsGrowth.Servicos.Servicos
             _validadorVenda = validacaoVenda;
         }
 
-        public List<Venda> ObterTodos(Venda venda)
+        public List<Venda> ObterTodos(FiltroVenda venda)
         {
             return _repositorioVenda.ObterTodos(venda);
         }

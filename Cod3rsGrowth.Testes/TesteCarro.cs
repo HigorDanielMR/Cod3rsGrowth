@@ -12,7 +12,7 @@ namespace Cod3rsGrowth.Testes
     {
         private ServicoCarro _servicoCarro;
         private List<Carro> _listaMock;
-        private readonly Carro _carro;
+        private readonly FiltroCarro _carro;
         public TesteCarro()
         {
             CarregarServico();

@@ -11,7 +11,7 @@ namespace Cod3rsGrowth.Testes
     {
         private ServicoVenda _servicoVenda;
         private List<Venda> _listaMock;
-        private readonly Venda _venda;
+        private readonly FiltroVenda _venda;
         public TesteVenda()
         {
             CarregarServico();
