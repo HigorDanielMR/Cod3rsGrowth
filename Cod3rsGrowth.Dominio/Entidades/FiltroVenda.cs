@@ -4,7 +4,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
 {
     public class FiltroVenda : IFiltro
     {
-        public int? Id { get; set; }
         public string? Nome { get; set; }
         public string? Cpf { get; set; }
         public string? Email { get; set; }

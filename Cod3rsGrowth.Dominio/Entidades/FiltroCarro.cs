@@ -5,7 +5,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
 {
     public class FiltroCarro : IFiltro
     {
-        public int Id { get; set; }
         public Marcas Marca { get; set; }
         public string Modelo { get; set; }
         public Cores Cor { get; set; }
