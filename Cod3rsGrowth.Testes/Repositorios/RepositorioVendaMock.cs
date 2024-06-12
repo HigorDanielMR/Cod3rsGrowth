@@ -1,14 +1,14 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
 
-namespace Cod3rsGrowth.Testes
+namespace Cod3rsGrowth.Testes.Repositorios
 {
     public class RepositorioVendaMock : IRepositorioVenda
     {
         private List<Venda> _repositorioVenda = ListaSingleton.Instance.RepositorioVenda;
         private int _novoId = 1;
-        public List<Venda> ObterTodos()
+        public List<Venda> ObterTodos(Venda venda)
         {
             return _repositorioVenda;
         }
@@ -36,7 +36,7 @@ namespace Cod3rsGrowth.Testes
             vendaDesejada.Email = vendaAtualizada.Email;
             vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
             vendaDesejada.Pago = vendaAtualizada.Pago;
-            vendaDesejada.Telefone =  vendaAtualizada.Telefone;
+            vendaDesejada.Telefone = vendaAtualizada.Telefone;
             vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
 
             return vendaDesejada;

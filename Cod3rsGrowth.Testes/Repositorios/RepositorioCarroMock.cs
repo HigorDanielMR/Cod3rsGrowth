@@ -1,14 +1,14 @@
-﻿using Cod3rsGrowth.Dominio.Entities;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Infra.Repositorios;
 
-namespace Cod3rsGrowth.Testes
+namespace Cod3rsGrowth.Testes.Repositorios
 {
     public class RepositorioCarroMock : IRepositorioCarro
     {
         private List<Carro> _repositorioCarro = ListaSingleton.Instance.RepositorioCarro;
         private int _novoId = 1;
-        public List<Carro> ObterTodos()
+        public List<Carro> ObterTodos(Carro carro)
         {
             return _repositorioCarro;
         }

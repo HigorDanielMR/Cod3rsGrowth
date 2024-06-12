@@ -1,6 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Enums;
 
-namespace Cod3rsGrowth.Dominio.Entities
+namespace Cod3rsGrowth.Dominio.Entidades
 {
     public class Carro
     {

@@ -1,7 +1,8 @@
 ﻿using LinqToDB;
-using Cod3rsGrowth.Dominio.Entities;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.MeuContextoDeDado;
+using Cod3rsGrowth.Dominio.Entidades;
+using System.Text.Json;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -35,8 +36,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            int idDoCarroNoBnco = _db.InsertWithInt32Identity(carro);
-            return ObterPorId(idDoCarroNoBnco);
+            int idDoCarroNoBanco = _db.InsertWithInt32Identity(carro);
+            return ObterPorId(idDoCarroNoBanco);
         }
 
         public Carro Editar(Carro carroAtualizado)

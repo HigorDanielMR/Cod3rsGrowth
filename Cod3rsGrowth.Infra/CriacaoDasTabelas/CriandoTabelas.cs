@@ -25,24 +25,24 @@ namespace Cod3rsGrowth.Infra.CriacaoDasTabelas
                 .WithColumn("ValorTotal").AsDecimal().NotNullable()
                 .WithColumn("Pago").AsBoolean();
 
-            Create.Table("HistoricoDeVendas")
+            Create.Table("VendasCarros")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("IdVenda").AsInt32().ForeignKey("Vendas", "Id")
                 .WithColumn("IdCarro").AsInt32().ForeignKey("Carros", "Id");
 
             Create.ForeignKey("chave_para_id_venda")
-            .FromTable("HistoricoDeVendas").ForeignColumn("IdVenda")
+            .FromTable("VendasCarros").ForeignColumn("IdVenda")
             .ToTable("Vendas").PrimaryColumn("Id");
 
             Create.ForeignKey("chave_para_id_carro")
-            .FromTable("HistoricoDeVendas").ForeignColumn("IdCarro")
+            .FromTable("VendasCarros").ForeignColumn("IdCarro")
             .ToTable("Carros").PrimaryColumn("Id");
         }
         public override void Down()
         {
             Delete.Table("Carros");
             Delete.Table("Vendas");
-            Delete.Table("HistoricoDeVendas");
+            Delete.Table("VendasCarros");
         }
     }
 }

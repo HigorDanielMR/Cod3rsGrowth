@@ -1,7 +1,7 @@
 ﻿using Cod3rsGrowth.Infra.MeuContextoDeDado;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace Cod3rsGrowth.Testes
+namespace Cod3rsGrowth.Infra.InjecaoDeDependencia
 {
     public static class ModuloDeInjecao
     {

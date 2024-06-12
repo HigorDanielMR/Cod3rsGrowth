@@ -1,9 +1,9 @@
 ﻿using Xunit;
 using FluentValidation;
-using Cod3rsGrowth.Dominio.Entities;
-using Cod3rsGrowth.Dominio.Services;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -11,10 +11,11 @@ namespace Cod3rsGrowth.Testes
     {
         private ServicoVenda _servicoVenda;
         private List<Venda> _listaMock;
+        private readonly Venda _venda;
         public TesteVenda()
         {
             CarregarServico();
-            _servicoVenda.ObterTodos().Clear();
+            _servicoVenda.ObterTodos(_venda).Clear();
             _listaMock = InicializarDadosMock();
         }
         private void CarregarServico()
@@ -67,7 +68,7 @@ namespace Cod3rsGrowth.Testes
         {
             //arrange
             //act
-            var vendasDoBanco = _servicoVenda.ObterTodos();
+            var vendasDoBanco = _servicoVenda.ObterTodos(_venda);
             //asset
             Assert.IsType<List<Venda>>(vendasDoBanco);
         }
@@ -77,7 +78,7 @@ namespace Cod3rsGrowth.Testes
         {
             //arrange
             //act
-            var vendasDoBanco = _servicoVenda.ObterTodos();
+            var vendasDoBanco = _servicoVenda.ObterTodos(_venda);
             //asset
             Assert.Equivalent(_listaMock, vendasDoBanco);
         }
