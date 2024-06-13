@@ -21,7 +21,7 @@ namespace Cod3rsGrowth.forms
             var host = CreateHostBuilder().Build();
             ServiceProvider = host.Services;
 
-            Application.Run(new MainForm());
+            Application.Run(new FormListagem());
 
             using (var serviceProvider = CreateServices())
             using (var scope = serviceProvider.CreateScope())

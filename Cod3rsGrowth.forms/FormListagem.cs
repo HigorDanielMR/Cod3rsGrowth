@@ -1,9 +1,9 @@
 namespace Cod3rsGrowth.forms
 {
-    public partial class MainForm : Form
+    public partial class FormListagem : Form
     {
 
-        public MainForm()
+        public FormListagem()
         {
             InitializeComponent();
         }
