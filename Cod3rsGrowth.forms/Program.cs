@@ -1,7 +1,8 @@
+using System.Configuration;
 using FluentMigrator.Runner;
+using Microsoft.Extensions.Hosting;
 using Cod3rsGrowth.Infra.CriacaoDasTabelas;
 using Microsoft.Extensions.DependencyInjection;
-using System.Configuration;
 
 namespace Cod3rsGrowth.forms
 {
@@ -16,13 +17,25 @@ namespace Cod3rsGrowth.forms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            Application.Run(new Form1());
+
+            var host = CreateHostBuilder().Build();
+            ServiceProvider = host.Services;
+
+            Application.Run(new FormListagem());
 
             using (var serviceProvider = CreateServices())
             using (var scope = serviceProvider.CreateScope())
             {
                 UpdateDataBase(scope.ServiceProvider);
             }
+        }
+
+        public static IServiceProvider ServiceProvider { get; private set; }
+        static IHostBuilder CreateHostBuilder()
+        {
+            return Host.CreateDefaultBuilder()
+                .ConfigureServices((context, services) => {
+                });
         }
 
         private static ServiceProvider CreateServices()
