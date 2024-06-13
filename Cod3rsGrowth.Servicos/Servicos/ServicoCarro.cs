@@ -7,9 +7,9 @@ namespace Cod3rsGrowth.Servicos.Servicos
 {
     public class ServicoCarro
     {
-        private readonly IRepositorioCarro _repositorioCarro;
+        private readonly RepositorioCarro _repositorioCarro;
         private ValidacoesCarro _validadorCarro;
-        public ServicoCarro(IRepositorioCarro repositorioCarro, ValidacoesCarro validadorCarro)
+        public ServicoCarro(RepositorioCarro repositorioCarro, ValidacoesCarro validadorCarro)
         {
             _repositorioCarro = repositorioCarro;
             _validadorCarro = validadorCarro;

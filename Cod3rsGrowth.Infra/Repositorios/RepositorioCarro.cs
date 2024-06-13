@@ -7,7 +7,7 @@ using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    class RepositorioCarro : IRepositorioCarro
+    class RepositorioCarro : Interfaces.RepositorioCarro
     {
         private MeuDataContext _db;
 

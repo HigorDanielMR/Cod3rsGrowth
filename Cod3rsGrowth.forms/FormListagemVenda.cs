@@ -7,7 +7,12 @@ namespace Cod3rsGrowth.forms
             InitializeComponent();
         }
 
-        private void MainForm_Load(object sender, EventArgs e)
+        private void FormListagem_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
