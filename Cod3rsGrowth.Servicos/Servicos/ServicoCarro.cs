@@ -1,15 +1,15 @@
 ﻿using FluentValidation;
-using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
 using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Servicos.Servicos
 {
     public class ServicoCarro
     {
-        private readonly RepositorioCarro _repositorioCarro;
+        private readonly IRepositorioCarro _repositorioCarro;
         private ValidacoesCarro _validadorCarro;
-        public ServicoCarro(RepositorioCarro repositorioCarro, ValidacoesCarro validadorCarro)
+        public ServicoCarro(IRepositorioCarro repositorioCarro, ValidacoesCarro validadorCarro)
         {
             _repositorioCarro = repositorioCarro;
             _validadorCarro = validadorCarro;

@@ -1,47 +1,47 @@
 ﻿using FluentMigrator;
 
-namespace Cod3rsGrowth.Infra.CriacaoDasTabelas
+namespace Cod3rsGrowth.Dominio.CriacaoDasTabelas
 {
-    [Migration(20240611093100)]
+    [Migration(20240614123100)]
     public class CriandoTabelas : Migration
     {
         public override void Up()
         {
-            Create.Table("Carros")
+            Create.Table("Carro")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("Modelo").AsString().NotNullable()
                 .WithColumn("Marca").AsInt32()
                 .WithColumn("Cor").AsInt32()
-                .WithColumn("ValorDoVeiculo").AsDecimal()
+                .WithColumn("ValorDoVeiculo").AsDecimal(16,2)
                 .WithColumn("Flex").AsBoolean();
 
-            Create.Table("Vendas")
+            Create.Table("Venda")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
                 .WithColumn("Nome").AsString().NotNullable()
                 .WithColumn("Cpf").AsString().NotNullable()
                 .WithColumn("Email").AsString().NotNullable()
                 .WithColumn("Telefone").AsString().NotNullable()
                 .WithColumn("DataDeCompra").AsDateTime().NotNullable()
-                .WithColumn("ValorTotal").AsDecimal().NotNullable()
+                .WithColumn("ValorTotal").AsDecimal(16,2).NotNullable()
                 .WithColumn("Pago").AsBoolean();
 
             Create.Table("VendasCarros")
                 .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("IdVenda").AsInt32().ForeignKey("Vendas", "Id")
-                .WithColumn("IdCarro").AsInt32().ForeignKey("Carros", "Id");
+                .WithColumn("IdVenda").AsInt32().ForeignKey("Venda", "Id")
+                .WithColumn("IdCarro").AsInt32().ForeignKey("Carro", "Id");
 
             Create.ForeignKey("chave_para_id_venda")
             .FromTable("VendasCarros").ForeignColumn("IdVenda")
-            .ToTable("Vendas").PrimaryColumn("Id");
+            .ToTable("Venda").PrimaryColumn("Id");
 
             Create.ForeignKey("chave_para_id_carro")
             .FromTable("VendasCarros").ForeignColumn("IdCarro")
-            .ToTable("Carros").PrimaryColumn("Id");
+            .ToTable("Carro").PrimaryColumn("Id");
         }
         public override void Down()
         {
-            Delete.Table("Carros");
-            Delete.Table("Vendas");
+            Delete.Table("Carro");
+            Delete.Table("Venda");
             Delete.Table("VendasCarros");
         }
     }

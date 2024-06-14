@@ -1,31 +1,32 @@
 ﻿using LinqToDB;
-using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.MeuContextoDeDado;
+using LinqToDB.Data;
 using Cod3rsGrowth.Dominio.Entidades;
-using System.Text.Json;
-using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    class RepositorioCarro : Interfaces.RepositorioCarro
+    public class RepositorioCarro : IRepositorioCarro
     {
-        private MeuDataContext _db;
+        private DataConnection _connection;
+        protected ITable<Carro> TabelaCarro;
 
-        public RepositorioCarro(MeuDataContext meuDataContext)
+        public RepositorioCarro()
         {
-            _db = meuDataContext;
+            _connection = new DataConnection(
+            new DataOptions()
+                .UseSqlServer(@"Data Source=INVENT020\SQLEXPRESS;Initial Catalog=Cod3rsGrowthBD;Persist Security Info=True;User ID=sa;Password=sap@123;Trust Server Certificate=True"));
+
+            TabelaCarro = _connection.GetTable<Carro>();
         }
 
         public List<Carro> ObterTodos(FiltroCarro filtro)
         {
-            IQueryable<Carro> carros = Filtro(_db.Carros.ToList(), filtro);
-            var query = carros;
-            return query.ToList();
+            return TabelaCarro.ToList();
         }
 
         public Carro ObterPorId(int IdDeBusca)
         {
-            var query = from p in _db.Carros
+            var query = from p in TabelaCarro
                         where p.Id == IdDeBusca
                         select p;
 
@@ -37,13 +38,13 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            int idDoCarroNoBanco = _db.InsertWithInt32Identity(carro);
-            return ObterPorId(idDoCarroNoBanco);
+            var idDoCarroNoBanco = _connection.Insert(carro);
+            return ObterPorId(carro.Id);
         }
 
         public Carro Editar(Carro carroAtualizado)
         {
-            var carroDesejado = _db.Carros.FirstOrDefault(carro => carro.Id == carroAtualizado.Id);
+            var carroDesejado = TabelaCarro.FirstOrDefault(carro => carro.Id == carroAtualizado.Id);
 
             if (carroDesejado != null)
             {
@@ -53,19 +54,21 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 carroDesejado.Marca = carroAtualizado.Marca;
                 carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
-                _db.Update(carroAtualizado);
+                _connection.Update(carroAtualizado);
             }
             else
             {
                 throw new Exception($"Carro com ID {carroAtualizado.Id} não encontrado.");
             }
             return carroAtualizado;
+
         }
+
         public void Remover(int Id)
         {
-            _db.Carros
-                .Where(carro => carro.Id == Id)
-                .Delete();
+            TabelaCarro
+                 .Where(carro => carro.Id == Id)
+                 .Delete();
         }
 
         private static IQueryable<Carro> Filtro(List<Carro> carros, FiltroCarro carro)
@@ -87,5 +90,5 @@ namespace Cod3rsGrowth.Infra.Repositorios
             return query;
         }
 
-    } 
+    }
 }

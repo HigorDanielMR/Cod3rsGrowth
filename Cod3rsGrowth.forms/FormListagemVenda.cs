@@ -1,20 +1,21 @@
-namespace Cod3rsGrowth.forms
+﻿using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Servicos.Servicos;
+using Cod3rsGrowth.Servicos.Validadores;
+
+namespace Cod3rsGrowth.Forms
 {
-    public partial class FormListagem : Form
+    public partial class FormListagemVenda : Form
     {
-        public FormListagem()
+        private ServicoVenda _servicoVenda;
+        private FiltroVenda _filtro;
+        private ValidacoesVenda _validacoesVenda;
+        public FormListagemVenda(ServicoVenda servico, ValidacoesVenda validations)
         {
+            _servicoVenda = servico;
+            _validacoesVenda = validations;
             InitializeComponent();
-        }
 
-        private void FormListagem_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
+            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
         }
     }
 }

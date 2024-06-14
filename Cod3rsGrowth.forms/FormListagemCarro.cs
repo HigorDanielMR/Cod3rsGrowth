@@ -1,6 +1,7 @@
 using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servicos.Servicos;
+using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.forms
 {
@@ -8,10 +9,10 @@ namespace Cod3rsGrowth.forms
     {
         private ServicoCarro _servicoCarro;
         private FiltroCarro _filtro;
-        private RepositorioCarro _repositorioCarro;
-        public FormListagemCarro(ServicoCarro servicoCarro, RepositorioCarro repositorio)
+        private ValidacoesCarro _validacoesCarro;
+        public FormListagemCarro(ServicoCarro servicoCarro, ValidacoesCarro validations)
         {
-            _repositorioCarro = repositorio;
+            _validacoesCarro = validations;
             _servicoCarro = servicoCarro;
             InitializeComponent();
         }

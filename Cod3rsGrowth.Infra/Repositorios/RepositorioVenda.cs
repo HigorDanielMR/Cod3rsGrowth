@@ -1,29 +1,33 @@
 ﻿using LinqToDB;
+using LinqToDB.Data;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Infra.MeuContextoDeDado;
 using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Infra.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
-    class RepositorioVenda : IRepositorioVenda
+    public class RepositorioVenda : IRepositorioVenda
     {
-        private MeuDataContext _db;
-        public RepositorioVenda(MeuDataContext meuDataContext)
+
+        private DataConnection _connection;
+        protected ITable<Venda> TabelaVenda;
+
+        public RepositorioVenda()
         {
-            _db = meuDataContext;
+            _connection = new DataConnection(
+            new DataOptions()
+                .UseSqlServer(@"Data Source=INVENT020\SQLEXPRESS;Initial Catalog=Cod3rsGrowthBD;Persist Security Info=True;User ID=sa;Password=sap@123;Trust Server Certificate=True"));
+
+            TabelaVenda = _connection.GetTable<Venda>();
         }
         public List<Venda> ObterTodos(FiltroVenda filtro)
         {
-            IQueryable<Venda> vendas = Filtro(_db.Vendas.ToList(), filtro);
-            var query = vendas;
-
-            return query.ToList();
+            return TabelaVenda.ToList();
         }
 
         public Venda ObterPorId(int IdDeBusca)
         {
-            var query = from p in _db.Vendas
+
+            var query = from p in TabelaVenda
                         where p.Id == IdDeBusca
                         select p;
 
@@ -35,14 +39,16 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Venda Criar(Venda venda)
         {
-            int idDaVendaNoBanco = _db.InsertWithInt32Identity(venda);
+            int idDaVendaNoBanco = _connection.InsertWithInt32Identity(venda);
 
             return ObterPorId(idDaVendaNoBanco);
+            return ObterPorId(venda.Id);
+
         }
 
         public Venda Editar(Venda vendaAtualizada)
         {
-            var vendaDesejada = _db.Vendas.FirstOrDefault(venda => venda.Id == vendaAtualizada.Id);
+            var vendaDesejada = TabelaVenda.FirstOrDefault(venda => venda.Id == vendaAtualizada.Id);
             if (vendaDesejada != null)
             {
                 vendaDesejada.Nome = vendaAtualizada.Nome;
@@ -53,17 +59,18 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 vendaDesejada.Telefone = vendaAtualizada.Telefone;
                 vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
 
-                _db.Update(vendaDesejada);
+                _connection.Update(vendaDesejada);
             }
             else
             {
                 throw new Exception($"Venda com ID {vendaDesejada.Id} não encontrada.");
             }
             return vendaAtualizada;
+
         }
         public void Remover(int Id)
         {
-            _db.Vendas
+            TabelaVenda
                 .Where(venda => venda.Id == Id)
                 .Delete();
         }

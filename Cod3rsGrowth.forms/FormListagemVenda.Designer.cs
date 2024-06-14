@@ -1,14 +1,14 @@
-﻿namespace Cod3rsGrowth.forms
+﻿namespace Cod3rsGrowth.Forms
 {
-    partial class FormListagem
+    partial class FormListagemVenda
     {
         /// <summary>
-        ///  Required designer variable.
+        /// Required designer variable.
         /// </summary>
         private System.ComponentModel.IContainer components = null;
 
         /// <summary>
-        ///  Clean up any resources being used.
+        /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
         protected override void Dispose(bool disposing)
@@ -23,14 +23,13 @@
         #region Windows Form Designer generated code
 
         /// <summary>
-        ///  Required method for Designer support - do not modify
-        ///  the contents of this method with the code editor.
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            dataGridView1 = new DataGridView();
-            vendaBindingSource = new BindingSource(components);
+            TabelaVenda = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cpfDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -39,26 +38,22 @@
             dataDeCompraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             valorTotalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             pagoDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            vendaBindingSource = new BindingSource(components);
+            ((System.ComponentModel.ISupportInitialize)TabelaVenda).BeginInit();
             ((System.ComponentModel.ISupportInitialize)vendaBindingSource).BeginInit();
             SuspendLayout();
             // 
-            // dataGridView1
+            // TabelaVenda
             // 
-            dataGridView1.AutoGenerateColumns = false;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, cpfDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, dataDeCompraDataGridViewTextBoxColumn, valorTotalDataGridViewTextBoxColumn, pagoDataGridViewCheckBoxColumn });
-            dataGridView1.DataSource = vendaBindingSource;
-            dataGridView1.Location = new Point(2, 1);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(794, 450);
-            dataGridView1.TabIndex = 0;
-            dataGridView1.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // vendaBindingSource
-            // 
-            vendaBindingSource.DataSource = typeof(Dominio.Entidades.Venda);
+            TabelaVenda.AutoGenerateColumns = false;
+            TabelaVenda.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            TabelaVenda.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, nomeDataGridViewTextBoxColumn, cpfDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, dataDeCompraDataGridViewTextBoxColumn, valorTotalDataGridViewTextBoxColumn, pagoDataGridViewCheckBoxColumn });
+            TabelaVenda.DataSource = vendaBindingSource;
+            TabelaVenda.Location = new Point(2, 0);
+            TabelaVenda.Name = "TabelaVenda";
+            TabelaVenda.RowTemplate.Height = 25;
+            TabelaVenda.Size = new Size(808, 451);
+            TabelaVenda.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -108,25 +103,26 @@
             pagoDataGridViewCheckBoxColumn.HeaderText = "Pago";
             pagoDataGridViewCheckBoxColumn.Name = "pagoDataGridViewCheckBoxColumn";
             // 
-            // FormListagem
+            // vendaBindingSource
+            // 
+            vendaBindingSource.DataSource = typeof(Dominio.Entidades.Venda);
+            // 
+            // FormListagemVenda
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            AutoValidate = AutoValidate.EnablePreventFocusChange;
-            ClientSize = new Size(800, 450);
-            Controls.Add(dataGridView1);
-            Name = "FormListagem";
-            Text = "Form1";
-            Load += FormListagem_Load;
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ClientSize = new Size(813, 452);
+            Controls.Add(TabelaVenda);
+            Name = "FormListagemVenda";
+            Text = "FormListagemVenda";
+            ((System.ComponentModel.ISupportInitialize)TabelaVenda).EndInit();
             ((System.ComponentModel.ISupportInitialize)vendaBindingSource).EndInit();
             ResumeLayout(false);
         }
 
         #endregion
 
-        private Label label1;
-        private DataGridView dataGridView1;
+        private DataGridView TabelaVenda;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cpfDataGridViewTextBoxColumn;

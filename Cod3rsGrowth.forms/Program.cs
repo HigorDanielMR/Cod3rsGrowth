@@ -1,18 +1,19 @@
 using System.Configuration;
 using FluentMigrator.Runner;
-using Cod3rsGrowth.Infra.CriacaoDasTabelas;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Servicos.Servicos;
-using Cod3rsGrowth.Forms;
+using Microsoft.Extensions.Hosting;
+using Cod3rsGrowth.Servicos.Validadores;
 using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Infra.Interfaces;
+using Cod3rsGrowth.Dominio.CriacaoDasTabelas;
+using MongoDB.Driver.Core.Configuration;
+using Cod3rsGrowth.Forms;
+using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.forms
 {
     internal static class Program
     {
-        private static ServiceProvider _serviceProvider;
         /// <summary>
         ///  The main entry point for the application.
         /// </summary>
@@ -22,20 +23,19 @@ namespace Cod3rsGrowth.forms
             // To customize application configuration such as set high DPI settings or default font,
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
-            var colecao = new ServiceCollection();
 
-            ModuloInjecaoForm.Injetar(colecao);
-            _serviceProvider = colecao.BuildServiceProvider();
+            var serviceProvider = CreateServices();
 
-            Application.Run(new FormListagemCarro(_serviceProvider.GetRequiredService<ServicoCarro>(),
-                _serviceProvider.GetRequiredService<IRepositorio<Carro, FiltroCarro>, RepositorioCarro>()));
-
-            using (var serviceProvider = CreateServices())
+            using(serviceProvider)
             using (var scope = serviceProvider.CreateScope())
             {
                 UpdateDataBase(scope.ServiceProvider);
+                Application.Run(serviceProvider.GetRequiredService<FormListagemCarro>());
+                Application.Run(serviceProvider.GetRequiredService<FormListagemVenda>());
             }
         }
+
+        
         private static ServiceProvider CreateServices()
         {
             var conectionstring = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
@@ -47,6 +47,19 @@ namespace Cod3rsGrowth.forms
                     .WithGlobalConnectionString(conectionstring)
                     .ScanIn(typeof(CriandoTabelas).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
+
+                .AddTransient<ServicoCarro>()
+                .AddTransient<ServicoVenda>()
+                .AddTransient<ValidacoesCarro>()
+                .AddTransient<ValidacoesVenda>()
+                .AddTransient<IRepositorioCarro, RepositorioCarro>()
+                .AddTransient<IRepositorioVenda, RepositorioVenda>()
+                .AddTransient<FormListagemCarro>()
+                .AddTransient<FormListagemVenda>()
+                .AddTransient<ValidacoesCarro>()
+                .AddTransient<ValidacoesVenda>()
+
+                
                 .BuildServiceProvider(false);
         }
 
