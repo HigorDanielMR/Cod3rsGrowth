@@ -36,19 +36,45 @@ namespace Cod3rsGrowth.forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _filtro.Marca = null;
+            if (_filtro.Marca != null)
+            {
+                _filtro.Marca = null;
+            }
+            if (_filtro.Modelo != null)
+            {
+                _filtro.Modelo = null;
+            }
+            if (_filtro.Cor != null)
+            {
+                _filtro.Cor = null;
+            }
 
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
         }
 
-        private void panel1_Paint(object sender, PaintEventArgs e)
+        private void button3_Click(object sender, EventArgs e)
         {
+            if (txtProcurar.Text == "")
+            {
+                _filtro = null;
 
+                TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
+            }
+            else
+            {
+                _filtro.Modelo = txtProcurar.Text;
+
+                TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
+            }
         }
 
-        private void TabelaCarro_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        private void button4_Click(object sender, EventArgs e)
         {
+           
+            var indexDesejado = selecionarCor.SelectedIndex;
+            _filtro.Cor = (Cores)indexDesejado;
 
+            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
         }
     }
 }

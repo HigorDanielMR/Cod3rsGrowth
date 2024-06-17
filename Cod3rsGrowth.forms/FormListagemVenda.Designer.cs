@@ -29,18 +29,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormListagemVenda));
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormListagemVenda));
             TabelaVenda = new DataGridView();
-            vendaBindingSource = new BindingSource(components);
-            label1 = new Label();
-            txtProcurar = new TextBox();
-            button1 = new Button();
-            button2 = new Button();
-            panel1 = new Panel();
-            panel2 = new Panel();
-            panel3 = new Panel();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cpfDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -49,6 +41,14 @@
             dataDeCompraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             valorTotalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             pagoDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
+            vendaBindingSource = new BindingSource(components);
+            label1 = new Label();
+            txtProcurar = new TextBox();
+            button1 = new Button();
+            button2 = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel3 = new Panel();
             ((System.ComponentModel.ISupportInitialize)TabelaVenda).BeginInit();
             ((System.ComponentModel.ISupportInitialize)vendaBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -67,85 +67,6 @@
             TabelaVenda.RowTemplate.Height = 25;
             TabelaVenda.Size = new Size(812, 307);
             TabelaVenda.TabIndex = 0;
-            // 
-            // vendaBindingSource
-            // 
-            vendaBindingSource.DataSource = typeof(Dominio.Entidades.Venda);
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(203, 21);
-            label1.Name = "label1";
-            label1.Size = new Size(50, 19);
-            label1.TabIndex = 1;
-            label1.Text = "Nome";
-            // 
-            // txtProcurar
-            // 
-            txtProcurar.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtProcurar.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            txtProcurar.Location = new Point(270, 18);
-            txtProcurar.MaxLength = 100;
-            txtProcurar.Name = "txtProcurar";
-            txtProcurar.Size = new Size(278, 25);
-            txtProcurar.TabIndex = 2;
-            // 
-            // button1
-            // 
-            button1.BackColor = SystemColors.Control;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(554, 12);
-            button1.Name = "button1";
-            button1.Size = new Size(40, 38);
-            button1.TabIndex = 3;
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
-            // 
-            // button2
-            // 
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(591, 15);
-            button2.Name = "button2";
-            button2.Size = new Size(36, 32);
-            button2.TabIndex = 4;
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
-            // 
-            // panel1
-            // 
-            panel1.Anchor = AnchorStyles.None;
-            panel1.Controls.Add(txtProcurar);
-            panel1.Controls.Add(button2);
-            panel1.Controls.Add(label1);
-            panel1.Controls.Add(button1);
-            panel1.Location = new Point(1, 1);
-            panel1.MinimumSize = new Size(800, 60);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(811, 60);
-            panel1.TabIndex = 5;
-            // 
-            // panel2
-            // 
-            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel2.Controls.Add(TabelaVenda);
-            panel2.Location = new Point(0, 67);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(812, 307);
-            panel2.TabIndex = 6;
-            // 
-            // panel3
-            // 
-            panel3.BackColor = SystemColors.ButtonHighlight;
-            panel3.Location = new Point(1, 380);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(809, 69);
-            panel3.TabIndex = 7;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -215,6 +136,85 @@
             pagoDataGridViewCheckBoxColumn.HeaderText = "Pago";
             pagoDataGridViewCheckBoxColumn.Name = "pagoDataGridViewCheckBoxColumn";
             pagoDataGridViewCheckBoxColumn.Width = 40;
+            // 
+            // vendaBindingSource
+            // 
+            vendaBindingSource.DataSource = typeof(Dominio.Entidades.Venda);
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label1.Location = new Point(11, 8);
+            label1.Name = "label1";
+            label1.Size = new Size(50, 19);
+            label1.TabIndex = 1;
+            label1.Text = "Nome";
+            // 
+            // txtProcurar
+            // 
+            txtProcurar.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            txtProcurar.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
+            txtProcurar.Location = new Point(11, 30);
+            txtProcurar.MaxLength = 100;
+            txtProcurar.Name = "txtProcurar";
+            txtProcurar.Size = new Size(171, 25);
+            txtProcurar.TabIndex = 2;
+            // 
+            // button1
+            // 
+            button1.BackColor = SystemColors.Control;
+            button1.FlatAppearance.BorderSize = 0;
+            button1.FlatStyle = FlatStyle.Flat;
+            button1.Image = (Image)resources.GetObject("button1.Image");
+            button1.Location = new Point(188, 15);
+            button1.Name = "button1";
+            button1.Size = new Size(36, 38);
+            button1.TabIndex = 3;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
+            // 
+            // button2
+            // 
+            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatStyle = FlatStyle.Flat;
+            button2.Image = (Image)resources.GetObject("button2.Image");
+            button2.Location = new Point(591, 15);
+            button2.Name = "button2";
+            button2.Size = new Size(36, 32);
+            button2.TabIndex = 4;
+            button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
+            // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.None;
+            panel1.Controls.Add(txtProcurar);
+            panel1.Controls.Add(button2);
+            panel1.Controls.Add(label1);
+            panel1.Controls.Add(button1);
+            panel1.Location = new Point(1, 1);
+            panel1.MinimumSize = new Size(800, 60);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(811, 60);
+            panel1.TabIndex = 5;
+            // 
+            // panel2
+            // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.Controls.Add(TabelaVenda);
+            panel2.Location = new Point(0, 67);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(812, 307);
+            panel2.TabIndex = 6;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = SystemColors.ButtonHighlight;
+            panel3.Location = new Point(1, 380);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(809, 69);
+            panel3.TabIndex = 7;
             // 
             // FormListagemVenda
             // 
