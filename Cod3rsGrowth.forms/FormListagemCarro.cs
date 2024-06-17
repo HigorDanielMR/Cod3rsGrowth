@@ -40,5 +40,15 @@ namespace Cod3rsGrowth.forms
 
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void TabelaCarro_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }

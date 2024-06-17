@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormListagemCarro));
             TabelaCarro = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -42,23 +43,31 @@
             button1 = new Button();
             selecionarMarca = new ComboBox();
             button2 = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel3 = new Panel();
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).BeginInit();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // TabelaCarro
             // 
             TabelaCarro.AllowUserToOrderColumns = true;
-            TabelaCarro.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             TabelaCarro.AutoGenerateColumns = false;
+            TabelaCarro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            TabelaCarro.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             TabelaCarro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             TabelaCarro.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, marcaDataGridViewTextBoxColumn, modeloDataGridViewTextBoxColumn, corDataGridViewTextBoxColumn, valorDoVeiculoDataGridViewTextBoxColumn, flexDataGridViewCheckBoxColumn });
             TabelaCarro.DataSource = carroBindingSource;
-            TabelaCarro.Location = new Point(3, 41);
+            TabelaCarro.Dock = DockStyle.Fill;
+            TabelaCarro.Location = new Point(0, 0);
             TabelaCarro.Name = "TabelaCarro";
             TabelaCarro.RowTemplate.Height = 25;
-            TabelaCarro.Size = new Size(795, 408);
+            TabelaCarro.Size = new Size(806, 331);
             TabelaCarro.TabIndex = 0;
+            TabelaCarro.CellContentClick += TabelaCarro_CellContentClick;
             // 
             // idDataGridViewTextBoxColumn
             // 
@@ -70,12 +79,14 @@
             // 
             // marcaDataGridViewTextBoxColumn
             // 
+            marcaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             marcaDataGridViewTextBoxColumn.DataPropertyName = "Marca";
             marcaDataGridViewTextBoxColumn.HeaderText = "Marca";
             marcaDataGridViewTextBoxColumn.Name = "marcaDataGridViewTextBoxColumn";
             // 
             // modeloDataGridViewTextBoxColumn
             // 
+            modeloDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
             modeloDataGridViewTextBoxColumn.DataPropertyName = "Modelo";
             modeloDataGridViewTextBoxColumn.HeaderText = "Modelo";
             modeloDataGridViewTextBoxColumn.Name = "modeloDataGridViewTextBoxColumn";
@@ -85,18 +96,24 @@
             corDataGridViewTextBoxColumn.DataPropertyName = "Cor";
             corDataGridViewTextBoxColumn.HeaderText = "Cor";
             corDataGridViewTextBoxColumn.Name = "corDataGridViewTextBoxColumn";
+            corDataGridViewTextBoxColumn.Width = 51;
             // 
             // valorDoVeiculoDataGridViewTextBoxColumn
             // 
             valorDoVeiculoDataGridViewTextBoxColumn.DataPropertyName = "ValorDoVeiculo";
-            valorDoVeiculoDataGridViewTextBoxColumn.HeaderText = "ValorDoVeiculo";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            valorDoVeiculoDataGridViewTextBoxColumn.HeaderText = "Preço";
             valorDoVeiculoDataGridViewTextBoxColumn.Name = "valorDoVeiculoDataGridViewTextBoxColumn";
+            valorDoVeiculoDataGridViewTextBoxColumn.Width = 62;
             // 
             // flexDataGridViewCheckBoxColumn
             // 
             flexDataGridViewCheckBoxColumn.DataPropertyName = "Flex";
             flexDataGridViewCheckBoxColumn.HeaderText = "Flex";
             flexDataGridViewCheckBoxColumn.Name = "flexDataGridViewCheckBoxColumn";
+            flexDataGridViewCheckBoxColumn.Width = 34;
             // 
             // carroBindingSource
             // 
@@ -106,7 +123,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(217, 12);
+            label2.Location = new Point(238, 23);
             label2.Name = "label2";
             label2.Size = new Size(51, 19);
             label2.TabIndex = 1;
@@ -119,7 +136,7 @@
             button1.FlatAppearance.MouseOverBackColor = Color.Snow;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(459, 6);
+            button1.Location = new Point(480, 17);
             button1.Name = "button1";
             button1.Size = new Size(39, 32);
             button1.TabIndex = 3;
@@ -130,7 +147,7 @@
             // 
             selecionarMarca.FormattingEnabled = true;
             selecionarMarca.Items.AddRange(new object[] { "Toyota", "Honda", "Hyundai", "Volkswagem", "Chevrolet", "Peugeot", "Mercedes", "Bmw", "Mitsubishi" });
-            selecionarMarca.Location = new Point(274, 12);
+            selecionarMarca.Location = new Point(295, 23);
             selecionarMarca.Name = "selecionarMarca";
             selecionarMarca.Size = new Size(179, 23);
             selecionarMarca.TabIndex = 4;
@@ -140,32 +157,64 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(504, 6);
+            button2.Location = new Point(525, 17);
             button2.Name = "button2";
             button2.Size = new Size(34, 32);
             button2.TabIndex = 5;
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // panel1
+            // 
+            panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel1.Controls.Add(selecionarMarca);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(button2);
+            panel1.Controls.Add(button1);
+            panel1.Location = new Point(0, 0);
+            panel1.MinimumSize = new Size(800, 60);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(800, 60);
+            panel1.TabIndex = 6;
+            panel1.Paint += panel1_Paint;
+            // 
+            // panel2
+            // 
+            panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel2.Controls.Add(panel3);
+            panel2.Controls.Add(TabelaCarro);
+            panel2.Location = new Point(0, 66);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(806, 331);
+            panel2.TabIndex = 7;
+            // 
+            // panel3
+            // 
+            panel3.BackColor = SystemColors.ActiveCaptionText;
+            panel3.Location = new Point(0, 331);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(803, 69);
+            panel3.TabIndex = 1;
+            // 
             // FormListagemCarro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            AutoSize = true;
             AutoValidate = AutoValidate.EnablePreventFocusChange;
             BackColor = SystemColors.ButtonHighlight;
-            ClientSize = new Size(800, 450);
-            Controls.Add(button2);
-            Controls.Add(selecionarMarca);
-            Controls.Add(button1);
-            Controls.Add(label2);
-            Controls.Add(TabelaCarro);
+            ClientSize = new Size(803, 463);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Name = "FormListagemCarro";
             Text = "Tela de Carros";
             Load += FormListagem_Load;
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).EndInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel2.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -173,15 +222,18 @@
         private Label label1;
         private DataGridView TabelaCarro;
         private BindingSource carroBindingSource;
+        private Label label2;
+        private Button button1;
+        private ComboBox selecionarMarca;
+        private Button button2;
+        private Panel panel1;
+        private Panel panel2;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn marcaDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn modeloDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn corDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valorDoVeiculoDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn flexDataGridViewCheckBoxColumn;
-        private Label label2;
-        private Button button1;
-        private ComboBox selecionarMarca;
-        private Button button2;
+        private Panel panel3;
     }
 }
