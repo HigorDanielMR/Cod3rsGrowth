@@ -1,5 +1,6 @@
 ﻿using LinqToDB;
 using LinqToDB.Data;
+using System.Configuration;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Entidades;
 
@@ -7,7 +8,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     public class RepositorioVenda : IRepositorioVenda
     {
-
         private DataConnection _connection;
         protected ITable<Venda> TabelaVenda;
 
@@ -15,18 +15,27 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             _connection = new DataConnection(
             new DataOptions()
-                .UseSqlServer(@"Data Source=INVENT020\SQLEXPRESS;Initial Catalog=Cod3rsGrowthBD;Persist Security Info=True;User ID=sa;Password=sap@123;Trust Server Certificate=True"));
+                .UseSqlServer(ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ConnectionString));
 
             TabelaVenda = _connection.GetTable<Venda>();
         }
+
         public List<Venda> ObterTodos(FiltroVenda filtro)
         {
-            return TabelaVenda.ToList();
+            var query = FiltroParaBusca(TabelaVenda, filtro);
+            if (query == null)
+            {
+                return TabelaVenda.ToList();
+            }
+            else
+            {
+                var resultadoFiltro = query.ToList();
+                return resultadoFiltro.ToList();
+            }
         }
 
         public Venda ObterPorId(int IdDeBusca)
         {
-
             var query = from p in TabelaVenda
                         where p.Id == IdDeBusca
                         select p;
@@ -42,8 +51,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
             int idDaVendaNoBanco = _connection.InsertWithInt32Identity(venda);
 
             return ObterPorId(idDaVendaNoBanco);
-            return ObterPorId(venda.Id);
-
         }
 
         public Venda Editar(Venda vendaAtualizada)
@@ -66,7 +73,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 throw new Exception($"Venda com ID {vendaDesejada.Id} não encontrada.");
             }
             return vendaAtualizada;
-
         }
         public void Remover(int Id)
         {
@@ -75,24 +81,26 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 .Delete();
         }
 
-        private static IQueryable<Venda> Filtro(List<Venda> vendas, FiltroVenda venda)
+        private static IQueryable<Venda> FiltroParaBusca(ITable<Venda> vendas, FiltroVenda venda)
         {
             var query = vendas.AsQueryable();
+            if (venda != null)
+            {
+                if (venda.Nome != null)
+                    query = query.Where(d => d.Nome == venda.Nome);
 
-            if (venda.Nome != null)
-                query = query.Where(d => d.Nome == venda.Nome);
+                if (venda.Cpf != null)
+                    query = query.Where(d => d.Cpf == venda.Cpf);
 
-            if (venda.Cpf != null)
-                query = query.Where(d => d.Cpf == venda.Cpf);
+                if (venda.DataDeCompra != null)
+                    query = query.Where(d => d.DataDeCompra == venda.DataDeCompra);
 
-            if (venda.DataDeCompra != null)
-                query = query.Where(d => d.DataDeCompra == venda.DataDeCompra);
+                if (venda.Telefone != null)
+                    query = query.Where(d => d.Telefone == venda.Telefone);
 
-            if (venda.Telefone != null)
-                query = query.Where(d => d.Telefone == venda.Telefone);
-
-            if (venda.Email != null)
-                query = query.Where(d => d.Email == venda.Email);
+                if (venda.Email != null)
+                    query = query.Where(d => d.Email == venda.Email);
+            }
 
             return query;
         }

@@ -1,32 +1,25 @@
+using Cod3rsGrowth.Forms;
 using System.Configuration;
 using FluentMigrator.Runner;
-using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Servicos.Servicos;
-using Microsoft.Extensions.Hosting;
-using Cod3rsGrowth.Servicos.Validadores;
-using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Dominio.CriacaoDasTabelas;
-using MongoDB.Driver.Core.Configuration;
-using Cod3rsGrowth.Forms;
 using Cod3rsGrowth.Infra.Repositorios;
+using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Servicos.Validadores;
+using Cod3rsGrowth.Dominio.CriacaoDasTabelas;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.forms
 {
     internal static class Program
     {
-        /// <summary>
-        ///  The main entry point for the application.
-        /// </summary>
         [STAThread]
         static void Main()
         {
-            // To customize application configuration such as set high DPI settings or default font,
-            // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
 
             var serviceProvider = CreateServices();
 
-            using(serviceProvider)
+            using (serviceProvider)
             using (var scope = serviceProvider.CreateScope())
             {
                 UpdateDataBase(scope.ServiceProvider);
@@ -35,7 +28,6 @@ namespace Cod3rsGrowth.forms
             }
         }
 
-        
         private static ServiceProvider CreateServices()
         {
             var conectionstring = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
@@ -59,14 +51,12 @@ namespace Cod3rsGrowth.forms
                 .AddTransient<ValidacoesCarro>()
                 .AddTransient<ValidacoesVenda>()
 
-                
                 .BuildServiceProvider(false);
         }
 
-            private static void UpdateDataBase(IServiceProvider serviceProvider)
+        private static void UpdateDataBase(IServiceProvider serviceProvider)
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
-
             runner.MigrateUp();
         }
     }
