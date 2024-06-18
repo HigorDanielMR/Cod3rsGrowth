@@ -21,21 +21,13 @@ namespace Cod3rsGrowth.Dominio.CriacaoDasTabelas
                 .WithColumn("Cpf").AsString().NotNullable()
                 .WithColumn("Email").AsString().NotNullable()
                 .WithColumn("Telefone").AsString().NotNullable()
+                .WithColumn("IdDoCarroVendido").AsInt32().NotNullable().ForeignKey("Carro", "Id")
                 .WithColumn("DataDeCompra").AsDateTime().NotNullable()
                 .WithColumn("ValorTotal").AsDecimal(16,2).NotNullable()
                 .WithColumn("Pago").AsBoolean();
 
-            Create.Table("VendasCarros")
-                .WithColumn("Id").AsInt32().PrimaryKey().Identity()
-                .WithColumn("IdVenda").AsInt32().ForeignKey("Venda", "Id")
-                .WithColumn("IdCarro").AsInt32().ForeignKey("Carro", "Id");
-
-            Create.ForeignKey("chave_para_id_venda")
-            .FromTable("VendasCarros").ForeignColumn("IdVenda")
-            .ToTable("Venda").PrimaryColumn("Id");
-
             Create.ForeignKey("chave_para_id_carro")
-            .FromTable("VendasCarros").ForeignColumn("IdCarro")
+            .FromTable("Venda").ForeignColumn("IdDoCarroVendido")
             .ToTable("Carro").PrimaryColumn("Id");
         }
         public override void Down()

@@ -88,7 +88,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             if (carro != null)
             {
                 if (carro.Modelo != null)
-                    query = query.Where(d => d.Modelo == carro.Modelo);
+                    query = query.Where(d => d.Modelo.Contains(carro.Modelo));
 
                 if (carro.Cor != null)
                     query = query.Where(d => d.Cor == carro.Cor);

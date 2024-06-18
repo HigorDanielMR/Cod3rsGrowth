@@ -50,10 +50,12 @@
             selecionarCor = new ComboBox();
             label3 = new Label();
             txtProcurar = new TextBox();
+            carroBindingSource1 = new BindingSource(components);
             panel2 = new Panel();
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).BeginInit();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)carroBindingSource1).BeginInit();
             panel2.SuspendLayout();
             SuspendLayout();
             // 
@@ -229,7 +231,6 @@
             // selecionarCor
             // 
             selecionarCor.FormattingEnabled = true;
-            selecionarCor.Items.AddRange(new object[] { "Grafite", "Preto", "Branco", "Vermelho", "Prata", "Azul" });
             selecionarCor.Location = new Point(455, 31);
             selecionarCor.Name = "selecionarCor";
             selecionarCor.Size = new Size(68, 23);
@@ -251,6 +252,10 @@
             txtProcurar.Name = "txtProcurar";
             txtProcurar.Size = new Size(176, 23);
             txtProcurar.TabIndex = 6;
+            // 
+            // carroBindingSource1
+            // 
+            carroBindingSource1.DataSource = typeof(Dominio.Entidades.Carro);
             // 
             // panel2
             // 
@@ -279,6 +284,7 @@
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)carroBindingSource1).EndInit();
             panel2.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -305,5 +311,6 @@
         private TextBox txtProcurar;
         private Button button3;
         private Button button4;
+        private BindingSource carroBindingSource1;
     }
 }

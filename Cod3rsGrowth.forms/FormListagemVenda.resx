@@ -117,6 +117,15 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <metadata name="IdDoCarroVendido.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
+  <metadata name="vendaBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>122, 17</value>
+  </metadata>
+  <metadata name="IdDoCarroVendido.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+    <value>True</value>
+  </metadata>
   <metadata name="vendaBindingSource.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
     <value>122, 17</value>
   </metadata>
@@ -143,6 +152,16 @@
         C61+84qP5TJ9TCa0KBSoa7VKBn2rdXe2Z+MeO4pC42SSPlWVVBjwijrMGgCWTvu1UpH2CI1TKXqqVqnv
         cumr71lZwHiSp3tWIxEaORxSi1DP6TSO211FEfcM/b0w1sLno3sckgE2mE27FssNx//fNgxGsgFabQO8
         Y5CvTIIh6a968HoP/DB2DA1YWbTKUYA9RTH9AoqaueBZSQlKAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="button5.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPCAYAAAA71pVKAAAABGdBTUEAALGPC/xhBQAAAOZJREFUOE+V
+        kk0KQWEUhm9ZgMiYMjVgbglGZGxmxlQmDJD87EOsQAYSGYg9yAIswvN2vqu+3Ovy1NN36ta55y+IIY17
+        nOMMB3jHHH5lih28YhUzWMQ19nCDkSxxhVk8Y8XFZdxhHm8YmaCBBfdGUcMUqgKvBfX3tDARtaAZvNni
+        yMJENIOhhYZ6LVn4E9rCmwtOLExEW1hYaLTxYWEiWqPuwKOPLQtj0eq6qEPyUOlNjEugNWo2OiSPo3uV
+        QBWoBc1AQxyj1lhHHZKH1iRO7hWagRLpT/quO/jg4N4wwV+ovDDBHwTBC+sHKku/ms2YAAAAAElFTkSu
+        QmCC
 </value>
   </data>
   <data name="button4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">

@@ -1,5 +1,7 @@
-﻿using Cod3rsGrowth.Servicos.Servicos;
+﻿using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
+using Cod3rsGrowth.Testes.Repositorios;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
@@ -16,9 +18,9 @@ namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
             servicos.AddScoped<ServicoCarro>();
             servicos.AddScoped<ServicoVenda>();
 
-            //servicos.AddScoped<IRepositorioCarro, RepositorioCarroMock>();
+            servicos.AddScoped<IRepositorioCarro, RepositorioCarroMock>();
 
-            //servicos.AddScoped<IRepositorioVenda, RepositorioVendaMock>();
+            servicos.AddScoped<IRepositorioVenda, RepositorioVendaMock>();
         }
     }
 }

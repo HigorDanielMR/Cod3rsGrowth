@@ -19,6 +19,9 @@ namespace Cod3rsGrowth.forms
             _servicoCarro = servicoCarro;
 
             InitializeComponent();
+
+            selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
+            selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
         }
 
         private void FormListagem_Load(object sender, EventArgs e)
@@ -70,11 +73,10 @@ namespace Cod3rsGrowth.forms
 
         private void button4_Click(object sender, EventArgs e)
         {
-           
-            var indexDesejado = selecionarCor.SelectedIndex;
-            _filtro.Cor = (Cores)indexDesejado;
-
+            var indexDesejado = (Cores)selecionarCor.SelectedIndex;
+            _filtro.Cor = indexDesejado;
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
         }
+
     }
 }

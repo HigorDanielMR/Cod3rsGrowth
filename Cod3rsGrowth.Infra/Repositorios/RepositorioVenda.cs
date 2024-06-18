@@ -87,7 +87,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             if (venda != null)
             {
                 if (venda.Nome != null)
-                    query = query.Where(d => d.Nome == venda.Nome);
+                    query = query.Where(d => d.Nome.Contains(venda.Nome));
 
                 if (venda.Cpf != null)
                     query = query.Where(d => d.Cpf == venda.Cpf);
