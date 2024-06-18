@@ -30,7 +30,6 @@
         {
             components = new System.ComponentModel.Container();
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormListagemCarro));
             TabelaCarro = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -40,12 +39,10 @@
             flexDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             carroBindingSource = new BindingSource(components);
             label2 = new Label();
-            button1 = new Button();
+            AoClicarNoBotaoFiltrar = new Button();
             selecionarMarca = new ComboBox();
             button2 = new Button();
             panel1 = new Panel();
-            button4 = new Button();
-            button3 = new Button();
             label1 = new Label();
             selecionarCor = new ComboBox();
             label3 = new Label();
@@ -135,46 +132,44 @@
             label2.TabIndex = 1;
             label2.Text = "Marca";
             // 
-            // button1
+            // AoClicarNoBotaoFiltrar
             // 
-            button1.BackColor = SystemColors.ButtonHighlight;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatAppearance.MouseOverBackColor = Color.Snow;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(135, 31);
-            button1.Name = "button1";
-            button1.Size = new Size(39, 26);
-            button1.TabIndex = 3;
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            AoClicarNoBotaoFiltrar.BackColor = SystemColors.ButtonHighlight;
+            AoClicarNoBotaoFiltrar.FlatAppearance.BorderColor = Color.Black;
+            AoClicarNoBotaoFiltrar.FlatAppearance.MouseOverBackColor = Color.Snow;
+            AoClicarNoBotaoFiltrar.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoFiltrar.Location = new Point(694, 15);
+            AoClicarNoBotaoFiltrar.Name = "AoClicarNoBotaoFiltrar";
+            AoClicarNoBotaoFiltrar.Size = new Size(54, 42);
+            AoClicarNoBotaoFiltrar.TabIndex = 3;
+            AoClicarNoBotaoFiltrar.Text = "Filtrar";
+            AoClicarNoBotaoFiltrar.UseVisualStyleBackColor = false;
+            AoClicarNoBotaoFiltrar.Click += button1_Click;
             // 
             // selecionarMarca
             // 
             selecionarMarca.FormattingEnabled = true;
-            selecionarMarca.Items.AddRange(new object[] { "Toyota", "Honda", "Hyundai", "Volkswagem", "Chevrolet", "Peugeot", "Mercedes", "Bmw", "Mitsubishi" });
-            selecionarMarca.Location = new Point(12, 31);
+            selecionarMarca.Items.AddRange(new object[] { "  " });
+            selecionarMarca.Location = new Point(12, 37);
             selecionarMarca.Name = "selecionarMarca";
             selecionarMarca.Size = new Size(117, 23);
             selecionarMarca.TabIndex = 4;
             // 
             // button2
             // 
-            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatAppearance.BorderColor = Color.Black;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(804, 25);
+            button2.Location = new Point(767, 15);
             button2.Name = "button2";
-            button2.Size = new Size(34, 32);
+            button2.Size = new Size(65, 42);
             button2.TabIndex = 5;
+            button2.Text = "Limpar Filtro";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
             // panel1
             // 
             panel1.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel1.Controls.Add(button4);
-            panel1.Controls.Add(button3);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(selecionarCor);
             panel1.Controls.Add(label3);
@@ -182,46 +177,18 @@
             panel1.Controls.Add(selecionarMarca);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(button2);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(AoClicarNoBotaoFiltrar);
             panel1.Location = new Point(0, 0);
             panel1.MinimumSize = new Size(800, 60);
             panel1.Name = "panel1";
             panel1.Size = new Size(841, 60);
             panel1.TabIndex = 6;
             // 
-            // button4
-            // 
-            button4.BackColor = SystemColors.ButtonHighlight;
-            button4.FlatAppearance.BorderSize = 0;
-            button4.FlatAppearance.MouseOverBackColor = Color.Snow;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Image = (Image)resources.GetObject("button4.Image");
-            button4.Location = new Point(529, 31);
-            button4.Name = "button4";
-            button4.Size = new Size(39, 23);
-            button4.TabIndex = 12;
-            button4.UseVisualStyleBackColor = false;
-            button4.Click += button4_Click;
-            // 
-            // button3
-            // 
-            button3.BackColor = SystemColors.ButtonHighlight;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatAppearance.MouseOverBackColor = Color.Snow;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(388, 31);
-            button3.Name = "button3";
-            button3.Size = new Size(39, 26);
-            button3.TabIndex = 11;
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
-            // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(455, 9);
+            label1.Location = new Point(369, 9);
             label1.Name = "label1";
             label1.Size = new Size(33, 19);
             label1.TabIndex = 9;
@@ -231,16 +198,17 @@
             // selecionarCor
             // 
             selecionarCor.FormattingEnabled = true;
-            selecionarCor.Location = new Point(455, 31);
+            selecionarCor.Items.AddRange(new object[] { " " });
+            selecionarCor.Location = new Point(369, 37);
             selecionarCor.Name = "selecionarCor";
-            selecionarCor.Size = new Size(68, 23);
+            selecionarCor.Size = new Size(97, 23);
             selecionarCor.TabIndex = 8;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(206, 9);
+            label3.Location = new Point(149, 9);
             label3.Name = "label3";
             label3.Size = new Size(50, 19);
             label3.TabIndex = 7;
@@ -248,7 +216,7 @@
             // 
             // txtProcurar
             // 
-            txtProcurar.Location = new Point(206, 31);
+            txtProcurar.Location = new Point(149, 37);
             txtProcurar.Name = "txtProcurar";
             txtProcurar.Size = new Size(176, 23);
             txtProcurar.TabIndex = 6;
@@ -295,7 +263,7 @@
         private DataGridView TabelaCarro;
         private BindingSource carroBindingSource;
         private Label label2;
-        private Button button1;
+        private Button AoClicarNoBotaoFiltrar;
         private ComboBox selecionarMarca;
         private Button button2;
         private Panel panel1;
@@ -309,8 +277,6 @@
         private ComboBox selecionarCor;
         private Label label3;
         private TextBox txtProcurar;
-        private Button button3;
-        private Button button4;
         private BindingSource carroBindingSource1;
     }
 }

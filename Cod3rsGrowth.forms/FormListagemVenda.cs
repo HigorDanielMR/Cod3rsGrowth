@@ -1,6 +1,7 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -20,76 +21,56 @@ namespace Cod3rsGrowth.Forms
             TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            if (txtProcurarNome.Text == "")
-            {
-                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
-            }
-            else
-            {
-                _filtro.Nome = txtProcurarNome.Text;
-
-                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
-            }
-        }
-
         private void button2_Click(object sender, EventArgs e)
         {
             if (_filtro.Nome != null)
                 _filtro.Nome = null;
+            txtProcurarNome.Clear();
 
             if (_filtro.Cpf != null)
                 _filtro.Cpf = null;
+            procurarCpf.Clear();
 
             if (_filtro.Email != null)
                 _filtro.Email = null;
+            txtProcurarEmail.Clear();
 
             if (_filtro.DataDeCompra != null)
                 _filtro.DataDeCompra = null;
+            procurarData.Clear();
 
             TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
         }
 
-        private void button3_Click(object sender, EventArgs e)
+        private void botaoFiltrar_Click(object sender, EventArgs e)
         {
-            if (procurarCpf.Text == "")
+            try
             {
-                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
-            }
-            else
-            {
-                _filtro.Cpf = procurarCpf.Text;
+                if (!txtProcurarNome.Text.IsNullOrEmpty())
+                {
+                    _filtro.Nome = txtProcurarNome.Text;
+                }
+
+                if (!procurarData.Text.IsNullOrEmpty() && procurarData.Text != "  /  /")
+                {
+                    _filtro.DataDeCompra = DateTime.Parse(procurarData.Text);
+                }
+
+                if (!txtProcurarEmail.Text.IsNullOrEmpty())
+                {
+                    _filtro.Email = txtProcurarEmail.Text;
+                }
+
+                if (!procurarCpf.Text.IsNullOrEmpty() && procurarCpf.Text != "   .   .   -")
+                {
+                    _filtro.Cpf = procurarCpf.Text;
+                }
 
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
             }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            if (txtProcurarEmail.Text == "")
+            catch (Exception ex)
             {
-                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
-            }
-            else
-            {
-                _filtro.Email = txtProcurarEmail.Text;
-
-                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
-            }
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-            if (procurarData.Text == "")
-            {
-                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
-            }
-            else
-            {
-                _filtro.DataDeCompra = DateTime.Parse(procurarData.Text);
-
-                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
+                MessageBox.Show($"{ex.Message}");
             }
         }
     }

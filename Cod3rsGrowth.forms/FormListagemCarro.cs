@@ -2,6 +2,7 @@ using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
+using Microsoft.IdentityModel.Tokens;
 using System.Data;
 
 namespace Cod3rsGrowth.forms
@@ -22,6 +23,9 @@ namespace Cod3rsGrowth.forms
 
             selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
             selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
+
+            selecionarCor.SelectedItem = null;
+            selecionarMarca.SelectedItem = null;
         }
 
         private void FormListagem_Load(object sender, EventArgs e)
@@ -31,9 +35,30 @@ namespace Cod3rsGrowth.forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            var indexDesejado = selecionarMarca.SelectedIndex;
-            _filtro.Marca = (Marcas)indexDesejado;
+            try
+            {
+                if(selecionarMarca != null && selecionarMarca.SelectedItem != null)
+                {
+                    var indexDesejado = selecionarMarca.SelectedIndex;
+                    _filtro.Marca = (Marcas)indexDesejado;
+                }
 
+                if (!txtProcurar.Text.IsNullOrEmpty())
+                {
+                    _filtro.Modelo = txtProcurar.Text;
+                }
+                if(selecionarCor != null && selecionarCor.SelectedItem != null)
+                {
+                    var indexdesejado = (Cores)selecionarCor.SelectedIndex;
+                    _filtro.Cor = indexdesejado;
+                }
+            }
+            
+            catch(Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+            
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
         }
 
@@ -52,31 +77,11 @@ namespace Cod3rsGrowth.forms
                 _filtro.Cor = null;
             }
 
+            txtProcurar.Clear();
+            selecionarCor.SelectedItem = null;
+            selecionarMarca.SelectedItem = null;
+
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
         }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            if (txtProcurar.Text == "")
-            {
-                _filtro = null;
-
-                TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
-            }
-            else
-            {
-                _filtro.Modelo = txtProcurar.Text;
-
-                TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
-            }
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-            var indexDesejado = (Cores)selecionarCor.SelectedIndex;
-            _filtro.Cor = indexDesejado;
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
-        }
-
     }
 }

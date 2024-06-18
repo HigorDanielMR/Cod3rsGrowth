@@ -29,9 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormListagemVenda));
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             TabelaVenda = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -44,21 +43,18 @@
             pagoDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             vendaBindingSource = new BindingSource(components);
             label1 = new Label();
-            button1 = new Button();
+            AoClicarNoBotaoFiltrar = new Button();
             button2 = new Button();
             panel1 = new Panel();
             label3 = new Label();
             procurarData = new MaskedTextBox();
-            button4 = new Button();
             label2 = new Label();
             txtProcurarEmail = new TextBox();
-            button3 = new Button();
             CPF = new Label();
             procurarCpf = new MaskedTextBox();
             txtProcurarNome = new TextBox();
             panel2 = new Panel();
             panel3 = new Panel();
-            button5 = new Button();
             ((System.ComponentModel.ISupportInitialize)TabelaVenda).BeginInit();
             ((System.ComponentModel.ISupportInitialize)vendaBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -129,9 +125,9 @@
             // 
             dataDeCompraDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataDeCompraDataGridViewTextBoxColumn.DataPropertyName = "DataDeCompra";
-            dataGridViewCellStyle3.Format = "d";
-            dataGridViewCellStyle3.NullValue = null;
-            dataDeCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "d";
+            dataGridViewCellStyle1.NullValue = null;
+            dataDeCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             dataDeCompraDataGridViewTextBoxColumn.HeaderText = "DataDeCompra";
             dataDeCompraDataGridViewTextBoxColumn.Name = "dataDeCompraDataGridViewTextBoxColumn";
             dataDeCompraDataGridViewTextBoxColumn.Width = 113;
@@ -140,9 +136,9 @@
             // 
             valorTotalDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             valorTotalDataGridViewTextBoxColumn.HeaderText = "ValorTotal";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
             valorTotalDataGridViewTextBoxColumn.Width = 83;
@@ -169,47 +165,45 @@
             label1.TabIndex = 1;
             label1.Text = "Nome";
             // 
-            // button1
+            // AoClicarNoBotaoFiltrar
             // 
-            button1.BackColor = SystemColors.Control;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(143, 19);
-            button1.Name = "button1";
-            button1.Size = new Size(36, 38);
-            button1.TabIndex = 3;
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            AoClicarNoBotaoFiltrar.BackColor = SystemColors.Control;
+            AoClicarNoBotaoFiltrar.FlatAppearance.BorderColor = Color.Black;
+            AoClicarNoBotaoFiltrar.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoFiltrar.ForeColor = SystemColors.ControlText;
+            AoClicarNoBotaoFiltrar.Location = new Point(603, 9);
+            AoClicarNoBotaoFiltrar.Name = "AoClicarNoBotaoFiltrar";
+            AoClicarNoBotaoFiltrar.Size = new Size(57, 46);
+            AoClicarNoBotaoFiltrar.TabIndex = 3;
+            AoClicarNoBotaoFiltrar.Text = "Filtrar";
+            AoClicarNoBotaoFiltrar.UseVisualStyleBackColor = false;
+            AoClicarNoBotaoFiltrar.Click += botaoFiltrar_Click;
             // 
             // button2
             // 
-            button2.FlatAppearance.BorderSize = 0;
+            button2.FlatAppearance.BorderColor = Color.Black;
             button2.FlatStyle = FlatStyle.Flat;
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(764, 19);
+            button2.Location = new Point(680, 11);
             button2.Name = "button2";
-            button2.Size = new Size(36, 38);
+            button2.Size = new Size(64, 43);
             button2.TabIndex = 4;
+            button2.Text = "Limpar FIltro";
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
             // panel1
             // 
             panel1.Anchor = AnchorStyles.None;
-            panel1.Controls.Add(button5);
             panel1.Controls.Add(label3);
             panel1.Controls.Add(procurarData);
-            panel1.Controls.Add(button4);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(txtProcurarEmail);
-            panel1.Controls.Add(button3);
             panel1.Controls.Add(CPF);
             panel1.Controls.Add(procurarCpf);
             panel1.Controls.Add(txtProcurarNome);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(label1);
-            panel1.Controls.Add(button1);
+            panel1.Controls.Add(AoClicarNoBotaoFiltrar);
             panel1.Location = new Point(1, 1);
             panel1.MinimumSize = new Size(800, 60);
             panel1.Name = "panel1";
@@ -220,7 +214,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(562, 8);
+            label3.Location = new Point(456, 6);
             label3.Name = "label3";
             label3.Size = new Size(120, 19);
             label3.TabIndex = 13;
@@ -228,31 +222,18 @@
             // 
             // procurarData
             // 
-            procurarData.Location = new Point(562, 31);
+            procurarData.Location = new Point(456, 28);
             procurarData.Mask = "00/00/0000";
             procurarData.Name = "procurarData";
             procurarData.Size = new Size(120, 23);
             procurarData.TabIndex = 12;
             procurarData.ValidatingType = typeof(DateTime);
             // 
-            // button4
-            // 
-            button4.BackColor = SystemColors.Control;
-            button4.FlatAppearance.BorderSize = 0;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.Image = (Image)resources.GetObject("button4.Image");
-            button4.Location = new Point(505, 25);
-            button4.Name = "button4";
-            button4.Size = new Size(36, 32);
-            button4.TabIndex = 11;
-            button4.UseVisualStyleBackColor = false;
-            button4.Click += button4_Click;
-            // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(324, 8);
+            label2.Location = new Point(261, 6);
             label2.Name = "label2";
             label2.Size = new Size(51, 19);
             label2.TabIndex = 10;
@@ -260,29 +241,16 @@
             // 
             // txtProcurarEmail
             // 
-            txtProcurarEmail.Location = new Point(324, 32);
+            txtProcurarEmail.Location = new Point(261, 28);
             txtProcurarEmail.Name = "txtProcurarEmail";
             txtProcurarEmail.Size = new Size(175, 23);
             txtProcurarEmail.TabIndex = 9;
-            // 
-            // button3
-            // 
-            button3.BackColor = SystemColors.Control;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.Image = (Image)resources.GetObject("button3.Image");
-            button3.Location = new Point(282, 30);
-            button3.Name = "button3";
-            button3.Size = new Size(36, 25);
-            button3.TabIndex = 8;
-            button3.UseVisualStyleBackColor = false;
-            button3.Click += button3_Click;
             // 
             // CPF
             // 
             CPF.AutoSize = true;
             CPF.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            CPF.Location = new Point(193, 8);
+            CPF.Location = new Point(157, 8);
             CPF.Name = "CPF";
             CPF.Size = new Size(34, 19);
             CPF.TabIndex = 7;
@@ -290,7 +258,7 @@
             // 
             // procurarCpf
             // 
-            procurarCpf.Location = new Point(193, 30);
+            procurarCpf.Location = new Point(157, 28);
             procurarCpf.Mask = "000,000,000-00";
             procurarCpf.Name = "procurarCpf";
             procurarCpf.Size = new Size(83, 23);
@@ -320,19 +288,6 @@
             panel3.Size = new Size(809, 69);
             panel3.TabIndex = 7;
             // 
-            // button5
-            // 
-            button5.BackColor = SystemColors.Control;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.Image = (Image)resources.GetObject("button5.Image");
-            button5.Location = new Point(688, 26);
-            button5.Name = "button5";
-            button5.Size = new Size(36, 32);
-            button5.TabIndex = 14;
-            button5.UseVisualStyleBackColor = false;
-            button5.Click += button5_Click;
-            // 
             // FormListagemVenda
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -356,17 +311,15 @@
         private DataGridView TabelaVenda;
         private BindingSource vendaBindingSource;
         private Label label1;
-        private Button button1;
+        private Button AoClicarNoBotaoFiltrar;
         private Button button2;
         private Panel panel1;
         private Panel panel2;
         private Panel panel3;
         private Label label2;
         private TextBox txtProcurarEmail;
-        private Button button3;
         private Label CPF;
         private TextBox txtProcurarNome;
-        private Button button4;
         private MaskedTextBox procurarCpf;
         private Label label3;
         private MaskedTextBox procurarData;
@@ -379,6 +332,5 @@
         private DataGridViewTextBoxColumn dataDeCompraDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valorTotalDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn pagoDataGridViewCheckBoxColumn;
-        private Button button5;
     }
 }
