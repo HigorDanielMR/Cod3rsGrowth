@@ -43,12 +43,18 @@
             pagoDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             vendaBindingSource = new BindingSource(components);
             label1 = new Label();
-            txtProcurar = new TextBox();
             button1 = new Button();
             button2 = new Button();
             panel1 = new Panel();
+            button4 = new Button();
+            label2 = new Label();
+            txtProcurarEmail = new TextBox();
+            button3 = new Button();
+            CPF = new Label();
+            txtProcurarNome = new TextBox();
             panel2 = new Panel();
             panel3 = new Panel();
+            procurarCpf = new MaskedTextBox();
             ((System.ComponentModel.ISupportInitialize)TabelaVenda).BeginInit();
             ((System.ComponentModel.ISupportInitialize)vendaBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -151,23 +157,13 @@
             label1.TabIndex = 1;
             label1.Text = "Nome";
             // 
-            // txtProcurar
-            // 
-            txtProcurar.Anchor = AnchorStyles.Left | AnchorStyles.Right;
-            txtProcurar.Font = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            txtProcurar.Location = new Point(11, 30);
-            txtProcurar.MaxLength = 100;
-            txtProcurar.Name = "txtProcurar";
-            txtProcurar.Size = new Size(171, 25);
-            txtProcurar.TabIndex = 2;
-            // 
             // button1
             // 
             button1.BackColor = SystemColors.Control;
             button1.FlatAppearance.BorderSize = 0;
             button1.FlatStyle = FlatStyle.Flat;
             button1.Image = (Image)resources.GetObject("button1.Image");
-            button1.Location = new Point(188, 15);
+            button1.Location = new Point(151, 19);
             button1.Name = "button1";
             button1.Size = new Size(36, 38);
             button1.TabIndex = 3;
@@ -179,9 +175,9 @@
             button2.FlatAppearance.BorderSize = 0;
             button2.FlatStyle = FlatStyle.Flat;
             button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.Location = new Point(591, 15);
+            button2.Location = new Point(764, 19);
             button2.Name = "button2";
-            button2.Size = new Size(36, 32);
+            button2.Size = new Size(36, 38);
             button2.TabIndex = 4;
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
@@ -189,7 +185,13 @@
             // panel1
             // 
             panel1.Anchor = AnchorStyles.None;
-            panel1.Controls.Add(txtProcurar);
+            panel1.Controls.Add(button4);
+            panel1.Controls.Add(label2);
+            panel1.Controls.Add(txtProcurarEmail);
+            panel1.Controls.Add(button3);
+            panel1.Controls.Add(CPF);
+            panel1.Controls.Add(procurarCpf);
+            panel1.Controls.Add(txtProcurarNome);
             panel1.Controls.Add(button2);
             panel1.Controls.Add(label1);
             panel1.Controls.Add(button1);
@@ -198,6 +200,66 @@
             panel1.Name = "panel1";
             panel1.Size = new Size(811, 60);
             panel1.TabIndex = 5;
+            // 
+            // button4
+            // 
+            button4.BackColor = SystemColors.Control;
+            button4.FlatAppearance.BorderSize = 0;
+            button4.FlatStyle = FlatStyle.Flat;
+            button4.Image = (Image)resources.GetObject("button4.Image");
+            button4.Location = new Point(571, 24);
+            button4.Name = "button4";
+            button4.Size = new Size(36, 32);
+            button4.TabIndex = 11;
+            button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label2.Location = new Point(390, 8);
+            label2.Name = "label2";
+            label2.Size = new Size(51, 19);
+            label2.TabIndex = 10;
+            label2.Text = "E-mail";
+            // 
+            // txtProcurarEmail
+            // 
+            txtProcurarEmail.Location = new Point(390, 30);
+            txtProcurarEmail.Name = "txtProcurarEmail";
+            txtProcurarEmail.Size = new Size(175, 23);
+            txtProcurarEmail.TabIndex = 9;
+            // 
+            // button3
+            // 
+            button3.BackColor = SystemColors.Control;
+            button3.FlatAppearance.BorderSize = 0;
+            button3.FlatStyle = FlatStyle.Flat;
+            button3.Image = (Image)resources.GetObject("button3.Image");
+            button3.Location = new Point(326, 26);
+            button3.Name = "button3";
+            button3.Size = new Size(36, 25);
+            button3.TabIndex = 8;
+            button3.UseVisualStyleBackColor = false;
+            button3.Click += button3_Click;
+            // 
+            // CPF
+            // 
+            CPF.AutoSize = true;
+            CPF.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            CPF.Location = new Point(220, 8);
+            CPF.Name = "CPF";
+            CPF.Size = new Size(34, 19);
+            CPF.TabIndex = 7;
+            CPF.Text = "CPF";
+            // 
+            // txtProcurarNome
+            // 
+            txtProcurarNome.Location = new Point(11, 28);
+            txtProcurarNome.Name = "txtProcurarNome";
+            txtProcurarNome.Size = new Size(134, 23);
+            txtProcurarNome.TabIndex = 5;
             // 
             // panel2
             // 
@@ -211,10 +273,18 @@
             // panel3
             // 
             panel3.BackColor = SystemColors.ButtonHighlight;
-            panel3.Location = new Point(1, 380);
+            panel3.Location = new Point(0, 380);
             panel3.Name = "panel3";
             panel3.Size = new Size(809, 69);
             panel3.TabIndex = 7;
+            // 
+            // procurarCpf
+            // 
+            procurarCpf.Location = new Point(220, 28);
+            procurarCpf.Mask = "000,000,000-00";
+            procurarCpf.Name = "procurarCpf";
+            procurarCpf.Size = new Size(100, 23);
+            procurarCpf.TabIndex = 6;
             // 
             // FormListagemVenda
             // 
@@ -239,7 +309,6 @@
         private DataGridView TabelaVenda;
         private BindingSource vendaBindingSource;
         private Label label1;
-        private TextBox txtProcurar;
         private Button button1;
         private Button button2;
         private Panel panel1;
@@ -253,5 +322,12 @@
         private DataGridViewTextBoxColumn dataDeCompraDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valorTotalDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn pagoDataGridViewCheckBoxColumn;
+        private Label label2;
+        private TextBox txtProcurarEmail;
+        private Button button3;
+        private Label CPF;
+        private TextBox txtProcurarNome;
+        private Button button4;
+        private MaskedTextBox procurarCpf;
     }
 }

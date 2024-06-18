@@ -22,15 +22,13 @@ namespace Cod3rsGrowth.Forms
 
         private void button1_Click(object sender, EventArgs e)
         {
-            if (txtProcurar.Text == "")
+            if (txtProcurarNome.Text == "")
             {
-                _filtro = null;
-
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
             }
             else
             {
-                _filtro.Nome = txtProcurar.Text;
+                _filtro.Nome = txtProcurarNome.Text;
 
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
             }
@@ -38,9 +36,44 @@ namespace Cod3rsGrowth.Forms
 
         private void button2_Click(object sender, EventArgs e)
         {
-            _filtro.Nome = null;
+            if(_filtro.Nome != null)
+                _filtro.Nome = null;
+
+            if(_filtro.Cpf != null)
+                _filtro.Cpf = null;
+
+            if (_filtro.Email!= null)
+                _filtro.Email = null;
 
             TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            if (procurarCpf.Text == "")
+            {
+                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
+            }
+            else
+            {
+                _filtro.Cpf = procurarCpf.Text;
+
+                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
+            }
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            if (txtProcurarEmail.Text == "")
+            {
+                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
+            }
+            else
+            {
+                _filtro.Email = txtProcurarEmail.Text;
+
+                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtro);
+            }
         }
     }
 }
