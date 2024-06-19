@@ -1,5 +1,6 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
 using Microsoft.IdentityModel.Tokens;
@@ -11,13 +12,19 @@ namespace Cod3rsGrowth.forms
     {
 
         private ServicoCarro _servicoCarro;
+        private ServicoVenda _servicoVenda;
         private ValidacoesCarro _validacoesCarro;
-        private FiltroCarro _filtro = new FiltroCarro();
+        private ValidacoesVenda _validacoesVenda;
+        private FiltroCarro _filtroCarro = new FiltroCarro();
+        private FiltroVenda _filtroVenda = new FiltroVenda();
 
-        public FormListagemCarro(ServicoCarro servicoCarro, ValidacoesCarro validations)
+        public FormListagemCarro(ServicoCarro servicoCarro, ValidacoesCarro validacoesCarro, ValidacoesVenda validacoesVenda, ServicoVenda servicoVenda)
         {
-            _validacoesCarro = validations;
+            _validacoesCarro = validacoesCarro;
             _servicoCarro = servicoCarro;
+
+            _validacoesVenda = validacoesVenda;
+            _servicoVenda = servicoVenda;
 
             InitializeComponent();
 
@@ -30,58 +37,112 @@ namespace Cod3rsGrowth.forms
 
         private void FormListagem_Load(object sender, EventArgs e)
         {
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
+            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
+            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             try
             {
-                if(selecionarMarca != null && selecionarMarca.SelectedItem != null)
+                if (selecionarMarca != null && selecionarMarca.SelectedItem != null)
                 {
                     var indexDesejado = selecionarMarca.SelectedIndex;
-                    _filtro.Marca = (Marcas)indexDesejado;
+                    _filtroCarro.Marca = (Marcas)indexDesejado;
                 }
 
                 if (!txtProcurar.Text.IsNullOrEmpty())
                 {
-                    _filtro.Modelo = txtProcurar.Text;
+                    _filtroCarro.Modelo = txtProcurar.Text;
                 }
-                if(selecionarCor != null && selecionarCor.SelectedItem != null)
+                if (selecionarCor != null && selecionarCor.SelectedItem != null)
                 {
                     var indexdesejado = (Cores)selecionarCor.SelectedIndex;
-                    _filtro.Cor = indexdesejado;
+                    _filtroCarro.Cor = indexdesejado;
                 }
             }
-            
-            catch(Exception ex)
+
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
             }
-            
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
+
+            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            if (_filtro.Marca != null)
+            if (_filtroCarro.Marca != null)
             {
-                _filtro.Marca = null;
+                _filtroCarro.Marca = null;
             }
-            if (_filtro.Modelo != null)
+            if (_filtroCarro.Modelo != null)
             {
-                _filtro.Modelo = null;
+                _filtroCarro.Modelo = null;
             }
-            if (_filtro.Cor != null)
+            if (_filtroCarro.Cor != null)
             {
-                _filtro.Cor = null;
+                _filtroCarro.Cor = null;
             }
 
             txtProcurar.Clear();
             selecionarCor.SelectedItem = null;
             selecionarMarca.SelectedItem = null;
 
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtro);
+            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
+        }
+
+        private void AoClicarNoBotaoFiltrarNaTabelaVenda_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (!txtProcurarNome.Text.IsNullOrEmpty())
+                {
+                    _filtroVenda.Nome = txtProcurarNome.Text;
+                }
+
+                if (!procurarData.Text.IsNullOrEmpty() && procurarData.Text != "  /  /")
+                {
+                    _filtroVenda.DataDeCompra = DateTime.Parse(procurarData.Text);
+                }
+
+                if (!txtProcurarEmail.Text.IsNullOrEmpty())
+                {
+                    _filtroVenda.Email = txtProcurarEmail.Text;
+                }
+
+                if (!procurarCpf.Text.IsNullOrEmpty() && procurarCpf.Text != "   .   .   -")
+                {
+                    _filtroVenda.Cpf = procurarCpf.Text;
+                }
+
+                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
+
+        private void AoCLicarNoBotaoLimparFIltroDaTabelaVenda_Click(object sender, EventArgs e)
+        {
+            if (_filtroVenda.Nome != null)
+                _filtroVenda.Nome = null;
+            txtProcurarNome.Clear();
+
+            if (_filtroVenda.Cpf != null)
+                _filtroVenda.Cpf = null;
+            procurarCpf.Clear();
+
+            if (_filtroVenda.Email != null)
+                _filtroVenda.Email = null;
+            txtProcurarEmail.Clear();
+
+            if (_filtroVenda.DataDeCompra != null)
+                _filtroVenda.DataDeCompra = null;
+            procurarData.Clear();
+
+            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
         }
     }
 }

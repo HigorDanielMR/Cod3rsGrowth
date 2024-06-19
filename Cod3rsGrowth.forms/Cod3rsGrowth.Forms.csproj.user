@@ -4,8 +4,5 @@
     <Compile Update="FormListagemCarro.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Update="FormListagemVenda.cs">
-      <SubType>Form</SubType>
-    </Compile>
   </ItemGroup>
 </Project>
