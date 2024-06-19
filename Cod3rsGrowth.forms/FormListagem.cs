@@ -8,7 +8,7 @@ using System.Data;
 
 namespace Cod3rsGrowth.forms
 {
-    public partial class FormListagemCarro : Form
+    public partial class FormListagem : Form
     {
 
         private ServicoCarro _servicoCarro;
@@ -18,7 +18,7 @@ namespace Cod3rsGrowth.forms
         private FiltroCarro _filtroCarro = new FiltroCarro();
         private FiltroVenda _filtroVenda = new FiltroVenda();
 
-        public FormListagemCarro(ServicoCarro servicoCarro, ValidacoesCarro validacoesCarro, ValidacoesVenda validacoesVenda, ServicoVenda servicoVenda)
+        public FormListagem(ServicoCarro servicoCarro, ValidacoesCarro validacoesCarro, ValidacoesVenda validacoesVenda, ServicoVenda servicoVenda)
         {
             _validacoesCarro = validacoesCarro;
             _servicoCarro = servicoCarro;

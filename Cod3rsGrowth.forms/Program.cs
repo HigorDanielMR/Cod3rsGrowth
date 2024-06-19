@@ -23,7 +23,7 @@ namespace Cod3rsGrowth.forms
             using (var scope = serviceProvider.CreateScope())
             {
                 UpdateDataBase(scope.ServiceProvider);
-                Application.Run(serviceProvider.GetRequiredService<FormListagemCarro>());
+                Application.Run(serviceProvider.GetRequiredService<FormListagem>());
             }
         }
 
@@ -45,7 +45,7 @@ namespace Cod3rsGrowth.forms
                 .AddTransient<ValidacoesVenda>()
                 .AddTransient<IRepositorioCarro, RepositorioCarro>()
                 .AddTransient<IRepositorioVenda, RepositorioVenda>()
-                .AddTransient<FormListagemCarro>()
+                .AddTransient<FormListagem>()
 
                 .BuildServiceProvider(false);
         }

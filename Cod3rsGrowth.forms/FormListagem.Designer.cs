@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.forms
 {
-    partial class FormListagemCarro
+    partial class FormListagem
     {
         /// <summary>
         ///  Required designer variable.
