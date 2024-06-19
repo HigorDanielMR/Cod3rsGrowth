@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             TabelaCarro = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -39,9 +39,9 @@
             flexDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             carroBindingSource = new BindingSource(components);
             label2 = new Label();
-            AoClicarNoBotaoFiltrar = new Button();
+            AoClicarNoBotaoFiltrarDaTabelaCarro = new Button();
             selecionarMarca = new ComboBox();
-            button2 = new Button();
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro = new Button();
             panel1 = new Panel();
             panel7 = new Panel();
             label1 = new Label();
@@ -97,7 +97,10 @@
             // 
             // TabelaCarro
             // 
-            TabelaCarro.AllowUserToOrderColumns = true;
+            TabelaCarro.AllowUserToAddRows = false;
+            TabelaCarro.AllowUserToDeleteRows = false;
+            TabelaCarro.AllowUserToResizeColumns = false;
+            TabelaCarro.AllowUserToResizeRows = false;
             TabelaCarro.AutoGenerateColumns = false;
             TabelaCarro.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             TabelaCarro.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
@@ -144,9 +147,9 @@
             // valorDoVeiculoDataGridViewTextBoxColumn
             // 
             valorDoVeiculoDataGridViewTextBoxColumn.DataPropertyName = "ValorDoVeiculo";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             valorDoVeiculoDataGridViewTextBoxColumn.HeaderText = "Preço";
             valorDoVeiculoDataGridViewTextBoxColumn.Name = "valorDoVeiculoDataGridViewTextBoxColumn";
             valorDoVeiculoDataGridViewTextBoxColumn.Width = 62;
@@ -172,19 +175,19 @@
             label2.TabIndex = 1;
             label2.Text = "Marca";
             // 
-            // AoClicarNoBotaoFiltrar
+            // AoClicarNoBotaoFiltrarDaTabelaCarro
             // 
-            AoClicarNoBotaoFiltrar.BackColor = SystemColors.ButtonHighlight;
-            AoClicarNoBotaoFiltrar.FlatAppearance.BorderColor = Color.Black;
-            AoClicarNoBotaoFiltrar.FlatAppearance.MouseOverBackColor = Color.Snow;
-            AoClicarNoBotaoFiltrar.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoFiltrar.Location = new Point(3, 20);
-            AoClicarNoBotaoFiltrar.Name = "AoClicarNoBotaoFiltrar";
-            AoClicarNoBotaoFiltrar.Size = new Size(55, 40);
-            AoClicarNoBotaoFiltrar.TabIndex = 3;
-            AoClicarNoBotaoFiltrar.Text = "Filtrar";
-            AoClicarNoBotaoFiltrar.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoFiltrar.Click += button1_Click;
+            AoClicarNoBotaoFiltrarDaTabelaCarro.BackColor = SystemColors.ButtonHighlight;
+            AoClicarNoBotaoFiltrarDaTabelaCarro.FlatAppearance.BorderColor = Color.Black;
+            AoClicarNoBotaoFiltrarDaTabelaCarro.FlatAppearance.MouseOverBackColor = Color.Snow;
+            AoClicarNoBotaoFiltrarDaTabelaCarro.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoFiltrarDaTabelaCarro.Location = new Point(3, 20);
+            AoClicarNoBotaoFiltrarDaTabelaCarro.Name = "AoClicarNoBotaoFiltrarDaTabelaCarro";
+            AoClicarNoBotaoFiltrarDaTabelaCarro.Size = new Size(55, 40);
+            AoClicarNoBotaoFiltrarDaTabelaCarro.TabIndex = 3;
+            AoClicarNoBotaoFiltrarDaTabelaCarro.Text = "Filtrar";
+            AoClicarNoBotaoFiltrarDaTabelaCarro.UseVisualStyleBackColor = false;
+            AoClicarNoBotaoFiltrarDaTabelaCarro.Click += AoClicarNoBotaoFiltrarDaTabelaCarro_Click;
             // 
             // selecionarMarca
             // 
@@ -195,17 +198,17 @@
             selecionarMarca.Size = new Size(131, 23);
             selecionarMarca.TabIndex = 4;
             // 
-            // button2
+            // AoClicarNoBotaoLimparFiltroDaTabelaCarro
             // 
-            button2.FlatAppearance.BorderColor = Color.Black;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.Location = new Point(80, 20);
-            button2.Name = "button2";
-            button2.Size = new Size(55, 40);
-            button2.TabIndex = 5;
-            button2.Text = "Limpar Filtro";
-            button2.UseVisualStyleBackColor = true;
-            button2.Click += button2_Click;
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.FlatAppearance.BorderColor = Color.Black;
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Location = new Point(80, 20);
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Name = "AoClicarNoBotaoLimparFiltroDaTabelaCarro";
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Size = new Size(55, 40);
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.TabIndex = 5;
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Text = "Limpar Filtro";
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.UseVisualStyleBackColor = true;
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Click += AoClicarNoBotaoLimparFiltroDaTabelaCarro_Click;
             // 
             // panel1
             // 
@@ -225,8 +228,8 @@
             // 
             // panel7
             // 
-            panel7.Controls.Add(button2);
-            panel7.Controls.Add(AoClicarNoBotaoFiltrar);
+            panel7.Controls.Add(AoClicarNoBotaoLimparFiltroDaTabelaCarro);
+            panel7.Controls.Add(AoClicarNoBotaoFiltrarDaTabelaCarro);
             panel7.Dock = DockStyle.Right;
             panel7.Location = new Point(703, 0);
             panel7.Name = "panel7";
@@ -454,7 +457,10 @@
             // 
             // TabelaVenda
             // 
-            TabelaVenda.AllowUserToOrderColumns = true;
+            TabelaVenda.AllowUserToAddRows = false;
+            TabelaVenda.AllowUserToDeleteRows = false;
+            TabelaVenda.AllowUserToResizeColumns = false;
+            TabelaVenda.AllowUserToResizeRows = false;
             TabelaVenda.AutoGenerateColumns = false;
             TabelaVenda.BackgroundColor = SystemColors.Control;
             TabelaVenda.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
@@ -463,6 +469,7 @@
             TabelaVenda.Dock = DockStyle.Fill;
             TabelaVenda.Location = new Point(0, 0);
             TabelaVenda.Name = "TabelaVenda";
+            TabelaVenda.ReadOnly = true;
             TabelaVenda.RowTemplate.Height = 25;
             TabelaVenda.Size = new Size(861, 293);
             TabelaVenda.TabIndex = 1;
@@ -473,6 +480,7 @@
             idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
             idDataGridViewTextBoxColumn1.HeaderText = "Id";
             idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
+            idDataGridViewTextBoxColumn1.ReadOnly = true;
             idDataGridViewTextBoxColumn1.Width = 42;
             // 
             // nomeDataGridViewTextBoxColumn
@@ -481,6 +489,7 @@
             nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
             nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
             nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
+            nomeDataGridViewTextBoxColumn.ReadOnly = true;
             // 
             // cpfDataGridViewTextBoxColumn
             // 
@@ -488,6 +497,7 @@
             cpfDataGridViewTextBoxColumn.DataPropertyName = "Cpf";
             cpfDataGridViewTextBoxColumn.HeaderText = "Cpf";
             cpfDataGridViewTextBoxColumn.Name = "cpfDataGridViewTextBoxColumn";
+            cpfDataGridViewTextBoxColumn.ReadOnly = true;
             cpfDataGridViewTextBoxColumn.Width = 51;
             // 
             // emailDataGridViewTextBoxColumn
@@ -496,6 +506,7 @@
             emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
             emailDataGridViewTextBoxColumn.HeaderText = "Email";
             emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
+            emailDataGridViewTextBoxColumn.ReadOnly = true;
             emailDataGridViewTextBoxColumn.Width = 61;
             // 
             // telefoneDataGridViewTextBoxColumn
@@ -504,6 +515,7 @@
             telefoneDataGridViewTextBoxColumn.DataPropertyName = "Telefone";
             telefoneDataGridViewTextBoxColumn.HeaderText = "Telefone";
             telefoneDataGridViewTextBoxColumn.Name = "telefoneDataGridViewTextBoxColumn";
+            telefoneDataGridViewTextBoxColumn.ReadOnly = true;
             telefoneDataGridViewTextBoxColumn.Width = 76;
             // 
             // idDoCarroVendidoDataGridViewTextBoxColumn
@@ -512,6 +524,7 @@
             idDoCarroVendidoDataGridViewTextBoxColumn.DataPropertyName = "IdDoCarroVendido";
             idDoCarroVendidoDataGridViewTextBoxColumn.HeaderText = "Id do carro comprado";
             idDoCarroVendidoDataGridViewTextBoxColumn.Name = "idDoCarroVendidoDataGridViewTextBoxColumn";
+            idDoCarroVendidoDataGridViewTextBoxColumn.ReadOnly = true;
             idDoCarroVendidoDataGridViewTextBoxColumn.Width = 134;
             // 
             // dataDeCompraDataGridViewTextBoxColumn
@@ -520,6 +533,7 @@
             dataDeCompraDataGridViewTextBoxColumn.DataPropertyName = "DataDeCompra";
             dataDeCompraDataGridViewTextBoxColumn.HeaderText = "Data da compra";
             dataDeCompraDataGridViewTextBoxColumn.Name = "dataDeCompraDataGridViewTextBoxColumn";
+            dataDeCompraDataGridViewTextBoxColumn.ReadOnly = true;
             dataDeCompraDataGridViewTextBoxColumn.Width = 106;
             // 
             // valorTotalDataGridViewTextBoxColumn
@@ -528,6 +542,7 @@
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
             valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor total";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
+            valorTotalDataGridViewTextBoxColumn.ReadOnly = true;
             valorTotalDataGridViewTextBoxColumn.Width = 79;
             // 
             // pagoDataGridViewCheckBoxColumn
@@ -536,6 +551,7 @@
             pagoDataGridViewCheckBoxColumn.DataPropertyName = "Pago";
             pagoDataGridViewCheckBoxColumn.HeaderText = "Pago";
             pagoDataGridViewCheckBoxColumn.Name = "pagoDataGridViewCheckBoxColumn";
+            pagoDataGridViewCheckBoxColumn.ReadOnly = true;
             pagoDataGridViewCheckBoxColumn.Width = 40;
             // 
             // vendaBindingSource
@@ -601,9 +617,9 @@
         private DataGridView TabelaCarro;
         private BindingSource carroBindingSource;
         private Label label2;
-        private Button AoClicarNoBotaoFiltrar;
+        private Button AoClicarNoBotaoFiltrarDaTabelaCarro;
         private ComboBox selecionarMarca;
-        private Button button2;
+        private Button AoClicarNoBotaoLimparFiltroDaTabelaCarro;
         private Panel panel1;
         private Panel panel2;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;

@@ -1,10 +1,8 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
 using Microsoft.IdentityModel.Tokens;
-using System.Data;
 
 namespace Cod3rsGrowth.forms
 {
@@ -41,7 +39,7 @@ namespace Cod3rsGrowth.forms
             TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoFiltrarDaTabelaCarro_Click(object sender, EventArgs e)
         {
             try
             {
@@ -70,26 +68,33 @@ namespace Cod3rsGrowth.forms
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoLimparFiltroDaTabelaCarro_Click(object sender, EventArgs e)
         {
-            if (_filtroCarro.Marca != null)
+            try
             {
-                _filtroCarro.Marca = null;
-            }
-            if (_filtroCarro.Modelo != null)
-            {
-                _filtroCarro.Modelo = null;
-            }
-            if (_filtroCarro.Cor != null)
-            {
-                _filtroCarro.Cor = null;
-            }
+                if (_filtroCarro.Marca != null)
+                {
+                    _filtroCarro.Marca = null;
+                }
+                if (_filtroCarro.Modelo != null)
+                {
+                    _filtroCarro.Modelo = null;
+                }
+                if (_filtroCarro.Cor != null)
+                {
+                    _filtroCarro.Cor = null;
+                }
 
-            txtProcurar.Clear();
-            selecionarCor.SelectedItem = null;
-            selecionarMarca.SelectedItem = null;
+                txtProcurar.Clear();
+                selecionarCor.SelectedItem = null;
+                selecionarMarca.SelectedItem = null;
 
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
+                TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
         }
 
         private void AoClicarNoBotaoFiltrarNaTabelaVenda_Click(object sender, EventArgs e)
@@ -126,23 +131,30 @@ namespace Cod3rsGrowth.forms
 
         private void AoCLicarNoBotaoLimparFIltroDaTabelaVenda_Click(object sender, EventArgs e)
         {
-            if (_filtroVenda.Nome != null)
-                _filtroVenda.Nome = null;
-            txtProcurarNome.Clear();
+            try
+            {
+                if (_filtroVenda.Nome != null)
+                    _filtroVenda.Nome = null;
+                txtProcurarNome.Clear();
 
-            if (_filtroVenda.Cpf != null)
-                _filtroVenda.Cpf = null;
-            procurarCpf.Clear();
+                if (_filtroVenda.Cpf != null)
+                    _filtroVenda.Cpf = null;
+                procurarCpf.Clear();
 
-            if (_filtroVenda.Email != null)
-                _filtroVenda.Email = null;
-            txtProcurarEmail.Clear();
+                if (_filtroVenda.Email != null)
+                    _filtroVenda.Email = null;
+                txtProcurarEmail.Clear();
 
-            if (_filtroVenda.DataDeCompra != null)
-                _filtroVenda.DataDeCompra = null;
-            procurarData.Clear();
+                if (_filtroVenda.DataDeCompra != null)
+                    _filtroVenda.DataDeCompra = null;
+                procurarData.Clear();
 
-            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
+                TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
         }
     }
 }
