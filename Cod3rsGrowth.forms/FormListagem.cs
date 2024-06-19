@@ -1,7 +1,9 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Forms;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.forms
@@ -91,7 +93,7 @@ namespace Cod3rsGrowth.forms
 
                 TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
             }
@@ -155,6 +157,17 @@ namespace Cod3rsGrowth.forms
             {
                 MessageBox.Show($"{ex.Message}");
             }
+        }
+
+        private void AoClicarNoBotaoCriarVenda_Click(object sender, EventArgs e)
+        {
+            var formulario = new CriandoVenda(_validacoesVenda, _servicoVenda, _servicoCarro);
+            formulario.Show();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            TabelaVenda.DataSource = _servicoVenda.ObterTodos( _filtroVenda);
         }
     }
 }

@@ -34,7 +34,6 @@ namespace Cod3rsGrowth.Dominio.CriacaoDasTabelas
         {
             Delete.Table("Carro");
             Delete.Table("Venda");
-            Delete.Table("VendasCarros");
         }
     }
 }

@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.forms
             }
         }
 
-        private static ServiceProvider CreateServices()
+        public static ServiceProvider CreateServices()
         {
             var conectionstring = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 
@@ -46,6 +46,7 @@ namespace Cod3rsGrowth.forms
                 .AddTransient<IRepositorioCarro, RepositorioCarro>()
                 .AddTransient<IRepositorioVenda, RepositorioVenda>()
                 .AddTransient<FormListagem>()
+                .AddTransient<CriandoVenda>()
 
                 .BuildServiceProvider(false);
         }
