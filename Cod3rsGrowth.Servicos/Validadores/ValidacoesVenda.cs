@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using Cod3rsGrowth.Infra.Interfaces;
 using System.Text.RegularExpressions;
 using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Servicos.Validadores
 {

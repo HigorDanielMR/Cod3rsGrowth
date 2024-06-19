@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
-using Cod3rsGrowth.Infra.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
 using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Servicos.Servicos
 {
@@ -9,6 +9,7 @@ namespace Cod3rsGrowth.Servicos.Servicos
     {
         private readonly IRepositorioVenda _repositorioVenda;
         private ValidacoesVenda _validadorVenda;
+
         public ServicoVenda(IRepositorioVenda repositorioVenda, ValidacoesVenda validacaoVenda)
         {
             _repositorioVenda = repositorioVenda;
