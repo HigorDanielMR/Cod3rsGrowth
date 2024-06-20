@@ -165,9 +165,20 @@ namespace Cod3rsGrowth.forms
             formulario.Show();
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoAtualizarListaCarro_Click(object sender, EventArgs e)
         {
-            TabelaVenda.DataSource = _servicoVenda.ObterTodos( _filtroVenda);
+            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
+        }
+
+        private void AoClicarNoBotaoCriarCarro_Click(object sender, EventArgs e)
+        {
+            var formulario = new CriandoCarro(_servicoCarro, _validacoesCarro);
+            formulario.Show();
+        }
+
+        private void AoClicarNoBotaoAtualizarListaVenda_Click(object sender, EventArgs e)
+        {
+            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
         }
     }
 }

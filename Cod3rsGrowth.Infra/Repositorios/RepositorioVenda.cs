@@ -49,7 +49,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public Venda Criar(Venda venda)
         {
             int idDaVendaNoBanco = _connection.InsertWithInt32Identity(venda);
-
             return ObterPorId(idDaVendaNoBanco);
         }
 

@@ -48,8 +48,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            var idDoCarroNoBanco = _connection.Insert(carro);
-            return ObterPorId(carro.Id);
+            var idDoCarroNoBanco = _connection.InsertWithInt32Identity(carro);
+            return ObterPorId(idDoCarroNoBanco);
         }
 
         public Carro Editar(Carro carroAtualizado)

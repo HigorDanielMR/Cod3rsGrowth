@@ -55,6 +55,7 @@ namespace Cod3rsGrowth.Forms
             {
                 _servicoVenda.Criar(venda);
                 MessageBox.Show("Venda criada com sucesso.");
+                this.Close();
             }
             catch (ValidationException ex)
             {
