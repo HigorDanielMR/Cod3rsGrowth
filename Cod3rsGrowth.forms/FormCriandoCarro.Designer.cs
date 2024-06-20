@@ -38,9 +38,7 @@
             selecionarFlex = new CheckBox();
             AoClicarNoBotaoCriarCarro = new Button();
             AoClicarNoBotaoCancelarCarro = new Button();
-            label5 = new Label();
-            selecionarValorDoVeiculo = new NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)selecionarValorDoVeiculo).BeginInit();
+            selecionarValorDoVeiculo = new TextBox();
             SuspendLayout();
             // 
             // txtModelo
@@ -120,9 +118,9 @@
             // AoClicarNoBotaoCriarCarro
             // 
             AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarCarro.Location = new Point(12, 403);
+            AoClicarNoBotaoCriarCarro.Location = new Point(12, 410);
             AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
-            AoClicarNoBotaoCriarCarro.Size = new Size(78, 35);
+            AoClicarNoBotaoCriarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoCriarCarro.TabIndex = 9;
             AoClicarNoBotaoCriarCarro.Text = "Adicionar carro";
             AoClicarNoBotaoCriarCarro.UseVisualStyleBackColor = true;
@@ -131,34 +129,23 @@
             // AoClicarNoBotaoCancelarCarro
             // 
             AoClicarNoBotaoCancelarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCancelarCarro.Location = new Point(324, 403);
+            AoClicarNoBotaoCancelarCarro.Location = new Point(308, 410);
             AoClicarNoBotaoCancelarCarro.Name = "AoClicarNoBotaoCancelarCarro";
-            AoClicarNoBotaoCancelarCarro.Size = new Size(78, 35);
+            AoClicarNoBotaoCancelarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoCancelarCarro.TabIndex = 10;
             AoClicarNoBotaoCancelarCarro.Text = "Cancelar";
             AoClicarNoBotaoCancelarCarro.UseVisualStyleBackColor = true;
             AoClicarNoBotaoCancelarCarro.Click += AoClicarNoBotaoCancelarCarro_Click;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(5, 160);
-            label5.Name = "label5";
-            label5.Size = new Size(22, 15);
-            label5.TabIndex = 11;
-            label5.Text = "R$";
-            // 
             // selecionarValorDoVeiculo
             // 
-            selecionarValorDoVeiculo.DecimalPlaces = 2;
-            selecionarValorDoVeiculo.Increment = new decimal(new int[] { 0, 0, 0, 0 });
-            selecionarValorDoVeiculo.Location = new Point(33, 158);
-            selecionarValorDoVeiculo.Maximum = new decimal(new int[] { -1530494976, 232830, 0, 0 });
+            selecionarValorDoVeiculo.AutoCompleteCustomSource.AddRange(new string[] { "R$   " });
+            selecionarValorDoVeiculo.Location = new Point(12, 158);
             selecionarValorDoVeiculo.Name = "selecionarValorDoVeiculo";
-            selecionarValorDoVeiculo.Size = new Size(175, 23);
-            selecionarValorDoVeiculo.TabIndex = 12;
-            selecionarValorDoVeiculo.ThousandsSeparator = true;
+            selecionarValorDoVeiculo.PlaceholderText = "R$";
+            selecionarValorDoVeiculo.Size = new Size(196, 23);
+            selecionarValorDoVeiculo.TabIndex = 13;
+            selecionarValorDoVeiculo.KeyPress += selecionarValorDoVeiculo_KeyPress;
             // 
             // CriandoCarro
             // 
@@ -166,7 +153,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(414, 450);
             Controls.Add(selecionarValorDoVeiculo);
-            Controls.Add(label5);
             Controls.Add(AoClicarNoBotaoCancelarCarro);
             Controls.Add(AoClicarNoBotaoCriarCarro);
             Controls.Add(selecionarFlex);
@@ -180,7 +166,6 @@
             Name = "CriandoCarro";
             Text = "Form1";
             Load += FormCriandoCarro_Load;
-            ((System.ComponentModel.ISupportInitialize)selecionarValorDoVeiculo).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -198,7 +183,6 @@
         private Button AoClicarNoBotaoCriarCarro;
         private Button AoClicarNoBotaoCancelarCarro;
         private NumericUpDown numericUpDown1;
-        private Label label5;
-        private NumericUpDown selecionarValorDoVeiculo;
+        private TextBox selecionarValorDoVeiculo;
     }
 }

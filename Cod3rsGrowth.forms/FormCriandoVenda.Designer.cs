@@ -153,7 +153,7 @@
             // AoClicarNoBotaoCriarDeCriarVenda
             // 
             AoClicarNoBotaoCriarDeCriarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarDeCriarVenda.Location = new Point(12, 410);
+            AoClicarNoBotaoCriarDeCriarVenda.Location = new Point(12, 411);
             AoClicarNoBotaoCriarDeCriarVenda.Name = "AoClicarNoBotaoCriarDeCriarVenda";
             AoClicarNoBotaoCriarDeCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCriarDeCriarVenda.TabIndex = 16;
@@ -164,9 +164,9 @@
             // AoClicarNoBotaoCancelarDeCriarVenda
             // 
             AoClicarNoBotaoCancelarDeCriarVenda.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(297, 410);
+            AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(284, 410);
             AoClicarNoBotaoCancelarDeCriarVenda.Name = "AoClicarNoBotaoCancelarDeCriarVenda";
-            AoClicarNoBotaoCancelarDeCriarVenda.Size = new Size(81, 28);
+            AoClicarNoBotaoCancelarDeCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCancelarDeCriarVenda.TabIndex = 17;
             AoClicarNoBotaoCancelarDeCriarVenda.Text = "Cancelar";
             AoClicarNoBotaoCancelarDeCriarVenda.UseVisualStyleBackColor = true;

@@ -4,6 +4,7 @@ using Cod3rsGrowth.forms;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
 using FluentValidation;
+using System.Globalization;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -36,7 +37,7 @@ namespace Cod3rsGrowth.Forms
                 Modelo = txtModelo.Text,
                 Marca = (Marcas)selecionarMarca.SelectedIndex,
                 Cor = (Cores)selecionarCor.SelectedIndex,
-                ValorDoVeiculo = selecionarValorDoVeiculo.Value,
+                ValorDoVeiculo = decimal.Parse(selecionarValorDoVeiculo.Text),
                 Flex = selecionarFlex.Checked
             };
 
@@ -56,5 +57,19 @@ namespace Cod3rsGrowth.Forms
         {
             this.Close();
         }
+
+        private void selecionarValorDoVeiculo_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '.')
+            {
+                e.Handled = true;
+            }
+
+            if ((e.KeyChar == ',' || e.KeyChar == '.') && (sender as TextBox).Text.Contains(","))
+            {
+                e.Handled = true;
+            }
+        }
+
     }
 }

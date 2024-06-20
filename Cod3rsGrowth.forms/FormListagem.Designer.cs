@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             TabelaCarro = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -152,9 +152,9 @@
             // valorDoVeiculoDataGridViewTextBoxColumn
             // 
             valorDoVeiculoDataGridViewTextBoxColumn.DataPropertyName = "ValorDoVeiculo";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             valorDoVeiculoDataGridViewTextBoxColumn.HeaderText = "Preço";
             valorDoVeiculoDataGridViewTextBoxColumn.Name = "valorDoVeiculoDataGridViewTextBoxColumn";
             valorDoVeiculoDataGridViewTextBoxColumn.Width = 62;
@@ -331,9 +331,9 @@
             AoClicarNoBotaoCriarVenda.FlatAppearance.BorderColor = Color.Black;
             AoClicarNoBotaoCriarVenda.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCriarVenda.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarVenda.Location = new Point(633, 27);
+            AoClicarNoBotaoCriarVenda.Location = new Point(743, 29);
             AoClicarNoBotaoCriarVenda.Name = "AoClicarNoBotaoCriarVenda";
-            AoClicarNoBotaoCriarVenda.Size = new Size(95, 30);
+            AoClicarNoBotaoCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCriarVenda.TabIndex = 10;
             AoClicarNoBotaoCriarVenda.Text = "Criar";
             AoClicarNoBotaoCriarVenda.UseVisualStyleBackColor = false;
@@ -560,9 +560,9 @@
             // 
             valorTotalDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor total";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
             valorTotalDataGridViewTextBoxColumn.ReadOnly = true;
@@ -608,9 +608,9 @@
             AoClicarNoBotaoCriarCarro.FlatAppearance.BorderColor = Color.Black;
             AoClicarNoBotaoCriarCarro.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarCarro.Location = new Point(635, 31);
+            AoClicarNoBotaoCriarCarro.Location = new Point(744, 35);
             AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
-            AoClicarNoBotaoCriarCarro.Size = new Size(95, 30);
+            AoClicarNoBotaoCriarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoCriarCarro.TabIndex = 0;
             AoClicarNoBotaoCriarCarro.Text = "Criar";
             AoClicarNoBotaoCriarCarro.UseVisualStyleBackColor = true;
