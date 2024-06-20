@@ -59,7 +59,7 @@ namespace Cod3rsGrowth.Forms
             }
             catch (ValidationException ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erros");
             }
         }
 

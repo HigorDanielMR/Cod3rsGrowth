@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             TabelaCarro = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -152,9 +152,9 @@
             // valorDoVeiculoDataGridViewTextBoxColumn
             // 
             valorDoVeiculoDataGridViewTextBoxColumn.DataPropertyName = "ValorDoVeiculo";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
             valorDoVeiculoDataGridViewTextBoxColumn.HeaderText = "Preço";
             valorDoVeiculoDataGridViewTextBoxColumn.Name = "valorDoVeiculoDataGridViewTextBoxColumn";
             valorDoVeiculoDataGridViewTextBoxColumn.Width = 62;
@@ -174,7 +174,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(23, 15);
+            label2.Location = new Point(14, 15);
             label2.Name = "label2";
             label2.Size = new Size(51, 19);
             label2.TabIndex = 1;
@@ -198,7 +198,7 @@
             // 
             selecionarMarca.FormattingEnabled = true;
             selecionarMarca.Items.AddRange(new object[] { "  " });
-            selecionarMarca.Location = new Point(23, 37);
+            selecionarMarca.Location = new Point(14, 37);
             selecionarMarca.Name = "selecionarMarca";
             selecionarMarca.Size = new Size(131, 23);
             selecionarMarca.TabIndex = 4;
@@ -245,7 +245,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(342, 15);
+            label1.Location = new Point(333, 15);
             label1.Name = "label1";
             label1.Size = new Size(33, 19);
             label1.TabIndex = 9;
@@ -256,7 +256,7 @@
             // 
             selecionarCor.FormattingEnabled = true;
             selecionarCor.Items.AddRange(new object[] { " " });
-            selecionarCor.Location = new Point(342, 37);
+            selecionarCor.Location = new Point(333, 37);
             selecionarCor.Name = "selecionarCor";
             selecionarCor.Size = new Size(128, 23);
             selecionarCor.TabIndex = 8;
@@ -265,7 +265,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(160, 15);
+            label3.Location = new Point(151, 15);
             label3.Name = "label3";
             label3.Size = new Size(50, 19);
             label3.TabIndex = 7;
@@ -273,7 +273,7 @@
             // 
             // txtProcurar
             // 
-            txtProcurar.Location = new Point(160, 37);
+            txtProcurar.Location = new Point(151, 37);
             txtProcurar.Name = "txtProcurar";
             txtProcurar.Size = new Size(176, 23);
             txtProcurar.TabIndex = 6;
@@ -330,7 +330,8 @@
             AoClicarNoBotaoCriarVenda.BackColor = Color.White;
             AoClicarNoBotaoCriarVenda.FlatAppearance.BorderColor = Color.Black;
             AoClicarNoBotaoCriarVenda.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoCriarVenda.Location = new Point(600, 17);
+            AoClicarNoBotaoCriarVenda.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            AoClicarNoBotaoCriarVenda.Location = new Point(633, 27);
             AoClicarNoBotaoCriarVenda.Name = "AoClicarNoBotaoCriarVenda";
             AoClicarNoBotaoCriarVenda.Size = new Size(95, 30);
             AoClicarNoBotaoCriarVenda.TabIndex = 10;
@@ -372,7 +373,7 @@
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.BackColor = Color.Transparent;
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.FlatAppearance.BorderColor = Color.Black;
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.FlatStyle = FlatStyle.Flat;
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Location = new Point(78, 20);
+            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Location = new Point(79, 20);
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Name = "AoCLicarNoBotaoLimparFIltroDaTabelaVenda";
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Size = new Size(55, 40);
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.TabIndex = 4;
@@ -559,9 +560,9 @@
             // 
             valorTotalDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle2.Format = "C2";
-            dataGridViewCellStyle2.NullValue = null;
-            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor total";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
             valorTotalDataGridViewTextBoxColumn.ReadOnly = true;
@@ -607,7 +608,7 @@
             AoClicarNoBotaoCriarCarro.FlatAppearance.BorderColor = Color.Black;
             AoClicarNoBotaoCriarCarro.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarCarro.Location = new Point(628, 22);
+            AoClicarNoBotaoCriarCarro.Location = new Point(635, 31);
             AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
             AoClicarNoBotaoCriarCarro.Size = new Size(95, 30);
             AoClicarNoBotaoCriarCarro.TabIndex = 0;
