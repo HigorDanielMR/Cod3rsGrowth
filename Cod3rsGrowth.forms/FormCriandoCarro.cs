@@ -1,5 +1,6 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.forms;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
 using FluentValidation;
@@ -10,6 +11,8 @@ namespace Cod3rsGrowth.Forms
     {
         private ServicoCarro _servicoCarro;
         private ValidacoesCarro _validacoes;
+        private FiltroCarro _filtroCarro;
+
         public CriandoCarro(ServicoCarro servico, ValidacoesCarro validacoes)
         {
             _servicoCarro = servico;
@@ -42,6 +45,7 @@ namespace Cod3rsGrowth.Forms
                 _servicoCarro.Criar(carro);
                 MessageBox.Show("Carro criado com sucesso!");
                 this.Close();
+
             }
             catch (ValidationException ex)
             {

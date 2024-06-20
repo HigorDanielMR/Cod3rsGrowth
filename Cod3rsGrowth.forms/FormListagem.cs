@@ -37,8 +37,7 @@ namespace Cod3rsGrowth.forms
 
         private void FormListagem_Load(object sender, EventArgs e)
         {
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
-            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
+            CarregarListasAtualizadas();
         }
 
         private void AoClicarNoBotaoFiltrarDaTabelaCarro_Click(object sender, EventArgs e)
@@ -122,7 +121,6 @@ namespace Cod3rsGrowth.forms
                 {
                     _filtroVenda.Cpf = procurarCpf.Text;
                 }
-
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
             }
             catch (Exception ex)
@@ -162,7 +160,8 @@ namespace Cod3rsGrowth.forms
         private void AoClicarNoBotaoCriarVenda_Click(object sender, EventArgs e)
         {
             var formulario = new CriandoVenda(_validacoesVenda, _servicoVenda, _servicoCarro);
-            formulario.Show();
+            formulario.ShowDialog();
+            CarregarListasAtualizadas();
         }
 
         private void AoClicarNoBotaoAtualizarListaCarro_Click(object sender, EventArgs e)
@@ -173,12 +172,14 @@ namespace Cod3rsGrowth.forms
         private void AoClicarNoBotaoCriarCarro_Click(object sender, EventArgs e)
         {
             var formulario = new CriandoCarro(_servicoCarro, _validacoesCarro);
-            formulario.Show();
+            formulario.ShowDialog();
+            CarregarListasAtualizadas();
         }
 
-        private void AoClicarNoBotaoAtualizarListaVenda_Click(object sender, EventArgs e)
+        private void CarregarListasAtualizadas()
         {
             TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
+            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
         }
     }
 }

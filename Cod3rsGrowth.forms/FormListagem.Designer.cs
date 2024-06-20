@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             TabelaCarro = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -54,7 +54,6 @@
             tabelaDeControleVenda = new TabControl();
             tabPage1 = new TabPage();
             panel5 = new Panel();
-            AoClicarNoBotaoAtualizarListaVenda = new Button();
             AoClicarNoBotaoCriarVenda = new Button();
             panel4 = new Panel();
             panel8 = new Panel();
@@ -82,7 +81,6 @@
             vendaBindingSource = new BindingSource(components);
             tabPage2 = new TabPage();
             panel6 = new Panel();
-            AoClicarNoBotaoAtualizarListaCarro = new Button();
             AoClicarNoBotaoCriarCarro = new Button();
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).BeginInit();
@@ -154,9 +152,9 @@
             // valorDoVeiculoDataGridViewTextBoxColumn
             // 
             valorDoVeiculoDataGridViewTextBoxColumn.DataPropertyName = "ValorDoVeiculo";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
             valorDoVeiculoDataGridViewTextBoxColumn.HeaderText = "Preço";
             valorDoVeiculoDataGridViewTextBoxColumn.Name = "valorDoVeiculoDataGridViewTextBoxColumn";
             valorDoVeiculoDataGridViewTextBoxColumn.Width = 62;
@@ -320,23 +318,12 @@
             // panel5
             // 
             panel5.BackColor = SystemColors.ButtonHighlight;
-            panel5.Controls.Add(AoClicarNoBotaoAtualizarListaVenda);
             panel5.Controls.Add(AoClicarNoBotaoCriarVenda);
             panel5.Dock = DockStyle.Bottom;
             panel5.Location = new Point(3, 371);
             panel5.Name = "panel5";
             panel5.Size = new Size(858, 62);
             panel5.TabIndex = 9;
-            // 
-            // AoClicarNoBotaoAtualizarListaVenda
-            // 
-            AoClicarNoBotaoAtualizarListaVenda.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoAtualizarListaVenda.Location = new Point(17, 21);
-            AoClicarNoBotaoAtualizarListaVenda.Name = "AoClicarNoBotaoAtualizarListaVenda";
-            AoClicarNoBotaoAtualizarListaVenda.Size = new Size(95, 30);
-            AoClicarNoBotaoAtualizarListaVenda.TabIndex = 0;
-            AoClicarNoBotaoAtualizarListaVenda.Text = "Atualizar Lista";
-            AoClicarNoBotaoAtualizarListaVenda.Click += AoClicarNoBotaoAtualizarListaVenda_Click;
             // 
             // AoClicarNoBotaoCriarVenda
             // 
@@ -572,9 +559,9 @@
             // 
             valorTotalDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle4.Format = "C2";
-            dataGridViewCellStyle4.NullValue = null;
-            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle2.Format = "C2";
+            dataGridViewCellStyle2.NullValue = null;
+            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
             valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor total";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
             valorTotalDataGridViewTextBoxColumn.ReadOnly = true;
@@ -608,26 +595,12 @@
             // 
             // panel6
             // 
-            panel6.Controls.Add(AoClicarNoBotaoAtualizarListaCarro);
             panel6.Controls.Add(AoClicarNoBotaoCriarCarro);
             panel6.Dock = DockStyle.Bottom;
             panel6.Location = new Point(3, 367);
             panel6.Name = "panel6";
             panel6.Size = new Size(858, 66);
             panel6.TabIndex = 8;
-            // 
-            // AoClicarNoBotaoAtualizarListaCarro
-            // 
-            AoClicarNoBotaoAtualizarListaCarro.FlatAppearance.BorderColor = Color.Black;
-            AoClicarNoBotaoAtualizarListaCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoAtualizarListaCarro.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoAtualizarListaCarro.Location = new Point(23, 22);
-            AoClicarNoBotaoAtualizarListaCarro.Name = "AoClicarNoBotaoAtualizarListaCarro";
-            AoClicarNoBotaoAtualizarListaCarro.Size = new Size(95, 30);
-            AoClicarNoBotaoAtualizarListaCarro.TabIndex = 1;
-            AoClicarNoBotaoAtualizarListaCarro.Text = "Atualizar Lista";
-            AoClicarNoBotaoAtualizarListaCarro.UseVisualStyleBackColor = true;
-            AoClicarNoBotaoAtualizarListaCarro.Click += AoClicarNoBotaoAtualizarListaCarro_Click;
             // 
             // AoClicarNoBotaoCriarCarro
             // 
@@ -719,7 +692,6 @@
         private Panel panel7;
         private Panel panel8;
         private Button AoClicarNoBotaoCriarVenda;
-        private Button AoClicarNoBotaoAtualizarListaVenda;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cpfDataGridViewTextBoxColumn;
@@ -729,7 +701,6 @@
         private DataGridViewTextBoxColumn dataDeCompraDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valorTotalDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn pagoDataGridViewCheckBoxColumn;
-        private Button AoClicarNoBotaoAtualizarListaCarro;
         private Button AoClicarNoBotaoCriarCarro;
     }
 }
