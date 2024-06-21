@@ -125,6 +125,7 @@
             AoClicarNoBotaoAdicionarCarro.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoAdicionarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AoClicarNoBotaoAdicionarCarro.Location = new Point(11, 26);
+            AoClicarNoBotaoAdicionarCarro.MaximumSize = new Size(94, 28);
             AoClicarNoBotaoAdicionarCarro.Name = "AoClicarNoBotaoAdicionarCarro";
             AoClicarNoBotaoAdicionarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoAdicionarCarro.TabIndex = 9;
@@ -138,6 +139,7 @@
             AoClicarNoBotaoCancelarCarro.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCancelarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AoClicarNoBotaoCancelarCarro.Location = new Point(307, 26);
+            AoClicarNoBotaoCancelarCarro.MaximumSize = new Size(94, 28);
             AoClicarNoBotaoCancelarCarro.Name = "AoClicarNoBotaoCancelarCarro";
             AoClicarNoBotaoCancelarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoCancelarCarro.TabIndex = 10;

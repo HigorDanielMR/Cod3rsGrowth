@@ -160,6 +160,7 @@
             AoClicarNoBotaoCriarDeCriarVenda.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCriarDeCriarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AoClicarNoBotaoCriarDeCriarVenda.Location = new Point(12, 23);
+            AoClicarNoBotaoCriarDeCriarVenda.MaximumSize = new Size(94, 28);
             AoClicarNoBotaoCriarDeCriarVenda.Name = "AoClicarNoBotaoCriarDeCriarVenda";
             AoClicarNoBotaoCriarDeCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCriarDeCriarVenda.TabIndex = 16;
@@ -173,6 +174,7 @@
             AoClicarNoBotaoCancelarDeCriarVenda.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCancelarDeCriarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(308, 23);
+            AoClicarNoBotaoCancelarDeCriarVenda.MaximumSize = new Size(94, 28);
             AoClicarNoBotaoCancelarDeCriarVenda.Name = "AoClicarNoBotaoCancelarDeCriarVenda";
             AoClicarNoBotaoCancelarDeCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCancelarDeCriarVenda.TabIndex = 17;
