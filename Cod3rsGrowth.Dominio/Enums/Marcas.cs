@@ -10,6 +10,24 @@
         Peugeot,
         Mercedes,
         Bmw,
-        Mitsubishi
+        Mitsubishi,
+        Ford,
+        Audi,
+        Nissan,
+        Kia,
+        Fiat,
+        Renault,
+        Subaru,
+        Volvo,
+        Jaguar,
+        LandRover,
+        Porsche,
+        Tesla,
+        Maserati,
+        Ferrari,
+        Lamborghini,
+        Bentley,
+        RollsRoyce,
+        Bugatti
     }
 }

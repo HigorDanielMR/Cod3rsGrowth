@@ -41,13 +41,13 @@ namespace Cod3rsGrowth.forms
 
                 .AddTransient<ServicoCarro>()
                 .AddTransient<ServicoVenda>()
+                .AddTransient<FormListagem>()
+                .AddTransient<CriandoVenda>()
+                .AddTransient<CriandoCarro>()
                 .AddTransient<ValidacoesCarro>()
                 .AddTransient<ValidacoesVenda>()
                 .AddTransient<IRepositorioCarro, RepositorioCarro>()
                 .AddTransient<IRepositorioVenda, RepositorioVenda>()
-                .AddTransient<FormListagem>()
-                .AddTransient<CriandoVenda>()
-                .AddTransient<CriandoCarro>()
 
                 .BuildServiceProvider(false);
         }

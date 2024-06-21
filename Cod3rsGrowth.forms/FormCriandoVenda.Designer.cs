@@ -42,11 +42,15 @@
             label6 = new Label();
             AoClicarNoBotaoCriarDeCriarVenda = new Button();
             AoClicarNoBotaoCancelarDeCriarVenda = new Button();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // txtNome
             // 
-            txtNome.Location = new Point(12, 33);
+            txtNome.Location = new Point(12, 37);
             txtNome.Name = "txtNome";
             txtNome.Size = new Size(366, 23);
             txtNome.TabIndex = 1;
@@ -55,7 +59,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(12, 59);
+            label2.Location = new Point(12, 74);
             label2.Name = "label2";
             label2.Size = new Size(34, 19);
             label2.TabIndex = 2;
@@ -63,7 +67,7 @@
             // 
             // txtCpf
             // 
-            txtCpf.Location = new Point(12, 81);
+            txtCpf.Location = new Point(12, 96);
             txtCpf.Mask = "000,000,000-00";
             txtCpf.Name = "txtCpf";
             txtCpf.Size = new Size(176, 23);
@@ -73,7 +77,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(194, 59);
+            label3.Location = new Point(203, 74);
             label3.Name = "label3";
             label3.Size = new Size(66, 19);
             label3.TabIndex = 4;
@@ -81,7 +85,7 @@
             // 
             // txtTelefone
             // 
-            txtTelefone.Location = new Point(194, 81);
+            txtTelefone.Location = new Point(203, 96);
             txtTelefone.Mask = "(99) 00000-0000";
             txtTelefone.Name = "txtTelefone";
             txtTelefone.Size = new Size(184, 23);
@@ -89,23 +93,23 @@
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(12, 135);
+            txtEmail.Location = new Point(12, 156);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(366, 23);
+            txtEmail.Size = new Size(390, 23);
             txtEmail.TabIndex = 7;
             // 
             // txtDataDeCompra
             // 
-            txtDataDeCompra.Location = new Point(12, 191);
+            txtDataDeCompra.Location = new Point(12, 214);
             txtDataDeCompra.Name = "txtDataDeCompra";
-            txtDataDeCompra.Size = new Size(366, 23);
+            txtDataDeCompra.Size = new Size(390, 23);
             txtDataDeCompra.TabIndex = 10;
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(12, 169);
+            label1.Location = new Point(12, 192);
             label1.Name = "label1";
             label1.Size = new Size(117, 19);
             label1.TabIndex = 11;
@@ -115,7 +119,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(12, 9);
+            label4.Location = new Point(12, 15);
             label4.Name = "label4";
             label4.Size = new Size(50, 19);
             label4.TabIndex = 12;
@@ -125,7 +129,7 @@
             // 
             label5.AutoSize = true;
             label5.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label5.Location = new Point(12, 113);
+            label5.Location = new Point(12, 134);
             label5.Name = "label5";
             label5.Size = new Size(51, 19);
             label5.TabIndex = 13;
@@ -134,9 +138,9 @@
             // selecionandoCarro
             // 
             selecionandoCarro.FormattingEnabled = true;
-            selecionandoCarro.Location = new Point(12, 259);
+            selecionandoCarro.Location = new Point(12, 273);
             selecionandoCarro.Name = "selecionandoCarro";
-            selecionandoCarro.Size = new Size(366, 23);
+            selecionandoCarro.Size = new Size(390, 23);
             selecionandoCarro.TabIndex = 14;
             selecionandoCarro.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
             // 
@@ -144,7 +148,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(12, 237);
+            label6.Location = new Point(12, 251);
             label6.Name = "label6";
             label6.Size = new Size(123, 19);
             label6.TabIndex = 15;
@@ -153,7 +157,7 @@
             // AoClicarNoBotaoCriarDeCriarVenda
             // 
             AoClicarNoBotaoCriarDeCriarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarDeCriarVenda.Location = new Point(12, 411);
+            AoClicarNoBotaoCriarDeCriarVenda.Location = new Point(12, 23);
             AoClicarNoBotaoCriarDeCriarVenda.Name = "AoClicarNoBotaoCriarDeCriarVenda";
             AoClicarNoBotaoCriarDeCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCriarDeCriarVenda.TabIndex = 16;
@@ -164,7 +168,7 @@
             // AoClicarNoBotaoCancelarDeCriarVenda
             // 
             AoClicarNoBotaoCancelarDeCriarVenda.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(284, 410);
+            AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(308, 22);
             AoClicarNoBotaoCancelarDeCriarVenda.Name = "AoClicarNoBotaoCancelarDeCriarVenda";
             AoClicarNoBotaoCancelarDeCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCancelarDeCriarVenda.TabIndex = 17;
@@ -172,29 +176,49 @@
             AoClicarNoBotaoCancelarDeCriarVenda.UseVisualStyleBackColor = true;
             AoClicarNoBotaoCancelarDeCriarVenda.Click += AoClicarNoBotaoCancelarDeCriarVenda_Click;
             // 
+            // panel1
+            // 
+            panel1.Controls.Add(AoClicarNoBotaoCriarDeCriarVenda);
+            panel1.Controls.Add(AoClicarNoBotaoCancelarDeCriarVenda);
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(0, 386);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(414, 63);
+            panel1.TabIndex = 18;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(selecionandoCarro);
+            panel2.Controls.Add(label6);
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(label5);
+            panel2.Controls.Add(txtNome);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(txtTelefone);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(txtDataDeCompra);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(txtCpf);
+            panel2.Controls.Add(txtEmail);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(414, 386);
+            panel2.TabIndex = 18;
+            // 
             // CriandoVenda
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(390, 450);
-            Controls.Add(AoClicarNoBotaoCancelarDeCriarVenda);
-            Controls.Add(AoClicarNoBotaoCriarDeCriarVenda);
-            Controls.Add(label6);
-            Controls.Add(selecionandoCarro);
-            Controls.Add(label5);
-            Controls.Add(label4);
-            Controls.Add(label1);
-            Controls.Add(txtDataDeCompra);
-            Controls.Add(txtEmail);
-            Controls.Add(txtTelefone);
-            Controls.Add(label3);
-            Controls.Add(txtCpf);
-            Controls.Add(label2);
-            Controls.Add(txtNome);
+            ClientSize = new Size(414, 449);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Name = "CriandoVenda";
             Text = "Cadastro de Venda";
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -212,5 +236,7 @@
         private Label label6;
         private Button AoClicarNoBotaoCriarDeCriarVenda;
         private Button AoClicarNoBotaoCancelarDeCriarVenda;
+        private Panel panel1;
+        private Panel panel2;
     }
 }

@@ -39,11 +39,15 @@
             AoClicarNoBotaoCriarCarro = new Button();
             AoClicarNoBotaoCancelarCarro = new Button();
             selecionarValorDoVeiculo = new TextBox();
+            panel1 = new Panel();
+            panel2 = new Panel();
+            panel1.SuspendLayout();
+            panel2.SuspendLayout();
             SuspendLayout();
             // 
             // txtModelo
             // 
-            txtModelo.Location = new Point(12, 33);
+            txtModelo.Location = new Point(12, 40);
             txtModelo.Name = "txtModelo";
             txtModelo.Size = new Size(390, 23);
             txtModelo.TabIndex = 0;
@@ -52,7 +56,7 @@
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(12, 11);
+            label1.Location = new Point(12, 18);
             label1.Name = "label1";
             label1.Size = new Size(61, 19);
             label1.TabIndex = 1;
@@ -61,7 +65,7 @@
             // selecionarMarca
             // 
             selecionarMarca.FormattingEnabled = true;
-            selecionarMarca.Location = new Point(12, 99);
+            selecionarMarca.Location = new Point(11, 97);
             selecionarMarca.Name = "selecionarMarca";
             selecionarMarca.Size = new Size(196, 23);
             selecionarMarca.TabIndex = 2;
@@ -70,7 +74,7 @@
             // 
             label2.AutoSize = true;
             label2.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label2.Location = new Point(12, 77);
+            label2.Location = new Point(11, 75);
             label2.Name = "label2";
             label2.Size = new Size(51, 19);
             label2.TabIndex = 3;
@@ -79,7 +83,7 @@
             // selecionarCor
             // 
             selecionarCor.FormattingEnabled = true;
-            selecionarCor.Location = new Point(214, 99);
+            selecionarCor.Location = new Point(213, 97);
             selecionarCor.Name = "selecionarCor";
             selecionarCor.Size = new Size(188, 23);
             selecionarCor.TabIndex = 4;
@@ -88,7 +92,7 @@
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(214, 77);
+            label3.Location = new Point(213, 75);
             label3.Name = "label3";
             label3.Size = new Size(33, 19);
             label3.TabIndex = 5;
@@ -98,7 +102,7 @@
             // 
             label4.AutoSize = true;
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label4.Location = new Point(13, 136);
+            label4.Location = new Point(11, 135);
             label4.Name = "label4";
             label4.Size = new Size(118, 19);
             label4.TabIndex = 7;
@@ -108,7 +112,7 @@
             // 
             selecionarFlex.AutoSize = true;
             selecionarFlex.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            selecionarFlex.Location = new Point(314, 160);
+            selecionarFlex.Location = new Point(282, 156);
             selecionarFlex.Name = "selecionarFlex";
             selecionarFlex.Size = new Size(55, 23);
             selecionarFlex.TabIndex = 8;
@@ -118,7 +122,7 @@
             // AoClicarNoBotaoCriarCarro
             // 
             AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarCarro.Location = new Point(12, 410);
+            AoClicarNoBotaoCriarCarro.Location = new Point(11, 26);
             AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
             AoClicarNoBotaoCriarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoCriarCarro.TabIndex = 9;
@@ -129,7 +133,7 @@
             // AoClicarNoBotaoCancelarCarro
             // 
             AoClicarNoBotaoCancelarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCancelarCarro.Location = new Point(308, 410);
+            AoClicarNoBotaoCancelarCarro.Location = new Point(307, 26);
             AoClicarNoBotaoCancelarCarro.Name = "AoClicarNoBotaoCancelarCarro";
             AoClicarNoBotaoCancelarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoCancelarCarro.TabIndex = 10;
@@ -140,34 +144,55 @@
             // selecionarValorDoVeiculo
             // 
             selecionarValorDoVeiculo.AutoCompleteCustomSource.AddRange(new string[] { "R$   " });
-            selecionarValorDoVeiculo.Location = new Point(12, 158);
+            selecionarValorDoVeiculo.Location = new Point(11, 157);
             selecionarValorDoVeiculo.Name = "selecionarValorDoVeiculo";
             selecionarValorDoVeiculo.PlaceholderText = "R$";
             selecionarValorDoVeiculo.Size = new Size(196, 23);
             selecionarValorDoVeiculo.TabIndex = 13;
+            selecionarValorDoVeiculo.TextChanged += selecionarValorDoVeiculo_TextChanged;
             selecionarValorDoVeiculo.KeyPress += selecionarValorDoVeiculo_KeyPress;
+            // 
+            // panel1
+            // 
+            panel1.Controls.Add(AoClicarNoBotaoCriarCarro);
+            panel1.Controls.Add(AoClicarNoBotaoCancelarCarro);
+            panel1.Dock = DockStyle.Bottom;
+            panel1.Location = new Point(0, 386);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(414, 63);
+            panel1.TabIndex = 14;
+            // 
+            // panel2
+            // 
+            panel2.Controls.Add(selecionarValorDoVeiculo);
+            panel2.Controls.Add(label4);
+            panel2.Controls.Add(label1);
+            panel2.Controls.Add(label3);
+            panel2.Controls.Add(txtModelo);
+            panel2.Controls.Add(selecionarFlex);
+            panel2.Controls.Add(label2);
+            panel2.Controls.Add(selecionarCor);
+            panel2.Controls.Add(selecionarMarca);
+            panel2.Dock = DockStyle.Fill;
+            panel2.Location = new Point(0, 0);
+            panel2.Name = "panel2";
+            panel2.Size = new Size(414, 386);
+            panel2.TabIndex = 15;
             // 
             // CriandoCarro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(414, 450);
-            Controls.Add(selecionarValorDoVeiculo);
-            Controls.Add(AoClicarNoBotaoCancelarCarro);
-            Controls.Add(AoClicarNoBotaoCriarCarro);
-            Controls.Add(selecionarFlex);
-            Controls.Add(label4);
-            Controls.Add(label3);
-            Controls.Add(selecionarCor);
-            Controls.Add(label2);
-            Controls.Add(selecionarMarca);
-            Controls.Add(label1);
-            Controls.Add(txtModelo);
+            ClientSize = new Size(414, 449);
+            Controls.Add(panel2);
+            Controls.Add(panel1);
             Name = "CriandoCarro";
-            Text = "Form1";
+            Text = "Cadatro de Carro";
             Load += FormCriandoCarro_Load;
+            panel1.ResumeLayout(false);
+            panel2.ResumeLayout(false);
+            panel2.PerformLayout();
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
@@ -184,5 +209,7 @@
         private Button AoClicarNoBotaoCancelarCarro;
         private NumericUpDown numericUpDown1;
         private TextBox selecionarValorDoVeiculo;
+        private Panel panel1;
+        private Panel panel2;
     }
 }

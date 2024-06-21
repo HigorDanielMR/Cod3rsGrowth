@@ -1,8 +1,8 @@
 ﻿using LinqToDB;
 using LinqToDB.Data;
 using System.Configuration;
-using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Interfaces;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -57,13 +57,13 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var vendaDesejada = TabelaVenda.FirstOrDefault(venda => venda.Id == vendaAtualizada.Id);
             if (vendaDesejada != null)
             {
-                vendaDesejada.Nome = vendaAtualizada.Nome;
                 vendaDesejada.Cpf = vendaAtualizada.Cpf;
-                vendaDesejada.Email = vendaAtualizada.Email;
-                vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
                 vendaDesejada.Pago = vendaAtualizada.Pago;
+                vendaDesejada.Nome = vendaAtualizada.Nome;
+                vendaDesejada.Email = vendaAtualizada.Email;
                 vendaDesejada.Telefone = vendaAtualizada.Telefone;
                 vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
+                vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
 
                 _connection.Update(vendaDesejada);
             }

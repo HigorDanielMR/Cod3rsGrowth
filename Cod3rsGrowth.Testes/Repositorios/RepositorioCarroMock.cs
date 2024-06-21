@@ -4,10 +4,10 @@ using Cod3rsGrowth.Infra.Repositorios;
 
 namespace Cod3rsGrowth.Testes.Repositorios
 {
-    public class RepositorioCarroMock : RepositorioCarro
+    public class RepositorioCarroMock : IRepositorioCarro
     {
-        private List<Carro> _repositorioCarro = ListaSingleton.Instance.RepositorioCarro;
         private int _novoId = 1;
+        private List<Carro> _repositorioCarro = ListaSingleton.Instance.RepositorioCarro;
         public List<Carro> ObterTodos(FiltroCarro carro)
         {
             return _repositorioCarro;
@@ -31,10 +31,10 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             var carroDesejado = ObterPorId(carroAtualizado.Id);
 
-            carroDesejado.Modelo = carroAtualizado.Modelo;
             carroDesejado.Cor = carroAtualizado.Cor;
             carroDesejado.Flex = carroAtualizado.Flex;
             carroDesejado.Marca = carroAtualizado.Marca;
+            carroDesejado.Modelo = carroAtualizado.Modelo;
             carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
             return carroDesejado;

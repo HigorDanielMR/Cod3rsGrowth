@@ -1,19 +1,19 @@
 ﻿using FluentValidation;
-using Cod3rsGrowth.Servicos.Validadores;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.Servicos.Servicos
 {
     public class ServicoVenda
     {
-        private readonly IRepositorioVenda _repositorioVenda;
         private ValidacoesVenda _validadorVenda;
+        private readonly IRepositorioVenda _repositorioVenda;
 
         public ServicoVenda(IRepositorioVenda repositorioVenda, ValidacoesVenda validacaoVenda)
         {
-            _repositorioVenda = repositorioVenda;
             _validadorVenda = validacaoVenda;
+            _repositorioVenda = repositorioVenda;
         }
 
         public List<Venda> ObterTodos(FiltroVenda venda)

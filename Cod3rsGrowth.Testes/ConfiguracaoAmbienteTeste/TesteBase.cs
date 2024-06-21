@@ -14,7 +14,6 @@ namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
         {
             var servicos = new ServiceCollection();
             ModuloDeInjecaoInfra.BindService(servicos);
-            //ModuloDeInjecao.BindService(servicos);
             return servicos;
         }
 

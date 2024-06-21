@@ -58,10 +58,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (carroDesejado != null)
             {
-                carroDesejado.Modelo = carroAtualizado.Modelo;
                 carroDesejado.Cor = carroAtualizado.Cor;
                 carroDesejado.Flex = carroAtualizado.Flex;
                 carroDesejado.Marca = carroAtualizado.Marca;
+                carroDesejado.Modelo = carroAtualizado.Modelo;
                 carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
                 _connection.Update(carroAtualizado);

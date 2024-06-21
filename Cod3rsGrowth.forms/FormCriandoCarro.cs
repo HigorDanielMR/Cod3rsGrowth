@@ -1,18 +1,17 @@
-﻿using Cod3rsGrowth.Dominio.Entidades;
+﻿using FluentValidation;
+using System.Globalization;
 using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.forms;
+using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
-using FluentValidation;
-using System.Globalization;
 
 namespace Cod3rsGrowth.Forms
 {
     public partial class CriandoCarro : Form
     {
+        private FiltroCarro _filtroCarro;
         private ServicoCarro _servicoCarro;
         private ValidacoesCarro _validacoes;
-        private FiltroCarro _filtroCarro;
 
         public CriandoCarro(ServicoCarro servico, ValidacoesCarro validacoes)
         {
@@ -35,10 +34,10 @@ namespace Cod3rsGrowth.Forms
             var carro = new Carro
             {
                 Modelo = txtModelo.Text,
-                Marca = (Marcas)selecionarMarca.SelectedIndex,
+                Flex = selecionarFlex.Checked,
                 Cor = (Cores)selecionarCor.SelectedIndex,
-                ValorDoVeiculo = decimal.Parse(selecionarValorDoVeiculo.Text),
-                Flex = selecionarFlex.Checked
+                Marca = (Marcas)selecionarMarca.SelectedIndex,
+                ValorDoVeiculo = decimal.Parse(selecionarValorDoVeiculo.Text)
             };
 
             try
@@ -71,5 +70,41 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
+        private void selecionarValorDoVeiculo_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+
+            if (textBox.Text == string.Empty)
+                return;
+
+            int selectionStart = textBox.SelectionStart;
+            int length = textBox.Text.Length;
+
+            string text = textBox.Text.Replace(".", "").Replace(",", "");
+
+            if (!int.TryParse(text, out int value))
+            {
+                MessageBox.Show("Entrada inválida!");
+                textBox.Text = string.Empty;
+                return;
+            }
+
+            textBox.TextChanged -= selecionarValorDoVeiculo_TextChanged;
+
+            string formattedText = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:N2}", value / 100.0);
+
+            textBox.Text = formattedText;
+
+            selectionStart = selectionStart + (textBox.Text.Length - length);
+            if (selectionStart > textBox.Text.Length)
+                selectionStart = textBox.Text.Length;
+            else if (selectionStart < 0)
+                selectionStart = 0;
+
+            textBox.SelectionStart = selectionStart;
+            textBox.TextChanged += selecionarValorDoVeiculo_TextChanged;
+
+
+        }
     }
 }

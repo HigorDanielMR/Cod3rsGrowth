@@ -1,22 +1,22 @@
 ﻿using Xunit;
 using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
-using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
+using Microsoft.Extensions.DependencyInjection;
+using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 
 namespace Cod3rsGrowth.Testes
 {
     public class TesteVenda : TesteBase
     {
-        private ServicoVenda _servicoVenda;
         private List<Venda> _listaMock;
+        private ServicoVenda _servicoVenda;
         private readonly FiltroVenda _venda;
         public TesteVenda()
         {
             CarregarServico();
-            _servicoVenda.ObterTodos(_venda).Clear();
             _listaMock = InicializarDadosMock();
+            _servicoVenda.ObterTodos(_venda).Clear();
         }
         private void CarregarServico()
         {
