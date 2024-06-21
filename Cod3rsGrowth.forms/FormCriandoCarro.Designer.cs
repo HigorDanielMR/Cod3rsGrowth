@@ -112,7 +112,7 @@
             // 
             selecionarFlex.AutoSize = true;
             selecionarFlex.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            selecionarFlex.Location = new Point(282, 156);
+            selecionarFlex.Location = new Point(346, 157);
             selecionarFlex.Name = "selecionarFlex";
             selecionarFlex.Size = new Size(55, 23);
             selecionarFlex.TabIndex = 8;
@@ -162,7 +162,7 @@
             panel1.Controls.Add(AoClicarNoBotaoCriarCarro);
             panel1.Controls.Add(AoClicarNoBotaoCancelarCarro);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 386);
+            panel1.Location = new Point(0, 232);
             panel1.Name = "panel1";
             panel1.Size = new Size(414, 63);
             panel1.TabIndex = 14;
@@ -181,14 +181,14 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(414, 386);
+            panel2.Size = new Size(414, 232);
             panel2.TabIndex = 15;
             // 
             // CriandoCarro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(414, 449);
+            ClientSize = new Size(414, 295);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "CriandoCarro";
