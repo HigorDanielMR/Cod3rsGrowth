@@ -20,6 +20,8 @@ namespace Cod3rsGrowth.Servicos.Validadores
                 .IsInEnum().WithMessage("Essa cor é inválido.");
 
             RuleFor(carro => carro.ValorDoVeiculo)
+                .Cascade(CascadeMode.Stop)
+                .NotEmpty().WithMessage("Campo valor do veiculo esta vazio.")
                 .GreaterThanOrEqualTo(0).WithMessage("O valor do veiculo deve ser maior que zero.");
         }
     }

@@ -52,7 +52,7 @@
             // 
             txtNome.Location = new Point(12, 37);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(366, 23);
+            txtNome.Size = new Size(390, 23);
             txtNome.TabIndex = 1;
             // 
             // label2
@@ -88,7 +88,7 @@
             txtTelefone.Location = new Point(203, 96);
             txtTelefone.Mask = "(99) 00000-0000";
             txtTelefone.Name = "txtTelefone";
-            txtTelefone.Size = new Size(184, 23);
+            txtTelefone.Size = new Size(199, 23);
             txtTelefone.TabIndex = 5;
             // 
             // txtEmail
@@ -156,24 +156,28 @@
             // 
             // AoClicarNoBotaoCriarDeCriarVenda
             // 
+            AoClicarNoBotaoCriarDeCriarVenda.BackColor = Color.DarkGray;
+            AoClicarNoBotaoCriarDeCriarVenda.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCriarDeCriarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AoClicarNoBotaoCriarDeCriarVenda.Location = new Point(12, 23);
             AoClicarNoBotaoCriarDeCriarVenda.Name = "AoClicarNoBotaoCriarDeCriarVenda";
             AoClicarNoBotaoCriarDeCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCriarDeCriarVenda.TabIndex = 16;
-            AoClicarNoBotaoCriarDeCriarVenda.Text = "Criar Venda";
-            AoClicarNoBotaoCriarDeCriarVenda.UseVisualStyleBackColor = true;
+            AoClicarNoBotaoCriarDeCriarVenda.Text = "Adicionar";
+            AoClicarNoBotaoCriarDeCriarVenda.UseVisualStyleBackColor = false;
             AoClicarNoBotaoCriarDeCriarVenda.Click += AoClicarNoBotaoCriarDeCriarVenda_Click;
             // 
             // AoClicarNoBotaoCancelarDeCriarVenda
             // 
-            AoClicarNoBotaoCancelarDeCriarVenda.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(308, 22);
+            AoClicarNoBotaoCancelarDeCriarVenda.BackColor = Color.DarkGray;
+            AoClicarNoBotaoCancelarDeCriarVenda.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoCancelarDeCriarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(308, 23);
             AoClicarNoBotaoCancelarDeCriarVenda.Name = "AoClicarNoBotaoCancelarDeCriarVenda";
             AoClicarNoBotaoCancelarDeCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCancelarDeCriarVenda.TabIndex = 17;
             AoClicarNoBotaoCancelarDeCriarVenda.Text = "Cancelar";
-            AoClicarNoBotaoCancelarDeCriarVenda.UseVisualStyleBackColor = true;
+            AoClicarNoBotaoCancelarDeCriarVenda.UseVisualStyleBackColor = false;
             AoClicarNoBotaoCancelarDeCriarVenda.Click += AoClicarNoBotaoCancelarDeCriarVenda_Click;
             // 
             // panel1

@@ -69,6 +69,10 @@
             label6 = new Label();
             panel3 = new Panel();
             TabelaVenda = new DataGridView();
+            vendaBindingSource = new BindingSource(components);
+            tabPage2 = new TabPage();
+            panel6 = new Panel();
+            AoClicarNoBotaoCriarCarro = new Button();
             idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
             nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             cpfDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -78,10 +82,6 @@
             dataDeCompraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             valorTotalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             pagoDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
-            vendaBindingSource = new BindingSource(components);
-            tabPage2 = new TabPage();
-            panel6 = new Panel();
-            AoClicarNoBotaoCriarCarro = new Button();
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -117,7 +117,7 @@
             TabelaCarro.Location = new Point(0, 0);
             TabelaCarro.Name = "TabelaCarro";
             TabelaCarro.RowTemplate.Height = 25;
-            TabelaCarro.Size = new Size(861, 286);
+            TabelaCarro.Size = new Size(824, 286);
             TabelaCarro.TabIndex = 0;
             // 
             // idDataGridViewTextBoxColumn
@@ -182,13 +182,14 @@
             // 
             // AoClicarNoBotaoFiltrarDaTabelaCarro
             // 
-            AoClicarNoBotaoFiltrarDaTabelaCarro.BackColor = SystemColors.ButtonHighlight;
+            AoClicarNoBotaoFiltrarDaTabelaCarro.BackColor = Color.DarkGray;
             AoClicarNoBotaoFiltrarDaTabelaCarro.FlatAppearance.BorderColor = Color.Black;
             AoClicarNoBotaoFiltrarDaTabelaCarro.FlatAppearance.MouseOverBackColor = Color.Snow;
             AoClicarNoBotaoFiltrarDaTabelaCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoFiltrarDaTabelaCarro.Location = new Point(3, 20);
+            AoClicarNoBotaoFiltrarDaTabelaCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AoClicarNoBotaoFiltrarDaTabelaCarro.Location = new Point(3, 32);
             AoClicarNoBotaoFiltrarDaTabelaCarro.Name = "AoClicarNoBotaoFiltrarDaTabelaCarro";
-            AoClicarNoBotaoFiltrarDaTabelaCarro.Size = new Size(55, 40);
+            AoClicarNoBotaoFiltrarDaTabelaCarro.Size = new Size(94, 28);
             AoClicarNoBotaoFiltrarDaTabelaCarro.TabIndex = 3;
             AoClicarNoBotaoFiltrarDaTabelaCarro.Text = "Filtrar";
             AoClicarNoBotaoFiltrarDaTabelaCarro.UseVisualStyleBackColor = false;
@@ -205,14 +206,16 @@
             // 
             // AoClicarNoBotaoLimparFiltroDaTabelaCarro
             // 
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.BackColor = Color.DarkGray;
             AoClicarNoBotaoLimparFiltroDaTabelaCarro.FlatAppearance.BorderColor = Color.Black;
             AoClicarNoBotaoLimparFiltroDaTabelaCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Location = new Point(80, 20);
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Location = new Point(117, 32);
             AoClicarNoBotaoLimparFiltroDaTabelaCarro.Name = "AoClicarNoBotaoLimparFiltroDaTabelaCarro";
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Size = new Size(55, 40);
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Size = new Size(94, 28);
             AoClicarNoBotaoLimparFiltroDaTabelaCarro.TabIndex = 5;
             AoClicarNoBotaoLimparFiltroDaTabelaCarro.Text = "Limpar Filtro";
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.UseVisualStyleBackColor = true;
+            AoClicarNoBotaoLimparFiltroDaTabelaCarro.UseVisualStyleBackColor = false;
             AoClicarNoBotaoLimparFiltroDaTabelaCarro.Click += AoClicarNoBotaoLimparFiltroDaTabelaCarro_Click;
             // 
             // panel1
@@ -236,9 +239,9 @@
             panel7.Controls.Add(AoClicarNoBotaoLimparFiltroDaTabelaCarro);
             panel7.Controls.Add(AoClicarNoBotaoFiltrarDaTabelaCarro);
             panel7.Dock = DockStyle.Right;
-            panel7.Location = new Point(703, 0);
+            panel7.Location = new Point(627, 0);
             panel7.Name = "panel7";
-            panel7.Size = new Size(155, 70);
+            panel7.Size = new Size(231, 70);
             panel7.TabIndex = 10;
             // 
             // label1
@@ -286,9 +289,9 @@
             // 
             panel2.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel2.Controls.Add(TabelaCarro);
-            panel2.Location = new Point(0, 83);
+            panel2.Location = new Point(17, 83);
             panel2.Name = "panel2";
-            panel2.Size = new Size(861, 286);
+            panel2.Size = new Size(824, 286);
             panel2.TabIndex = 7;
             // 
             // tabelaDeControleVenda
@@ -320,18 +323,18 @@
             panel5.BackColor = SystemColors.ButtonHighlight;
             panel5.Controls.Add(AoClicarNoBotaoCriarVenda);
             panel5.Dock = DockStyle.Bottom;
-            panel5.Location = new Point(3, 371);
+            panel5.Location = new Point(3, 375);
             panel5.Name = "panel5";
-            panel5.Size = new Size(858, 62);
+            panel5.Size = new Size(858, 58);
             panel5.TabIndex = 9;
             // 
             // AoClicarNoBotaoCriarVenda
             // 
-            AoClicarNoBotaoCriarVenda.BackColor = Color.White;
+            AoClicarNoBotaoCriarVenda.BackColor = Color.DarkGray;
             AoClicarNoBotaoCriarVenda.FlatAppearance.BorderColor = Color.Black;
             AoClicarNoBotaoCriarVenda.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCriarVenda.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarVenda.Location = new Point(743, 29);
+            AoClicarNoBotaoCriarVenda.Location = new Point(743, 25);
             AoClicarNoBotaoCriarVenda.Name = "AoClicarNoBotaoCriarVenda";
             AoClicarNoBotaoCriarVenda.Size = new Size(94, 28);
             AoClicarNoBotaoCriarVenda.TabIndex = 10;
@@ -363,19 +366,20 @@
             panel8.Controls.Add(AoCLicarNoBotaoLimparFIltroDaTabelaVenda);
             panel8.Controls.Add(AoClicarNoBotaoFiltrarNaTabelaVenda);
             panel8.Dock = DockStyle.Right;
-            panel8.Location = new Point(703, 0);
+            panel8.Location = new Point(627, 0);
             panel8.Name = "panel8";
-            panel8.Size = new Size(155, 70);
+            panel8.Size = new Size(231, 70);
             panel8.TabIndex = 14;
             // 
             // AoCLicarNoBotaoLimparFIltroDaTabelaVenda
             // 
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.BackColor = Color.Transparent;
+            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.BackColor = Color.DarkGray;
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.FlatAppearance.BorderColor = Color.Black;
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.FlatStyle = FlatStyle.Flat;
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Location = new Point(79, 20);
+            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Location = new Point(116, 33);
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Name = "AoCLicarNoBotaoLimparFIltroDaTabelaVenda";
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Size = new Size(55, 40);
+            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Size = new Size(94, 28);
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.TabIndex = 4;
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Text = "Limpar FIltro";
             AoCLicarNoBotaoLimparFIltroDaTabelaVenda.UseVisualStyleBackColor = false;
@@ -383,13 +387,14 @@
             // 
             // AoClicarNoBotaoFiltrarNaTabelaVenda
             // 
-            AoClicarNoBotaoFiltrarNaTabelaVenda.BackColor = Color.Transparent;
+            AoClicarNoBotaoFiltrarNaTabelaVenda.BackColor = Color.DarkGray;
             AoClicarNoBotaoFiltrarNaTabelaVenda.FlatAppearance.BorderColor = Color.Black;
             AoClicarNoBotaoFiltrarNaTabelaVenda.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoFiltrarNaTabelaVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AoClicarNoBotaoFiltrarNaTabelaVenda.ForeColor = SystemColors.ControlText;
-            AoClicarNoBotaoFiltrarNaTabelaVenda.Location = new Point(3, 20);
+            AoClicarNoBotaoFiltrarNaTabelaVenda.Location = new Point(3, 33);
             AoClicarNoBotaoFiltrarNaTabelaVenda.Name = "AoClicarNoBotaoFiltrarNaTabelaVenda";
-            AoClicarNoBotaoFiltrarNaTabelaVenda.Size = new Size(55, 40);
+            AoClicarNoBotaoFiltrarNaTabelaVenda.Size = new Size(94, 28);
             AoClicarNoBotaoFiltrarNaTabelaVenda.TabIndex = 3;
             AoClicarNoBotaoFiltrarNaTabelaVenda.Text = "Filtrar";
             AoClicarNoBotaoFiltrarNaTabelaVenda.UseVisualStyleBackColor = false;
@@ -470,9 +475,9 @@
             // 
             panel3.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             panel3.Controls.Add(TabelaVenda);
-            panel3.Location = new Point(0, 79);
+            panel3.Location = new Point(20, 79);
             panel3.Name = "panel3";
-            panel3.Size = new Size(861, 293);
+            panel3.Size = new Size(820, 293);
             panel3.TabIndex = 7;
             // 
             // TabelaVenda
@@ -491,8 +496,48 @@
             TabelaVenda.Name = "TabelaVenda";
             TabelaVenda.ReadOnly = true;
             TabelaVenda.RowTemplate.Height = 25;
-            TabelaVenda.Size = new Size(861, 293);
+            TabelaVenda.Size = new Size(820, 293);
             TabelaVenda.TabIndex = 1;
+            // 
+            // vendaBindingSource
+            // 
+            vendaBindingSource.DataSource = typeof(Dominio.Entidades.Venda);
+            // 
+            // tabPage2
+            // 
+            tabPage2.Controls.Add(panel6);
+            tabPage2.Controls.Add(panel2);
+            tabPage2.Controls.Add(panel1);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(864, 436);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Tabela de Carros";
+            tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // panel6
+            // 
+            panel6.Controls.Add(AoClicarNoBotaoCriarCarro);
+            panel6.Dock = DockStyle.Bottom;
+            panel6.Location = new Point(3, 375);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(858, 58);
+            panel6.TabIndex = 8;
+            // 
+            // AoClicarNoBotaoCriarCarro
+            // 
+            AoClicarNoBotaoCriarCarro.BackColor = Color.DarkGray;
+            AoClicarNoBotaoCriarCarro.FlatAppearance.BorderColor = Color.Black;
+            AoClicarNoBotaoCriarCarro.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            AoClicarNoBotaoCriarCarro.Location = new Point(744, 25);
+            AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
+            AoClicarNoBotaoCriarCarro.Size = new Size(94, 28);
+            AoClicarNoBotaoCriarCarro.TabIndex = 0;
+            AoClicarNoBotaoCriarCarro.Text = "Criar";
+            AoClicarNoBotaoCriarCarro.UseVisualStyleBackColor = false;
+            AoClicarNoBotaoCriarCarro.Click += AoClicarNoBotaoCriarCarro_Click;
             // 
             // idDataGridViewTextBoxColumn1
             // 
@@ -542,10 +587,10 @@
             // 
             idDoCarroVendidoDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             idDoCarroVendidoDataGridViewTextBoxColumn.DataPropertyName = "IdDoCarroVendido";
-            idDoCarroVendidoDataGridViewTextBoxColumn.HeaderText = "Id do carro comprado";
+            idDoCarroVendidoDataGridViewTextBoxColumn.HeaderText = "Id do Carro";
             idDoCarroVendidoDataGridViewTextBoxColumn.Name = "idDoCarroVendidoDataGridViewTextBoxColumn";
             idDoCarroVendidoDataGridViewTextBoxColumn.ReadOnly = true;
-            idDoCarroVendidoDataGridViewTextBoxColumn.Width = 134;
+            idDoCarroVendidoDataGridViewTextBoxColumn.Width = 91;
             // 
             // dataDeCompraDataGridViewTextBoxColumn
             // 
@@ -576,45 +621,6 @@
             pagoDataGridViewCheckBoxColumn.Name = "pagoDataGridViewCheckBoxColumn";
             pagoDataGridViewCheckBoxColumn.ReadOnly = true;
             pagoDataGridViewCheckBoxColumn.Width = 40;
-            // 
-            // vendaBindingSource
-            // 
-            vendaBindingSource.DataSource = typeof(Dominio.Entidades.Venda);
-            // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(panel6);
-            tabPage2.Controls.Add(panel2);
-            tabPage2.Controls.Add(panel1);
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(864, 436);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Tabela de Carros";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // panel6
-            // 
-            panel6.Controls.Add(AoClicarNoBotaoCriarCarro);
-            panel6.Dock = DockStyle.Bottom;
-            panel6.Location = new Point(3, 367);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(858, 66);
-            panel6.TabIndex = 8;
-            // 
-            // AoClicarNoBotaoCriarCarro
-            // 
-            AoClicarNoBotaoCriarCarro.FlatAppearance.BorderColor = Color.Black;
-            AoClicarNoBotaoCriarCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarCarro.Location = new Point(744, 35);
-            AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
-            AoClicarNoBotaoCriarCarro.Size = new Size(94, 28);
-            AoClicarNoBotaoCriarCarro.TabIndex = 0;
-            AoClicarNoBotaoCriarCarro.Text = "Criar";
-            AoClicarNoBotaoCriarCarro.UseVisualStyleBackColor = true;
-            AoClicarNoBotaoCriarCarro.Click += AoClicarNoBotaoCriarCarro_Click;
             // 
             // FormListagem
             // 
@@ -693,6 +699,7 @@
         private Panel panel7;
         private Panel panel8;
         private Button AoClicarNoBotaoCriarVenda;
+        private Button AoClicarNoBotaoCriarCarro;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
         private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn cpfDataGridViewTextBoxColumn;
@@ -702,6 +709,5 @@
         private DataGridViewTextBoxColumn dataDeCompraDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn valorTotalDataGridViewTextBoxColumn;
         private DataGridViewCheckBoxColumn pagoDataGridViewCheckBoxColumn;
-        private Button AoClicarNoBotaoCriarCarro;
     }
 }

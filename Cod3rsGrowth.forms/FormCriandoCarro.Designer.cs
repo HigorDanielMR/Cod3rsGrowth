@@ -121,24 +121,28 @@
             // 
             // AoClicarNoBotaoCriarCarro
             // 
-            AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 8F, FontStyle.Bold, GraphicsUnit.Point);
+            AoClicarNoBotaoCriarCarro.BackColor = Color.DarkGray;
+            AoClicarNoBotaoCriarCarro.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AoClicarNoBotaoCriarCarro.Location = new Point(11, 26);
             AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
             AoClicarNoBotaoCriarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoCriarCarro.TabIndex = 9;
-            AoClicarNoBotaoCriarCarro.Text = "Adicionar carro";
-            AoClicarNoBotaoCriarCarro.UseVisualStyleBackColor = true;
+            AoClicarNoBotaoCriarCarro.Text = "Adicionar";
+            AoClicarNoBotaoCriarCarro.UseVisualStyleBackColor = false;
             AoClicarNoBotaoCriarCarro.Click += AoClicarNoBotaoCriarCarro_Click;
             // 
             // AoClicarNoBotaoCancelarCarro
             // 
+            AoClicarNoBotaoCancelarCarro.BackColor = Color.DarkGray;
+            AoClicarNoBotaoCancelarCarro.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCancelarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             AoClicarNoBotaoCancelarCarro.Location = new Point(307, 26);
             AoClicarNoBotaoCancelarCarro.Name = "AoClicarNoBotaoCancelarCarro";
             AoClicarNoBotaoCancelarCarro.Size = new Size(94, 28);
             AoClicarNoBotaoCancelarCarro.TabIndex = 10;
             AoClicarNoBotaoCancelarCarro.Text = "Cancelar";
-            AoClicarNoBotaoCancelarCarro.UseVisualStyleBackColor = true;
+            AoClicarNoBotaoCancelarCarro.UseVisualStyleBackColor = false;
             AoClicarNoBotaoCancelarCarro.Click += AoClicarNoBotaoCancelarCarro_Click;
             // 
             // selecionarValorDoVeiculo
@@ -149,6 +153,7 @@
             selecionarValorDoVeiculo.PlaceholderText = "R$";
             selecionarValorDoVeiculo.Size = new Size(196, 23);
             selecionarValorDoVeiculo.TabIndex = 13;
+            selecionarValorDoVeiculo.Text = "0,00";
             selecionarValorDoVeiculo.TextChanged += selecionarValorDoVeiculo_TextChanged;
             selecionarValorDoVeiculo.KeyPress += selecionarValorDoVeiculo_KeyPress;
             // 

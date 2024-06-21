@@ -4,6 +4,7 @@ using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
+using System.Linq.Expressions;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -31,17 +32,17 @@ namespace Cod3rsGrowth.Forms
 
         private void AoClicarNoBotaoCriarCarro_Click(object sender, EventArgs e)
         {
-            var carro = new Carro
-            {
-                Modelo = txtModelo.Text,
-                Flex = selecionarFlex.Checked,
-                Cor = (Cores)selecionarCor.SelectedIndex,
-                Marca = (Marcas)selecionarMarca.SelectedIndex,
-                ValorDoVeiculo = decimal.Parse(selecionarValorDoVeiculo.Text)
-            };
-
             try
             {
+                var valorDoVeiculoConvertido = decimal.Parse(selecionarValorDoVeiculo.Text);
+                var carro = new Carro
+                {
+                    Modelo = txtModelo.Text,
+                    Flex = selecionarFlex.Checked,
+                    Cor = (Cores)selecionarCor.SelectedIndex,
+                    Marca = (Marcas)selecionarMarca.SelectedIndex,
+                    ValorDoVeiculo = valorDoVeiculoConvertido
+                };
                 _servicoCarro.Criar(carro);
                 MessageBox.Show("Carro criado com sucesso!");
                 this.Close();
@@ -74,8 +75,8 @@ namespace Cod3rsGrowth.Forms
         {
             TextBox textBox = sender as TextBox;
 
-            if (textBox.Text == string.Empty)
-                return;
+            if (textBox.Text == string.Empty || textBox.Text == "")
+                throw new ValidationException("Campo valor do veiculo esta vazio.");
 
             int selectionStart = textBox.SelectionStart;
             int length = textBox.Text.Length;
