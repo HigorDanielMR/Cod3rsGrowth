@@ -4,6 +4,7 @@ using Cod3rsGrowth.Forms;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
 using Microsoft.IdentityModel.Tokens;
+using System.Globalization;
 
 namespace Cod3rsGrowth.forms
 {
@@ -28,14 +29,14 @@ namespace Cod3rsGrowth.forms
             InitializeComponent();
         }
 
-        private void FormListagem_Load(object sender, EventArgs e)
+        private void AoCarregarFormListagem(object sender, EventArgs e)
         {
             CarregarListasAtualizadas();
             CarregarEnums();
             LimparComboBox();
         }
 
-        private void AoClicarNoBotaoFiltrarDaTabelaCarro_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoFiltrarDaTabelaCarro(object sender, EventArgs e)
         {
             try
             {
@@ -63,7 +64,7 @@ namespace Cod3rsGrowth.forms
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
         }
 
-        private void AoClicarNoBotaoLimparFiltroDaTabelaCarro_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoLimparFiltroDaTabelaCarro(object sender, EventArgs e)
         {
             try
             {
@@ -92,7 +93,7 @@ namespace Cod3rsGrowth.forms
             }
         }
 
-        private void AoClicarNoBotaoFiltrarNaTabelaVenda_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoFiltrarNaTabelaVenda(object sender, EventArgs e)
         {
             try
             {
@@ -103,7 +104,7 @@ namespace Cod3rsGrowth.forms
 
                 if (!procurarData.Text.IsNullOrEmpty() && procurarData.Text != "  /  /")
                 {
-                    _filtroVenda.DataDeCompra = DateTime.Parse(procurarData.Text);
+                    _filtroVenda.DataDeCompra = DateTime.ParseExact(procurarData.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
 
                 if (!txtProcurarEmail.Text.IsNullOrEmpty())
@@ -123,7 +124,7 @@ namespace Cod3rsGrowth.forms
             }
         }
 
-        private void AoCLicarNoBotaoLimparFIltroDaTabelaVenda_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoLimparFIltroDaTabelaVenda(object sender, EventArgs e)
         {
             try
             {
@@ -150,15 +151,14 @@ namespace Cod3rsGrowth.forms
                 MessageBox.Show($"{ex.Message}");
             }
         }
-
-        private void AoClicarNoBotaoCriarVenda_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoCriarVenda(object sender, EventArgs e)
         {
             var formulario = new FormCriarVenda(_validacoesVenda, _servicoVenda, _servicoCarro);
             formulario.ShowDialog();
             CarregarListasAtualizadas();
         }
 
-        private void AoClicarNoBotaoCriarCarro_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoCriarCarro(object sender, EventArgs e)
         {
             var formulario = new FormCriarCarro(_servicoCarro, _validacoesCarro);
             formulario.ShowDialog();

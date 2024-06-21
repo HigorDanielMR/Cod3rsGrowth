@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
+using System.Globalization;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -52,7 +53,7 @@ namespace Cod3rsGrowth.Forms
                     Cpf = txtCpf.Text,
                     Email = txtEmail.Text,
                     Telefone = txtTelefone.Text,
-                    DataDeCompra = DateTime.Parse(txtDataDeCompra.Text),
+                    DataDeCompra = DateTime.ParseExact(txtDataDeCompra.Text.Replace(" 00:00:00",""), "dd/MM/yyyy", CultureInfo.InvariantCulture),
                     ValorTotal = valorPago,
                     IdDoCarroVendido = IdDoCarroComprado,
                     Pago = true

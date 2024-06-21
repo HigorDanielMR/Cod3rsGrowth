@@ -100,10 +100,13 @@
             // 
             // txtDataDeCompra
             // 
+            txtDataDeCompra.Format = DateTimePickerFormat.Short;
             txtDataDeCompra.Location = new Point(12, 214);
             txtDataDeCompra.Name = "txtDataDeCompra";
             txtDataDeCompra.Size = new Size(390, 23);
             txtDataDeCompra.TabIndex = 10;
+            txtDataDeCompra.TabStop = false;
+            txtDataDeCompra.Value = new DateTime(2024, 6, 21, 0, 0, 0, 0);
             // 
             // label1
             // 

@@ -98,7 +98,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
                     query = query.Where(d => d.Telefone == venda.Telefone);
 
                 if (venda.Email != null)
-                    query = query.Where(d => d.Email == venda.Email);
+                    query = query.Where(d => d.Email.Contains(venda.Email));
             }
 
             return query;

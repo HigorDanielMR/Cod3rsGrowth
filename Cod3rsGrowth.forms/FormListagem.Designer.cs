@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             TabelaCarro = new DataGridView();
             idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
             marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
@@ -41,9 +41,9 @@
             flexDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             carroBindingSource = new BindingSource(components);
             label2 = new Label();
-            AoClicarNoBotaoFiltrarDaTabelaCarro = new Button();
+            FiltrarCarro = new Button();
             selecionarMarca = new ComboBox();
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro = new Button();
+            LimparFiltroCarro = new Button();
             panel1 = new Panel();
             panel7 = new Panel();
             label1 = new Label();
@@ -55,11 +55,11 @@
             tabelaDeControleVenda = new TabControl();
             tabPage1 = new TabPage();
             panel5 = new Panel();
-            AoClicarNoBotaoCriarVenda = new Button();
+            CriarVenda = new Button();
             panel4 = new Panel();
             panel8 = new Panel();
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda = new Button();
-            AoClicarNoBotaoFiltrarNaTabelaVenda = new Button();
+            LimparFIltroVenda = new Button();
+            FiltrarVenda = new Button();
             label4 = new Label();
             procurarData = new MaskedTextBox();
             label5 = new Label();
@@ -81,7 +81,7 @@
             vendaBindingSource = new BindingSource(components);
             tabPage2 = new TabPage();
             panel6 = new Panel();
-            AoClicarNoBotaoCriarCarro = new Button();
+            CriarCarro = new Button();
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -152,9 +152,9 @@
             // valorDoVeiculoDataGridViewTextBoxColumn
             // 
             valorDoVeiculoDataGridViewTextBoxColumn.DataPropertyName = "ValorDoVeiculo";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle4;
             valorDoVeiculoDataGridViewTextBoxColumn.HeaderText = "Preço";
             valorDoVeiculoDataGridViewTextBoxColumn.Name = "valorDoVeiculoDataGridViewTextBoxColumn";
             valorDoVeiculoDataGridViewTextBoxColumn.Width = 62;
@@ -180,21 +180,21 @@
             label2.TabIndex = 1;
             label2.Text = "Marca";
             // 
-            // AoClicarNoBotaoFiltrarDaTabelaCarro
+            // FiltrarCarro
             // 
-            AoClicarNoBotaoFiltrarDaTabelaCarro.BackColor = Color.DarkGray;
-            AoClicarNoBotaoFiltrarDaTabelaCarro.FlatAppearance.BorderColor = Color.Black;
-            AoClicarNoBotaoFiltrarDaTabelaCarro.FlatAppearance.MouseOverBackColor = Color.Snow;
-            AoClicarNoBotaoFiltrarDaTabelaCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoFiltrarDaTabelaCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoFiltrarDaTabelaCarro.Location = new Point(3, 32);
-            AoClicarNoBotaoFiltrarDaTabelaCarro.MaximumSize = new Size(94, 28);
-            AoClicarNoBotaoFiltrarDaTabelaCarro.Name = "AoClicarNoBotaoFiltrarDaTabelaCarro";
-            AoClicarNoBotaoFiltrarDaTabelaCarro.Size = new Size(94, 28);
-            AoClicarNoBotaoFiltrarDaTabelaCarro.TabIndex = 3;
-            AoClicarNoBotaoFiltrarDaTabelaCarro.Text = "Filtrar";
-            AoClicarNoBotaoFiltrarDaTabelaCarro.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoFiltrarDaTabelaCarro.Click += AoClicarNoBotaoFiltrarDaTabelaCarro_Click;
+            FiltrarCarro.BackColor = Color.DarkGray;
+            FiltrarCarro.FlatAppearance.BorderColor = Color.Black;
+            FiltrarCarro.FlatAppearance.MouseOverBackColor = Color.Snow;
+            FiltrarCarro.FlatStyle = FlatStyle.Flat;
+            FiltrarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            FiltrarCarro.Location = new Point(3, 32);
+            FiltrarCarro.MaximumSize = new Size(94, 28);
+            FiltrarCarro.Name = "FiltrarCarro";
+            FiltrarCarro.Size = new Size(94, 28);
+            FiltrarCarro.TabIndex = 3;
+            FiltrarCarro.Text = "Filtrar";
+            FiltrarCarro.UseVisualStyleBackColor = false;
+            FiltrarCarro.Click += AoClicarNoBotaoFiltrarDaTabelaCarro;
             // 
             // selecionarMarca
             // 
@@ -205,20 +205,20 @@
             selecionarMarca.Size = new Size(131, 23);
             selecionarMarca.TabIndex = 4;
             // 
-            // AoClicarNoBotaoLimparFiltroDaTabelaCarro
+            // LimparFiltroCarro
             // 
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.BackColor = Color.DarkGray;
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.FlatAppearance.BorderColor = Color.Black;
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Location = new Point(117, 32);
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.MaximumSize = new Size(94, 28);
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Name = "AoClicarNoBotaoLimparFiltroDaTabelaCarro";
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Size = new Size(94, 28);
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.TabIndex = 5;
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Text = "Limpar Filtro";
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoLimparFiltroDaTabelaCarro.Click += AoClicarNoBotaoLimparFiltroDaTabelaCarro_Click;
+            LimparFiltroCarro.BackColor = Color.DarkGray;
+            LimparFiltroCarro.FlatAppearance.BorderColor = Color.Black;
+            LimparFiltroCarro.FlatStyle = FlatStyle.Flat;
+            LimparFiltroCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LimparFiltroCarro.Location = new Point(117, 32);
+            LimparFiltroCarro.MaximumSize = new Size(94, 28);
+            LimparFiltroCarro.Name = "LimparFiltroCarro";
+            LimparFiltroCarro.Size = new Size(94, 28);
+            LimparFiltroCarro.TabIndex = 5;
+            LimparFiltroCarro.Text = "Limpar Filtro";
+            LimparFiltroCarro.UseVisualStyleBackColor = false;
+            LimparFiltroCarro.Click += AoClicarNoBotaoLimparFiltroDaTabelaCarro;
             // 
             // panel1
             // 
@@ -238,8 +238,8 @@
             // 
             // panel7
             // 
-            panel7.Controls.Add(AoClicarNoBotaoLimparFiltroDaTabelaCarro);
-            panel7.Controls.Add(AoClicarNoBotaoFiltrarDaTabelaCarro);
+            panel7.Controls.Add(LimparFiltroCarro);
+            panel7.Controls.Add(FiltrarCarro);
             panel7.Dock = DockStyle.Right;
             panel7.Location = new Point(627, 0);
             panel7.Name = "panel7";
@@ -323,28 +323,28 @@
             // panel5
             // 
             panel5.BackColor = SystemColors.ButtonHighlight;
-            panel5.Controls.Add(AoClicarNoBotaoCriarVenda);
+            panel5.Controls.Add(CriarVenda);
             panel5.Dock = DockStyle.Bottom;
             panel5.Location = new Point(3, 375);
             panel5.Name = "panel5";
             panel5.Size = new Size(858, 58);
             panel5.TabIndex = 9;
             // 
-            // AoClicarNoBotaoCriarVenda
+            // CriarVenda
             // 
-            AoClicarNoBotaoCriarVenda.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            AoClicarNoBotaoCriarVenda.BackColor = Color.DarkGray;
-            AoClicarNoBotaoCriarVenda.FlatAppearance.BorderColor = Color.Black;
-            AoClicarNoBotaoCriarVenda.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoCriarVenda.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarVenda.Location = new Point(743, 25);
-            AoClicarNoBotaoCriarVenda.MaximumSize = new Size(94, 28);
-            AoClicarNoBotaoCriarVenda.Name = "AoClicarNoBotaoCriarVenda";
-            AoClicarNoBotaoCriarVenda.Size = new Size(94, 28);
-            AoClicarNoBotaoCriarVenda.TabIndex = 10;
-            AoClicarNoBotaoCriarVenda.Text = "Criar";
-            AoClicarNoBotaoCriarVenda.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoCriarVenda.Click += AoClicarNoBotaoCriarVenda_Click;
+            CriarVenda.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            CriarVenda.BackColor = Color.DarkGray;
+            CriarVenda.FlatAppearance.BorderColor = Color.Black;
+            CriarVenda.FlatStyle = FlatStyle.Flat;
+            CriarVenda.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            CriarVenda.Location = new Point(743, 25);
+            CriarVenda.MaximumSize = new Size(94, 28);
+            CriarVenda.Name = "CriarVenda";
+            CriarVenda.Size = new Size(94, 28);
+            CriarVenda.TabIndex = 10;
+            CriarVenda.Text = "Criar";
+            CriarVenda.UseVisualStyleBackColor = false;
+            CriarVenda.Click += AoClicarNoBotaoCriarVenda;
             // 
             // panel4
             // 
@@ -367,44 +367,44 @@
             // 
             // panel8
             // 
-            panel8.Controls.Add(AoCLicarNoBotaoLimparFIltroDaTabelaVenda);
-            panel8.Controls.Add(AoClicarNoBotaoFiltrarNaTabelaVenda);
+            panel8.Controls.Add(LimparFIltroVenda);
+            panel8.Controls.Add(FiltrarVenda);
             panel8.Dock = DockStyle.Right;
             panel8.Location = new Point(627, 0);
             panel8.Name = "panel8";
             panel8.Size = new Size(231, 70);
             panel8.TabIndex = 14;
             // 
-            // AoCLicarNoBotaoLimparFIltroDaTabelaVenda
+            // LimparFIltroVenda
             // 
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.BackColor = Color.DarkGray;
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.FlatAppearance.BorderColor = Color.Black;
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.FlatStyle = FlatStyle.Flat;
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Location = new Point(116, 33);
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.MaximumSize = new Size(94, 28);
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Name = "AoCLicarNoBotaoLimparFIltroDaTabelaVenda";
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Size = new Size(94, 28);
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.TabIndex = 4;
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Text = "Limpar FIltro";
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.UseVisualStyleBackColor = false;
-            AoCLicarNoBotaoLimparFIltroDaTabelaVenda.Click += AoCLicarNoBotaoLimparFIltroDaTabelaVenda_Click;
+            LimparFIltroVenda.BackColor = Color.DarkGray;
+            LimparFIltroVenda.FlatAppearance.BorderColor = Color.Black;
+            LimparFIltroVenda.FlatStyle = FlatStyle.Flat;
+            LimparFIltroVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            LimparFIltroVenda.Location = new Point(116, 33);
+            LimparFIltroVenda.MaximumSize = new Size(94, 28);
+            LimparFIltroVenda.Name = "LimparFIltroVenda";
+            LimparFIltroVenda.Size = new Size(94, 28);
+            LimparFIltroVenda.TabIndex = 4;
+            LimparFIltroVenda.Text = "Limpar FIltro";
+            LimparFIltroVenda.UseVisualStyleBackColor = false;
+            LimparFIltroVenda.Click += AoClicarNoBotaoLimparFIltroDaTabelaVenda;
             // 
-            // AoClicarNoBotaoFiltrarNaTabelaVenda
+            // FiltrarVenda
             // 
-            AoClicarNoBotaoFiltrarNaTabelaVenda.BackColor = Color.DarkGray;
-            AoClicarNoBotaoFiltrarNaTabelaVenda.FlatAppearance.BorderColor = Color.Black;
-            AoClicarNoBotaoFiltrarNaTabelaVenda.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoFiltrarNaTabelaVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoFiltrarNaTabelaVenda.ForeColor = SystemColors.ControlText;
-            AoClicarNoBotaoFiltrarNaTabelaVenda.Location = new Point(3, 33);
-            AoClicarNoBotaoFiltrarNaTabelaVenda.MaximumSize = new Size(94, 28);
-            AoClicarNoBotaoFiltrarNaTabelaVenda.Name = "AoClicarNoBotaoFiltrarNaTabelaVenda";
-            AoClicarNoBotaoFiltrarNaTabelaVenda.Size = new Size(94, 28);
-            AoClicarNoBotaoFiltrarNaTabelaVenda.TabIndex = 3;
-            AoClicarNoBotaoFiltrarNaTabelaVenda.Text = "Filtrar";
-            AoClicarNoBotaoFiltrarNaTabelaVenda.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoFiltrarNaTabelaVenda.Click += AoClicarNoBotaoFiltrarNaTabelaVenda_Click;
+            FiltrarVenda.BackColor = Color.DarkGray;
+            FiltrarVenda.FlatAppearance.BorderColor = Color.Black;
+            FiltrarVenda.FlatStyle = FlatStyle.Flat;
+            FiltrarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            FiltrarVenda.ForeColor = SystemColors.ControlText;
+            FiltrarVenda.Location = new Point(3, 33);
+            FiltrarVenda.MaximumSize = new Size(94, 28);
+            FiltrarVenda.Name = "FiltrarVenda";
+            FiltrarVenda.Size = new Size(94, 28);
+            FiltrarVenda.TabIndex = 3;
+            FiltrarVenda.Text = "Filtrar";
+            FiltrarVenda.UseVisualStyleBackColor = false;
+            FiltrarVenda.Click += AoClicarNoBotaoFiltrarNaTabelaVenda;
             // 
             // label4
             // 
@@ -553,9 +553,9 @@
             // 
             dataDeCompraDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             dataDeCompraDataGridViewTextBoxColumn.DataPropertyName = "DataDeCompra";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            dataDeCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            dataDeCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle5;
             dataDeCompraDataGridViewTextBoxColumn.HeaderText = "Data da compra";
             dataDeCompraDataGridViewTextBoxColumn.Name = "dataDeCompraDataGridViewTextBoxColumn";
             dataDeCompraDataGridViewTextBoxColumn.ReadOnly = true;
@@ -565,9 +565,9 @@
             // 
             valorTotalDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle6;
             valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor total";
             valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
             valorTotalDataGridViewTextBoxColumn.ReadOnly = true;
@@ -602,27 +602,27 @@
             // panel6
             // 
             panel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel6.Controls.Add(AoClicarNoBotaoCriarCarro);
+            panel6.Controls.Add(CriarCarro);
             panel6.Location = new Point(3, 375);
             panel6.Name = "panel6";
             panel6.Size = new Size(858, 58);
             panel6.TabIndex = 8;
             // 
-            // AoClicarNoBotaoCriarCarro
+            // CriarCarro
             // 
-            AoClicarNoBotaoCriarCarro.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            AoClicarNoBotaoCriarCarro.BackColor = Color.DarkGray;
-            AoClicarNoBotaoCriarCarro.FlatAppearance.BorderColor = Color.Black;
-            AoClicarNoBotaoCriarCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarCarro.Location = new Point(744, 25);
-            AoClicarNoBotaoCriarCarro.MaximumSize = new Size(94, 28);
-            AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
-            AoClicarNoBotaoCriarCarro.Size = new Size(94, 28);
-            AoClicarNoBotaoCriarCarro.TabIndex = 0;
-            AoClicarNoBotaoCriarCarro.Text = "Criar";
-            AoClicarNoBotaoCriarCarro.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoCriarCarro.Click += AoClicarNoBotaoCriarCarro_Click;
+            CriarCarro.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            CriarCarro.BackColor = Color.DarkGray;
+            CriarCarro.FlatAppearance.BorderColor = Color.Black;
+            CriarCarro.FlatStyle = FlatStyle.Flat;
+            CriarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            CriarCarro.Location = new Point(744, 25);
+            CriarCarro.MaximumSize = new Size(94, 28);
+            CriarCarro.Name = "CriarCarro";
+            CriarCarro.Size = new Size(94, 28);
+            CriarCarro.TabIndex = 0;
+            CriarCarro.Text = "Criar";
+            CriarCarro.UseVisualStyleBackColor = false;
+            CriarCarro.Click += AoClicarNoBotaoCriarCarro;
             // 
             // FormListagem
             // 
@@ -636,7 +636,7 @@
             ForeColor = SystemColors.ActiveCaptionText;
             Name = "FormListagem";
             Text = "Cod3rsGrowth";
-            Load += FormListagem_Load;
+            Load += AoCarregarFormListagem;
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).EndInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).EndInit();
             panel1.ResumeLayout(false);
@@ -664,9 +664,9 @@
         private DataGridView TabelaCarro;
         private BindingSource carroBindingSource;
         private Label label2;
-        private Button AoClicarNoBotaoFiltrarDaTabelaCarro;
+        private Button FiltrarCarro;
         private ComboBox selecionarMarca;
-        private Button AoClicarNoBotaoLimparFiltroDaTabelaCarro;
+        private Button LimparFiltroCarro;
         private Panel panel1;
         private Panel panel2;
         private ComboBox selecionarCor;
@@ -687,15 +687,15 @@
         private Label CPF;
         private MaskedTextBox procurarCpf;
         private TextBox txtProcurarNome;
-        private Button AoCLicarNoBotaoLimparFIltroDaTabelaVenda;
+        private Button LimparFIltroVenda;
         private Label label6;
-        private Button AoClicarNoBotaoFiltrarNaTabelaVenda;
+        private Button FiltrarVenda;
         private Panel panel3;
         private DataGridView TabelaVenda;
         private Panel panel7;
         private Panel panel8;
-        private Button AoClicarNoBotaoCriarVenda;
-        private Button AoClicarNoBotaoCriarCarro;
+        private Button CriarVenda;
+        private Button CriarCarro;
         private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn marcaDataGridViewTextBoxColumn;
         private DataGridViewTextBoxColumn modeloDataGridViewTextBoxColumn;
