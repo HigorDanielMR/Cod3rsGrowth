@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms
 {
-    partial class CriandoCarro
+    partial class FormCriarCarro
     {
         /// <summary>
         /// Required designer variable.
@@ -36,8 +36,8 @@
             label3 = new Label();
             label4 = new Label();
             selecionarFlex = new CheckBox();
-            AoClicarNoBotaoAdicionarCarro = new Button();
-            AoClicarNoBotaoCancelarCarro = new Button();
+            AdicionarCarro = new Button();
+            CancelarCarro = new Button();
             selecionarValorDoVeiculo = new TextBox();
             panel1 = new Panel();
             panel2 = new Panel();
@@ -119,33 +119,33 @@
             selecionarFlex.Text = "Flex";
             selecionarFlex.UseVisualStyleBackColor = true;
             // 
-            // AoClicarNoBotaoAdicionarCarro
+            // AdicionarCarro
             // 
-            AoClicarNoBotaoAdicionarCarro.BackColor = Color.DarkGray;
-            AoClicarNoBotaoAdicionarCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoAdicionarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoAdicionarCarro.Location = new Point(11, 26);
-            AoClicarNoBotaoAdicionarCarro.MaximumSize = new Size(94, 28);
-            AoClicarNoBotaoAdicionarCarro.Name = "AoClicarNoBotaoAdicionarCarro";
-            AoClicarNoBotaoAdicionarCarro.Size = new Size(94, 28);
-            AoClicarNoBotaoAdicionarCarro.TabIndex = 9;
-            AoClicarNoBotaoAdicionarCarro.Text = "Adicionar";
-            AoClicarNoBotaoAdicionarCarro.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoAdicionarCarro.Click += AoClicarNoBotaoAdicionarCarro_Click;
+            AdicionarCarro.BackColor = Color.DarkGray;
+            AdicionarCarro.FlatStyle = FlatStyle.Flat;
+            AdicionarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AdicionarCarro.Location = new Point(11, 26);
+            AdicionarCarro.MaximumSize = new Size(94, 28);
+            AdicionarCarro.Name = "AdicionarCarro";
+            AdicionarCarro.Size = new Size(94, 28);
+            AdicionarCarro.TabIndex = 9;
+            AdicionarCarro.Text = "Adicionar";
+            AdicionarCarro.UseVisualStyleBackColor = false;
+            AdicionarCarro.Click += AoClicarNoBotaoAdicionar;
             // 
-            // AoClicarNoBotaoCancelarCarro
+            // CancelarCarro
             // 
-            AoClicarNoBotaoCancelarCarro.BackColor = Color.DarkGray;
-            AoClicarNoBotaoCancelarCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoCancelarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCancelarCarro.Location = new Point(307, 26);
-            AoClicarNoBotaoCancelarCarro.MaximumSize = new Size(94, 28);
-            AoClicarNoBotaoCancelarCarro.Name = "AoClicarNoBotaoCancelarCarro";
-            AoClicarNoBotaoCancelarCarro.Size = new Size(94, 28);
-            AoClicarNoBotaoCancelarCarro.TabIndex = 10;
-            AoClicarNoBotaoCancelarCarro.Text = "Cancelar";
-            AoClicarNoBotaoCancelarCarro.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoCancelarCarro.Click += AoClicarNoBotaoCancelarCarro_Click;
+            CancelarCarro.BackColor = Color.DarkGray;
+            CancelarCarro.FlatStyle = FlatStyle.Flat;
+            CancelarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            CancelarCarro.Location = new Point(307, 26);
+            CancelarCarro.MaximumSize = new Size(94, 28);
+            CancelarCarro.Name = "CancelarCarro";
+            CancelarCarro.Size = new Size(94, 28);
+            CancelarCarro.TabIndex = 10;
+            CancelarCarro.Text = "Cancelar";
+            CancelarCarro.UseVisualStyleBackColor = false;
+            CancelarCarro.Click += AoClicarNoBotaoCancelarCarro;
             // 
             // selecionarValorDoVeiculo
             // 
@@ -156,13 +156,13 @@
             selecionarValorDoVeiculo.Size = new Size(196, 23);
             selecionarValorDoVeiculo.TabIndex = 13;
             selecionarValorDoVeiculo.Text = "0,00";
-            selecionarValorDoVeiculo.TextChanged += AoPreencherValorDoVeiculo_TextChanged;
-            selecionarValorDoVeiculo.KeyPress += AoPreencherValorDoVeiculo_KeyPress;
+            selecionarValorDoVeiculo.TextChanged += AoPreencherValorDoVeiculo;
+            selecionarValorDoVeiculo.KeyPress += AoPreencherValorDoVeiculo;
             // 
             // panel1
             // 
-            panel1.Controls.Add(AoClicarNoBotaoAdicionarCarro);
-            panel1.Controls.Add(AoClicarNoBotaoCancelarCarro);
+            panel1.Controls.Add(AdicionarCarro);
+            panel1.Controls.Add(CancelarCarro);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 232);
             panel1.Name = "panel1";
@@ -186,16 +186,16 @@
             panel2.Size = new Size(414, 232);
             panel2.TabIndex = 15;
             // 
-            // CriandoCarro
+            // FormCriarCarro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(414, 295);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "CriandoCarro";
+            Name = "FormCriarCarro";
             Text = "Cadatro de Carro";
-            Load += FormCriandoCarro_Load;
+            Load += AoCarregarFormCriarCarro;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -212,8 +212,8 @@
         private Label label3;
         private Label label4;
         private CheckBox selecionarFlex;
-        private Button AoClicarNoBotaoAdicionarCarro;
-        private Button AoClicarNoBotaoCancelarCarro;
+        private Button AdicionarCarro;
+        private Button CancelarCarro;
         private NumericUpDown numericUpDown1;
         private TextBox selecionarValorDoVeiculo;
         private Panel panel1;

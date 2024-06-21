@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms
 {
-    partial class CriandoVenda
+    partial class FormCriarVenda
     {
         /// <summary>
         /// Required designer variable.
@@ -40,7 +40,7 @@
             label5 = new Label();
             selecionandoCarro = new ComboBox();
             label6 = new Label();
-            AoClicarNoBotaoCriarDeCriarVenda = new Button();
+            AdicionarVenda = new Button();
             AoClicarNoBotaoCancelarDeCriarVenda = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
@@ -142,7 +142,7 @@
             selecionandoCarro.Name = "selecionandoCarro";
             selecionandoCarro.Size = new Size(390, 23);
             selecionandoCarro.TabIndex = 14;
-            selecionandoCarro.SelectedIndexChanged += AoSelecionarCarro_SelectedIndexChanged;
+            selecionandoCarro.SelectedIndexChanged += AoSelecionarCarro;
             // 
             // label6
             // 
@@ -154,19 +154,19 @@
             label6.TabIndex = 15;
             label6.Text = "Carro Comprado";
             // 
-            // AoClicarNoBotaoCriarDeCriarVenda
+            // AdicionarVenda
             // 
-            AoClicarNoBotaoCriarDeCriarVenda.BackColor = Color.DarkGray;
-            AoClicarNoBotaoCriarDeCriarVenda.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoCriarDeCriarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarDeCriarVenda.Location = new Point(12, 23);
-            AoClicarNoBotaoCriarDeCriarVenda.MaximumSize = new Size(94, 28);
-            AoClicarNoBotaoCriarDeCriarVenda.Name = "AoClicarNoBotaoCriarDeCriarVenda";
-            AoClicarNoBotaoCriarDeCriarVenda.Size = new Size(94, 28);
-            AoClicarNoBotaoCriarDeCriarVenda.TabIndex = 16;
-            AoClicarNoBotaoCriarDeCriarVenda.Text = "Adicionar";
-            AoClicarNoBotaoCriarDeCriarVenda.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoCriarDeCriarVenda.Click += AoClicarNoBotaoCriarDeCriarVenda_Click;
+            AdicionarVenda.BackColor = Color.DarkGray;
+            AdicionarVenda.FlatStyle = FlatStyle.Flat;
+            AdicionarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AdicionarVenda.Location = new Point(12, 23);
+            AdicionarVenda.MaximumSize = new Size(94, 28);
+            AdicionarVenda.Name = "AdicionarVenda";
+            AdicionarVenda.Size = new Size(94, 28);
+            AdicionarVenda.TabIndex = 16;
+            AdicionarVenda.Text = "Adicionar";
+            AdicionarVenda.UseVisualStyleBackColor = false;
+            AdicionarVenda.Click += AoClicarNoBotaoAdicionarVenda;
             // 
             // AoClicarNoBotaoCancelarDeCriarVenda
             // 
@@ -180,11 +180,11 @@
             AoClicarNoBotaoCancelarDeCriarVenda.TabIndex = 17;
             AoClicarNoBotaoCancelarDeCriarVenda.Text = "Cancelar";
             AoClicarNoBotaoCancelarDeCriarVenda.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoCancelarDeCriarVenda.Click += AoClicarNoBotaoCancelarDeCriarVenda_Click;
+            AoClicarNoBotaoCancelarDeCriarVenda.Click += AoClicarNoBotaoCancelarDeVenda;
             // 
             // panel1
             // 
-            panel1.Controls.Add(AoClicarNoBotaoCriarDeCriarVenda);
+            panel1.Controls.Add(AdicionarVenda);
             panel1.Controls.Add(AoClicarNoBotaoCancelarDeCriarVenda);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 334);
@@ -212,16 +212,16 @@
             panel2.Size = new Size(414, 334);
             panel2.TabIndex = 18;
             // 
-            // CriandoVenda
+            // FormCriarVenda
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(414, 397);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "CriandoVenda";
+            Name = "FormCriarVenda";
             Text = "Cadastro de Venda";
-            Load += CriandoVenda_Load;
+            Load += AoCarregarFormCriarVenda;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -241,7 +241,7 @@
         private Label label5;
         private ComboBox selecionandoCarro;
         private Label label6;
-        private Button AoClicarNoBotaoCriarDeCriarVenda;
+        private Button AdicionarVenda;
         private Button AoClicarNoBotaoCancelarDeCriarVenda;
         private Panel panel1;
         private Panel panel2;

@@ -153,14 +153,14 @@ namespace Cod3rsGrowth.forms
 
         private void AoClicarNoBotaoCriarVenda_Click(object sender, EventArgs e)
         {
-            var formulario = new CriandoVenda(_validacoesVenda, _servicoVenda, _servicoCarro);
+            var formulario = new FormCriarVenda(_validacoesVenda, _servicoVenda, _servicoCarro);
             formulario.ShowDialog();
             CarregarListasAtualizadas();
         }
 
         private void AoClicarNoBotaoCriarCarro_Click(object sender, EventArgs e)
         {
-            var formulario = new CriandoCarro(_servicoCarro, _validacoesCarro);
+            var formulario = new FormCriarCarro(_servicoCarro, _validacoesCarro);
             formulario.ShowDialog();
             CarregarListasAtualizadas();
         }

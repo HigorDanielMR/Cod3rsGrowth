@@ -7,24 +7,32 @@ using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.Forms
 {
-    public partial class CriandoCarro : Form
+    public partial class FormCriarCarro : Form
     {
         private FiltroCarro _filtroCarro;
         private ServicoCarro _servicoCarro;
         private ValidacoesCarro _validacoes;
 
-        public CriandoCarro(ServicoCarro servico, ValidacoesCarro validacoes)
+        public FormCriarCarro(ServicoCarro servico, ValidacoesCarro validacoes)
         {
             _servicoCarro = servico;
             _validacoes = validacoes;
             InitializeComponent();
         }
 
-        private void FormCriandoCarro_Load(object sender, EventArgs e)
+        private void AoCarregarFormCriarCarro(object sender, EventArgs e)
         {
-            CarregarEnums();
-            LimparComboBox();
+            try
+            {
+                CarregarEnums();
+                LimparComboBox();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Erro ao carregar metodos");
+            }
         }
+
         private void CarregarEnums()
         {
             selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
@@ -36,7 +44,7 @@ namespace Cod3rsGrowth.Forms
             selecionarMarca.SelectedItem = null;
         }
 
-        private void AoClicarNoBotaoAdicionarCarro_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoAdicionar(object sender, EventArgs e)
         {
             try
             {
@@ -59,7 +67,7 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void AoClicarNoBotaoCancelarCarro_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoCancelarCarro(object sender, EventArgs e)
         {
             try
             {
@@ -72,7 +80,7 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void AoPreencherValorDoVeiculo_TextChanged(object sender, EventArgs e)
+        private void AoPreencherValorDoVeiculo(object sender, EventArgs e)
         {
             try
             {
@@ -93,7 +101,7 @@ namespace Cod3rsGrowth.Forms
                     return;
                 }
 
-                textBox.TextChanged -= AoPreencherValorDoVeiculo_TextChanged;
+                textBox.TextChanged -= AoPreencherValorDoVeiculo;
 
                 string formattedText = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:N2}", value / 100.0);
 
@@ -106,7 +114,7 @@ namespace Cod3rsGrowth.Forms
                     selectionStart = 0;
 
                 textBox.SelectionStart = selectionStart;
-                textBox.TextChanged += AoPreencherValorDoVeiculo_TextChanged;
+                textBox.TextChanged += AoPreencherValorDoVeiculo;
             }
             catch (Exception ex)
             {
@@ -114,7 +122,7 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void AoPreencherValorDoVeiculo_KeyPress(object sender, KeyPressEventArgs e)
+        private void AoPreencherValorDoVeiculo(object sender, KeyPressEventArgs e)
         {
             try
             {
@@ -128,7 +136,7 @@ namespace Cod3rsGrowth.Forms
                     e.Handled = true;
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
             }
