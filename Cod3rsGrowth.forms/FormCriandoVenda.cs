@@ -1,34 +1,31 @@
-﻿using Cod3rsGrowth.Dominio.Entidades;
+﻿using FluentValidation;
+using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
-using FluentValidation;
 
 namespace Cod3rsGrowth.Forms
 {
     public partial class CriandoVenda : Form
     {
-        private ValidacoesVenda _validacoesVenda;
-        private ServicoVenda _servicoVenda;
         private ServicoCarro _servico;
-        private FiltroVenda _filtroVenda = new FiltroVenda();
-        private FiltroCarro _filtro = new FiltroCarro();
+        private ServicoVenda _servicoVenda;
+        private ValidacoesVenda _validacoesVenda;
         private List<Carro> carro = new List<Carro>();
+        private FiltroCarro _filtro = new FiltroCarro();
+        private FiltroVenda _filtroVenda = new FiltroVenda();
         private List<string> comboBoxSelecionarCarro = new List<string>();
         public CriandoVenda(ValidacoesVenda validacoes, ServicoVenda servico, ServicoCarro servicoCarro)
         {
-            _validacoesVenda = validacoes;
             _servicoVenda = servico;
             _servico = servicoCarro;
+            _validacoesVenda = validacoes;
 
             InitializeComponent();
-            var var = _servico.ObterTodos(_filtro);
+        }
 
-            foreach (var car in var)
-            {
-                carro.Add(car);
-                comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
-            }
-            selecionandoCarro.DataSource = comboBoxSelecionarCarro;
+        private void CriandoVenda_Load(object sender, EventArgs e)
+        {
+            CarregarComboBoxCarro();
         }
 
         private void AoClicarNoBotaoCancelarDeCriarVenda_Click(object sender, EventArgs e)
@@ -59,11 +56,23 @@ namespace Cod3rsGrowth.Forms
             }
             catch (ValidationException ex)
             {
-                MessageBox.Show($"{ex.Message}", "Erros");
+                MessageBox.Show($"{ex.Message}", "Erros ao criar venda");
             }
         }
 
-        private void comboBox1_SelectedIndexChanged(object sender, EventArgs e)
+        private void CarregarComboBoxCarro()
+        {
+            var var = _servico.ObterTodos(_filtro);
+
+            foreach (var car in var)
+            {
+                carro.Add(car);
+                comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
+            }
+            selecionandoCarro.DataSource = comboBoxSelecionarCarro;
+        }
+
+        private void AoSelecionarCarro_SelectedIndexChanged(object sender, EventArgs e)
         {
             var var = selecionandoCarro.SelectedItem;
         }

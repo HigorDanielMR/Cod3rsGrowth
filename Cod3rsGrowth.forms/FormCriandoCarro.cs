@@ -4,7 +4,6 @@ using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
-using System.Linq.Expressions;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -23,14 +22,11 @@ namespace Cod3rsGrowth.Forms
 
         private void FormCriandoCarro_Load(object sender, EventArgs e)
         {
-            selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
-            selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
-
-            selecionarCor.SelectedItem = null;
-            selecionarMarca.SelectedItem = null;
+            CarregarEnums();
+            LimparComboBox();
         }
 
-        private void AoClicarNoBotaoCriarCarro_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoAdicionarCarro_Click(object sender, EventArgs e)
         {
             try
             {
@@ -49,7 +45,7 @@ namespace Cod3rsGrowth.Forms
             }
             catch (ValidationException ex)
             {
-                MessageBox.Show($"{ex.Message}", "Erros");
+                MessageBox.Show($"{ex.Message}", "Erro ao criar");
             }
         }
 
@@ -104,8 +100,17 @@ namespace Cod3rsGrowth.Forms
 
             textBox.SelectionStart = selectionStart;
             textBox.TextChanged += selecionarValorDoVeiculo_TextChanged;
+        }
 
-
+        private void CarregarEnums()
+        {
+            selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
+            selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
+        }
+        private void LimparComboBox()
+        {
+            selecionarCor.SelectedItem = null;
+            selecionarMarca.SelectedItem = null;
         }
     }
 }

@@ -142,7 +142,7 @@
             selecionandoCarro.Name = "selecionandoCarro";
             selecionandoCarro.Size = new Size(390, 23);
             selecionandoCarro.TabIndex = 14;
-            selecionandoCarro.SelectedIndexChanged += comboBox1_SelectedIndexChanged;
+            selecionandoCarro.SelectedIndexChanged += AoSelecionarCarro_SelectedIndexChanged;
             // 
             // label6
             // 
@@ -219,6 +219,7 @@
             Controls.Add(panel1);
             Name = "CriandoVenda";
             Text = "Cadastro de Venda";
+            Load += CriandoVenda_Load;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

@@ -36,7 +36,7 @@
             label3 = new Label();
             label4 = new Label();
             selecionarFlex = new CheckBox();
-            AoClicarNoBotaoCriarCarro = new Button();
+            AoClicarNoBotaoAdicionarCarro = new Button();
             AoClicarNoBotaoCancelarCarro = new Button();
             selecionarValorDoVeiculo = new TextBox();
             panel1 = new Panel();
@@ -119,18 +119,18 @@
             selecionarFlex.Text = "Flex";
             selecionarFlex.UseVisualStyleBackColor = true;
             // 
-            // AoClicarNoBotaoCriarCarro
+            // AoClicarNoBotaoAdicionarCarro
             // 
-            AoClicarNoBotaoCriarCarro.BackColor = Color.DarkGray;
-            AoClicarNoBotaoCriarCarro.FlatStyle = FlatStyle.Flat;
-            AoClicarNoBotaoCriarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCriarCarro.Location = new Point(11, 26);
-            AoClicarNoBotaoCriarCarro.Name = "AoClicarNoBotaoCriarCarro";
-            AoClicarNoBotaoCriarCarro.Size = new Size(94, 28);
-            AoClicarNoBotaoCriarCarro.TabIndex = 9;
-            AoClicarNoBotaoCriarCarro.Text = "Adicionar";
-            AoClicarNoBotaoCriarCarro.UseVisualStyleBackColor = false;
-            AoClicarNoBotaoCriarCarro.Click += AoClicarNoBotaoCriarCarro_Click;
+            AoClicarNoBotaoAdicionarCarro.BackColor = Color.DarkGray;
+            AoClicarNoBotaoAdicionarCarro.FlatStyle = FlatStyle.Flat;
+            AoClicarNoBotaoAdicionarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            AoClicarNoBotaoAdicionarCarro.Location = new Point(11, 26);
+            AoClicarNoBotaoAdicionarCarro.Name = "AoClicarNoBotaoAdicionarCarro";
+            AoClicarNoBotaoAdicionarCarro.Size = new Size(94, 28);
+            AoClicarNoBotaoAdicionarCarro.TabIndex = 9;
+            AoClicarNoBotaoAdicionarCarro.Text = "Adicionar";
+            AoClicarNoBotaoAdicionarCarro.UseVisualStyleBackColor = false;
+            AoClicarNoBotaoAdicionarCarro.Click += AoClicarNoBotaoAdicionarCarro_Click;
             // 
             // AoClicarNoBotaoCancelarCarro
             // 
@@ -159,7 +159,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(AoClicarNoBotaoCriarCarro);
+            panel1.Controls.Add(AoClicarNoBotaoAdicionarCarro);
             panel1.Controls.Add(AoClicarNoBotaoCancelarCarro);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 232);
@@ -210,7 +210,7 @@
         private Label label3;
         private Label label4;
         private CheckBox selecionarFlex;
-        private Button AoClicarNoBotaoCriarCarro;
+        private Button AoClicarNoBotaoAdicionarCarro;
         private Button AoClicarNoBotaoCancelarCarro;
         private NumericUpDown numericUpDown1;
         private TextBox selecionarValorDoVeiculo;

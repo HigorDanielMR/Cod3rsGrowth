@@ -3,7 +3,6 @@ using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Forms;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.forms
@@ -27,17 +26,13 @@ namespace Cod3rsGrowth.forms
             _servicoVenda = servicoVenda;
 
             InitializeComponent();
-
-            selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
-            selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
-
-            selecionarCor.SelectedItem = null;
-            selecionarMarca.SelectedItem = null;
         }
 
         private void FormListagem_Load(object sender, EventArgs e)
         {
             CarregarListasAtualizadas();
+            CarregarEnums();
+            LimparComboBox();
         }
 
         private void AoClicarNoBotaoFiltrarDaTabelaCarro_Click(object sender, EventArgs e)
@@ -60,7 +55,6 @@ namespace Cod3rsGrowth.forms
                     _filtroCarro.Cor = indexdesejado;
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
@@ -164,11 +158,6 @@ namespace Cod3rsGrowth.forms
             CarregarListasAtualizadas();
         }
 
-        private void AoClicarNoBotaoAtualizarListaCarro_Click(object sender, EventArgs e)
-        {
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
-        }
-
         private void AoClicarNoBotaoCriarCarro_Click(object sender, EventArgs e)
         {
             var formulario = new CriandoCarro(_servicoCarro, _validacoesCarro);
@@ -180,6 +169,18 @@ namespace Cod3rsGrowth.forms
         {
             TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
+        }
+
+        private void CarregarEnums()
+        {
+            selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
+            selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
+        }
+
+        private void LimparComboBox()
+        {
+            selecionarCor.SelectedItem = null;
+            selecionarMarca.SelectedItem = null;
         }
     }
 }
