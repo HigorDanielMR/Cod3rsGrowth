@@ -156,8 +156,8 @@
             selecionarValorDoVeiculo.Size = new Size(196, 23);
             selecionarValorDoVeiculo.TabIndex = 13;
             selecionarValorDoVeiculo.Text = "0,00";
-            selecionarValorDoVeiculo.TextChanged += selecionarValorDoVeiculo_TextChanged;
-            selecionarValorDoVeiculo.KeyPress += selecionarValorDoVeiculo_KeyPress;
+            selecionarValorDoVeiculo.TextChanged += AoPreencherValorDoVeiculo_TextChanged;
+            selecionarValorDoVeiculo.KeyPress += AoPreencherValorDoVeiculo_KeyPress;
             // 
             // panel1
             // 
