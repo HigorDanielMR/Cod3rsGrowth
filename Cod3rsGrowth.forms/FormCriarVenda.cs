@@ -53,7 +53,7 @@ namespace Cod3rsGrowth.Forms
                     Cpf = txtCpf.Text,
                     Email = txtEmail.Text,
                     Telefone = txtTelefone.Text,
-                    DataDeCompra = DateTime.ParseExact(txtDataDeCompra.Text.Replace(" 00:00:00",""), "dd/MM/yyyy", CultureInfo.InvariantCulture),
+                    DataDeCompra = DateTime.Parse(DateTime.Now.ToString().Replace(" 00:00:00", "")),
                     ValorTotal = valorPago,
                     IdDoCarroVendido = IdDoCarroComprado,
                     Pago = true

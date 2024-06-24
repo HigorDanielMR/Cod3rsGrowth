@@ -34,8 +34,6 @@
             label3 = new Label();
             txtTelefone = new MaskedTextBox();
             txtEmail = new TextBox();
-            txtDataDeCompra = new DateTimePicker();
-            label1 = new Label();
             label4 = new Label();
             label5 = new Label();
             selecionandoCarro = new ComboBox();
@@ -98,26 +96,6 @@
             txtEmail.Size = new Size(390, 23);
             txtEmail.TabIndex = 7;
             // 
-            // txtDataDeCompra
-            // 
-            txtDataDeCompra.Format = DateTimePickerFormat.Short;
-            txtDataDeCompra.Location = new Point(12, 214);
-            txtDataDeCompra.Name = "txtDataDeCompra";
-            txtDataDeCompra.Size = new Size(390, 23);
-            txtDataDeCompra.TabIndex = 10;
-            txtDataDeCompra.TabStop = false;
-            txtDataDeCompra.Value = new DateTime(2024, 6, 21, 0, 0, 0, 0);
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label1.Location = new Point(12, 192);
-            label1.Name = "label1";
-            label1.Size = new Size(117, 19);
-            label1.TabIndex = 11;
-            label1.Text = "Data da compra";
-            // 
             // label4
             // 
             label4.AutoSize = true;
@@ -141,7 +119,7 @@
             // selecionandoCarro
             // 
             selecionandoCarro.FormattingEnabled = true;
-            selecionandoCarro.Location = new Point(12, 273);
+            selecionandoCarro.Location = new Point(12, 218);
             selecionandoCarro.Name = "selecionandoCarro";
             selecionandoCarro.Size = new Size(390, 23);
             selecionandoCarro.TabIndex = 14;
@@ -151,7 +129,7 @@
             // 
             label6.AutoSize = true;
             label6.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label6.Location = new Point(12, 251);
+            label6.Location = new Point(12, 196);
             label6.Name = "label6";
             label6.Size = new Size(123, 19);
             label6.TabIndex = 15;
@@ -190,7 +168,7 @@
             panel1.Controls.Add(AdicionarVenda);
             panel1.Controls.Add(AoClicarNoBotaoCancelarDeCriarVenda);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 334);
+            panel1.Location = new Point(0, 261);
             panel1.Name = "panel1";
             panel1.Size = new Size(414, 63);
             panel1.TabIndex = 18;
@@ -205,21 +183,19 @@
             panel2.Controls.Add(label3);
             panel2.Controls.Add(txtTelefone);
             panel2.Controls.Add(label2);
-            panel2.Controls.Add(txtDataDeCompra);
-            panel2.Controls.Add(label1);
             panel2.Controls.Add(txtCpf);
             panel2.Controls.Add(txtEmail);
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(414, 334);
+            panel2.Size = new Size(414, 261);
             panel2.TabIndex = 18;
             // 
             // FormCriarVenda
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(414, 397);
+            ClientSize = new Size(414, 324);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "FormCriarVenda";
@@ -238,8 +214,6 @@
         private Label label3;
         private MaskedTextBox txtTelefone;
         private TextBox txtEmail;
-        private DateTimePicker txtDataDeCompra;
-        private Label label1;
         private Label label4;
         private Label label5;
         private ComboBox selecionandoCarro;
