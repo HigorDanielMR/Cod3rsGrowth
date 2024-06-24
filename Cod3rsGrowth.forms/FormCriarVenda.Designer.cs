@@ -50,7 +50,7 @@
             // 
             txtNome.Location = new Point(12, 37);
             txtNome.Name = "txtNome";
-            txtNome.Size = new Size(390, 23);
+            txtNome.Size = new Size(260, 23);
             txtNome.TabIndex = 1;
             // 
             // label2
@@ -68,14 +68,14 @@
             txtCpf.Location = new Point(12, 96);
             txtCpf.Mask = "000,000,000-00";
             txtCpf.Name = "txtCpf";
-            txtCpf.Size = new Size(176, 23);
+            txtCpf.Size = new Size(123, 23);
             txtCpf.TabIndex = 3;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(203, 74);
+            label3.Location = new Point(141, 74);
             label3.Name = "label3";
             label3.Size = new Size(66, 19);
             label3.TabIndex = 4;
@@ -83,17 +83,17 @@
             // 
             // txtTelefone
             // 
-            txtTelefone.Location = new Point(203, 96);
+            txtTelefone.Location = new Point(141, 96);
             txtTelefone.Mask = "(99) 00000-0000";
             txtTelefone.Name = "txtTelefone";
-            txtTelefone.Size = new Size(199, 23);
+            txtTelefone.Size = new Size(131, 23);
             txtTelefone.TabIndex = 5;
             // 
             // txtEmail
             // 
             txtEmail.Location = new Point(12, 156);
             txtEmail.Name = "txtEmail";
-            txtEmail.Size = new Size(390, 23);
+            txtEmail.Size = new Size(260, 23);
             txtEmail.TabIndex = 7;
             // 
             // label4
@@ -121,7 +121,7 @@
             selecionandoCarro.FormattingEnabled = true;
             selecionandoCarro.Location = new Point(12, 218);
             selecionandoCarro.Name = "selecionandoCarro";
-            selecionandoCarro.Size = new Size(390, 23);
+            selecionandoCarro.Size = new Size(260, 23);
             selecionandoCarro.TabIndex = 14;
             selecionandoCarro.SelectedIndexChanged += AoSelecionarCarro;
             // 
@@ -154,7 +154,7 @@
             AoClicarNoBotaoCancelarDeCriarVenda.BackColor = Color.DarkGray;
             AoClicarNoBotaoCancelarDeCriarVenda.FlatStyle = FlatStyle.Flat;
             AoClicarNoBotaoCancelarDeCriarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(308, 23);
+            AoClicarNoBotaoCancelarDeCriarVenda.Location = new Point(178, 23);
             AoClicarNoBotaoCancelarDeCriarVenda.MaximumSize = new Size(94, 28);
             AoClicarNoBotaoCancelarDeCriarVenda.Name = "AoClicarNoBotaoCancelarDeCriarVenda";
             AoClicarNoBotaoCancelarDeCriarVenda.Size = new Size(94, 28);
@@ -170,7 +170,7 @@
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 261);
             panel1.Name = "panel1";
-            panel1.Size = new Size(414, 63);
+            panel1.Size = new Size(284, 63);
             panel1.TabIndex = 18;
             // 
             // panel2
@@ -188,14 +188,14 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(414, 261);
+            panel2.Size = new Size(284, 261);
             panel2.TabIndex = 18;
             // 
             // FormCriarVenda
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(414, 324);
+            ClientSize = new Size(284, 324);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "FormCriarVenda";

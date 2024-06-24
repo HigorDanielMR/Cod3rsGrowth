@@ -1,10 +1,10 @@
-using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Forms;
-using Cod3rsGrowth.Servicos.Servicos;
-using Cod3rsGrowth.Servicos.Validadores;
-using Microsoft.IdentityModel.Tokens;
 using System.Globalization;
+using Cod3rsGrowth.Forms;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Servicos.Servicos;
+using Microsoft.IdentityModel.Tokens;
+using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.forms
 {

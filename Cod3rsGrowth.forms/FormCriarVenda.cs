@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
+using System.Globalization;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
-using System.Globalization;
 
 namespace Cod3rsGrowth.Forms
 {

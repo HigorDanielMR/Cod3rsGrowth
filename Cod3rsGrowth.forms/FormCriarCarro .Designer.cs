@@ -49,7 +49,7 @@
             // 
             txtModelo.Location = new Point(12, 40);
             txtModelo.Name = "txtModelo";
-            txtModelo.Size = new Size(390, 23);
+            txtModelo.Size = new Size(260, 23);
             txtModelo.TabIndex = 0;
             // 
             // label1
@@ -67,7 +67,7 @@
             selecionarMarca.FormattingEnabled = true;
             selecionarMarca.Location = new Point(11, 97);
             selecionarMarca.Name = "selecionarMarca";
-            selecionarMarca.Size = new Size(196, 23);
+            selecionarMarca.Size = new Size(132, 23);
             selecionarMarca.TabIndex = 2;
             // 
             // label2
@@ -83,16 +83,16 @@
             // selecionarCor
             // 
             selecionarCor.FormattingEnabled = true;
-            selecionarCor.Location = new Point(213, 97);
+            selecionarCor.Location = new Point(149, 97);
             selecionarCor.Name = "selecionarCor";
-            selecionarCor.Size = new Size(188, 23);
+            selecionarCor.Size = new Size(123, 23);
             selecionarCor.TabIndex = 4;
             // 
             // label3
             // 
             label3.AutoSize = true;
             label3.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            label3.Location = new Point(213, 75);
+            label3.Location = new Point(149, 75);
             label3.Name = "label3";
             label3.Size = new Size(33, 19);
             label3.TabIndex = 5;
@@ -112,7 +112,7 @@
             // 
             selecionarFlex.AutoSize = true;
             selecionarFlex.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            selecionarFlex.Location = new Point(346, 157);
+            selecionarFlex.Location = new Point(217, 156);
             selecionarFlex.Name = "selecionarFlex";
             selecionarFlex.Size = new Size(55, 23);
             selecionarFlex.TabIndex = 8;
@@ -138,7 +138,7 @@
             CancelarCarro.BackColor = Color.DarkGray;
             CancelarCarro.FlatStyle = FlatStyle.Flat;
             CancelarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            CancelarCarro.Location = new Point(307, 26);
+            CancelarCarro.Location = new Point(178, 26);
             CancelarCarro.MaximumSize = new Size(94, 28);
             CancelarCarro.Name = "CancelarCarro";
             CancelarCarro.Size = new Size(94, 28);
@@ -153,9 +153,10 @@
             selecionarValorDoVeiculo.Location = new Point(11, 157);
             selecionarValorDoVeiculo.Name = "selecionarValorDoVeiculo";
             selecionarValorDoVeiculo.PlaceholderText = "R$";
-            selecionarValorDoVeiculo.Size = new Size(196, 23);
+            selecionarValorDoVeiculo.Size = new Size(132, 23);
             selecionarValorDoVeiculo.TabIndex = 13;
             selecionarValorDoVeiculo.Text = "0,00";
+            selecionarValorDoVeiculo.TextAlign = HorizontalAlignment.Right;
             selecionarValorDoVeiculo.TextChanged += AoPreencherValorDoVeiculo;
             selecionarValorDoVeiculo.KeyPress += AoPreencherValorDoVeiculo;
             // 
@@ -164,9 +165,9 @@
             panel1.Controls.Add(AdicionarCarro);
             panel1.Controls.Add(CancelarCarro);
             panel1.Dock = DockStyle.Bottom;
-            panel1.Location = new Point(0, 232);
+            panel1.Location = new Point(0, 199);
             panel1.Name = "panel1";
-            panel1.Size = new Size(414, 63);
+            panel1.Size = new Size(284, 63);
             panel1.TabIndex = 14;
             // 
             // panel2
@@ -183,18 +184,18 @@
             panel2.Dock = DockStyle.Fill;
             panel2.Location = new Point(0, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(414, 232);
+            panel2.Size = new Size(284, 199);
             panel2.TabIndex = 15;
             // 
             // FormCriarCarro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(414, 295);
+            ClientSize = new Size(284, 262);
             Controls.Add(panel2);
             Controls.Add(panel1);
             Name = "FormCriarCarro";
-            Text = "Cadatro de Carro";
+            Text = "Cadastro de Carro";
             Load += AoCarregarFormCriarCarro;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
