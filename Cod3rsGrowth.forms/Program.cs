@@ -27,7 +27,7 @@ namespace Cod3rsGrowth.forms
             }
         }
 
-        private static ServiceProvider CreateServices()
+        public static ServiceProvider CreateServices()
         {
             var conectionstring = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 
@@ -36,16 +36,18 @@ namespace Cod3rsGrowth.forms
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(conectionstring)
-                    .ScanIn(typeof(CriandoTabelas).Assembly).For.Migrations())
+                    .ScanIn(typeof(CriandoTabelaCarro).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
 
                 .AddTransient<ServicoCarro>()
                 .AddTransient<ServicoVenda>()
+                .AddTransient<FormListagem>()
+                .AddTransient<FormCriarVenda>()
+                .AddTransient<FormCriarCarro>()
                 .AddTransient<ValidacoesCarro>()
                 .AddTransient<ValidacoesVenda>()
                 .AddTransient<IRepositorioCarro, RepositorioCarro>()
                 .AddTransient<IRepositorioVenda, RepositorioVenda>()
-                .AddTransient<FormListagem>()
 
                 .BuildServiceProvider(false);
         }

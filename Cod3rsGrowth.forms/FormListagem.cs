@@ -1,8 +1,10 @@
-using Cod3rsGrowth.Dominio.Entidades;
+using System.Globalization;
+using Cod3rsGrowth.Forms;
 using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
-using Cod3rsGrowth.Servicos.Validadores;
 using Microsoft.IdentityModel.Tokens;
+using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.forms
 {
@@ -25,21 +27,16 @@ namespace Cod3rsGrowth.forms
             _servicoVenda = servicoVenda;
 
             InitializeComponent();
-
-            selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
-            selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
-
-            selecionarCor.SelectedItem = null;
-            selecionarMarca.SelectedItem = null;
         }
 
-        private void FormListagem_Load(object sender, EventArgs e)
+        private void AoCarregarFormListagem(object sender, EventArgs e)
         {
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
-            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
+            CarregarListasAtualizadas();
+            CarregarEnums();
+            LimparComboBox();
         }
 
-        private void AoClicarNoBotaoFiltrarDaTabelaCarro_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoFiltrarDaTabelaCarro(object sender, EventArgs e)
         {
             try
             {
@@ -59,7 +56,6 @@ namespace Cod3rsGrowth.forms
                     _filtroCarro.Cor = indexdesejado;
                 }
             }
-
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
@@ -68,7 +64,7 @@ namespace Cod3rsGrowth.forms
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
         }
 
-        private void AoClicarNoBotaoLimparFiltroDaTabelaCarro_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoLimparFiltroDaTabelaCarro(object sender, EventArgs e)
         {
             try
             {
@@ -91,13 +87,13 @@ namespace Cod3rsGrowth.forms
 
                 TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
             }
         }
 
-        private void AoClicarNoBotaoFiltrarNaTabelaVenda_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoFiltrarNaTabelaVenda(object sender, EventArgs e)
         {
             try
             {
@@ -108,7 +104,7 @@ namespace Cod3rsGrowth.forms
 
                 if (!procurarData.Text.IsNullOrEmpty() && procurarData.Text != "  /  /")
                 {
-                    _filtroVenda.DataDeCompra = DateTime.Parse(procurarData.Text);
+                    _filtroVenda.DataDeCompra = DateTime.ParseExact(procurarData.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
 
                 if (!txtProcurarEmail.Text.IsNullOrEmpty())
@@ -120,7 +116,6 @@ namespace Cod3rsGrowth.forms
                 {
                     _filtroVenda.Cpf = procurarCpf.Text;
                 }
-
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
             }
             catch (Exception ex)
@@ -129,7 +124,7 @@ namespace Cod3rsGrowth.forms
             }
         }
 
-        private void AoCLicarNoBotaoLimparFIltroDaTabelaVenda_Click(object sender, EventArgs e)
+        private void AoClicarNoBotaoLimparFIltroDaTabelaVenda(object sender, EventArgs e)
         {
             try
             {
@@ -155,6 +150,37 @@ namespace Cod3rsGrowth.forms
             {
                 MessageBox.Show($"{ex.Message}");
             }
+        }
+        private void AoClicarNoBotaoCriarVenda(object sender, EventArgs e)
+        {
+            var formulario = new FormCriarVenda(_validacoesVenda, _servicoVenda, _servicoCarro);
+            formulario.ShowDialog();
+            CarregarListasAtualizadas();
+        }
+
+        private void AoClicarNoBotaoCriarCarro(object sender, EventArgs e)
+        {
+            var formulario = new FormCriarCarro(_servicoCarro, _validacoesCarro);
+            formulario.ShowDialog();
+            CarregarListasAtualizadas();
+        }
+
+        private void CarregarListasAtualizadas()
+        {
+            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
+            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
+        }
+
+        private void CarregarEnums()
+        {
+            selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
+            selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
+        }
+
+        private void LimparComboBox()
+        {
+            selecionarCor.SelectedItem = null;
+            selecionarMarca.SelectedItem = null;
         }
     }
 }

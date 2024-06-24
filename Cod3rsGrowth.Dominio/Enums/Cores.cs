@@ -7,6 +7,21 @@
         Branco,
         Vermelho,
         Prata,
-        Azul
+        Azul,
+        Verde,
+        Amarelo,
+        Laranja,
+        Roxo,
+        Marrom,
+        Rosa,
+        Ciano,
+        Magenta,
+        Bege,
+        Bordô,
+        Cinza,
+        Dourado,
+        Prateado,
+        Turquesa,
+        Violeta
     }
 }

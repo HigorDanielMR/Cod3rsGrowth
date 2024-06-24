@@ -33,11 +33,13 @@ namespace Cod3rsGrowth.Servicos.Validadores
                 .NotEmpty().WithMessage("Campo telefone não preenchido.")
                 .Must(ValidarTelefone).WithMessage("Formato de telefone inválido.");
 
+            RuleFor(venda => venda)
+                .Must(ValidaDataDeComprarCriar).WithMessage("Data de compra inválida.");
+
             RuleSet("Editar", () =>
             {
                 RuleFor(venda => venda)
-                    .Must(ValidarDataDeCompra)
-                    .WithMessage("Uma venda concluida não pode ter a data alterada.");
+                    .Must(ValidarDataDeCompra).WithMessage("Uma venda concluida não pode ter a data alterada.");
             });
         }
 
@@ -61,10 +63,16 @@ namespace Cod3rsGrowth.Servicos.Validadores
             }
             return cpf.EndsWith(cpf);
         }
+
         private bool ValidarTelefone(string telefone)
         {
             var regex = new Regex(@"\(?([0-9]{2})\)?[-. ]?([0-9]{5})[-. ]?([0-9]{4})");
             return regex.IsMatch(telefone);
+        }
+
+        private bool ValidaDataDeComprarCriar(Venda venda)
+        {
+            return venda.DataDeCompra <= DateTime.Now ? true : false;
         }
 
         private bool ValidarDataDeCompra(Venda venda)

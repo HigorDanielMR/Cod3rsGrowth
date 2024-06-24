@@ -1,17 +1,18 @@
 ﻿using Xunit;
 using FluentValidation;
-using Microsoft.Extensions.DependencyInjection;
-using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
+using Microsoft.Extensions.DependencyInjection;
+using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
+using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 namespace Cod3rsGrowth.Testes
 {
     public class TesteVenda : TesteBase
     {
-        private ServicoVenda _servicoVenda;
         private List<Venda> _listaMock;
-        private readonly FiltroVenda _venda;
+        private ServicoVenda _servicoVenda;
+        private FiltroVenda _venda = new FiltroVenda();
         public TesteVenda()
         {
             CarregarServico();
@@ -27,7 +28,7 @@ namespace Cod3rsGrowth.Testes
         {
             List<Venda> listaDeVendas = new List<Venda> 
             {
-                new()
+                new Venda
                 {
                     Nome = "higor",
                     Cpf = "714.696.331-40",
@@ -36,7 +37,7 @@ namespace Cod3rsGrowth.Testes
                     Telefone = "65651651651",
                     ValorTotal = 100
                 },
-                new()
+                new Venda
                 {
                     Nome = "Daniel",
                     Cpf = "124.454.878-77",
@@ -44,8 +45,9 @@ namespace Cod3rsGrowth.Testes
                     Pago = true,
                     Telefone = "01209091212",
                     ValorTotal = 100
+
                 },
-                new()
+                new Venda
                 {
                     Nome = "Higor Daniel",
                     Cpf = "124.454.878-77",
@@ -53,7 +55,8 @@ namespace Cod3rsGrowth.Testes
                     DataDeCompra = new DateTime(2024, 5, 10),
                     Pago = true,
                     Telefone = "01209091212",
-                    ValorTotal = 100
+                    ValorTotal = 100,
+                    IdDoCarroVendido = 12
                 }
             };
             foreach (var venda in listaDeVendas)
@@ -559,7 +562,7 @@ namespace Cod3rsGrowth.Testes
             //arrange
             var novaVenda = new Venda
             {
-                Id = 2,
+                Id = 3,
                 Nome = "higor",
                 Cpf = "213.344.567-90",
                 Email = "higordaniel@gmail.com",
@@ -581,11 +584,12 @@ namespace Cod3rsGrowth.Testes
             var novaVenda = new Venda
             {
                 Id = 3,
-                Nome = "higor",
-                Cpf = "213.344.567-90",
+                Nome = "Higor",
+                Cpf = "212.344.567-90",
                 Email = "higordaniel@gmail.com",
                 DataDeCompra = new DateTime(2024, 5, 10),
                 Pago = true,
+                IdDoCarroVendido = 12,
                 Telefone = "(65)65161-1651",
                 ValorTotal = 100
             };
@@ -602,9 +606,10 @@ namespace Cod3rsGrowth.Testes
             var vendaDesejada = _listaMock.FirstOrDefault();
             //act
             _servicoVenda.Remover(vendaDesejada.Id);
-            var excessao = Assert.Throws<Exception>(() => _servicoVenda.Remover(vendaDesejada.Id));
+            var excessao = Assert.Throws<Exception>(() => _servicoVenda.Editar(vendaDesejada));
+
             //asset
-            Assert.Equal($"A venda com ID {vendaDesejada.Id} não foi encontrada", excessao.Message);
+            Assert.Equivalent($"A venda com ID {vendaDesejada.Id} não foi encontrada", excessao.Message);
         }
     }
 }

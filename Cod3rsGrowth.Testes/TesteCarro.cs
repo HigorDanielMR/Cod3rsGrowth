@@ -1,17 +1,17 @@
 ﻿using Xunit;
 using FluentValidation;
 using Cod3rsGrowth.Dominio.Enums;
-using Microsoft.Extensions.DependencyInjection;
-using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
+using Microsoft.Extensions.DependencyInjection;
+using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
 
 namespace Cod3rsGrowth.Testes
 {
     public class TesteCarro : TesteBase
     {
-        private ServicoCarro _servicoCarro;
         private List<Carro> _listaMock;
+        private ServicoCarro _servicoCarro;
         private readonly FiltroCarro _carro;
         public TesteCarro()
         {

@@ -48,8 +48,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            var idDoCarroNoBanco = _connection.Insert(carro);
-            return ObterPorId(carro.Id);
+            var idDoCarroNoBanco = _connection.InsertWithInt32Identity(carro);
+            return ObterPorId(idDoCarroNoBanco);
         }
 
         public Carro Editar(Carro carroAtualizado)
@@ -58,10 +58,10 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (carroDesejado != null)
             {
-                carroDesejado.Modelo = carroAtualizado.Modelo;
                 carroDesejado.Cor = carroAtualizado.Cor;
                 carroDesejado.Flex = carroAtualizado.Flex;
                 carroDesejado.Marca = carroAtualizado.Marca;
+                carroDesejado.Modelo = carroAtualizado.Modelo;
                 carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
                 _connection.Update(carroAtualizado);
