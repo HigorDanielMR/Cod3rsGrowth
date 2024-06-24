@@ -36,7 +36,7 @@ namespace Cod3rsGrowth.forms
                 .ConfigureRunner(rb => rb
                     .AddSqlServer()
                     .WithGlobalConnectionString(conectionstring)
-                    .ScanIn(typeof(CriandoTabelas).Assembly).For.Migrations())
+                    .ScanIn(typeof(CriandoTabelaCarro).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
 
                 .AddTransient<ServicoCarro>()
