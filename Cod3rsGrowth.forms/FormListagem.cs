@@ -182,5 +182,53 @@ namespace Cod3rsGrowth.forms
             selecionarCor.SelectedItem = null;
             selecionarMarca.SelectedItem = null;
         }
+
+        private void AoClicarNoBotaoRemoverVenda(object sender, EventArgs e)
+        {
+            try
+            {
+                var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
+                var colunaDeseada = 0;
+
+                var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDeseada].Value.ToString());
+
+                DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do Id {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    _servicoVenda.Remover(idSelecionado);
+                }
+
+                CarregarListasAtualizadas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
+
+        private void AoClicarNoBotaoRemoverCarro(object sender, EventArgs e)
+        {
+            try
+            {
+                var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
+                var colunaDeseada = 0;
+
+                var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDeseada].Value.ToString());
+
+                DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do Id {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
+
+                if (resultado == DialogResult.Yes)
+                {
+                    _servicoCarro.Remover(idSelecionado);
+                }
+
+                CarregarListasAtualizadas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
     }
 }
