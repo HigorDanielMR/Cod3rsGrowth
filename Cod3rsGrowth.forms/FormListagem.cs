@@ -182,5 +182,62 @@ namespace Cod3rsGrowth.forms
             selecionarCor.SelectedItem = null;
             selecionarMarca.SelectedItem = null;
         }
+
+        private void AoClicarNoBotaoRemoverVenda(object sender, EventArgs e)
+        {
+            try
+            {
+                var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
+                var colunaDesejadaIdVenda = TabelaVenda.Columns[0].Index;
+                var colunaDesejadaIdCarro = TabelaVenda.Columns["IdDoCarroVendido"].Index;
+
+                var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdVenda].Value.ToString());
+                var idCarroSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdCarro].Value.ToString());
+
+                DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do Id {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
+
+                DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir também permanentemente o carro ID {idCarroSelecionado} que está associado a venda ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
+
+                if (resultado == DialogResult.Yes && resultadoRemoverCarro == DialogResult.Yes)
+                {
+                    _servicoVenda.Remover(idSelecionado);
+                    _servicoCarro.Remover(idCarroSelecionado);
+                }
+                else if(resultado == DialogResult.Yes)
+                {
+                    _servicoVenda.Remover(idSelecionado);
+                }
+
+                CarregarListasAtualizadas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
+
+        private void AoClicarNoBotaoRemoverCarro(object sender, EventArgs e)
+        {
+            try
+            {
+                var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
+                var colunaDeseada = 0;
+                var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDeseada].Value.ToString());
+
+                DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
+
+
+                if (resultadoRemoverCarro == DialogResult.Yes)
+                {
+                    _servicoCarro.Remover(idSelecionado);
+                }
+
+                CarregarListasAtualizadas();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
     }
 }
