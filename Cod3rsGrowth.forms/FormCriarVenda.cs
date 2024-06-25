@@ -70,14 +70,27 @@ namespace Cod3rsGrowth.Forms
 
         private void CarregarComboBoxCarro()
         {
-            var var = _servico.ObterTodos(_filtro);
-
-            foreach (var car in var)
+            try
             {
-                carro.Add(car);
-                comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
+                IEnumerable<Carro> obter;
+                var carros = _servico.ObterTodos(_filtro);
+                var venda = _servicoVenda.ObterTodos(_filtroVenda);
+                if (venda.Count != 0)
+                    obter = carros.Where(x => x.Id != venda.FirstOrDefault().IdDoCarroVendido);
+                else
+                    obter = carros;
+
+                foreach (var car in obter)
+                {
+                    carro.Add(car);
+                    comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
+                }
+                selecionandoCarro.DataSource = comboBoxSelecionarCarro;
             }
-            selecionandoCarro.DataSource = comboBoxSelecionarCarro;
+            catch(Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
         }
 
         private void AoSelecionarCarro(object sender, EventArgs e)
