@@ -1,13 +1,13 @@
-﻿using FluentValidation;
-using System.Globalization;
-using Cod3rsGrowth.Dominio.Entidades;
+﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.Forms
 {
-    public partial class FormCriarVenda : Form
+    public partial class FormEditarVenda : Form
     {
+        private int _idDaEdicao;
         private ServicoCarro _servico;
         private ServicoVenda _servicoVenda;
         private ValidacoesVenda _validacoesVenda;
@@ -15,21 +15,34 @@ namespace Cod3rsGrowth.Forms
         private FiltroCarro _filtro = new FiltroCarro();
         private FiltroVenda _filtroVenda = new FiltroVenda();
         private List<string> comboBoxSelecionarCarro = new List<string>();
-        public FormCriarVenda(ValidacoesVenda validacoes, ServicoVenda servico, ServicoCarro servicoCarro)
+        private string _nome;
+        private string _cpf;
+        private string _telefone;
+        private string _email;
+        private string _data;
+        public FormEditarVenda(int IdVenda, ServicoCarro servicoCarro, ServicoVenda servico, ValidacoesVenda validacoes, string nome, string cpf, string telefone, string email, string data)
         {
+            _idDaEdicao = IdVenda;
             _servicoVenda = servico;
             _servico = servicoCarro;
             _validacoesVenda = validacoes;
 
+            _nome = nome;
+            _cpf = cpf;
+            _telefone = telefone;
+            _email = email;
+            _data = data;
+
             InitializeComponent();
         }
 
-        private void AoCarregarFormCriarVenda(object sender, EventArgs e)
+        private void AoCarregarFomEditarVenda(object sender, EventArgs e)
         {
             CarregarComboBoxCarro();
+            CarregarDados();
         }
 
-        private void AoClicarNoBotaoCancelarDeVenda(object sender, EventArgs e)
+        private void AoClicarNoBotaoCancelarEditarVenda(object sender, EventArgs e)
         {
             try
             {
@@ -37,34 +50,36 @@ namespace Cod3rsGrowth.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}", "Erro ao cancelar");
+                MessageBox.Show($"{ex.Message}", "Erro cancelar Edicao");
             }
         }
 
-        private void AoClicarNoBotaoAdicionarVenda(object sender, EventArgs e)
+        private void AoClicarNoBotaoSalvarEdicaoVenda(object sender, EventArgs e)
         {
             try
             {
+                carro = _servico.ObterTodos(_filtro);
                 var IdDoCarroComprado = carro[selecionandoCarro.SelectedIndex].Id;
                 var valorPago = carro[selecionandoCarro.SelectedIndex].ValorDoVeiculo;
-                var venda = new Venda
+                var vendaNova = new Venda
                 {
-                    Nome = txtNome.Text,
+                    Id = _idDaEdicao,
                     Cpf = txtCpf.Text,
                     Email = txtEmail.Text,
-                    Telefone = txtTelefone.Text,
-                    DataDeCompra = DateTime.Parse(DateTime.Now.ToString()),
-                    ValorTotal = valorPago,
                     IdDoCarroVendido = IdDoCarroComprado,
-                    Pago = true
+                    ValorTotal = valorPago,
+                    DataDeCompra = DateTime.Parse(_data),
+                    Nome = txtNome.Text,
+                    Telefone = txtTelefone.Text
                 };
-                _servicoVenda.Criar(venda);
-                MessageBox.Show("Venda criada com sucesso.");
+
+                _servicoVenda.Editar(vendaNova);
+                MessageBox.Show($"Venda {_idDaEdicao} editada com successo!", "Editando venda");
                 this.Close();
             }
-            catch (ValidationException ex)
+            catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}", "Erros ao criar venda");
+                MessageBox.Show($"{ex.Message}");
             }
         }
 
@@ -75,7 +90,7 @@ namespace Cod3rsGrowth.Forms
                 IEnumerable<Carro> obter;
                 var carros = _servico.ObterTodos(_filtro);
                 var venda = _servicoVenda.ObterTodos(_filtroVenda);
-                if (venda.Count != 0)
+                if (venda.Count != 0 && venda.FirstOrDefault().Id != _idDaEdicao)
                     obter = carros.Where(x => x.Id != venda.FirstOrDefault().IdDoCarroVendido);
                 else
                     obter = carros;
@@ -87,19 +102,27 @@ namespace Cod3rsGrowth.Forms
                 }
                 selecionandoCarro.DataSource = comboBoxSelecionarCarro;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
             }
         }
 
-        private void AoSelecionarCarro(object sender, EventArgs e)
+        private void CarregarDados()
+        {
+            txtCpf.Text = _cpf;
+            txtEmail.Text = _email;
+            txtNome.Text = _nome;
+            txtTelefone.Text = _telefone;
+        }
+
+        private void AoSelecionarCarroComprado(object sender, EventArgs e)
         {
             try
             {
                 var var = selecionandoCarro.SelectedItem;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}");
             }

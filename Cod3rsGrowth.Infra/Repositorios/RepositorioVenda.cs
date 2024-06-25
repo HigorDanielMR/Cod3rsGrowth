@@ -64,6 +64,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 vendaDesejada.Telefone = vendaAtualizada.Telefone;
                 vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
                 vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
+                vendaDesejada.IdDoCarroVendido = vendaAtualizada.IdDoCarroVendido;
 
                 _connection.Update(vendaDesejada);
             }

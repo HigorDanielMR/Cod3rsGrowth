@@ -203,7 +203,7 @@ namespace Cod3rsGrowth.forms
                     _servicoVenda.Remover(idSelecionado);
                     _servicoCarro.Remover(idCarroSelecionado);
                 }
-                else if(resultado == DialogResult.Yes)
+                else if (resultado == DialogResult.Yes)
                 {
                     _servicoVenda.Remover(idSelecionado);
                 }
@@ -238,6 +238,41 @@ namespace Cod3rsGrowth.forms
             {
                 MessageBox.Show($"{ex.Message}");
             }
+        }
+
+        private void AoClicarNoBotaoEditarVenda(object sender, EventArgs e)
+        {
+            var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
+            var colunaDesejada = 0;
+            var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
+
+            var nome = TabelaVenda.Rows[linhaSelecionada].Cells[1].Value.ToString();
+            var cpf = TabelaVenda.Rows[linhaSelecionada].Cells[2].Value.ToString();
+            var telefone = TabelaVenda.Rows[linhaSelecionada].Cells[4].Value.ToString();
+            var email = TabelaVenda.Rows[linhaSelecionada].Cells[3].Value.ToString();
+            var data = TabelaVenda.Rows[linhaSelecionada].Cells[6].Value.ToString();
+
+
+            var formulario = new FormEditarVenda(idSelecionado, _servicoCarro, _servicoVenda, _validacoesVenda, nome, cpf, telefone, email, data);
+            formulario.ShowDialog();
+            CarregarListasAtualizadas();
+        }
+
+        private void AoClicarNoBotaoEditarCarro(object sender, EventArgs e)
+        {
+            var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
+            var colunaDesejada = 0;
+            var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
+
+            var modelo = TabelaCarro.Rows[linhaSelecionada].Cells[2].Value.ToString();
+            var valor = TabelaCarro.Rows[linhaSelecionada].Cells[4].Value.ToString();
+            var cor =(Cores) TabelaCarro.Rows[linhaSelecionada].Cells[3].Value;
+            var marca = (Marcas) TabelaCarro.Rows[linhaSelecionada].Cells[1].Value;
+            var flex = bool.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[5].Value.ToString());
+
+            var formulario = new FormEditarCarro(modelo,cor, marca, valor, flex, _servicoCarro, idSelecionado);
+            formulario.ShowDialog();
+            CarregarListasAtualizadas();
         }
     }
 }
