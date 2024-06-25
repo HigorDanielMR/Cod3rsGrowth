@@ -188,13 +188,22 @@ namespace Cod3rsGrowth.forms
             try
             {
                 var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
-                var colunaDeseada = 0;
+                var colunaDesejadaIdVenda = TabelaVenda.Columns[0].Index;
+                var colunaDesejadaIdCarro = TabelaVenda.Columns["IdDoCarroVendido"].Index;
 
-                var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDeseada].Value.ToString());
+                var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdVenda].Value.ToString());
+                var idCarroSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdCarro].Value.ToString());
 
                 DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do Id {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
 
-                if (resultado == DialogResult.Yes)
+                DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir também permanentemente o carro ID {idCarroSelecionado} que está associado a venda ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
+
+                if (resultado == DialogResult.Yes && resultadoRemoverCarro == DialogResult.Yes)
+                {
+                    _servicoVenda.Remover(idSelecionado);
+                    _servicoCarro.Remover(idCarroSelecionado);
+                }
+                else if(resultado == DialogResult.Yes)
                 {
                     _servicoVenda.Remover(idSelecionado);
                 }
@@ -213,12 +222,12 @@ namespace Cod3rsGrowth.forms
             {
                 var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
                 var colunaDeseada = 0;
-
                 var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDeseada].Value.ToString());
 
-                DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do Id {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
+                DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
 
-                if (resultado == DialogResult.Yes)
+
+                if (resultadoRemoverCarro == DialogResult.Yes)
                 {
                     _servicoCarro.Remover(idSelecionado);
                 }
