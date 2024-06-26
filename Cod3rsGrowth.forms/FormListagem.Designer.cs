@@ -84,9 +84,9 @@
             vendaBindingSource = new BindingSource(components);
             tabPage2 = new TabPage();
             panel6 = new Panel();
+            BotaoEditarCarro = new Button();
             BotaoRemoverCarro = new Button();
             CriarCarro = new Button();
-            BotaoEditarCarro = new Button();
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -650,6 +650,19 @@
             panel6.Size = new Size(858, 58);
             panel6.TabIndex = 8;
             // 
+            // BotaoEditarCarro
+            // 
+            BotaoEditarCarro.BackColor = Color.DarkGray;
+            BotaoEditarCarro.FlatStyle = FlatStyle.Flat;
+            BotaoEditarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BotaoEditarCarro.Location = new Point(630, 27);
+            BotaoEditarCarro.Name = "BotaoEditarCarro";
+            BotaoEditarCarro.Size = new Size(94, 28);
+            BotaoEditarCarro.TabIndex = 2;
+            BotaoEditarCarro.Text = "Editar";
+            BotaoEditarCarro.UseVisualStyleBackColor = false;
+            BotaoEditarCarro.Click += AoClicarNoBotaoEditarCarro;
+            // 
             // BotaoRemoverCarro
             // 
             BotaoRemoverCarro.BackColor = Color.DarkGray;
@@ -678,19 +691,6 @@
             CriarCarro.Text = "Criar";
             CriarCarro.UseVisualStyleBackColor = false;
             CriarCarro.Click += AoClicarNoBotaoCriarCarro;
-            // 
-            // BotaoEditarCarro
-            // 
-            BotaoEditarCarro.BackColor = Color.DarkGray;
-            BotaoEditarCarro.FlatStyle = FlatStyle.Flat;
-            BotaoEditarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BotaoEditarCarro.Location = new Point(630, 27);
-            BotaoEditarCarro.Name = "BotaoEditarCarro";
-            BotaoEditarCarro.Size = new Size(94, 28);
-            BotaoEditarCarro.TabIndex = 2;
-            BotaoEditarCarro.Text = "Editar";
-            BotaoEditarCarro.UseVisualStyleBackColor = false;
-            BotaoEditarCarro.Click += AoClicarNoBotaoEditarCarro;
             // 
             // FormListagem
             // 

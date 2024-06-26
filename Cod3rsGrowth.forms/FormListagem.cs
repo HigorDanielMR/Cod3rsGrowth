@@ -344,17 +344,29 @@ namespace Cod3rsGrowth.forms
         private void AtualizarValorDoVeiculoNaVenda(int idDoCarro)
         {
             var carro = _servicoCarro.ObterPorId(idDoCarro);
+
+            if (carro == null)
+            {
+                throw new Exception("Carro não encontrado");
+            }
+
             var valorDoCarro = carro.ValorDoVeiculo;
-            var indexPadrao = 0;
-
             _filtroVenda.IdDoCarroVendido = idDoCarro;
-            List<Venda> venda = _servicoVenda.ObterTodos(_filtroVenda);
+            List<Venda> vendas = _servicoVenda.ObterTodos(_filtroVenda);
 
-            venda[indexPadrao].ValorTotal = valorDoCarro;
-            var vendaAtualizada = venda[indexPadrao];
-            _servicoVenda.Editar(vendaAtualizada);
+            if (vendas.Count != 0)
+            {
+                var primeiraVenda = vendas[0];
+                primeiraVenda.ValorTotal = valorDoCarro;
+                _servicoVenda.Editar(primeiraVenda);
+            }
+            else
+            {
+                return;
+            }
 
             _filtroVenda = new FiltroVenda();
         }
+
     }
 }

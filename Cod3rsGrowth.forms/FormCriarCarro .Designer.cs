@@ -154,7 +154,7 @@
             selecionarValorDoVeiculo.Name = "selecionarValorDoVeiculo";
             selecionarValorDoVeiculo.PlaceholderText = "R$";
             selecionarValorDoVeiculo.Size = new Size(132, 23);
-            selecionarValorDoVeiculo.TabIndex = 13;
+            selecionarValorDoVeiculo.TabIndex = 16;
             selecionarValorDoVeiculo.Text = "0,00";
             selecionarValorDoVeiculo.TextAlign = HorizontalAlignment.Right;
             selecionarValorDoVeiculo.TextChanged += AoPreencherValorDoVeiculo;

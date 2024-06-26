@@ -44,7 +44,7 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
