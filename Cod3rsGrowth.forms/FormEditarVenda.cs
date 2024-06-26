@@ -90,10 +90,16 @@ namespace Cod3rsGrowth.Forms
                 IEnumerable<Carro> obter;
                 var carros = _servico.ObterTodos(_filtro);
                 var venda = _servicoVenda.ObterTodos(_filtroVenda);
-                if (venda.Count != 0 && venda.FirstOrDefault().Id != _idDaEdicao)
-                    obter = carros.Where(x => x.Id != venda.FirstOrDefault().IdDoCarroVendido);
-                else
-                    obter = carros;
+
+                foreach( var vendas in venda)
+                {
+                    if (venda.Count != 0 && vendas.Id != _idDaEdicao)
+                        carros = carros.Where(x => x.Id != vendas.IdDoCarroVendido).ToList();
+                    else
+                        carros.ToList();
+                }
+
+                obter = carros;
 
                 foreach (var car in obter)
                 {
