@@ -1,31 +1,25 @@
 ﻿using LinqToDB;
-using LinqToDB.Data;
-using System.Configuration;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Infra.ConexaoComBanco;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
     public class RepositorioVenda : IRepositorioVenda
     {
-        private DataConnection _connection;
-        protected ITable<Venda> TabelaVenda;
+        private MeuContextoDeDados _connection;
 
-        public RepositorioVenda()
+        public RepositorioVenda(MeuContextoDeDados meuContextoDeDados)
         {
-            _connection = new DataConnection(
-            new DataOptions()
-                .UseSqlServer(ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ConnectionString));
-
-            TabelaVenda = _connection.GetTable<Venda>();
+            _connection = meuContextoDeDados;
         }
 
         public List<Venda> ObterTodos(FiltroVenda filtro)
         {
-            var query = FiltroParaBusca(TabelaVenda, filtro);
+            var query = FiltroParaBusca(_connection.Venda, filtro);
             if (query == null)
             {
-                return TabelaVenda.ToList();
+                return _connection.Venda.ToList();
             }
             else
             {
@@ -36,7 +30,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Venda ObterPorId(int IdDeBusca)
         {
-            var query = from p in TabelaVenda
+            var query = from p in _connection.Venda
                         where p.Id == IdDeBusca
                         select p;
 
@@ -54,7 +48,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Venda Editar(Venda vendaAtualizada)
         {
-            var vendaDesejada = TabelaVenda.FirstOrDefault(venda => venda.Id == vendaAtualizada.Id);
+            var vendaDesejada = _connection.Venda.FirstOrDefault(venda => venda.Id == vendaAtualizada.Id);
             if (vendaDesejada != null)
             {
                 vendaDesejada.Cpf = vendaAtualizada.Cpf;
@@ -76,7 +70,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         }
         public void Remover(int Id)
         {
-            TabelaVenda
+            _connection.Venda
                 .Where(venda => venda.Id == Id)
                 .Delete();
         }
@@ -85,7 +79,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             var query = vendas.AsQueryable();
             if (venda != null)
-            {
                 if (venda.Nome != null)
                     query = query.Where(d => d.Nome.Contains(venda.Nome));
 
@@ -100,7 +93,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
                 if (venda.Email != null)
                     query = query.Where(d => d.Email.Contains(venda.Email));
-            }
 
             return query;
         }

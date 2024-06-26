@@ -6,40 +6,53 @@ using Cod3rsGrowth.Dominio.Interfaces;
 namespace Cod3rsGrowth.Servicos.Validadores
 {
     public class ValidacoesVenda : AbstractValidator<Venda>
-    {   
+    {
         private readonly IRepositorioVenda _repositorio;
         public ValidacoesVenda(IRepositorioVenda repositorio)
         {
             _repositorio = repositorio;
+            var limiteMaximoDeCaracteres = 100;
+            var regexParaConterApenasLetras = "^[a-zA-ZÀ-ú ]+$";
 
             RuleFor(venda => venda.Nome)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Campo nome não preenchido.")
-                .MaximumLength(100).WithMessage("O nome deve ter no máximo 100 caracteres.")
-                .Matches("^[a-zA-ZÀ-ú ]+$").WithMessage("O nome deve conter apenas letras.");
+                .NotEmpty()
+                .WithMessage("Campo nome não preenchido.")
+                .MaximumLength(limiteMaximoDeCaracteres)
+                .WithMessage("O nome deve ter no máximo 100 caracteres.")
+                .Matches(regexParaConterApenasLetras)
+                .WithMessage("O nome deve conter apenas letras.");
 
             RuleFor(venda => venda.Cpf)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Campo cpf não preenchido.")
-                .Must(ValidarCpf).WithMessage("Formato CPF inválido.");
+                .NotEmpty()
+                .WithMessage("Campo cpf não preenchido.")
+                .Must(ValidarCpf)
+                .WithMessage("Formato CPF inválido.");
 
             RuleFor(venda => venda.Email)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Campo e-mail não preenchido.")
-                .EmailAddress().WithMessage("Formato de e-mail inválido.");
+                .NotEmpty()
+                .WithMessage("Campo e-mail não preenchido.")
+                .EmailAddress()
+                .WithMessage("Formato de e-mail inválido.");
 
             RuleFor(venda => venda.Telefone)
                 .Cascade(CascadeMode.Stop)
-                .NotEmpty().WithMessage("Campo telefone não preenchido.")
-                .Must(ValidarTelefone).WithMessage("Formato de telefone inválido.");
+                .NotEmpty()
+                .WithMessage("Campo telefone não preenchido.")
+                .Must(ValidarTelefone)
+                .WithMessage("Formato de telefone inválido.");
 
             RuleFor(venda => venda)
-                .Must(ValidaDataDeComprarCriar).WithMessage("Data de compra inválida.");
+                .Must(ValidaDataDeComprarCriar)
+                .WithMessage("Data de compra inválida.");
 
             RuleSet("Editar", () =>
             {
                 RuleFor(venda => venda)
-                    .Must(ValidarDataDeCompra).WithMessage("Uma venda concluida não pode ter a data alterada.");
+                    .Must(ValidarDataDeCompra)
+                    .WithMessage("Uma venda concluida não pode ter a data alterada.");
             });
         }
 
@@ -47,20 +60,12 @@ namespace Cod3rsGrowth.Servicos.Validadores
         {
             cpf = new string(cpf.Where(char.IsDigit).ToArray());
 
-            if (cpf.Distinct().Count() == 1)
-            {
-                return false;
-            }
+            if (cpf.Distinct().Count() == 1) return false;
 
-            if (cpf.Length != 11)
-            {
-                return false;
-            }
+            if (cpf.Length != 11) return false;
 
-            if (new string(cpf[0], cpf.Length) == cpf)
-            {
-                return false;
-            }
+            if (new string(cpf[0], cpf.Length) == cpf) return false;
+
             return cpf.EndsWith(cpf);
         }
 
