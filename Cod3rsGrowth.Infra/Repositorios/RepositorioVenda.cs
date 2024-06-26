@@ -68,6 +68,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             }
             return vendaAtualizada;
         }
+
         public void Remover(int Id)
         {
             _connection.Venda
@@ -93,6 +94,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
                 if (venda.Email != null)
                     query = query.Where(d => d.Email.Contains(venda.Email));
+
+                if (venda.IdDoCarroVendido != null)
+                    query = query.Where(d => d.IdDoCarroVendido == venda.IdDoCarroVendido);
 
             return query;
         }

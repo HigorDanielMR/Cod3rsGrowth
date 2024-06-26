@@ -83,7 +83,7 @@ namespace Cod3rsGrowth.Servicos.Validadores
         private bool ValidarDataDeCompra(Venda venda)
         {
             var vendaDobanco = _repositorio.ObterPorId(venda.Id);
-            return venda.DataDeCompra == vendaDobanco.DataDeCompra ? true : false;
+            return venda.DataDeCompra == vendaDobanco.DataDeCompra;
         }
     }
 }

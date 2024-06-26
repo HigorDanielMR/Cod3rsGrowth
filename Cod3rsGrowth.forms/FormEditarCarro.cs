@@ -1,29 +1,30 @@
-﻿using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Enums;
-using Cod3rsGrowth.Servicos.Servicos;
-using FluentValidation;
+﻿using FluentValidation;
 using System.Globalization;
+using Cod3rsGrowth.Dominio.Enums;
+using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Forms
 {
     public partial class FormEditarCarro : Form
     {
-        private int _idDaEdicao;
-        private string _modelo;
-        private string _valor;
         private Cores _cor;
-        private Marcas _marca;
         private bool _flex;
+        private Marcas _marca;
+        private string _valor;
+        private string _modelo;
+        private int _idDaEdicao;
         private ServicoCarro _servicoCarro;
+
         public FormEditarCarro(string modelo, Cores cor, Marcas marca, string valor, bool flex, ServicoCarro servico, int id)
         {
-            _modelo = modelo;
-            _valor = valor;
             _cor = cor;
-            _marca = marca;
             _flex = flex;
-            _servicoCarro = servico;
+            _marca = marca;
+            _valor = valor;
             _idDaEdicao = id;
+            _modelo = modelo;
+            _servicoCarro = servico;
             InitializeComponent();
         }
 
@@ -56,15 +57,17 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 var valorDoVeiculoConvertido = decimal.Parse(selecionarValorDoVeiculo.Text);
+
                 var carroEditado = new Carro
                 {
                     Id = _idDaEdicao,
                     Modelo = txtModelo.Text,
-                    Cor = (Cores)selecionarCor.SelectedIndex,
-                    Marca = (Marcas)selecionarMarca.SelectedIndex,
                     Flex = selecionarFlex.Checked,
-                    ValorDoVeiculo = valorDoVeiculoConvertido
+                    Cor = (Cores)selecionarCor.SelectedIndex,
+                    ValorDoVeiculo = valorDoVeiculoConvertido,
+                    Marca = (Marcas)selecionarMarca.SelectedIndex
                 };
+
                 _servicoCarro.Editar(carroEditado);
                 MessageBox.Show($"Carro com ID {_idDaEdicao} editado com sucesso!", "Editando carro");
                 this.Close();
@@ -78,8 +81,8 @@ namespace Cod3rsGrowth.Forms
         private void CarregarDados()
         {
             txtModelo.Text = _modelo;
-            selecionarCor.SelectedItem = _cor;
             selecionarFlex.Checked = _flex;
+            selecionarCor.SelectedItem = _cor;
             selecionarMarca.SelectedItem = _marca;
             selecionarValorDoVeiculo.Text = _valor;
         }
@@ -110,34 +113,34 @@ namespace Cod3rsGrowth.Forms
             {
                 TextBox textBox = sender as TextBox;
 
-                if (textBox.Text == string.Empty || textBox.Text == "")
+                if (textBox.Text == string.Empty)
                     throw new ValidationException("Campo valor do veiculo esta vazio.");
 
-                int selectionStart = textBox.SelectionStart;
-                int length = textBox.Text.Length;
+                int inicioDaSelecaoDoCursor = textBox.SelectionStart;
+                int tamanhoDoValor = textBox.Text.Length;
 
-                string text = textBox.Text.Replace(".", "").Replace(",", "");
+                string valorSemMascara = textBox.Text.Replace(".", "").Replace(",", "");
 
-                if (!int.TryParse(text, out int value))
+                if (!int.TryParse(valorSemMascara, out int value))
                 {
-                    MessageBox.Show("Entrada inválida!");
+                    MessageBox.Show("Valor inválido!");
                     textBox.Text = string.Empty;
                     return;
                 }
 
                 textBox.TextChanged -= AoPreencherValorDoVeiculo;
 
-                string formattedText = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:N2}", value / 100.0);
+                string formatandoTexto = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:N2}", value / 100.0);
 
-                textBox.Text = formattedText;
+                textBox.Text = formatandoTexto;
 
-                selectionStart = selectionStart + (textBox.Text.Length - length);
-                if (selectionStart > textBox.Text.Length)
-                    selectionStart = textBox.Text.Length;
-                else if (selectionStart < 0)
-                    selectionStart = 0;
+                inicioDaSelecaoDoCursor = inicioDaSelecaoDoCursor + (textBox.Text.Length - tamanhoDoValor);
+                if (inicioDaSelecaoDoCursor > textBox.Text.Length)
+                    inicioDaSelecaoDoCursor = textBox.Text.Length;
+                else if (inicioDaSelecaoDoCursor < 0)
+                    inicioDaSelecaoDoCursor = 0;
 
-                textBox.SelectionStart = selectionStart;
+                textBox.SelectionStart = inicioDaSelecaoDoCursor;
                 textBox.TextChanged += AoPreencherValorDoVeiculo;
             }
             catch (Exception ex)

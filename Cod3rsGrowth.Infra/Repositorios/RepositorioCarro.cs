@@ -1,6 +1,4 @@
 ﻿using LinqToDB;
-using LinqToDB.Data;
-using System.Configuration;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoComBanco;

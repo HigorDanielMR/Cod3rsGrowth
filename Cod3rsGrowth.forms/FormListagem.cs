@@ -1,5 +1,5 @@
-using System.Globalization;
 using Cod3rsGrowth.Forms;
+using System.Globalization;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
@@ -20,11 +20,11 @@ namespace Cod3rsGrowth.forms
 
         public FormListagem(ServicoCarro servicoCarro, ValidacoesCarro validacoesCarro, ValidacoesVenda validacoesVenda, ServicoVenda servicoVenda)
         {
-            _validacoesCarro = validacoesCarro;
             _servicoCarro = servicoCarro;
+            _validacoesCarro = validacoesCarro;
 
-            _validacoesVenda = validacoesVenda;
             _servicoVenda = servicoVenda;
+            _validacoesVenda = validacoesVenda;
 
             InitializeComponent();
         }
@@ -50,6 +50,7 @@ namespace Cod3rsGrowth.forms
                 {
                     _filtroCarro.Modelo = txtProcurar.Text;
                 }
+
                 if (selecionarCor != null && selecionarCor.SelectedItem != null)
                 {
                     var indexdesejado = (Cores)selecionarCor.SelectedIndex;
@@ -72,10 +73,12 @@ namespace Cod3rsGrowth.forms
                 {
                     _filtroCarro.Marca = null;
                 }
+
                 if (_filtroCarro.Modelo != null)
                 {
                     _filtroCarro.Modelo = null;
                 }
+
                 if (_filtroCarro.Cor != null)
                 {
                     _filtroCarro.Cor = null;
@@ -116,6 +119,7 @@ namespace Cod3rsGrowth.forms
                 {
                     _filtroVenda.Cpf = procurarCpf.Text;
                 }
+
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
             }
             catch (Exception ex)
@@ -194,7 +198,7 @@ namespace Cod3rsGrowth.forms
                 var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdVenda].Value.ToString());
                 var idCarroSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdCarro].Value.ToString());
 
-                DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do Id {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
+                DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do ID {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
 
                 DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir também permanentemente o carro ID {idCarroSelecionado} que está associado a venda ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
 
@@ -224,7 +228,7 @@ namespace Cod3rsGrowth.forms
                 var colunaDeseada = 0;
                 var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDeseada].Value.ToString());
 
-                DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
+                DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
 
 
                 if (resultadoRemoverCarro == DialogResult.Yes)
@@ -242,37 +246,53 @@ namespace Cod3rsGrowth.forms
 
         private void AoClicarNoBotaoEditarVenda(object sender, EventArgs e)
         {
-            var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
             var colunaDesejada = 0;
+            var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
             var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
 
-            var nome = TabelaVenda.Rows[linhaSelecionada].Cells[1].Value.ToString();
             var cpf = TabelaVenda.Rows[linhaSelecionada].Cells[2].Value.ToString();
-            var telefone = TabelaVenda.Rows[linhaSelecionada].Cells[4].Value.ToString();
-            var email = TabelaVenda.Rows[linhaSelecionada].Cells[3].Value.ToString();
             var data = TabelaVenda.Rows[linhaSelecionada].Cells[6].Value.ToString();
+            var nome = TabelaVenda.Rows[linhaSelecionada].Cells[1].Value.ToString();
+            var valor = TabelaCarro.Rows[linhaSelecionada].Cells[4].Value.ToString();
+            var email = TabelaVenda.Rows[linhaSelecionada].Cells[3].Value.ToString();
+            var telefone = TabelaVenda.Rows[linhaSelecionada].Cells[4].Value.ToString();
 
-
-            var formulario = new FormEditarVenda(idSelecionado, _servicoCarro, _servicoVenda, _validacoesVenda, nome, cpf, telefone, email, data);
+            var formulario = new FormEditarVenda(idSelecionado, _servicoCarro, _servicoVenda, _validacoesVenda, nome, cpf, telefone, email, data, valor);
             formulario.ShowDialog();
             CarregarListasAtualizadas();
         }
 
         private void AoClicarNoBotaoEditarCarro(object sender, EventArgs e)
         {
+            var colunaID = 0;
             var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
-            var colunaDesejada = 0;
-            var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
+            var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaID].Value.ToString());
 
-            var modelo = TabelaCarro.Rows[linhaSelecionada].Cells[2].Value.ToString();
-            var valor = TabelaCarro.Rows[linhaSelecionada].Cells[4].Value.ToString();
             var cor =(Cores) TabelaCarro.Rows[linhaSelecionada].Cells[3].Value;
             var marca = (Marcas) TabelaCarro.Rows[linhaSelecionada].Cells[1].Value;
+            var valor = TabelaCarro.Rows[linhaSelecionada].Cells[4].Value.ToString();
+            var modelo = TabelaCarro.Rows[linhaSelecionada].Cells[2].Value.ToString();
             var flex = bool.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[5].Value.ToString());
 
             var formulario = new FormEditarCarro(modelo,cor, marca, valor, flex, _servicoCarro, idSelecionado);
             formulario.ShowDialog();
+            AtualizarValorDoVeiculoNaVenda(idSelecionado);
             CarregarListasAtualizadas();
+        }
+
+        private void AtualizarValorDoVeiculoNaVenda(int idDoCarro)
+        {
+            var carro = _servicoCarro.ObterPorId(idDoCarro);
+            var valorDoCarro = carro.ValorDoVeiculo;
+
+            _filtroVenda.IdDoCarroVendido = idDoCarro;
+            List<Venda> venda = _servicoVenda.ObterTodos(_filtroVenda);
+
+            venda[0].ValorTotal = valorDoCarro;
+            var vendaAtualizada = venda[0];
+            _servicoVenda.Editar(vendaAtualizada);
+
+            _filtroVenda = new FiltroVenda();
         }
     }
 }

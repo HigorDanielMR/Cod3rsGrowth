@@ -1,13 +1,17 @@
 ﻿using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.Forms
 {
     public partial class FormEditarVenda : Form
     {
+        private string _cpf;
+        private string _nome;
+        private string _data;
+        private string _email;
         private int _idDaEdicao;
+        private string _telefone;
         private ServicoCarro _servico;
         private ServicoVenda _servicoVenda;
         private ValidacoesVenda _validacoesVenda;
@@ -15,23 +19,18 @@ namespace Cod3rsGrowth.Forms
         private FiltroCarro _filtro = new FiltroCarro();
         private FiltroVenda _filtroVenda = new FiltroVenda();
         private List<string> comboBoxSelecionarCarro = new List<string>();
-        private string _nome;
-        private string _cpf;
-        private string _telefone;
-        private string _email;
-        private string _data;
-        public FormEditarVenda(int IdVenda, ServicoCarro servicoCarro, ServicoVenda servico, ValidacoesVenda validacoes, string nome, string cpf, string telefone, string email, string data)
+
+        public FormEditarVenda(int IdVenda, ServicoCarro servicoCarro, ServicoVenda servico, ValidacoesVenda validacoes, string nome, string cpf, string telefone, string email, string data, string valor)
         {
+            _cpf = cpf;
+            _nome = nome;
+            _data = data;
+            _email = email;
+            _telefone = telefone;
             _idDaEdicao = IdVenda;
             _servicoVenda = servico;
             _servico = servicoCarro;
             _validacoesVenda = validacoes;
-
-            _nome = nome;
-            _cpf = cpf;
-            _telefone = telefone;
-            _email = email;
-            _data = data;
 
             InitializeComponent();
         }
@@ -60,14 +59,15 @@ namespace Cod3rsGrowth.Forms
             {
                 carro = _servico.ObterTodos(_filtro);
                 var IdDoCarroComprado = carro[selecionandoCarro.SelectedIndex].Id;
-                var valorPago = carro[selecionandoCarro.SelectedIndex].ValorDoVeiculo;
+                var carroComprado = _servico.ObterPorId(IdDoCarroComprado);
+
                 var vendaNova = new Venda
                 {
                     Id = _idDaEdicao,
                     Cpf = txtCpf.Text,
                     Email = txtEmail.Text,
                     IdDoCarroVendido = IdDoCarroComprado,
-                    ValorTotal = valorPago,
+                    ValorTotal = carroComprado.ValorDoVeiculo,
                     DataDeCompra = DateTime.Parse(_data),
                     Nome = txtNome.Text,
                     Telefone = txtTelefone.Text
@@ -120,7 +120,7 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                var var = selecionandoCarro.SelectedItem;
+                var carroSelecionado = selecionandoCarro.SelectedItem;
             }
             catch (Exception ex)
             {

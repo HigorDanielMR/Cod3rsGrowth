@@ -17,6 +17,7 @@ namespace Cod3rsGrowth.Forms
         {
             _servicoCarro = servico;
             _validacoes = validacoes;
+
             InitializeComponent();
         }
 
@@ -38,6 +39,7 @@ namespace Cod3rsGrowth.Forms
             selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
             selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
         }
+
         private void LimparComboBox()
         {
             selecionarCor.SelectedItem = null;
@@ -49,6 +51,7 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 var valorDoVeiculoConvertido = decimal.Parse(selecionarValorDoVeiculo.Text);
+
                 var carro = new Carro
                 {
                     Modelo = txtModelo.Text,
@@ -57,6 +60,7 @@ namespace Cod3rsGrowth.Forms
                     Marca = (Marcas)selecionarMarca.SelectedIndex,
                     ValorDoVeiculo = valorDoVeiculoConvertido
                 };
+
                 _servicoCarro.Criar(carro);
                 MessageBox.Show("Carro criado com sucesso!");
                 this.Close();
@@ -72,7 +76,6 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 this.Close();
-
             }
             catch (Exception ex)
             {
@@ -86,34 +89,34 @@ namespace Cod3rsGrowth.Forms
             {
                 TextBox textBox = sender as TextBox;
 
-                if (textBox.Text == string.Empty || textBox.Text == "")
+                if (textBox.Text == string.Empty)
                     throw new ValidationException("Campo valor do veiculo esta vazio.");
 
-                int selectionStart = textBox.SelectionStart;
-                int length = textBox.Text.Length;
+                int inicioDaSelecaoDoCursor = textBox.SelectionStart;
+                int tamanhoDoValor = textBox.Text.Length;
 
-                string text = textBox.Text.Replace(".", "").Replace(",", "");
+                string valorSemMascara = textBox.Text.Replace(".", "").Replace(",", "");
 
-                if (!int.TryParse(text, out int value))
+                if (!int.TryParse(valorSemMascara, out int value))
                 {
-                    MessageBox.Show("Entrada inválida!");
+                    MessageBox.Show("Valor inválido!");
                     textBox.Text = string.Empty;
                     return;
                 }
 
                 textBox.TextChanged -= AoPreencherValorDoVeiculo;
 
-                string formattedText = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:N2}", value / 100.0);
+                string formatandoTexto = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:N2}", value / 100.0);
 
-                textBox.Text = formattedText;
+                textBox.Text = formatandoTexto;
 
-                selectionStart = selectionStart + (textBox.Text.Length - length);
-                if (selectionStart > textBox.Text.Length)
-                    selectionStart = textBox.Text.Length;
-                else if (selectionStart < 0)
-                    selectionStart = 0;
+                inicioDaSelecaoDoCursor = inicioDaSelecaoDoCursor + (textBox.Text.Length - tamanhoDoValor);
+                if (inicioDaSelecaoDoCursor > textBox.Text.Length)
+                    inicioDaSelecaoDoCursor = textBox.Text.Length;
+                else if (inicioDaSelecaoDoCursor < 0)
+                    inicioDaSelecaoDoCursor = 0;
 
-                textBox.SelectionStart = selectionStart;
+                textBox.SelectionStart = inicioDaSelecaoDoCursor;
                 textBox.TextChanged += AoPreencherValorDoVeiculo;
             }
             catch (Exception ex)
