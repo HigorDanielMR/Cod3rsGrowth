@@ -4,7 +4,6 @@ using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Microsoft.Extensions.DependencyInjection;
 using Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste;
-using Microsoft.VisualStudio.TestPlatform.CommunicationUtilities;
 
 namespace Cod3rsGrowth.Testes
 {
@@ -13,17 +12,20 @@ namespace Cod3rsGrowth.Testes
         private List<Venda> _listaMock;
         private ServicoVenda _servicoVenda;
         private FiltroVenda _venda = new FiltroVenda();
+
         public TesteVenda()
         {
             CarregarServico();
             _servicoVenda.ObterTodos(_venda).Clear();
             _listaMock = InicializarDadosMock();
         }
+
         private void CarregarServico()
         {
             _servicoVenda = ServiceProvider.GetService<ServicoVenda>()
                ?? throw new Exception($"Erro ao obter servico [{nameof(ServicoVenda)}]");
         }
+
         private List<Venda> InicializarDadosMock()
         {
             List<Venda> listaDeVendas = new List<Venda> 
@@ -59,10 +61,12 @@ namespace Cod3rsGrowth.Testes
                     IdDoCarroVendido = 12
                 }
             };
+
             foreach (var venda in listaDeVendas)
             {
                 _servicoVenda.Criar(venda);
             }
+
             return listaDeVendas;
         }
 

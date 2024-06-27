@@ -13,6 +13,7 @@ namespace Cod3rsGrowth.Testes
         private List<Carro> _listaMock;
         private ServicoCarro _servicoCarro;
         private readonly FiltroCarro _carro;
+
         public TesteCarro()
         {
             CarregarServico();
@@ -36,7 +37,7 @@ namespace Cod3rsGrowth.Testes
                     Cor = Cores.Branco,
                     Flex = true,
                     ValorDoVeiculo = 100,
-                    Marca = Marcas.Volkswagem
+                    Marca = Marcas.Volkswagen
                 },
                 new()
                 {
@@ -52,7 +53,7 @@ namespace Cod3rsGrowth.Testes
                     Cor = Cores.Preto,
                     Flex = true,
                     ValorDoVeiculo = 100,
-                    Marca = Marcas.Volkswagem
+                    Marca = Marcas.Volkswagen
                 }
             };
             foreach (var carro in listaDeCarros)
@@ -128,7 +129,7 @@ namespace Cod3rsGrowth.Testes
                 Modelo = nome,
                 Cor = Cores.Branco,
                 Flex = true,
-                Marca = Marcas.Bmw,
+                Marca = Marcas.BMW,
                 ValorDoVeiculo = 1000
             };
             //act
@@ -148,7 +149,7 @@ namespace Cod3rsGrowth.Testes
                 Modelo = nome,
                 Cor = Cores.Branco,
                 Flex = true,
-                Marca = Marcas.Bmw,
+                Marca = Marcas.BMW,
                 ValorDoVeiculo = 1000
             };
             //act
@@ -166,7 +167,7 @@ namespace Cod3rsGrowth.Testes
                 Modelo = "C180",
                 Cor = Cores.Branco,
                 Flex = true,
-                Marca = Marcas.Bmw,
+                Marca = Marcas.BMW,
                 ValorDoVeiculo = -11111
             };
             //act
@@ -184,7 +185,7 @@ namespace Cod3rsGrowth.Testes
                 Modelo = "C180",
                 Cor = Cores.Branco,
                 Flex = true,
-                Marca = Marcas.Bmw,
+                Marca = Marcas.BMW,
                 ValorDoVeiculo = 100
             };
             //act
@@ -206,7 +207,7 @@ namespace Cod3rsGrowth.Testes
                 Modelo = modelo,
                 Cor = Cores.Branco,
                 Flex = true,
-                Marca = Marcas.Bmw,
+                Marca = Marcas.BMW,
                 ValorDoVeiculo = 111
             };
             //act
@@ -227,7 +228,7 @@ namespace Cod3rsGrowth.Testes
                 Modelo = modelo,
                 Cor = Cores.Branco,
                 Flex = true,
-                Marca = Marcas.Bmw,
+                Marca = Marcas.BMW,
                 ValorDoVeiculo = 111
             };
             //act
@@ -246,7 +247,7 @@ namespace Cod3rsGrowth.Testes
                 Modelo = "C180",
                 Cor = Cores.Branco,
                 Flex = true,
-                Marca = Marcas.Bmw,
+                Marca = Marcas.BMW,
                 ValorDoVeiculo = -111
             };
             //act
@@ -265,7 +266,7 @@ namespace Cod3rsGrowth.Testes
                 Modelo = "C180",
                 Cor = Cores.Branco,
                 Flex = true,
-                Marca = Marcas.Bmw,
+                Marca = Marcas.BMW,
                 ValorDoVeiculo = 10000
             };
             //act

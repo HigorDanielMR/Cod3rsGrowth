@@ -1,10 +1,11 @@
-using Cod3rsGrowth.Forms;
 using System.Configuration;
 using FluentMigrator.Runner;
+using Microsoft.Extensions.Hosting;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Infra.Repositorios;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Servicos.Validadores;
+using Cod3rsGrowth.Infra.ConexaoComBanco;
 using Cod3rsGrowth.Dominio.CriacaoDasTabelas;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -12,22 +13,26 @@ namespace Cod3rsGrowth.forms
 {
     internal static class Program
     {
+        public static IServiceProvider ServiceProvider { get; set; }
+
         [STAThread]
         static void Main()
         {
             ApplicationConfiguration.Initialize();
 
-            var serviceProvider = CreateServices();
 
-            using (serviceProvider)
-            using (var scope = serviceProvider.CreateScope())
+            using (var serviceProvider = CriarServicoDeMigracao())
+            using (var scopo = serviceProvider.CreateScope())
             {
-                UpdateDataBase(scope.ServiceProvider);
-                Application.Run(serviceProvider.GetRequiredService<FormListagem>());
+                AtualizarBancoDeDados(scopo.ServiceProvider);
             }
+            var host = CriarHostBuider().Build();
+            ServiceProvider = host.Services;
+
+            Application.Run(ServiceProvider.GetRequiredService<FormListagem>());
         }
 
-        public static ServiceProvider CreateServices()
+        public static ServiceProvider CriarServicoDeMigracao()
         {
             var conectionstring = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 
@@ -38,21 +43,32 @@ namespace Cod3rsGrowth.forms
                     .WithGlobalConnectionString(conectionstring)
                     .ScanIn(typeof(CriandoTabelaCarro).Assembly).For.Migrations())
                 .AddLogging(lb => lb.AddFluentMigratorConsole())
-
-                .AddTransient<ServicoCarro>()
-                .AddTransient<ServicoVenda>()
-                .AddTransient<FormListagem>()
-                .AddTransient<FormCriarVenda>()
-                .AddTransient<FormCriarCarro>()
-                .AddTransient<ValidacoesCarro>()
-                .AddTransient<ValidacoesVenda>()
-                .AddTransient<IRepositorioCarro, RepositorioCarro>()
-                .AddTransient<IRepositorioVenda, RepositorioVenda>()
-
                 .BuildServiceProvider(false);
         }
 
-        private static void UpdateDataBase(IServiceProvider serviceProvider)
+        static IHostBuilder CriarHostBuider()
+        {
+            return Host.CreateDefaultBuilder()
+                .ConfigureServices((contexto, servicos) =>
+                {
+                    var stringDeConexao = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
+
+                    servicos.AddTransient<ServicoCarro>();
+                    servicos.AddTransient<ServicoVenda>();
+
+                    servicos.AddTransient<FormListagem>();
+
+                    servicos.AddTransient<ValidacoesCarro>();
+                    servicos.AddTransient<ValidacoesVenda>();
+
+                    servicos.AddTransient<IRepositorioCarro, RepositorioCarro>();
+                    servicos.AddTransient<IRepositorioVenda, RepositorioVenda>();
+
+                    servicos.AddScoped(provider => new MeuContextoDeDados(stringDeConexao));
+                });
+        }
+
+        private static void AtualizarBancoDeDados(IServiceProvider serviceProvider)
         {
             var runner = serviceProvider.GetRequiredService<IMigrationRunner>();
             runner.MigrateUp();

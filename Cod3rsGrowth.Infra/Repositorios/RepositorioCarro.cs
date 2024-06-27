@@ -1,31 +1,25 @@
 ﻿using LinqToDB;
-using LinqToDB.Data;
-using System.Configuration;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Infra.ConexaoComBanco;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
     public class RepositorioCarro : IRepositorioCarro
     {
-        private DataConnection _connection;
-        protected ITable<Carro> TabelaCarro;
+        private MeuContextoDeDados _connection;
 
-        public RepositorioCarro()
+        public RepositorioCarro(MeuContextoDeDados meuContextoDeDados)
         {
-            _connection = new DataConnection(
-            new DataOptions()
-                .UseSqlServer(ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ConnectionString));
-
-            TabelaCarro = _connection.GetTable<Carro>();
+            _connection = meuContextoDeDados;
         }
 
         public List<Carro> ObterTodos(FiltroCarro filtro)
         {
-            var query = FiltroParaBusca(TabelaCarro, filtro);
+            var query = FiltroParaBusca(_connection.Carro, filtro);
             if (query == null)
             {
-                return TabelaCarro.ToList();
+                return _connection.Carro.ToList();
             }
             else
             {
@@ -36,7 +30,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro ObterPorId(int IdDeBusca)
         {
-            var query = from p in TabelaCarro
+            var query = from p in _connection.Carro
                         where p.Id == IdDeBusca
                         select p;
 
@@ -54,7 +48,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Editar(Carro carroAtualizado)
         {
-            var carroDesejado = TabelaCarro.FirstOrDefault(carro => carro.Id == carroAtualizado.Id);
+            var carroDesejado = _connection.Carro.FirstOrDefault(carro => carro.Id == carroAtualizado.Id);
 
             if (carroDesejado != null)
             {
@@ -76,7 +70,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Remover(int Id)
         {
-            TabelaCarro
+            _connection.Carro
                  .Where(carro => carro.Id == Id)
                  .Delete();
         }
@@ -86,7 +80,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var query = carros.AsQueryable();
 
             if (carro != null)
-            {
                 if (carro.Modelo != null)
                     query = query.Where(d => d.Modelo.Contains(carro.Modelo));
 
@@ -98,7 +91,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
                 if (carro.Flex != null)
                     query = query.Where(d => d.Flex == carro.Flex);
-            }
+
             return query;
         }
 

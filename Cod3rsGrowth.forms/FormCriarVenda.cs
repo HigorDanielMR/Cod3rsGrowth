@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using System.Globalization;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Servicos.Validadores;
@@ -15,6 +14,7 @@ namespace Cod3rsGrowth.Forms
         private FiltroCarro _filtro = new FiltroCarro();
         private FiltroVenda _filtroVenda = new FiltroVenda();
         private List<string> comboBoxSelecionarCarro = new List<string>();
+
         public FormCriarVenda(ValidacoesVenda validacoes, ServicoVenda servico, ServicoCarro servicoCarro)
         {
             _servicoVenda = servico;
@@ -47,17 +47,19 @@ namespace Cod3rsGrowth.Forms
             {
                 var IdDoCarroComprado = carro[selecionandoCarro.SelectedIndex].Id;
                 var valorPago = carro[selecionandoCarro.SelectedIndex].ValorDoVeiculo;
+
                 var venda = new Venda
                 {
-                    Nome = txtNome.Text,
+                    Pago = true,
                     Cpf = txtCpf.Text,
+                    Nome = txtNome.Text,
                     Email = txtEmail.Text,
-                    Telefone = txtTelefone.Text,
-                    DataDeCompra = DateTime.Parse(DateTime.Now.ToString().Replace(" 00:00:00", "")),
                     ValorTotal = valorPago,
+                    Telefone = txtTelefone.Text,
                     IdDoCarroVendido = IdDoCarroComprado,
-                    Pago = true
+                    DataDeCompra = DateTime.Parse(DateTime.Now.ToString())
                 };
+
                 _servicoVenda.Criar(venda);
                 MessageBox.Show("Venda criada com sucesso.");
                 this.Close();
@@ -72,19 +74,21 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                IEnumerable<Carro> obter;
                 var carros = _servico.ObterTodos(_filtro);
-                var venda = _servicoVenda.ObterTodos(_filtroVenda);
-                if (venda.Count != 0)
-                    obter = carros.Where(x => x.Id != venda.FirstOrDefault().IdDoCarroVendido);
-                else
-                    obter = carros;
+                var vendas = _servicoVenda.ObterTodos(_filtroVenda);
 
-                foreach (var car in obter)
+                vendas.ForEach(x => {
+                    carros = carros
+                    .Where(c => c.Id != x.IdDoCarroVendido)
+                    .ToList();
+                });
+
+                carros.ForEach(car =>
                 {
                     carro.Add(car);
                     comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
-                }
+                });
+
                 selecionandoCarro.DataSource = comboBoxSelecionarCarro;
             }
             catch(Exception ex)
@@ -97,7 +101,7 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                var var = selecionandoCarro.SelectedItem;
+                var carroSelecionado = selecionandoCarro.SelectedItem;
             }
             catch(Exception ex)
             {

@@ -14,7 +14,6 @@ namespace Cod3rsGrowth.Dominio.CriacaoDasTabelas
                 .WithColumn("Cor").AsInt32()
                 .WithColumn("ValorDoVeiculo").AsDecimal(16,2)
                 .WithColumn("Flex").AsBoolean();
-
         }
         public override void Down()
         {

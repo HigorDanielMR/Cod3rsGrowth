@@ -3,35 +3,35 @@ using System.Globalization;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
-using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.Forms
 {
-    public partial class FormCriarCarro : Form
+    public partial class FormEditarCarro : Form
     {
-        private FiltroCarro _filtroCarro;
+        private Cores _cor;
+        private bool _flex;
+        private Marcas _marca;
+        private string _valor;
+        private string _modelo;
+        private int _idDaEdicao;
         private ServicoCarro _servicoCarro;
-        private ValidacoesCarro _validacoes;
 
-        public FormCriarCarro(ServicoCarro servico, ValidacoesCarro validacoes)
+        public FormEditarCarro(string modelo, Cores cor, Marcas marca, string valor, bool flex, ServicoCarro servico, int id)
         {
+            _cor = cor;
+            _flex = flex;
+            _marca = marca;
+            _valor = valor;
+            _idDaEdicao = id;
+            _modelo = modelo;
             _servicoCarro = servico;
-            _validacoes = validacoes;
-
             InitializeComponent();
         }
 
-        private void AoCarregarFormCriarCarro(object sender, EventArgs e)
+        private void AoCarregarFormEditarCarro(object sender, EventArgs e)
         {
-            try
-            {
-                CarregarEnums();
-                LimparComboBox();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Erro ao carregar metodos");
-            }
+            CarregarEnums();
+            CarregarDados();
         }
 
         private void CarregarEnums()
@@ -40,46 +40,70 @@ namespace Cod3rsGrowth.Forms
             selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
         }
 
-        private void LimparComboBox()
+        private void AoClicarNoBotaoCancelarEdicaoCarro(object sender, EventArgs e)
         {
-            selecionarCor.SelectedItem = null;
-            selecionarMarca.SelectedItem = null;
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Erro cancelar Edicao");
+            }
         }
 
-        private void AoClicarNoBotaoAdicionar(object sender, EventArgs e)
+        private void AoClicarNoBotaoSalvarEdicaoCarro(object sender, EventArgs e)
         {
             try
             {
                 var valorDoVeiculoConvertido = decimal.Parse(selecionarValorDoVeiculo.Text);
 
-                var carro = new Carro
+                var carroEditado = new Carro
                 {
+                    Id = _idDaEdicao,
                     Modelo = txtModelo.Text,
                     Flex = selecionarFlex.Checked,
                     Cor = (Cores)selecionarCor.SelectedIndex,
-                    Marca = (Marcas)selecionarMarca.SelectedIndex,
-                    ValorDoVeiculo = valorDoVeiculoConvertido
+                    ValorDoVeiculo = valorDoVeiculoConvertido,
+                    Marca = (Marcas)selecionarMarca.SelectedIndex
                 };
 
-                _servicoCarro.Criar(carro);
-                MessageBox.Show("Carro criado com sucesso!");
-                this.Close();
-            }
-            catch (ValidationException ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Erro ao criar");
-            }
-        }
-
-        private void AoClicarNoBotaoCancelarCarro(object sender, EventArgs e)
-        {
-            try
-            {
+                _servicoCarro.Editar(carroEditado);
+                MessageBox.Show($"Carro com ID {_idDaEdicao} editado com sucesso!", "Editando carro");
                 this.Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}", "Erro ao cancelar");
+                MessageBox.Show($"{ex.Message}");
+            }
+        }
+
+        private void CarregarDados()
+        {
+            txtModelo.Text = _modelo;
+            selecionarFlex.Checked = _flex;
+            selecionarCor.SelectedItem = _cor;
+            selecionarMarca.SelectedItem = _marca;
+            selecionarValorDoVeiculo.Text = _valor;
+        }
+
+        private void AoComecarAPreencherValor(object sender, KeyPressEventArgs e)
+        {
+            try
+            {
+                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '.')
+                {
+                    e.Handled = true;
+                }
+
+                if ((e.KeyChar == ',' || e.KeyChar == '.') && (sender as TextBox).Text.Contains(","))
+                {
+                    e.Handled = true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
             }
         }
 
@@ -122,26 +146,6 @@ namespace Cod3rsGrowth.Forms
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Erro ao tentar executar evento");
-            }
-        }
-
-        private void AoPreencherValorDoVeiculo(object sender, KeyPressEventArgs e)
-        {
-            try
-            {
-                if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && e.KeyChar != ',' && e.KeyChar != '.')
-                {
-                    e.Handled = true;
-                }
-
-                if ((e.KeyChar == ',' || e.KeyChar == '.') && (sender as TextBox).Text.Contains(","))
-                {
-                    e.Handled = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}");
             }
         }
     }
