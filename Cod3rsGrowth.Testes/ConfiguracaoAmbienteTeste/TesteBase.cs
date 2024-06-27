@@ -1,11 +1,11 @@
-﻿using Cod3rsGrowth.Infra.InjecaoDeDependencia;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
 
 namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
 {
     public abstract class TesteBase : IDisposable
     {
         protected ServiceProvider ServiceProvider;
+
         protected TesteBase()
         {
             ServiceProvider = ObterServiceCollection().BuildServiceProvider();
@@ -15,7 +15,6 @@ namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
         {
             var servicos = new ServiceCollection();
             ModuloDeInjecaoInfra.BindService(servicos);
-            ModuloDeInjecao.BindService(servicos);
             return servicos;
         }
 
