@@ -74,24 +74,20 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                IEnumerable<Carro> obter;
                 var carros = _servico.ObterTodos(_filtro);
-                var venda = _servicoVenda.ObterTodos(_filtroVenda);
-                foreach(var vendas in venda)
-                {
-                    if (venda.Count != 0 && carros.Count != 0)
-                        carros = carros.Where(x => x.Id != vendas.IdDoCarroVendido).ToList();
-                    else
-                        carros.ToList();
-                }
+                var vendas = _servicoVenda.ObterTodos(_filtroVenda);
 
-                obter = carros;
+                vendas.ForEach(x => {
+                    carros = carros
+                    .Where(c => c.Id != x.IdDoCarroVendido)
+                    .ToList();
+                });
 
-                foreach (var car in obter)
+                carros.ForEach(car =>
                 {
                     carro.Add(car);
                     comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
-                }
+                });
 
                 selecionandoCarro.DataSource = comboBoxSelecionarCarro;
             }
