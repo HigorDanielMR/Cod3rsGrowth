@@ -14,10 +14,5 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public static ListaSingleton Instance => _instance.Value;
 
-        public void Clear()
-        {
-            RepositorioCarro.Clear();
-            RepositorioVenda.Clear();
-        }
     }
 }

@@ -7,14 +7,23 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="MeuContextoDeDado\**" />
+    <EmbeddedResource Remove="MeuContextoDeDado\**" />
+    <None Remove="MeuContextoDeDado\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentMigrator" Version="5.2.0" />
     <PackageReference Include="FluentMigrator.Runner" Version="5.2.0" />
     <PackageReference Include="linq2db" Version="5.4.1" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="8.0.0" />
+    <PackageReference Include="NLog" Version="5.3.2" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="8.0.0" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Cod3rsGrowth.Dominio\Cod3rsGrowth.Dominio.csproj" />
+    <ProjectReference Include="..\Cod3rsGrowth.Servicos\Cod3rsGrowth.Servicos.csproj" />
   </ItemGroup>
 
 </Project>

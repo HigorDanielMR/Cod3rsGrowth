@@ -2,11 +2,26 @@
 {
     public enum Cores
     {
-        Grafite,
-        Preto,
+        Amarelo,
+        Azul,
+        Bege,
+        Bordô,
         Branco,
-        Vermelho,
+        Cinza,
+        Ciano,
+        Dourado,
+        Grafite,
+        Laranja,
+        Magenta,
+        Marrom,
         Prata,
-        Azul
+        Prateado,
+        Preto,
+        Rosa,
+        Roxo,
+        Turquesa,
+        Verde,
+        Vermelho,
+        Violeta
     }
 }

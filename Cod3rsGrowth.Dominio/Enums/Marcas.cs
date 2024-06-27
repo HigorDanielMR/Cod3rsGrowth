@@ -2,14 +2,31 @@
 {
     public enum Marcas
     {
-        Toyota,
+        Audi,
+        Bentley,
+        BMW,
+        Bugatti,
+        Chevrolet,
+        Ferrari,
+        Fiat,
+        Ford,
         Honda,
         Hyundai,
-        Volkswagem,
-        Chevrolet,
-        Peugeot,
+        Jaguar,
+        Kia,
+        Lamborghini,
+        LandRover,
+        Maserati,
         Mercedes,
-        Bmw,
-        Mitsubishi
+        Mitsubishi,
+        Nissan,
+        Peugeot,
+        Porsche,
+        Renault,
+        RollsRoyce,
+        Subaru,
+        Tesla,
+        Toyota,
+        Volkswagen
     }
 }
