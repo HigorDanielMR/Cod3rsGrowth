@@ -1,6 +1,6 @@
-﻿using Cod3rsGrowth.Dominio.Entidades;
+﻿using Microsoft.AspNetCore.Mvc;
+using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
@@ -8,8 +8,9 @@ namespace Cod3rsGrowth.Web.Controllers
     [Route("[controller]")]
     public class VendaController : ControllerBase
     {
-        private readonly ServicoVenda _servico;
         private FiltroVenda _filtro = new();
+        private readonly ServicoVenda _servico;
+
         public VendaController(ServicoVenda servico)
         {
             _servico = servico;
@@ -21,7 +22,6 @@ namespace Cod3rsGrowth.Web.Controllers
             try
             {
                 var vendas = _servico.ObterTodos(_filtro);
-
                 return Ok(vendas);
             }
             catch(FluentValidation.ValidationException ex)
@@ -94,13 +94,13 @@ namespace Cod3rsGrowth.Web.Controllers
             try
             {
                 var venda = _servico.ObterPorId(Id);
+
                 if (venda == null)
                 {
                     return NotFound();
                 }
 
                 _servico.Remover(Id);
-
                 return NoContent();
             }
             catch(FluentValidation.ValidationException ex)

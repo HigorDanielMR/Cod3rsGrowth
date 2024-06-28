@@ -29,16 +29,10 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             TabelaCarro = new DataGridView();
-            idDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            marcaDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            modeloDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            corDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            valorDoVeiculoDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            flexDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             carroBindingSource = new BindingSource(components);
             label2 = new Label();
             FiltrarCarro = new Button();
@@ -72,21 +66,27 @@
             label6 = new Label();
             panel3 = new Panel();
             TabelaVenda = new DataGridView();
-            idDataGridViewTextBoxColumn1 = new DataGridViewTextBoxColumn();
-            nomeDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            cpfDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            emailDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            telefoneDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            IdDoCarroVendido = new DataGridViewTextBoxColumn();
-            dataDeCompraDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            valorTotalDataGridViewTextBoxColumn = new DataGridViewTextBoxColumn();
-            pagoDataGridViewCheckBoxColumn = new DataGridViewCheckBoxColumn();
             vendaBindingSource = new BindingSource(components);
             tabPage2 = new TabPage();
             panel6 = new Panel();
             BotaoEditarCarro = new Button();
             BotaoRemoverCarro = new Button();
             CriarCarro = new Button();
+            ColunaIdVenda = new DataGridViewTextBoxColumn();
+            ColunaNome = new DataGridViewTextBoxColumn();
+            colunaCpf = new DataGridViewTextBoxColumn();
+            ColunaEmail = new DataGridViewTextBoxColumn();
+            ColunaTelefone = new DataGridViewTextBoxColumn();
+            IdDoCarroVendido = new DataGridViewTextBoxColumn();
+            ColunaDataDeCompra = new DataGridViewTextBoxColumn();
+            ColunaValorTotal = new DataGridViewTextBoxColumn();
+            ColunaPago = new DataGridViewCheckBoxColumn();
+            ColunaIdCarro = new DataGridViewTextBoxColumn();
+            ColunaMarca = new DataGridViewTextBoxColumn();
+            ColunaModelo = new DataGridViewTextBoxColumn();
+            ColunaCor = new DataGridViewTextBoxColumn();
+            ColunaValorDoVeiculo = new DataGridViewTextBoxColumn();
+            ColunaFlex = new DataGridViewCheckBoxColumn();
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -116,7 +116,7 @@
             TabelaCarro.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
             TabelaCarro.BackgroundColor = SystemColors.Control;
             TabelaCarro.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            TabelaCarro.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn, marcaDataGridViewTextBoxColumn, modeloDataGridViewTextBoxColumn, corDataGridViewTextBoxColumn, valorDoVeiculoDataGridViewTextBoxColumn, flexDataGridViewCheckBoxColumn });
+            TabelaCarro.Columns.AddRange(new DataGridViewColumn[] { ColunaIdCarro, ColunaMarca, ColunaModelo, ColunaCor, ColunaValorDoVeiculo, ColunaFlex });
             TabelaCarro.DataSource = carroBindingSource;
             TabelaCarro.Dock = DockStyle.Fill;
             TabelaCarro.Location = new Point(0, 0);
@@ -124,52 +124,6 @@
             TabelaCarro.RowTemplate.Height = 25;
             TabelaCarro.Size = new Size(824, 286);
             TabelaCarro.TabIndex = 0;
-            // 
-            // idDataGridViewTextBoxColumn
-            // 
-            idDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            idDataGridViewTextBoxColumn.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn.HeaderText = "ID";
-            idDataGridViewTextBoxColumn.Name = "idDataGridViewTextBoxColumn";
-            idDataGridViewTextBoxColumn.Width = 43;
-            // 
-            // marcaDataGridViewTextBoxColumn
-            // 
-            marcaDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            marcaDataGridViewTextBoxColumn.DataPropertyName = "Marca";
-            marcaDataGridViewTextBoxColumn.HeaderText = "Marca";
-            marcaDataGridViewTextBoxColumn.Name = "marcaDataGridViewTextBoxColumn";
-            // 
-            // modeloDataGridViewTextBoxColumn
-            // 
-            modeloDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            modeloDataGridViewTextBoxColumn.DataPropertyName = "Modelo";
-            modeloDataGridViewTextBoxColumn.HeaderText = "Modelo";
-            modeloDataGridViewTextBoxColumn.Name = "modeloDataGridViewTextBoxColumn";
-            // 
-            // corDataGridViewTextBoxColumn
-            // 
-            corDataGridViewTextBoxColumn.DataPropertyName = "Cor";
-            corDataGridViewTextBoxColumn.HeaderText = "Cor";
-            corDataGridViewTextBoxColumn.Name = "corDataGridViewTextBoxColumn";
-            corDataGridViewTextBoxColumn.Width = 51;
-            // 
-            // valorDoVeiculoDataGridViewTextBoxColumn
-            // 
-            valorDoVeiculoDataGridViewTextBoxColumn.DataPropertyName = "ValorDoVeiculo";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            valorDoVeiculoDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle1;
-            valorDoVeiculoDataGridViewTextBoxColumn.HeaderText = "Preço";
-            valorDoVeiculoDataGridViewTextBoxColumn.Name = "valorDoVeiculoDataGridViewTextBoxColumn";
-            valorDoVeiculoDataGridViewTextBoxColumn.Width = 62;
-            // 
-            // flexDataGridViewCheckBoxColumn
-            // 
-            flexDataGridViewCheckBoxColumn.DataPropertyName = "Flex";
-            flexDataGridViewCheckBoxColumn.HeaderText = "Flex";
-            flexDataGridViewCheckBoxColumn.Name = "flexDataGridViewCheckBoxColumn";
-            flexDataGridViewCheckBoxColumn.Width = 34;
             // 
             // carroBindingSource
             // 
@@ -528,7 +482,7 @@
             TabelaVenda.AutoGenerateColumns = false;
             TabelaVenda.BackgroundColor = SystemColors.Control;
             TabelaVenda.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            TabelaVenda.Columns.AddRange(new DataGridViewColumn[] { idDataGridViewTextBoxColumn1, nomeDataGridViewTextBoxColumn, cpfDataGridViewTextBoxColumn, emailDataGridViewTextBoxColumn, telefoneDataGridViewTextBoxColumn, IdDoCarroVendido, dataDeCompraDataGridViewTextBoxColumn, valorTotalDataGridViewTextBoxColumn, pagoDataGridViewCheckBoxColumn });
+            TabelaVenda.Columns.AddRange(new DataGridViewColumn[] { ColunaIdVenda, ColunaNome, colunaCpf, ColunaEmail, ColunaTelefone, IdDoCarroVendido, ColunaDataDeCompra, ColunaValorTotal, ColunaPago });
             TabelaVenda.DataSource = vendaBindingSource;
             TabelaVenda.Dock = DockStyle.Fill;
             TabelaVenda.Location = new Point(0, 0);
@@ -537,90 +491,6 @@
             TabelaVenda.RowTemplate.Height = 25;
             TabelaVenda.Size = new Size(820, 293);
             TabelaVenda.TabIndex = 1;
-            // 
-            // idDataGridViewTextBoxColumn1
-            // 
-            idDataGridViewTextBoxColumn1.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            idDataGridViewTextBoxColumn1.DataPropertyName = "Id";
-            idDataGridViewTextBoxColumn1.HeaderText = "ID";
-            idDataGridViewTextBoxColumn1.Name = "idDataGridViewTextBoxColumn1";
-            idDataGridViewTextBoxColumn1.ReadOnly = true;
-            idDataGridViewTextBoxColumn1.Width = 43;
-            // 
-            // nomeDataGridViewTextBoxColumn
-            // 
-            nomeDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            nomeDataGridViewTextBoxColumn.DataPropertyName = "Nome";
-            nomeDataGridViewTextBoxColumn.HeaderText = "Nome";
-            nomeDataGridViewTextBoxColumn.Name = "nomeDataGridViewTextBoxColumn";
-            nomeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // cpfDataGridViewTextBoxColumn
-            // 
-            cpfDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            cpfDataGridViewTextBoxColumn.DataPropertyName = "Cpf";
-            cpfDataGridViewTextBoxColumn.HeaderText = "CPF";
-            cpfDataGridViewTextBoxColumn.Name = "cpfDataGridViewTextBoxColumn";
-            cpfDataGridViewTextBoxColumn.ReadOnly = true;
-            cpfDataGridViewTextBoxColumn.Width = 53;
-            // 
-            // emailDataGridViewTextBoxColumn
-            // 
-            emailDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            emailDataGridViewTextBoxColumn.DataPropertyName = "Email";
-            emailDataGridViewTextBoxColumn.HeaderText = "Email";
-            emailDataGridViewTextBoxColumn.Name = "emailDataGridViewTextBoxColumn";
-            emailDataGridViewTextBoxColumn.ReadOnly = true;
-            emailDataGridViewTextBoxColumn.Width = 61;
-            // 
-            // telefoneDataGridViewTextBoxColumn
-            // 
-            telefoneDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            telefoneDataGridViewTextBoxColumn.DataPropertyName = "Telefone";
-            telefoneDataGridViewTextBoxColumn.HeaderText = "Telefone";
-            telefoneDataGridViewTextBoxColumn.Name = "telefoneDataGridViewTextBoxColumn";
-            telefoneDataGridViewTextBoxColumn.ReadOnly = true;
-            telefoneDataGridViewTextBoxColumn.Width = 76;
-            // 
-            // IdDoCarroVendido
-            // 
-            IdDoCarroVendido.DataPropertyName = "IdDoCarroVendido";
-            IdDoCarroVendido.HeaderText = "Id do Carro vendido";
-            IdDoCarroVendido.Name = "IdDoCarroVendido";
-            IdDoCarroVendido.ReadOnly = true;
-            // 
-            // dataDeCompraDataGridViewTextBoxColumn
-            // 
-            dataDeCompraDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            dataDeCompraDataGridViewTextBoxColumn.DataPropertyName = "DataDeCompra";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            dataDeCompraDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle2;
-            dataDeCompraDataGridViewTextBoxColumn.HeaderText = "Data da compra";
-            dataDeCompraDataGridViewTextBoxColumn.Name = "dataDeCompraDataGridViewTextBoxColumn";
-            dataDeCompraDataGridViewTextBoxColumn.ReadOnly = true;
-            dataDeCompraDataGridViewTextBoxColumn.Width = 106;
-            // 
-            // valorTotalDataGridViewTextBoxColumn
-            // 
-            valorTotalDataGridViewTextBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            valorTotalDataGridViewTextBoxColumn.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            valorTotalDataGridViewTextBoxColumn.DefaultCellStyle = dataGridViewCellStyle3;
-            valorTotalDataGridViewTextBoxColumn.HeaderText = "Valor total";
-            valorTotalDataGridViewTextBoxColumn.Name = "valorTotalDataGridViewTextBoxColumn";
-            valorTotalDataGridViewTextBoxColumn.ReadOnly = true;
-            valorTotalDataGridViewTextBoxColumn.Width = 79;
-            // 
-            // pagoDataGridViewCheckBoxColumn
-            // 
-            pagoDataGridViewCheckBoxColumn.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
-            pagoDataGridViewCheckBoxColumn.DataPropertyName = "Pago";
-            pagoDataGridViewCheckBoxColumn.HeaderText = "Pago";
-            pagoDataGridViewCheckBoxColumn.Name = "pagoDataGridViewCheckBoxColumn";
-            pagoDataGridViewCheckBoxColumn.ReadOnly = true;
-            pagoDataGridViewCheckBoxColumn.Width = 40;
             // 
             // vendaBindingSource
             // 
@@ -691,6 +561,136 @@
             CriarCarro.Text = "Criar";
             CriarCarro.UseVisualStyleBackColor = false;
             CriarCarro.Click += AoClicarNoBotaoCriarCarro;
+            // 
+            // ColunaIdVenda
+            // 
+            ColunaIdVenda.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColunaIdVenda.DataPropertyName = "Id";
+            ColunaIdVenda.HeaderText = "ID";
+            ColunaIdVenda.Name = "ColunaIdVenda";
+            ColunaIdVenda.ReadOnly = true;
+            ColunaIdVenda.Width = 43;
+            // 
+            // ColunaNome
+            // 
+            ColunaNome.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColunaNome.DataPropertyName = "Nome";
+            ColunaNome.HeaderText = "Nome";
+            ColunaNome.Name = "ColunaNome";
+            ColunaNome.ReadOnly = true;
+            // 
+            // colunaCpf
+            // 
+            colunaCpf.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            colunaCpf.DataPropertyName = "Cpf";
+            colunaCpf.HeaderText = "CPF";
+            colunaCpf.Name = "colunaCpf";
+            colunaCpf.ReadOnly = true;
+            colunaCpf.Width = 53;
+            // 
+            // ColunaEmail
+            // 
+            ColunaEmail.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColunaEmail.DataPropertyName = "Email";
+            ColunaEmail.HeaderText = "Email";
+            ColunaEmail.Name = "ColunaEmail";
+            ColunaEmail.ReadOnly = true;
+            ColunaEmail.Width = 61;
+            // 
+            // ColunaTelefone
+            // 
+            ColunaTelefone.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColunaTelefone.DataPropertyName = "Telefone";
+            ColunaTelefone.HeaderText = "Telefone";
+            ColunaTelefone.Name = "ColunaTelefone";
+            ColunaTelefone.ReadOnly = true;
+            ColunaTelefone.Width = 76;
+            // 
+            // IdDoCarroVendido
+            // 
+            IdDoCarroVendido.DataPropertyName = "IdDoCarroVendido";
+            IdDoCarroVendido.HeaderText = "Id do Carro vendido";
+            IdDoCarroVendido.Name = "IdDoCarroVendido";
+            IdDoCarroVendido.ReadOnly = true;
+            // 
+            // ColunaDataDeCompra
+            // 
+            ColunaDataDeCompra.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColunaDataDeCompra.DataPropertyName = "DataDeCompra";
+            dataGridViewCellStyle2.Format = "d";
+            dataGridViewCellStyle2.NullValue = null;
+            ColunaDataDeCompra.DefaultCellStyle = dataGridViewCellStyle2;
+            ColunaDataDeCompra.HeaderText = "Data da compra";
+            ColunaDataDeCompra.Name = "ColunaDataDeCompra";
+            ColunaDataDeCompra.ReadOnly = true;
+            ColunaDataDeCompra.Width = 106;
+            // 
+            // ColunaValorTotal
+            // 
+            ColunaValorTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColunaValorTotal.DataPropertyName = "ValorTotal";
+            dataGridViewCellStyle3.Format = "C2";
+            dataGridViewCellStyle3.NullValue = null;
+            ColunaValorTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            ColunaValorTotal.HeaderText = "Valor total";
+            ColunaValorTotal.Name = "ColunaValorTotal";
+            ColunaValorTotal.ReadOnly = true;
+            ColunaValorTotal.Width = 79;
+            // 
+            // ColunaPago
+            // 
+            ColunaPago.AutoSizeMode = DataGridViewAutoSizeColumnMode.ColumnHeader;
+            ColunaPago.DataPropertyName = "Pago";
+            ColunaPago.HeaderText = "Pago";
+            ColunaPago.Name = "ColunaPago";
+            ColunaPago.ReadOnly = true;
+            ColunaPago.Width = 40;
+            // 
+            // ColunaIdCarro
+            // 
+            ColunaIdCarro.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColunaIdCarro.DataPropertyName = "Id";
+            ColunaIdCarro.HeaderText = "ID";
+            ColunaIdCarro.Name = "ColunaIdCarro";
+            ColunaIdCarro.Width = 43;
+            // 
+            // ColunaMarca
+            // 
+            ColunaMarca.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColunaMarca.DataPropertyName = "Marca";
+            ColunaMarca.HeaderText = "Marca";
+            ColunaMarca.Name = "ColunaMarca";
+            // 
+            // ColunaModelo
+            // 
+            ColunaModelo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColunaModelo.DataPropertyName = "Modelo";
+            ColunaModelo.HeaderText = "Modelo";
+            ColunaModelo.Name = "ColunaModelo";
+            // 
+            // ColunaCor
+            // 
+            ColunaCor.DataPropertyName = "Cor";
+            ColunaCor.HeaderText = "Cor";
+            ColunaCor.Name = "ColunaCor";
+            ColunaCor.Width = 51;
+            // 
+            // ColunaValorDoVeiculo
+            // 
+            ColunaValorDoVeiculo.DataPropertyName = "ValorDoVeiculo";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            ColunaValorDoVeiculo.DefaultCellStyle = dataGridViewCellStyle1;
+            ColunaValorDoVeiculo.HeaderText = "Preço";
+            ColunaValorDoVeiculo.Name = "ColunaValorDoVeiculo";
+            ColunaValorDoVeiculo.Width = 62;
+            // 
+            // ColunaFlex
+            // 
+            ColunaFlex.DataPropertyName = "Flex";
+            ColunaFlex.HeaderText = "Flex";
+            ColunaFlex.Name = "ColunaFlex";
+            ColunaFlex.Width = 34;
             // 
             // FormListagem
             // 
@@ -764,24 +764,24 @@
         private Panel panel8;
         private Button CriarVenda;
         private Button CriarCarro;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn marcaDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn modeloDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn corDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn valorDoVeiculoDataGridViewTextBoxColumn;
-        private DataGridViewCheckBoxColumn flexDataGridViewCheckBoxColumn;
         private Button BotaoRemoverVenda;
         private Button BotaoRemoverCarro;
         private Button BotaoEditarVenda;
-        private DataGridViewTextBoxColumn idDataGridViewTextBoxColumn1;
-        private DataGridViewTextBoxColumn nomeDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn cpfDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn emailDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn telefoneDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn IdDoCarroVendido;
-        private DataGridViewTextBoxColumn dataDeCompraDataGridViewTextBoxColumn;
-        private DataGridViewTextBoxColumn valorTotalDataGridViewTextBoxColumn;
-        private DataGridViewCheckBoxColumn pagoDataGridViewCheckBoxColumn;
         private Button BotaoEditarCarro;
+        private DataGridViewTextBoxColumn ColunaIdVenda;
+        private DataGridViewTextBoxColumn ColunaNome;
+        private DataGridViewTextBoxColumn colunaCpf;
+        private DataGridViewTextBoxColumn ColunaEmail;
+        private DataGridViewTextBoxColumn ColunaTelefone;
+        private DataGridViewTextBoxColumn IdDoCarroVendido;
+        private DataGridViewTextBoxColumn ColunaDataDeCompra;
+        private DataGridViewTextBoxColumn ColunaValorTotal;
+        private DataGridViewCheckBoxColumn ColunaPago;
+        private DataGridViewTextBoxColumn ColunaIdCarro;
+        private DataGridViewTextBoxColumn ColunaMarca;
+        private DataGridViewTextBoxColumn ColunaModelo;
+        private DataGridViewTextBoxColumn ColunaCor;
+        private DataGridViewTextBoxColumn ColunaValorDoVeiculo;
+        private DataGridViewCheckBoxColumn ColunaFlex;
     }
 }

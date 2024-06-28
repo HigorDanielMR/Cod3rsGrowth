@@ -1,6 +1,6 @@
+using Microsoft.AspNetCore.Mvc;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
-using Microsoft.AspNetCore.Mvc;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
@@ -8,8 +8,9 @@ namespace Cod3rsGrowth.Web.Controllers
     [Route("[controller]")]
     public class CarroController : ControllerBase
     {
-        private readonly ServicoCarro _servico;
         private FiltroCarro _filtro = new();
+        private readonly ServicoCarro _servico;
+
         public CarroController(ServicoCarro servico)
         {
             _servico = servico;
@@ -21,7 +22,6 @@ namespace Cod3rsGrowth.Web.Controllers
             try
             {
                 var carros = _servico.ObterTodos(_filtro);
-
                 return Ok(carros);
             }
             catch (FluentValidation.ValidationException ex)

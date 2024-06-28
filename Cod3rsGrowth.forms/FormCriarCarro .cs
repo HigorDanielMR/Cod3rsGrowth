@@ -94,7 +94,6 @@ namespace Cod3rsGrowth.Forms
 
                 int inicioDaSelecaoDoCursor = textBox.SelectionStart;
                 int tamanhoDoValor = textBox.Text.Length;
-
                 string valorSemMascara = textBox.Text.Replace(".", "").Replace(",", "");
 
                 if (!int.TryParse(valorSemMascara, out int value))
@@ -107,10 +106,9 @@ namespace Cod3rsGrowth.Forms
                 textBox.TextChanged -= AoPreencherValorDoVeiculo;
 
                 string formatandoTexto = string.Format(CultureInfo.GetCultureInfo("pt-BR"), "{0:N2}", value / 100.0);
-
                 textBox.Text = formatandoTexto;
-
                 inicioDaSelecaoDoCursor = inicioDaSelecaoDoCursor + (textBox.Text.Length - tamanhoDoValor);
+
                 if (inicioDaSelecaoDoCursor > textBox.Text.Length)
                     inicioDaSelecaoDoCursor = textBox.Text.Length;
                 else if (inicioDaSelecaoDoCursor < 0)
