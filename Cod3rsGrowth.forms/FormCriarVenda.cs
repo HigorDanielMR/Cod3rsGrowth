@@ -33,7 +33,7 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
@@ -93,7 +93,7 @@ namespace Cod3rsGrowth.Forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao carregar comboBox");
             }
         }
 

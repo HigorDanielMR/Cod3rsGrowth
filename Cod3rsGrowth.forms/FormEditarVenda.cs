@@ -45,7 +45,7 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
@@ -106,11 +106,12 @@ namespace Cod3rsGrowth.Forms
                     carro.Add(car);
                     comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
                 }
+
                 selecionandoCarro.DataSource = comboBoxSelecionarCarro;
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao carregar comboBox");
             }
         }
 
@@ -130,7 +131,7 @@ namespace Cod3rsGrowth.Forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao selecionar carro");
             }
         }
     }

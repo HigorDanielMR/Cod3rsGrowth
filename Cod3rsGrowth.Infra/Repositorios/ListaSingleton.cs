@@ -13,6 +13,5 @@ namespace Cod3rsGrowth.Infra.Repositorios
         private ListaSingleton() { }
 
         public static ListaSingleton Instance => _instance.Value;
-
     }
 }

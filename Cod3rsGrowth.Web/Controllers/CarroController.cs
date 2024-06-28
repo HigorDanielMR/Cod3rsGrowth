@@ -94,13 +94,13 @@ namespace Cod3rsGrowth.Web.Controllers
             try
             {
                 var carro = _servico.ObterPorId(Id);
+
                 if(carro == null)
                 {
                     return NotFound();
                 }
 
                 _servico.Remover(Id);
-
                 return NoContent();
             }
             catch(FluentValidation.ValidationException ex)

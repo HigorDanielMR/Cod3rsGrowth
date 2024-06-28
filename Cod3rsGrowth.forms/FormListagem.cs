@@ -77,7 +77,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar fitrar carros");
             }
 
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
@@ -110,7 +110,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar limpar filtro carro");
             }
         }
 
@@ -142,7 +142,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar filtrar venda");
             }
         }
 
@@ -170,7 +170,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar limpar filtro venda");
             }
         }
 
@@ -222,12 +222,11 @@ namespace Cod3rsGrowth.forms
                 else
                 {
                     MessageBox.Show("Não é possível remover, pois, a lista está vazia.", "Erro ao remover Venda");
-
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar remver venda");
             }
         }
 
@@ -236,6 +235,7 @@ namespace Cod3rsGrowth.forms
             try
             {
                 var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
+
                 if(tabelaCarro.Count != 0)
                 {
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
@@ -258,7 +258,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar remover carro");
             }
         }
 
@@ -299,7 +299,7 @@ namespace Cod3rsGrowth.forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição de venda");
             }
         }
 
@@ -308,6 +308,7 @@ namespace Cod3rsGrowth.forms
             try
             {
                 var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
+
                 if (tabelaCarro.Count != 0)
                 {
                     var colunaID = "ColunaIdCarro";
@@ -338,7 +339,7 @@ namespace Cod3rsGrowth.forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição carro");
             }
         }
 

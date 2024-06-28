@@ -8,6 +8,7 @@ namespace Cod3rsGrowth.Servicos.Validadores
     public class ValidacoesVenda : AbstractValidator<Venda>
     {
         private readonly IRepositorioVenda _repositorio;
+
         public ValidacoesVenda(IRepositorioVenda repositorio)
         {
             _repositorio = repositorio;
