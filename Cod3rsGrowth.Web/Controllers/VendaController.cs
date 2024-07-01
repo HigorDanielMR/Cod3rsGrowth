@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 
@@ -6,43 +6,43 @@ namespace Cod3rsGrowth.Web.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class CarroController : ControllerBase
+    public class VendaController : ControllerBase
     {
-        private FiltroCarro _filtro = new();
-        private readonly ServicoCarro _servico;
+        private FiltroVenda _filtro = new();
+        private readonly ServicoVenda _servico;
 
-        public CarroController(ServicoCarro servico)
+        public VendaController(ServicoVenda servico)
         {
             _servico = servico;
         }
 
         [HttpGet]
-        public IActionResult ObterTodosCarros()
+        public IActionResult ObterTodasAsVendas()
         {
             try
             {
-                var carros = _servico.ObterTodos(_filtro);
-                return Ok(carros);
+                var vendas = _servico.ObterTodos(_filtro);
+                return Ok(vendas);
             }
-            catch (FluentValidation.ValidationException ex)
+            catch(FluentValidation.ValidationException ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
-        [HttpGet ("{Id}")]
-        public IActionResult ObterCarroPorId(int Id)
+        [HttpGet("{Id}")]
+        public IActionResult ObterVendaPorId(int Id)
         {
             try
             {
-                var carro = _servico.ObterPorId(Id);
+                var venda = _servico.ObterPorId(Id);
 
-                if (carro == null)
+                if (venda == null)
                 {
                     return NotFound();
                 }
 
-                return Ok(carro);
+                return Ok(venda);
             }
             catch(FluentValidation.ValidationException ex)
             {
@@ -51,17 +51,17 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpPost]
-        public IActionResult CriarCarro([FromBody]Carro carro)
+        public IActionResult CriarVenda([FromBody] Venda venda)
         {
             try
             {
-                if (carro == null)
+                if (venda == null)
                 {
                     return BadRequest();
                 }
 
-                _servico.Criar(carro);
-                return CreatedAtRoute(new { }, carro);
+                _servico.Criar(venda);
+                return CreatedAtRoute(new { }, venda);
             }
             catch(FluentValidation.ValidationException ex)
             {
@@ -70,16 +70,16 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpPut("{Id}")]
-        public IActionResult EditarCarro(int Id, [FromBody]Carro carro)
+        public IActionResult EditarVenda(int Id, [FromBody] Venda venda)
         {
             try
             {
-                if(carro == null ||  carro.Id != Id)
+                if (venda == null || venda.Id != Id)
                 {
                     return BadRequest();
                 }
 
-                _servico.Editar(carro);
+                _servico.Editar(venda);
                 return NoContent();
             }
             catch(FluentValidation.ValidationException ex)
@@ -89,13 +89,13 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpDelete("{Id}")]
-        public IActionResult RemoverCarro(int Id)
+        public IActionResult RemoverVenda(int Id)
         {
             try
             {
-                var carro = _servico.ObterPorId(Id);
+                var venda = _servico.ObterPorId(Id);
 
-                if(carro == null)
+                if (venda == null)
                 {
                     return NotFound();
                 }

@@ -70,11 +70,11 @@ namespace Cod3rsGrowth.Forms
 
                 _servicoCarro.Editar(carroEditado);
                 MessageBox.Show($"Carro com ID {_idDaEdicao} editado com sucesso!", "Editando carro");
-                this.Close();
+                Close();
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar salvar carro");
             }
         }
 

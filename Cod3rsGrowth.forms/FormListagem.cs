@@ -77,7 +77,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar fitrar carros");
             }
 
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
@@ -110,7 +110,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar limpar filtro carro");
             }
         }
 
@@ -142,7 +142,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar filtrar venda");
             }
         }
 
@@ -170,7 +170,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar limpar filtro venda");
             }
         }
 
@@ -195,7 +195,7 @@ namespace Cod3rsGrowth.forms
                 var tabelaVenda = _servicoVenda.ObterTodos(_filtroVenda);
                 if(tabelaVenda.Count != 0)
                 {
-                    var colunaIdVenda = 0;
+                    var colunaIdVenda = "ColunaIdVenda";
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
                     var colunaDesejadaIdVenda = TabelaVenda.Columns[colunaIdVenda].Index;
                     var colunaDesejadaIdCarro = TabelaVenda.Columns["IdDoCarroVendido"].Index;
@@ -222,12 +222,11 @@ namespace Cod3rsGrowth.forms
                 else
                 {
                     MessageBox.Show("Não é possível remover, pois, a lista está vazia.", "Erro ao remover Venda");
-
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar remver venda");
             }
         }
 
@@ -236,11 +235,12 @@ namespace Cod3rsGrowth.forms
             try
             {
                 var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
+
                 if(tabelaCarro.Count != 0)
                 {
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
-                    var colunaDeseada = 0;
-                    var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDeseada].Value.ToString());
+                    var colunaDesejada = "ColunaIdCarro";
+                    var idSelecionado = Convert.ToInt32(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDesejada].Value);
 
                     DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
 
@@ -258,7 +258,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar remover carro");
             }
         }
 
@@ -267,18 +267,19 @@ namespace Cod3rsGrowth.forms
             try
             {
                 var tabelaVenda = _servicoVenda.ObterTodos(_filtroVenda);
+
                 if( tabelaVenda.Count != 0)
                 {
-                    var colunaDesejada = 0;
+                    var colunaDesejada = "ColunaIdVenda";
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
-                    var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
+                    var idSelecionado = Convert.ToInt32(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
 
-                    var colunaCpf = 2;
-                    var colunaData = 6;
-                    var colunaNome = 1;
-                    var colunaValor = 4;
-                    var colunaEmail = 3;
-                    var colunaTelefone = 4;
+                    var colunaCpf = "colunaCpf";
+                    var colunaData = "ColunaDataDeCompra";
+                    var colunaNome = "ColunaNome";
+                    var colunaValor = "ColunaValorDoVeiculo";
+                    var colunaEmail = "ColunaEmail";
+                    var colunaTelefone = "ColunaTelefone";
 
                     var cpf = TabelaVenda.Rows[linhaSelecionada].Cells[colunaCpf].Value.ToString();
                     var data = TabelaVenda.Rows[linhaSelecionada].Cells[colunaData].Value.ToString();
@@ -298,7 +299,7 @@ namespace Cod3rsGrowth.forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição de venda");
             }
         }
 
@@ -307,17 +308,18 @@ namespace Cod3rsGrowth.forms
             try
             {
                 var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
+
                 if (tabelaCarro.Count != 0)
                 {
-                    var colunaID = 0;
+                    var colunaID = "ColunaIdCarro";
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
-                    var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaID].Value.ToString());
+                    var idSelecionado = Convert.ToInt32(TabelaCarro.Rows[linhaSelecionada].Cells[colunaID].Value);
 
-                    var colunaCor = 3;
-                    var colunaFlex = 5;
-                    var colunaMarca = 1;
-                    var colunaValor = 4;
-                    var colunaModelo = 2;
+                    var colunaCor = "ColunaCor";
+                    var colunaFlex = "ColunaFlex";
+                    var colunaMarca = "ColunaMarca";
+                    var colunaValor = "ColunaValorDoVeiculo";
+                    var colunaModelo = "ColunaModelo";
 
                     var cor =(Cores) TabelaCarro.Rows[linhaSelecionada].Cells[colunaCor].Value;
                     var marca = (Marcas) TabelaCarro.Rows[linhaSelecionada].Cells[colunaMarca].Value;
@@ -337,7 +339,7 @@ namespace Cod3rsGrowth.forms
             }
             catch(Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição carro");
             }
         }
 

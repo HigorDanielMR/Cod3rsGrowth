@@ -17,6 +17,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public List<Carro> ObterTodos(FiltroCarro filtro)
         {
             var query = FiltroParaBusca(_connection.Carro, filtro);
+
             if (query == null)
             {
                 return _connection.Carro.ToList();
@@ -64,8 +65,8 @@ namespace Cod3rsGrowth.Infra.Repositorios
             {
                 throw new Exception($"Carro com ID {carroAtualizado.Id} não encontrado.");
             }
-            return carroAtualizado;
 
+            return carroAtualizado;
         }
 
         public void Remover(int Id)
@@ -83,17 +84,16 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 if (carro.Modelo != null)
                     query = query.Where(d => d.Modelo.Contains(carro.Modelo));
 
-                if (carro.Cor != null)
-                    query = query.Where(d => d.Cor == carro.Cor);
+            if (carro.Cor != null)
+                query = query.Where(d => d.Cor == carro.Cor);
 
-                if (carro.Marca != null)
-                    query = query.Where(d => d.Marca == carro.Marca);
+            if (carro.Marca != null)
+                query = query.Where(d => d.Marca == carro.Marca);
 
-                if (carro.Flex != null)
-                    query = query.Where(d => d.Flex == carro.Flex);
+            if (carro.Flex != null)
+                query = query.Where(d => d.Flex == carro.Flex);
 
             return query;
         }
-
     }
 }
