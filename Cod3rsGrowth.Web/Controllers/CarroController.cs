@@ -4,7 +4,7 @@ using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class CarroController : ControllerBase
     {
@@ -19,94 +19,34 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet]
         public IActionResult ObterTodosCarros()
         {
-            try
-            {
-                var carros = _servico.ObterTodos(_filtro);
-                return Ok(carros);
-            }
-            catch (FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_servico.ObterTodos(_filtro));
         }
 
-        [HttpGet ("{Id}")]
+        [HttpGet("{Id}")]
         public IActionResult ObterCarroPorId(int Id)
         {
-            try
-            {
-                var carro = _servico.ObterPorId(Id);
-
-                if (carro == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(carro);
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            var carro = _servico.ObterPorId(Id);
+            return Ok(carro);
         }
 
         [HttpPost]
-        public IActionResult CriarCarro([FromBody]Carro carro)
+        public IActionResult CriarCarro([FromBody] Carro carro)
         {
-            try
-            {
-                if (carro == null)
-                {
-                    return BadRequest();
-                }
-
-                _servico.Criar(carro);
-                return CreatedAtRoute(new { }, carro);
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_servico.Criar(carro));
         }
 
         [HttpPut("{Id}")]
-        public IActionResult EditarCarro(int Id, [FromBody]Carro carro)
+        public IActionResult EditarCarro(int Id, [FromBody] Carro carro)
         {
-            try
-            {
-                if(carro == null ||  carro.Id != Id)
-                {
-                    return BadRequest();
-                }
-
-                _servico.Editar(carro);
-                return NoContent();
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _servico.Editar(carro);
+            return NoContent();
         }
 
         [HttpDelete("{Id}")]
         public IActionResult RemoverCarro(int Id)
         {
-            try
-            {
-                var carro = _servico.ObterPorId(Id);
-
-                if(carro == null)
-                {
-                    return NotFound();
-                }
-
-                _servico.Remover(Id);
-                return NoContent();
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _servico.Remover(Id);
+            return NoContent();
         }
     }
 }

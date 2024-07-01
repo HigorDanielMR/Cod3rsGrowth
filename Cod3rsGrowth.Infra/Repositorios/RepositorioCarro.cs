@@ -35,8 +35,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
                         where p.Id == IdDeBusca
                         select p;
 
-            var resultado = query.FirstOrDefault()
-                ?? throw new Exception($"Carro com ID {IdDeBusca} não encontrado.");
+            if(query == null) throw new Exception($"Carro com ID {IdDeBusca} não encontrado.");
+
+            var resultado = query.FirstOrDefault();
 
             return resultado;
         }

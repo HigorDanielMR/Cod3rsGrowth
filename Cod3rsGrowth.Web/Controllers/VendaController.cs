@@ -4,7 +4,7 @@ using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     [ApiController]
     public class VendaController : ControllerBase
     {
@@ -19,94 +19,34 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet]
         public IActionResult ObterTodasAsVendas()
         {
-            try
-            {
-                var vendas = _servico.ObterTodos(_filtro);
-                return Ok(vendas);
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_servico.ObterTodos(_filtro));
         }
 
         [HttpGet("{Id}")]
         public IActionResult ObterVendaPorId(int Id)
         {
-            try
-            {
-                var venda = _servico.ObterPorId(Id);
-
-                if (venda == null)
-                {
-                    return NotFound();
-                }
-
-                return Ok(venda);
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            return Ok(_servico.ObterPorId(Id));
         }
 
         [HttpPost]
         public IActionResult CriarVenda([FromBody] Venda venda)
         {
-            try
-            {
-                if (venda == null)
-                {
-                    return BadRequest();
-                }
-
-                _servico.Criar(venda);
-                return CreatedAtRoute(new { }, venda);
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _servico.Criar(venda);
+            return CreatedAtRoute(new { }, venda);
         }
 
         [HttpPut("{Id}")]
         public IActionResult EditarVenda(int Id, [FromBody] Venda venda)
         {
-            try
-            {
-                if (venda == null || venda.Id != Id)
-                {
-                    return BadRequest();
-                }
-
-                _servico.Editar(venda);
-                return NoContent();
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _servico.Editar(venda);
+            return NoContent();
         }
 
         [HttpDelete("{Id}")]
         public IActionResult RemoverVenda(int Id)
         {
-            try
-            {
-                var venda = _servico.ObterPorId(Id);
-
-                if (venda == null)
-                {
-                    return NotFound();
-                }
-
-                _servico.Remover(Id);
-                return NoContent();
-            }
-            catch(FluentValidation.ValidationException ex)
-            {
-                return BadRequest(ex.Message);
-            }
+            _servico.Remover(Id);
+            return NoContent();
         }
     }
 }
