@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Web.Controllers
             _servico = servico;
         }
 
-        [HttpGet("Carros")]
+        [HttpGet]
         public IActionResult ObterTodosCarros()
         {
             try
@@ -30,7 +30,7 @@ namespace Cod3rsGrowth.Web.Controllers
             }
         }
 
-        [HttpGet ("Carros/{Id}")]
+        [HttpGet ("{Id}")]
         public IActionResult ObterCarroPorId(int Id)
         {
             try
@@ -50,7 +50,7 @@ namespace Cod3rsGrowth.Web.Controllers
             }
         }
 
-        [HttpPost("Carros")]
+        [HttpPost]
         public IActionResult CriarCarro([FromBody]Carro carro)
         {
             try
@@ -69,7 +69,7 @@ namespace Cod3rsGrowth.Web.Controllers
             }
         }
 
-        [HttpPut("Carros/{Id}")]
+        [HttpPut("{Id}")]
         public IActionResult EditarCarro(int Id, [FromBody]Carro carro)
         {
             try
@@ -88,7 +88,7 @@ namespace Cod3rsGrowth.Web.Controllers
             }
         }
 
-        [HttpDelete("Carros/{Id}")]
+        [HttpDelete("{Id}")]
         public IActionResult RemoverCarro(int Id)
         {
             try

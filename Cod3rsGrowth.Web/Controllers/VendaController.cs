@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Web.Controllers
             _servico = servico;
         }
 
-        [HttpGet("Vendas")]
+        [HttpGet]
         public IActionResult ObterTodasAsVendas()
         {
             try
@@ -30,7 +30,7 @@ namespace Cod3rsGrowth.Web.Controllers
             }
         }
 
-        [HttpGet("Vendas/{Id}")]
+        [HttpGet("{Id}")]
         public IActionResult ObterVendaPorId(int Id)
         {
             try
@@ -50,7 +50,7 @@ namespace Cod3rsGrowth.Web.Controllers
             }
         }
 
-        [HttpPost("Vendas")]
+        [HttpPost]
         public IActionResult CriarVenda([FromBody] Venda venda)
         {
             try
@@ -69,7 +69,7 @@ namespace Cod3rsGrowth.Web.Controllers
             }
         }
 
-        [HttpPut("Vendas/{Id}")]
+        [HttpPut("{Id}")]
         public IActionResult EditarVenda(int Id, [FromBody] Venda venda)
         {
             try
@@ -88,7 +88,7 @@ namespace Cod3rsGrowth.Web.Controllers
             }
         }
 
-        [HttpDelete("Vendas/{Id}")]
+        [HttpDelete("{Id}")]
         public IActionResult RemoverVenda(int Id)
         {
             try
