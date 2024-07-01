@@ -44,8 +44,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             var carroDesejado = _repositorioCarro.Find(c => c.Id == Id);
 
-            if (carroDesejado != null) _repositorioCarro.Remove(carroDesejado);
-            else throw new Exception($"O carro com ID {Id} não foi encontrado");
+            _repositorioCarro.Remove(carroDesejado ?? throw new Exception($"O carro com ID {Id} não foi encontrado"));
         }
     }
 }

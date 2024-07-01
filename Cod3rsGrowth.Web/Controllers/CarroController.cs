@@ -4,8 +4,8 @@ using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
+    [Route("api/[controller]")]
     [ApiController]
-    [Route("[controller]")]
     public class CarroController : ControllerBase
     {
         private FiltroCarro _filtro = new();

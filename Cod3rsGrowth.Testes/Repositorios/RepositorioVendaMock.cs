@@ -47,8 +47,8 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             var vendaDesejada = _repositorioVenda.Find(c => c.Id == Id);
 
-            if (vendaDesejada != null) _repositorioVenda.Remove(vendaDesejada);
-            else throw new Exception($"A venda com ID {Id} não foi encontrada");
+            _repositorioVenda.Remove(vendaDesejada ?? throw new Exception($"O carro com ID {Id} não foi encontrado"));
+
         }
     }
 }
