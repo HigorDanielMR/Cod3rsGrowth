@@ -4,7 +4,7 @@ using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class CarroController : ControllerBase
     {
