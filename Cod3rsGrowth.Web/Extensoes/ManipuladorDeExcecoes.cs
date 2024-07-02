@@ -28,7 +28,7 @@ namespace Cod3rsGrowth.Web.DetalhesDosProblemas
                         {
                             problemDetails.Title = "Erro de validação do FluentValidation";
                             problemDetails.Status = StatusCodes.Status400BadRequest;
-                            problemDetails.Detail = excecao.StackTrace.ToString();
+                            problemDetails.Detail = excecao.StackTrace;
                             problemDetails.Extensions["Erros de validação: "] = excecao.Message.Split("\r\n");
                         }
                         else
@@ -37,14 +37,14 @@ namespace Cod3rsGrowth.Web.DetalhesDosProblemas
                             logger.LogError($"Erro inesperado: {manipulandoExcecoes.Error}");
                             problemDetails.Title = "Erro de requisição de tarefas";
                             problemDetails.Status = StatusCodes.Status500InternalServerError;
-                            problemDetails.Detail = excecao.StackTrace.ToString();
+                            problemDetails.Detail = excecao.StackTrace;
                             problemDetails.Extensions["Erros inesperados: "] = excecao.Message.Split("\r\n");
                         }
 
                         context.Response.StatusCode = problemDetails.Status.Value;
                         context.Response.ContentType = "application/problem+json";
-                        var json = JsonConvert.SerializeObject(problemDetails);
-                        await context.Response.WriteAsync(json);
+                        var jsonConvertido = JsonConvert.SerializeObject(problemDetails);
+                        await context.Response.WriteAsync(jsonConvertido);
                     }
                 });
             });

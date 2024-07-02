@@ -14,7 +14,7 @@ namespace Cod3rsGrowth.Web.DetalhesDosProblemas
                     {
                         Instance = context.HttpContext.Request.Path,
                         Status = StatusCodes.Status400BadRequest,
-                        Detail = "Please refer to the errors property for additional details"
+                        Detail = "Modelo inválido."
                     };
                     return new BadRequestObjectResult(problemDetails)
                     {
