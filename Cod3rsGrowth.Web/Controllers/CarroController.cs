@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodosCarros([FromBody] FiltroCarro? filtro)
+        public IActionResult ObterTodosCarros([FromQuery] FiltroCarro? filtro)
         {
             return Ok(_servico.ObterTodos(filtro));
         }

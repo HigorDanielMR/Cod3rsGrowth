@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodasAsVendas([FromBody] FiltroVenda? filtro)
+        public IActionResult ObterTodasAsVendas([FromQuery] FiltroVenda? filtro)
         {
             return Ok(_servico.ObterTodos(filtro));
         }
