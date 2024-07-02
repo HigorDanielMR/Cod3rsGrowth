@@ -8,7 +8,6 @@ namespace Cod3rsGrowth.Web.Controllers
     [ApiController]
     public class CarroController : ControllerBase
     {
-        private FiltroCarro _filtro = new();
         private readonly ServicoCarro _servico;
 
         public CarroController(ServicoCarro servico)
@@ -17,9 +16,9 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodosCarros()
+        public IActionResult ObterTodosCarros([FromBody] FiltroCarro? filtro)
         {
-            return Ok(_servico.ObterTodos(_filtro));
+            return Ok(_servico.ObterTodos(filtro));
         }
 
         [HttpGet("{Id}")]

@@ -8,7 +8,6 @@ namespace Cod3rsGrowth.Web.Controllers
     [ApiController]
     public class VendaController : ControllerBase
     {
-        private FiltroVenda _filtro = new();
         private readonly ServicoVenda _servico;
 
         public VendaController(ServicoVenda servico)
@@ -17,9 +16,9 @@ namespace Cod3rsGrowth.Web.Controllers
         }
 
         [HttpGet]
-        public IActionResult ObterTodasAsVendas()
+        public IActionResult ObterTodasAsVendas([FromBody] FiltroVenda filtro)
         {
-            return Ok(_servico.ObterTodos(_filtro));
+            return Ok(_servico.ObterTodos(filtro));
         }
 
         [HttpGet("{Id}")]

@@ -5,14 +5,10 @@ using Cod3rsGrowth.Servicos.Validadores;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
 using Cod3rsGrowth.Web.DetalhesDosProblemas;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
-using Microsoft.AspNetCore.Mvc;
 
 var stringDeConexao = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 var builder = WebApplication.CreateBuilder(args);
 
-
-builder.Services.AddMvc();
-builder.Services.ConfigureProblemDetailsModelState();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddProblemDetails();
@@ -21,11 +17,10 @@ builder.Services.AddScoped<ServicoCarro>();
 builder.Services.AddScoped<ServicoVenda>();
 builder.Services.AddScoped<ValidacoesVenda>();
 builder.Services.AddScoped<ValidacoesCarro>();
+builder.Services.ConfigurarOEstadoDoModeloDeDetalhesDoProblema();
 builder.Services.AddScoped<IRepositorioVenda, RepositorioVenda>();
 builder.Services.AddScoped<IRepositorioCarro, RepositorioCarro>();
 builder.Services.AddScoped(provider => new MeuContextoDeDados(stringDeConexao));
-
-builder.Services.ConfigureProblemDetailsModelState();
 
 var app = builder.Build();
 
@@ -35,9 +30,9 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseProblemDetailsExceptionHandler(app.Services.GetRequiredService<ILoggerFactory>());
 app.MapControllers();
 app.UseAuthorization();
 app.UseHttpsRedirection();
 app.UseDeveloperExceptionPage();
+app.UsarManipuladorDeExcecaoDeDetalhesDoProblema(app.Services.GetRequiredService<ILoggerFactory>());
 app.Run();
