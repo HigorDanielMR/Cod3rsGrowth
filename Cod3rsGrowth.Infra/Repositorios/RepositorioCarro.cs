@@ -76,22 +76,24 @@ namespace Cod3rsGrowth.Infra.Repositorios
                  .Delete();
         }
 
-        private static IQueryable<Carro> FiltroParaBusca(ITable<Carro> carros, FiltroCarro carro)
+        private static IQueryable<Carro> FiltroParaBusca(ITable<Carro> carros, FiltroCarro? carro)
         {
             var query = carros.AsQueryable();
 
             if (carro != null)
+            {
                 if (carro.Modelo != null)
                     query = query.Where(d => d.Modelo.Contains(carro.Modelo));
 
-            if (carro.Cor != null)
-                query = query.Where(d => d.Cor == carro.Cor);
+                if (carro.Cor != null)
+                    query = query.Where(d => d.Cor == carro.Cor);
 
-            if (carro.Marca != null)
-                query = query.Where(d => d.Marca == carro.Marca);
+                if (carro.Marca != null)
+                    query = query.Where(d => d.Marca == carro.Marca);
 
-            if (carro.Flex != null)
-                query = query.Where(d => d.Flex == carro.Flex);
+                if (carro.Flex != null)
+                    query = query.Where(d => d.Flex == carro.Flex);
+            }
 
             return query;
         }

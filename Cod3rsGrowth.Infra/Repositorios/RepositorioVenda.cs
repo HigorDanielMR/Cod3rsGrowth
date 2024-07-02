@@ -84,6 +84,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             var query = vendas.AsQueryable();
 
             if (venda != null)
+            {
                 if (venda.Nome != null)
                     query = query.Where(d => d.Nome.Contains(venda.Nome));
 
@@ -101,6 +102,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
                 if (venda.IdDoCarroVendido != null)
                     query = query.Where(d => d.IdDoCarroVendido == venda.IdDoCarroVendido);
+            }
 
             return query;
         }
