@@ -29,10 +29,16 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
             TabelaCarro = new DataGridView();
+            ColunaIdCarro = new DataGridViewTextBoxColumn();
+            ColunaMarca = new DataGridViewTextBoxColumn();
+            ColunaModelo = new DataGridViewTextBoxColumn();
+            ColunaCor = new DataGridViewTextBoxColumn();
+            ColunaValorDoVeiculo = new DataGridViewTextBoxColumn();
+            ColunaFlex = new DataGridViewCheckBoxColumn();
             carroBindingSource = new BindingSource(components);
             label2 = new Label();
             FiltrarCarro = new Button();
@@ -53,11 +59,13 @@
             BotaoRemoverVenda = new Button();
             CriarVenda = new Button();
             panel4 = new Panel();
+            label7 = new Label();
+            procurarDataFinal = new MaskedTextBox();
             panel8 = new Panel();
             LimparFIltroVenda = new Button();
             FiltrarVenda = new Button();
             label4 = new Label();
-            procurarData = new MaskedTextBox();
+            procurarDataInicial = new MaskedTextBox();
             label5 = new Label();
             txtProcurarEmail = new TextBox();
             CPF = new Label();
@@ -66,12 +74,6 @@
             label6 = new Label();
             panel3 = new Panel();
             TabelaVenda = new DataGridView();
-            vendaBindingSource = new BindingSource(components);
-            tabPage2 = new TabPage();
-            panel6 = new Panel();
-            BotaoEditarCarro = new Button();
-            BotaoRemoverCarro = new Button();
-            CriarCarro = new Button();
             ColunaIdVenda = new DataGridViewTextBoxColumn();
             ColunaNome = new DataGridViewTextBoxColumn();
             colunaCpf = new DataGridViewTextBoxColumn();
@@ -81,12 +83,12 @@
             ColunaDataDeCompra = new DataGridViewTextBoxColumn();
             ColunaValorTotal = new DataGridViewTextBoxColumn();
             ColunaPago = new DataGridViewCheckBoxColumn();
-            ColunaIdCarro = new DataGridViewTextBoxColumn();
-            ColunaMarca = new DataGridViewTextBoxColumn();
-            ColunaModelo = new DataGridViewTextBoxColumn();
-            ColunaCor = new DataGridViewTextBoxColumn();
-            ColunaValorDoVeiculo = new DataGridViewTextBoxColumn();
-            ColunaFlex = new DataGridViewCheckBoxColumn();
+            vendaBindingSource = new BindingSource(components);
+            tabPage2 = new TabPage();
+            panel6 = new Panel();
+            BotaoEditarCarro = new Button();
+            BotaoRemoverCarro = new Button();
+            CriarCarro = new Button();
             ((System.ComponentModel.ISupportInitialize)TabelaCarro).BeginInit();
             ((System.ComponentModel.ISupportInitialize)carroBindingSource).BeginInit();
             panel1.SuspendLayout();
@@ -125,6 +127,52 @@
             TabelaCarro.Size = new Size(824, 286);
             TabelaCarro.TabIndex = 0;
             // 
+            // ColunaIdCarro
+            // 
+            ColunaIdCarro.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
+            ColunaIdCarro.DataPropertyName = "Id";
+            ColunaIdCarro.HeaderText = "ID";
+            ColunaIdCarro.Name = "ColunaIdCarro";
+            ColunaIdCarro.Width = 43;
+            // 
+            // ColunaMarca
+            // 
+            ColunaMarca.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColunaMarca.DataPropertyName = "Marca";
+            ColunaMarca.HeaderText = "Marca";
+            ColunaMarca.Name = "ColunaMarca";
+            // 
+            // ColunaModelo
+            // 
+            ColunaModelo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            ColunaModelo.DataPropertyName = "Modelo";
+            ColunaModelo.HeaderText = "Modelo";
+            ColunaModelo.Name = "ColunaModelo";
+            // 
+            // ColunaCor
+            // 
+            ColunaCor.DataPropertyName = "Cor";
+            ColunaCor.HeaderText = "Cor";
+            ColunaCor.Name = "ColunaCor";
+            ColunaCor.Width = 51;
+            // 
+            // ColunaValorDoVeiculo
+            // 
+            ColunaValorDoVeiculo.DataPropertyName = "ValorDoVeiculo";
+            dataGridViewCellStyle1.Format = "C2";
+            dataGridViewCellStyle1.NullValue = null;
+            ColunaValorDoVeiculo.DefaultCellStyle = dataGridViewCellStyle1;
+            ColunaValorDoVeiculo.HeaderText = "Preço";
+            ColunaValorDoVeiculo.Name = "ColunaValorDoVeiculo";
+            ColunaValorDoVeiculo.Width = 62;
+            // 
+            // ColunaFlex
+            // 
+            ColunaFlex.DataPropertyName = "Flex";
+            ColunaFlex.HeaderText = "Flex";
+            ColunaFlex.Name = "ColunaFlex";
+            ColunaFlex.Width = 34;
+            // 
             // carroBindingSource
             // 
             carroBindingSource.DataSource = typeof(Dominio.Entidades.Carro);
@@ -150,7 +198,7 @@
             FiltrarCarro.MaximumSize = new Size(94, 28);
             FiltrarCarro.Name = "FiltrarCarro";
             FiltrarCarro.Size = new Size(94, 28);
-            FiltrarCarro.TabIndex = 3;
+            FiltrarCarro.TabIndex = 4;
             FiltrarCarro.Text = "Filtrar";
             FiltrarCarro.UseVisualStyleBackColor = false;
             FiltrarCarro.Click += AoClicarNoBotaoFiltrarDaTabelaCarro;
@@ -162,7 +210,7 @@
             selecionarMarca.Location = new Point(14, 37);
             selecionarMarca.Name = "selecionarMarca";
             selecionarMarca.Size = new Size(131, 23);
-            selecionarMarca.TabIndex = 4;
+            selecionarMarca.TabIndex = 1;
             // 
             // LimparFiltroCarro
             // 
@@ -223,7 +271,7 @@
             selecionarCor.Location = new Point(333, 37);
             selecionarCor.Name = "selecionarCor";
             selecionarCor.Size = new Size(128, 23);
-            selecionarCor.TabIndex = 8;
+            selecionarCor.TabIndex = 3;
             // 
             // label3
             // 
@@ -240,7 +288,7 @@
             txtProcurar.Location = new Point(151, 37);
             txtProcurar.Name = "txtProcurar";
             txtProcurar.Size = new Size(176, 23);
-            txtProcurar.TabIndex = 6;
+            txtProcurar.TabIndex = 2;
             // 
             // carroBindingSource1
             // 
@@ -299,7 +347,7 @@
             BotaoEditarVenda.Location = new Point(630, 27);
             BotaoEditarVenda.Name = "BotaoEditarVenda";
             BotaoEditarVenda.Size = new Size(94, 28);
-            BotaoEditarVenda.TabIndex = 12;
+            BotaoEditarVenda.TabIndex = 9;
             BotaoEditarVenda.Text = "Editar";
             BotaoEditarVenda.UseVisualStyleBackColor = false;
             BotaoEditarVenda.Click += AoClicarNoBotaoEditarVenda;
@@ -312,7 +360,7 @@
             BotaoRemoverVenda.Location = new Point(743, 27);
             BotaoRemoverVenda.Name = "BotaoRemoverVenda";
             BotaoRemoverVenda.Size = new Size(94, 28);
-            BotaoRemoverVenda.TabIndex = 11;
+            BotaoRemoverVenda.TabIndex = 10;
             BotaoRemoverVenda.Text = "Remover";
             BotaoRemoverVenda.UseVisualStyleBackColor = false;
             BotaoRemoverVenda.Click += AoClicarNoBotaoRemoverVenda;
@@ -328,7 +376,7 @@
             CriarVenda.MaximumSize = new Size(94, 28);
             CriarVenda.Name = "CriarVenda";
             CriarVenda.Size = new Size(94, 28);
-            CriarVenda.TabIndex = 10;
+            CriarVenda.TabIndex = 8;
             CriarVenda.Text = "Criar";
             CriarVenda.UseVisualStyleBackColor = false;
             CriarVenda.Click += AoClicarNoBotaoCriarVenda;
@@ -336,9 +384,11 @@
             // panel4
             // 
             panel4.BackColor = Color.Transparent;
+            panel4.Controls.Add(label7);
+            panel4.Controls.Add(procurarDataFinal);
             panel4.Controls.Add(panel8);
             panel4.Controls.Add(label4);
-            panel4.Controls.Add(procurarData);
+            panel4.Controls.Add(procurarDataInicial);
             panel4.Controls.Add(label5);
             panel4.Controls.Add(txtProcurarEmail);
             panel4.Controls.Add(CPF);
@@ -351,6 +401,25 @@
             panel4.Name = "panel4";
             panel4.Size = new Size(858, 70);
             panel4.TabIndex = 8;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(512, 15);
+            label7.Name = "label7";
+            label7.Size = new Size(75, 19);
+            label7.TabIndex = 17;
+            label7.Text = "Data Final";
+            // 
+            // procurarDataFinal
+            // 
+            procurarDataFinal.Location = new Point(512, 37);
+            procurarDataFinal.Mask = "00/00/0000";
+            procurarDataFinal.Name = "procurarDataFinal";
+            procurarDataFinal.Size = new Size(79, 23);
+            procurarDataFinal.TabIndex = 5;
+            procurarDataFinal.ValidatingType = typeof(DateTime);
             // 
             // panel8
             // 
@@ -372,10 +441,10 @@
             LimparFIltroVenda.MaximumSize = new Size(94, 28);
             LimparFIltroVenda.Name = "LimparFIltroVenda";
             LimparFIltroVenda.Size = new Size(94, 28);
-            LimparFIltroVenda.TabIndex = 4;
+            LimparFIltroVenda.TabIndex = 7;
             LimparFIltroVenda.Text = "Limpar FIltro";
             LimparFIltroVenda.UseVisualStyleBackColor = false;
-            LimparFIltroVenda.Click += AoClicarNoBotaoLimparFIltroDaTabelaVenda;
+            LimparFIltroVenda.Click += AoClicarNoBotaoLimparFiltroDaTabelaVenda;
             // 
             // FiltrarVenda
             // 
@@ -388,7 +457,7 @@
             FiltrarVenda.MaximumSize = new Size(94, 28);
             FiltrarVenda.Name = "FiltrarVenda";
             FiltrarVenda.Size = new Size(94, 28);
-            FiltrarVenda.TabIndex = 3;
+            FiltrarVenda.TabIndex = 6;
             FiltrarVenda.Text = "Filtrar";
             FiltrarVenda.UseVisualStyleBackColor = false;
             FiltrarVenda.Click += AoClicarNoBotaoFiltrarNaTabelaVenda;
@@ -399,18 +468,18 @@
             label4.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
             label4.Location = new Point(427, 15);
             label4.Name = "label4";
-            label4.Size = new Size(117, 19);
+            label4.Size = new Size(83, 19);
             label4.TabIndex = 13;
-            label4.Text = "Data de compra";
+            label4.Text = "Data Inicial";
             // 
-            // procurarData
+            // procurarDataInicial
             // 
-            procurarData.Location = new Point(427, 37);
-            procurarData.Mask = "00/00/0000";
-            procurarData.Name = "procurarData";
-            procurarData.Size = new Size(120, 23);
-            procurarData.TabIndex = 12;
-            procurarData.ValidatingType = typeof(DateTime);
+            procurarDataInicial.Location = new Point(427, 37);
+            procurarDataInicial.Mask = "00/00/0000";
+            procurarDataInicial.Name = "procurarDataInicial";
+            procurarDataInicial.Size = new Size(79, 23);
+            procurarDataInicial.TabIndex = 4;
+            procurarDataInicial.ValidatingType = typeof(DateTime);
             // 
             // label5
             // 
@@ -427,7 +496,7 @@
             txtProcurarEmail.Location = new Point(246, 37);
             txtProcurarEmail.Name = "txtProcurarEmail";
             txtProcurarEmail.Size = new Size(175, 23);
-            txtProcurarEmail.TabIndex = 9;
+            txtProcurarEmail.TabIndex = 3;
             // 
             // CPF
             // 
@@ -445,14 +514,14 @@
             procurarCpf.Mask = "000,000,000-00";
             procurarCpf.Name = "procurarCpf";
             procurarCpf.Size = new Size(83, 23);
-            procurarCpf.TabIndex = 6;
+            procurarCpf.TabIndex = 2;
             // 
             // txtProcurarNome
             // 
             txtProcurarNome.Location = new Point(17, 37);
             txtProcurarNome.Name = "txtProcurarNome";
             txtProcurarNome.Size = new Size(134, 23);
-            txtProcurarNome.TabIndex = 5;
+            txtProcurarNome.TabIndex = 1;
             // 
             // label6
             // 
@@ -491,76 +560,6 @@
             TabelaVenda.RowTemplate.Height = 25;
             TabelaVenda.Size = new Size(820, 293);
             TabelaVenda.TabIndex = 1;
-            // 
-            // vendaBindingSource
-            // 
-            vendaBindingSource.DataSource = typeof(Dominio.Entidades.Venda);
-            // 
-            // tabPage2
-            // 
-            tabPage2.Controls.Add(panel6);
-            tabPage2.Controls.Add(panel2);
-            tabPage2.Controls.Add(panel1);
-            tabPage2.Location = new Point(4, 24);
-            tabPage2.Name = "tabPage2";
-            tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(864, 436);
-            tabPage2.TabIndex = 1;
-            tabPage2.Text = "Tabela de Carros";
-            tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // panel6
-            // 
-            panel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            panel6.Controls.Add(BotaoEditarCarro);
-            panel6.Controls.Add(BotaoRemoverCarro);
-            panel6.Controls.Add(CriarCarro);
-            panel6.Location = new Point(3, 375);
-            panel6.Name = "panel6";
-            panel6.Size = new Size(858, 58);
-            panel6.TabIndex = 8;
-            // 
-            // BotaoEditarCarro
-            // 
-            BotaoEditarCarro.BackColor = Color.DarkGray;
-            BotaoEditarCarro.FlatStyle = FlatStyle.Flat;
-            BotaoEditarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BotaoEditarCarro.Location = new Point(630, 27);
-            BotaoEditarCarro.Name = "BotaoEditarCarro";
-            BotaoEditarCarro.Size = new Size(94, 28);
-            BotaoEditarCarro.TabIndex = 2;
-            BotaoEditarCarro.Text = "Editar";
-            BotaoEditarCarro.UseVisualStyleBackColor = false;
-            BotaoEditarCarro.Click += AoClicarNoBotaoEditarCarro;
-            // 
-            // BotaoRemoverCarro
-            // 
-            BotaoRemoverCarro.BackColor = Color.DarkGray;
-            BotaoRemoverCarro.FlatStyle = FlatStyle.Flat;
-            BotaoRemoverCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            BotaoRemoverCarro.Location = new Point(744, 27);
-            BotaoRemoverCarro.Name = "BotaoRemoverCarro";
-            BotaoRemoverCarro.Size = new Size(94, 28);
-            BotaoRemoverCarro.TabIndex = 1;
-            BotaoRemoverCarro.Text = "Remover";
-            BotaoRemoverCarro.UseVisualStyleBackColor = false;
-            BotaoRemoverCarro.Click += AoClicarNoBotaoRemoverCarro;
-            // 
-            // CriarCarro
-            // 
-            CriarCarro.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
-            CriarCarro.BackColor = Color.DarkGray;
-            CriarCarro.FlatAppearance.BorderColor = Color.Black;
-            CriarCarro.FlatStyle = FlatStyle.Flat;
-            CriarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
-            CriarCarro.Location = new Point(518, 27);
-            CriarCarro.MaximumSize = new Size(94, 28);
-            CriarCarro.Name = "CriarCarro";
-            CriarCarro.Size = new Size(94, 28);
-            CriarCarro.TabIndex = 0;
-            CriarCarro.Text = "Criar";
-            CriarCarro.UseVisualStyleBackColor = false;
-            CriarCarro.Click += AoClicarNoBotaoCriarCarro;
             // 
             // ColunaIdVenda
             // 
@@ -646,51 +645,75 @@
             ColunaPago.ReadOnly = true;
             ColunaPago.Width = 40;
             // 
-            // ColunaIdCarro
+            // vendaBindingSource
             // 
-            ColunaIdCarro.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
-            ColunaIdCarro.DataPropertyName = "Id";
-            ColunaIdCarro.HeaderText = "ID";
-            ColunaIdCarro.Name = "ColunaIdCarro";
-            ColunaIdCarro.Width = 43;
+            vendaBindingSource.DataSource = typeof(Dominio.Entidades.Venda);
             // 
-            // ColunaMarca
+            // tabPage2
             // 
-            ColunaMarca.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ColunaMarca.DataPropertyName = "Marca";
-            ColunaMarca.HeaderText = "Marca";
-            ColunaMarca.Name = "ColunaMarca";
+            tabPage2.Controls.Add(panel6);
+            tabPage2.Controls.Add(panel2);
+            tabPage2.Controls.Add(panel1);
+            tabPage2.Location = new Point(4, 24);
+            tabPage2.Name = "tabPage2";
+            tabPage2.Padding = new Padding(3);
+            tabPage2.Size = new Size(864, 436);
+            tabPage2.TabIndex = 1;
+            tabPage2.Text = "Tabela de Carros";
+            tabPage2.UseVisualStyleBackColor = true;
             // 
-            // ColunaModelo
+            // panel6
             // 
-            ColunaModelo.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            ColunaModelo.DataPropertyName = "Modelo";
-            ColunaModelo.HeaderText = "Modelo";
-            ColunaModelo.Name = "ColunaModelo";
+            panel6.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            panel6.Controls.Add(BotaoEditarCarro);
+            panel6.Controls.Add(BotaoRemoverCarro);
+            panel6.Controls.Add(CriarCarro);
+            panel6.Location = new Point(3, 375);
+            panel6.Name = "panel6";
+            panel6.Size = new Size(858, 58);
+            panel6.TabIndex = 8;
             // 
-            // ColunaCor
+            // BotaoEditarCarro
             // 
-            ColunaCor.DataPropertyName = "Cor";
-            ColunaCor.HeaderText = "Cor";
-            ColunaCor.Name = "ColunaCor";
-            ColunaCor.Width = 51;
+            BotaoEditarCarro.BackColor = Color.DarkGray;
+            BotaoEditarCarro.FlatStyle = FlatStyle.Flat;
+            BotaoEditarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BotaoEditarCarro.Location = new Point(630, 27);
+            BotaoEditarCarro.Name = "BotaoEditarCarro";
+            BotaoEditarCarro.Size = new Size(94, 28);
+            BotaoEditarCarro.TabIndex = 7;
+            BotaoEditarCarro.Text = "Editar";
+            BotaoEditarCarro.UseVisualStyleBackColor = false;
+            BotaoEditarCarro.Click += AoClicarNoBotaoEditarCarro;
             // 
-            // ColunaValorDoVeiculo
+            // BotaoRemoverCarro
             // 
-            ColunaValorDoVeiculo.DataPropertyName = "ValorDoVeiculo";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            ColunaValorDoVeiculo.DefaultCellStyle = dataGridViewCellStyle1;
-            ColunaValorDoVeiculo.HeaderText = "Preço";
-            ColunaValorDoVeiculo.Name = "ColunaValorDoVeiculo";
-            ColunaValorDoVeiculo.Width = 62;
+            BotaoRemoverCarro.BackColor = Color.DarkGray;
+            BotaoRemoverCarro.FlatStyle = FlatStyle.Flat;
+            BotaoRemoverCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            BotaoRemoverCarro.Location = new Point(744, 27);
+            BotaoRemoverCarro.Name = "BotaoRemoverCarro";
+            BotaoRemoverCarro.Size = new Size(94, 28);
+            BotaoRemoverCarro.TabIndex = 8;
+            BotaoRemoverCarro.Text = "Remover";
+            BotaoRemoverCarro.UseVisualStyleBackColor = false;
+            BotaoRemoverCarro.Click += AoClicarNoBotaoRemoverCarro;
             // 
-            // ColunaFlex
+            // CriarCarro
             // 
-            ColunaFlex.DataPropertyName = "Flex";
-            ColunaFlex.HeaderText = "Flex";
-            ColunaFlex.Name = "ColunaFlex";
-            ColunaFlex.Width = 34;
+            CriarCarro.Anchor = AnchorStyles.Bottom | AnchorStyles.Right;
+            CriarCarro.BackColor = Color.DarkGray;
+            CriarCarro.FlatAppearance.BorderColor = Color.Black;
+            CriarCarro.FlatStyle = FlatStyle.Flat;
+            CriarCarro.Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            CriarCarro.Location = new Point(518, 27);
+            CriarCarro.MaximumSize = new Size(94, 28);
+            CriarCarro.Name = "CriarCarro";
+            CriarCarro.Size = new Size(94, 28);
+            CriarCarro.TabIndex = 6;
+            CriarCarro.Text = "Criar";
+            CriarCarro.UseVisualStyleBackColor = false;
+            CriarCarro.Click += AoClicarNoBotaoCriarCarro;
             // 
             // FormListagem
             // 
@@ -749,7 +772,7 @@
         private Panel panel5;
         private Panel panel4;
         private Label label4;
-        private MaskedTextBox procurarData;
+        private MaskedTextBox procurarDataInicial;
         private Label label5;
         private TextBox txtProcurarEmail;
         private Label CPF;
@@ -783,5 +806,7 @@
         private DataGridViewTextBoxColumn ColunaCor;
         private DataGridViewTextBoxColumn ColunaValorDoVeiculo;
         private DataGridViewCheckBoxColumn ColunaFlex;
+        private MaskedTextBox procurarDataFinal;
+        private Label label7;
     }
 }

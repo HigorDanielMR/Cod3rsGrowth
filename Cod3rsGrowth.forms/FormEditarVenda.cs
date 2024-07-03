@@ -6,12 +6,8 @@ namespace Cod3rsGrowth.Forms
 {
     public partial class FormEditarVenda : Form
     {
-        private string _cpf;
-        private string _nome;
-        private string _data;
-        private string _email;
+        private Venda _venda = new Venda();
         private int _idDaEdicao;
-        private string _telefone;
         private ServicoCarro _servico;
         private ServicoVenda _servicoVenda;
         private ValidacoesVenda _validacoesVenda;
@@ -20,13 +16,9 @@ namespace Cod3rsGrowth.Forms
         private FiltroVenda _filtroVenda = new FiltroVenda();
         private List<string> comboBoxSelecionarCarro = new List<string>();
 
-        public FormEditarVenda(int IdVenda, ServicoCarro servicoCarro, ServicoVenda servico, ValidacoesVenda validacoes, string nome, string cpf, string telefone, string email, string data, string valor)
+        public FormEditarVenda(int IdVenda, ServicoCarro servicoCarro, ServicoVenda servico, ValidacoesVenda validacoes, Venda venda)
         {
-            _cpf = cpf;
-            _nome = nome;
-            _data = data;
-            _email = email;
-            _telefone = telefone;
+            _venda = venda;
             _idDaEdicao = IdVenda;
             _servicoVenda = servico;
             _servico = servicoCarro;
@@ -61,19 +53,19 @@ namespace Cod3rsGrowth.Forms
                 var IdDoCarroComprado = carro[selecionandoCarro.SelectedIndex].Id;
                 var carroComprado = _servico.ObterPorId(IdDoCarroComprado);
 
-                var vendaNova = new Venda
+                var vendaEditada = new Venda
                 {
                     Id = _idDaEdicao,
                     Cpf = txtCpf.Text,
                     Email = txtEmail.Text,
                     IdDoCarroVendido = IdDoCarroComprado,
                     ValorTotal = carroComprado.ValorDoVeiculo,
-                    DataDeCompra = DateTime.Parse(_data),
+                    DataDeCompra = DateTime.Parse(_venda.DataDeCompra.ToString()),
                     Nome = txtNome.Text,
                     Telefone = txtTelefone.Text
                 };
 
-                _servicoVenda.Editar(vendaNova);
+                _servicoVenda.Editar(vendaEditada);
                 MessageBox.Show($"Venda {_idDaEdicao} editada com successo!", "Editando venda");
                 this.Close();
             }
@@ -117,10 +109,10 @@ namespace Cod3rsGrowth.Forms
 
         private void CarregarDados()
         {
-            txtCpf.Text = _cpf;
-            txtEmail.Text = _email;
-            txtNome.Text = _nome;
-            txtTelefone.Text = _telefone;
+            txtCpf.Text = _venda.Cpf;
+            txtEmail.Text = _venda.Email;
+            txtNome.Text = _venda.Nome;
+            txtTelefone.Text = _venda.Telefone;
         }
 
         private void AoSelecionarCarroComprado(object sender, EventArgs e)
