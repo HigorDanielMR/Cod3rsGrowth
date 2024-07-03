@@ -17,6 +17,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public List<Venda> ObterTodos(FiltroVenda filtro)
         {
             var query = FiltroParaBusca(_connection.Venda, filtro);
+
             if (query == null)
             {
                 return _connection.Venda.ToList();
@@ -49,6 +50,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         public Venda Editar(Venda vendaAtualizada)
         {
             var vendaDesejada = _connection.Venda.FirstOrDefault(venda => venda.Id == vendaAtualizada.Id);
+
             if (vendaDesejada != null)
             {
                 vendaDesejada.Cpf = vendaAtualizada.Cpf;
@@ -66,6 +68,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             {
                 throw new Exception($"Venda com ID {vendaDesejada.Id} não encontrada.");
             }
+
             return vendaAtualizada;
         }
 
@@ -79,7 +82,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
         private static IQueryable<Venda> FiltroParaBusca(ITable<Venda> vendas, FiltroVenda venda)
         {
             var query = vendas.AsQueryable();
+
             if (venda != null)
+            {
                 if (venda.Nome != null)
                     query = query.Where(d => d.Nome.Contains(venda.Nome));
 
@@ -97,6 +102,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
                 if (venda.IdDoCarroVendido != null)
                     query = query.Where(d => d.IdDoCarroVendido == venda.IdDoCarroVendido);
+            }
 
             return query;
         }

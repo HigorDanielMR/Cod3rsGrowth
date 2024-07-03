@@ -10,12 +10,10 @@ namespace Cod3rsGrowth.Testes.ConfiguracaoAmbienteTeste
     {
         public static void BindService(ServiceCollection servicos)
         {
-            servicos.AddScoped<ValidacoesCarro>();
-            servicos.AddScoped<ValidacoesVenda>();
-
             servicos.AddScoped<ServicoCarro>();
             servicos.AddScoped<ServicoVenda>();
-
+            servicos.AddScoped<ValidacoesCarro>();
+            servicos.AddScoped<ValidacoesVenda>();
             servicos.AddScoped<IRepositorioCarro, RepositorioCarroMock>();
             servicos.AddScoped<IRepositorioVenda, RepositorioVendaMock>();
         }

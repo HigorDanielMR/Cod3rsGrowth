@@ -20,15 +20,14 @@ namespace Cod3rsGrowth.forms
         {
             ApplicationConfiguration.Initialize();
 
-
             using (var serviceProvider = CriarServicoDeMigracao())
             using (var scopo = serviceProvider.CreateScope())
             {
                 AtualizarBancoDeDados(scopo.ServiceProvider);
             }
+
             var host = CriarHostBuider().Build();
             ServiceProvider = host.Services;
-
             Application.Run(ServiceProvider.GetRequiredService<FormListagem>());
         }
 
@@ -55,15 +54,11 @@ namespace Cod3rsGrowth.forms
 
                     servicos.AddTransient<ServicoCarro>();
                     servicos.AddTransient<ServicoVenda>();
-
                     servicos.AddTransient<FormListagem>();
-
                     servicos.AddTransient<ValidacoesCarro>();
                     servicos.AddTransient<ValidacoesVenda>();
-
                     servicos.AddTransient<IRepositorioCarro, RepositorioCarro>();
                     servicos.AddTransient<IRepositorioVenda, RepositorioVenda>();
-
                     servicos.AddScoped(provider => new MeuContextoDeDados(stringDeConexao));
                 });
         }
