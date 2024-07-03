@@ -8,22 +8,14 @@ namespace Cod3rsGrowth.Forms
 {
     public partial class FormEditarCarro : Form
     {
-        private Cores _cor;
-        private bool _flex;
-        private Marcas _marca;
-        private string _valor;
-        private string _modelo;
+        private Carro _carro = new Carro();
         private int _idDaEdicao;
         private ServicoCarro _servicoCarro;
 
-        public FormEditarCarro(string modelo, Cores cor, Marcas marca, string valor, bool flex, ServicoCarro servico, int id)
+        public FormEditarCarro(ServicoCarro servico, int id, Carro carro)
         {
-            _cor = cor;
-            _flex = flex;
-            _marca = marca;
-            _valor = valor;
+            _carro = carro;
             _idDaEdicao = id;
-            _modelo = modelo;
             _servicoCarro = servico;
             InitializeComponent();
         }
@@ -80,11 +72,11 @@ namespace Cod3rsGrowth.Forms
 
         private void CarregarDados()
         {
-            txtModelo.Text = _modelo;
-            selecionarFlex.Checked = _flex;
-            selecionarCor.SelectedItem = _cor;
-            selecionarMarca.SelectedItem = _marca;
-            selecionarValorDoVeiculo.Text = _valor;
+            txtModelo.Text = _carro.Modelo;
+            selecionarFlex.Checked = _carro.Flex;
+            selecionarCor.SelectedItem = _carro.Cor;
+            selecionarMarca.SelectedItem = _carro.Marca;
+            selecionarValorDoVeiculo.Text = _carro.ValorDoVeiculo.ToString();
         }
 
         private void AoComecarAPreencherValor(object sender, KeyPressEventArgs e)

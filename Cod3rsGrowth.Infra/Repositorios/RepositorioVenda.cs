@@ -91,8 +91,11 @@ namespace Cod3rsGrowth.Infra.Repositorios
                 if (venda.Cpf != null)
                     query = query.Where(d => d.Cpf == venda.Cpf);
 
-                if (venda.DataDeCompra != null)
-                    query = query.Where(d => d.DataDeCompra == venda.DataDeCompra);
+                if (venda.DataDeCompraInicial != null)
+                    query = query.Where(d => d.DataDeCompra.Date >= venda.DataDeCompraInicial);
+
+                if (venda.DataDeCompraFinal != null)
+                    query = query.Where(d => d.DataDeCompra.Date <= venda.DataDeCompraFinal);
 
                 if (venda.Telefone != null)
                     query = query.Where(d => d.Telefone == venda.Telefone);

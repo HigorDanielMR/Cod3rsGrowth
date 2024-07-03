@@ -123,9 +123,15 @@ namespace Cod3rsGrowth.forms
                     _filtroVenda.Nome = txtProcurarNome.Text;
                 }
 
-                if (!procurarData.Text.IsNullOrEmpty() && procurarData.Text != "  /  /")
+                if (!procurarDataInicial.Text.IsNullOrEmpty() && procurarDataInicial.Text != "  /  /")
                 {
-                    _filtroVenda.DataDeCompra = DateTime.ParseExact(procurarData.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    _filtroVenda.DataDeCompraInicial = DateTime.ParseExact(procurarDataInicial.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    
+                }
+
+                if (!procurarDataFinal.Text.IsNullOrEmpty() && procurarDataFinal.Text != "  /  /")
+                {
+                    _filtroVenda.DataDeCompraFinal = DateTime.ParseExact(procurarDataFinal.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
 
                 if (!txtProcurarEmail.Text.IsNullOrEmpty())
@@ -146,7 +152,7 @@ namespace Cod3rsGrowth.forms
             }
         }
 
-        private void AoClicarNoBotaoLimparFIltroDaTabelaVenda(object sender, EventArgs e)
+        private void AoClicarNoBotaoLimparFiltroDaTabelaVenda(object sender, EventArgs e)
         {
             try
             {
@@ -162,9 +168,13 @@ namespace Cod3rsGrowth.forms
                     _filtroVenda.Email = null;
                 txtProcurarEmail.Clear();
 
-                if (_filtroVenda.DataDeCompra != null)
-                    _filtroVenda.DataDeCompra = null;
-                procurarData.Clear();
+                if (_filtroVenda.DataDeCompraFinal != null)
+                    _filtroVenda.DataDeCompraFinal = null;
+                procurarDataFinal.Clear();
+
+                if (_filtroVenda.DataDeCompraInicial != null)
+                    _filtroVenda.DataDeCompraInicial = null;
+                procurarDataInicial.Clear();
 
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
             }
@@ -193,7 +203,7 @@ namespace Cod3rsGrowth.forms
             try
             {
                 var tabelaVenda = _servicoVenda.ObterTodos(_filtroVenda);
-                if(tabelaVenda.Count != 0)
+                if (tabelaVenda.Count != 0)
                 {
                     var colunaIdVenda = "ColunaIdVenda";
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
@@ -236,7 +246,7 @@ namespace Cod3rsGrowth.forms
             {
                 var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
 
-                if(tabelaCarro.Count != 0)
+                if (tabelaCarro.Count != 0)
                 {
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
                     var colunaDesejada = "ColunaIdCarro";
@@ -268,27 +278,15 @@ namespace Cod3rsGrowth.forms
             {
                 var tabelaVenda = _servicoVenda.ObterTodos(_filtroVenda);
 
-                if( tabelaVenda.Count != 0)
+                if (tabelaVenda.Count != 0)
                 {
                     var colunaDesejada = "ColunaIdVenda";
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
                     var idSelecionado = Convert.ToInt32(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
 
-                    var colunaCpf = "colunaCpf";
-                    var colunaData = "ColunaDataDeCompra";
-                    var colunaNome = "ColunaNome";
-                    var colunaValor = "ColunaValorDoVeiculo";
-                    var colunaEmail = "ColunaEmail";
-                    var colunaTelefone = "ColunaTelefone";
+                    var venda = _servicoVenda.ObterPorId(idSelecionado);
 
-                    var cpf = TabelaVenda.Rows[linhaSelecionada].Cells[colunaCpf].Value.ToString();
-                    var data = TabelaVenda.Rows[linhaSelecionada].Cells[colunaData].Value.ToString();
-                    var nome = TabelaVenda.Rows[linhaSelecionada].Cells[colunaNome].Value.ToString();
-                    var valor = TabelaCarro.Rows[linhaSelecionada].Cells[colunaValor].Value.ToString();
-                    var email = TabelaVenda.Rows[linhaSelecionada].Cells[colunaEmail].Value.ToString();
-                    var telefone = TabelaVenda.Rows[linhaSelecionada].Cells[colunaTelefone].Value.ToString();
-
-                    var formulario = new FormEditarVenda(idSelecionado, _servicoCarro, _servicoVenda, _validacoesVenda, nome, cpf, telefone, email, data, valor);
+                    var formulario = new FormEditarVenda(idSelecionado, _servicoCarro, _servicoVenda, _validacoesVenda, venda);
                     formulario.ShowDialog();
                     CarregarListasAtualizadas();
                 }
@@ -297,7 +295,7 @@ namespace Cod3rsGrowth.forms
                     MessageBox.Show("Não é possível editar, pois, a lista está vazia.", "Erro ao editar Venda");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição de venda");
             }
@@ -315,19 +313,9 @@ namespace Cod3rsGrowth.forms
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
                     var idSelecionado = Convert.ToInt32(TabelaCarro.Rows[linhaSelecionada].Cells[colunaID].Value);
 
-                    var colunaCor = "ColunaCor";
-                    var colunaFlex = "ColunaFlex";
-                    var colunaMarca = "ColunaMarca";
-                    var colunaValor = "ColunaValorDoVeiculo";
-                    var colunaModelo = "ColunaModelo";
+                    var carro = _servicoCarro.ObterPorId(idSelecionado);
 
-                    var cor =(Cores) TabelaCarro.Rows[linhaSelecionada].Cells[colunaCor].Value;
-                    var marca = (Marcas) TabelaCarro.Rows[linhaSelecionada].Cells[colunaMarca].Value;
-                    var valor = TabelaCarro.Rows[linhaSelecionada].Cells[colunaValor].Value.ToString();
-                    var modelo = TabelaCarro.Rows[linhaSelecionada].Cells[colunaModelo].Value.ToString();
-                    var flex = bool.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaFlex].Value.ToString());
-
-                    var formulario = new FormEditarCarro(modelo,cor, marca, valor, flex, _servicoCarro, idSelecionado);
+                    var formulario = new FormEditarCarro(_servicoCarro, idSelecionado, carro);
                     formulario.ShowDialog();
                     AtualizarValorDoVeiculoNaVenda(idSelecionado);
                     CarregarListasAtualizadas();
@@ -337,7 +325,7 @@ namespace Cod3rsGrowth.forms
                     MessageBox.Show("Não é possível editar, pois, a lista está vazia.", "Erro ao editar Carro");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição carro");
             }
