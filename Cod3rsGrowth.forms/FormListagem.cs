@@ -353,10 +353,7 @@ namespace Cod3rsGrowth.forms
 
         private int ObterIdSelecionado(string coluna, int linha, DataGridView data)
         {
-            var colunaDesejada = coluna;
-            var linhaSelecionada = linha;
-
-            var idSelecionado = Convert.ToInt32(data.Rows[linhaSelecionada].Cells[colunaDesejada].Value);
+            var idSelecionado = Convert.ToInt32(data.Rows[linha].Cells[coluna].Value);
 
             return idSelecionado;
         }
