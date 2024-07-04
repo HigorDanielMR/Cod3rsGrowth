@@ -9,13 +9,11 @@ namespace Cod3rsGrowth.Forms
     public partial class FormEditarCarro : Form
     {
         private Carro _carro = new Carro();
-        private int _idDaEdicao;
         private ServicoCarro _servicoCarro;
 
-        public FormEditarCarro(ServicoCarro servico, int id, Carro carro)
+        public FormEditarCarro(ServicoCarro servico, Carro carro)
         {
             _carro = carro;
-            _idDaEdicao = id;
             _servicoCarro = servico;
             InitializeComponent();
         }
@@ -52,7 +50,7 @@ namespace Cod3rsGrowth.Forms
 
                 var carroEditado = new Carro
                 {
-                    Id = _idDaEdicao,
+                    Id = _carro.Id,
                     Modelo = txtModelo.Text,
                     Flex = selecionarFlex.Checked,
                     Cor = (Cores)selecionarCor.SelectedIndex,
@@ -61,7 +59,7 @@ namespace Cod3rsGrowth.Forms
                 };
 
                 _servicoCarro.Editar(carroEditado);
-                MessageBox.Show($"Carro com ID {_idDaEdicao} editado com sucesso!", "Editando carro");
+                MessageBox.Show($"Carro com ID {_carro.Id} editado com sucesso!", "Editando carro");
                 Close();
             }
             catch (Exception ex)

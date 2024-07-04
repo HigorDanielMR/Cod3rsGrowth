@@ -202,16 +202,14 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                var tabelaVenda = _servicoVenda.ObterTodos(_filtroVenda);
-                if (tabelaVenda.Count != 0)
+                if (TabelaVenda.Rows.Count != 0)
                 {
                     var colunaIdVenda = "ColunaIdVenda";
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
-                    var colunaDesejadaIdVenda = TabelaVenda.Columns[colunaIdVenda].Index;
-                    var colunaDesejadaIdCarro = TabelaVenda.Columns["IdDoCarroVendido"].Index;
+                    var colunaIdCarro = "IdDoCarroVendido";
 
-                    var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdVenda].Value.ToString());
-                    var idCarroSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdCarro].Value.ToString());
+                    var idSelecionado = ObterIdSelecionado(colunaIdVenda, linhaSelecionada, TabelaVenda);
+                    var idCarroSelecionado = ObterIdSelecionado(colunaIdCarro, linhaSelecionada, TabelaVenda);
 
                     DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do ID {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
 
@@ -244,13 +242,11 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
-
-                if (tabelaCarro.Count != 0)
+                if (TabelaCarro.Rows.Count != 0)
                 {
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
                     var colunaDesejada = "ColunaIdCarro";
-                    var idSelecionado = Convert.ToInt32(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDesejada].Value);
+                    var idSelecionado = ObterIdSelecionado(colunaDesejada, linhaSelecionada, TabelaCarro);
 
                     DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
 
@@ -276,17 +272,15 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                var tabelaVenda = _servicoVenda.ObterTodos(_filtroVenda);
-
-                if (tabelaVenda.Count != 0)
+                if (TabelaVenda.Rows.Count != 0)
                 {
                     var colunaDesejada = "ColunaIdVenda";
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
-                    var idSelecionado = Convert.ToInt32(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
+                    var idSelecionado = ObterIdSelecionado(colunaDesejada, linhaSelecionada, TabelaVenda);
 
                     var venda = _servicoVenda.ObterPorId(idSelecionado);
 
-                    var formulario = new FormEditarVenda(idSelecionado, _servicoCarro, _servicoVenda, _validacoesVenda, venda);
+                    var formulario = new FormEditarVenda(_servicoCarro, _servicoVenda, venda);
                     formulario.ShowDialog();
                     CarregarListasAtualizadas();
                 }
@@ -305,19 +299,17 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
-
-                if (tabelaCarro.Count != 0)
+                if (TabelaCarro.Rows.Count != 0)
                 {
-                    var colunaID = "ColunaIdCarro";
+                    var coluna = "ColunaIdCarro";
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
-                    var idSelecionado = Convert.ToInt32(TabelaCarro.Rows[linhaSelecionada].Cells[colunaID].Value);
+                    var id = ObterIdSelecionado(coluna, linhaSelecionada, TabelaCarro);
 
-                    var carro = _servicoCarro.ObterPorId(idSelecionado);
+                    var carro = _servicoCarro.ObterPorId(id);
 
-                    var formulario = new FormEditarCarro(_servicoCarro, idSelecionado, carro);
+                    var formulario = new FormEditarCarro(_servicoCarro, carro);
                     formulario.ShowDialog();
-                    AtualizarValorDoVeiculoNaVenda(idSelecionado);
+                    AtualizarValorDoVeiculoNaVenda(id);
                     CarregarListasAtualizadas();
                 }
                 else
@@ -358,5 +350,14 @@ namespace Cod3rsGrowth.forms
             _filtroVenda = new FiltroVenda();
         }
 
+        private int ObterIdSelecionado(string coluna, int linha, DataGridView data)
+        {
+            var colunaDesejada = coluna;
+            var linhaDesejada = linha;
+
+            var idSelecionado = Convert.ToInt32(data.Rows[linhaDesejada].Cells[colunaDesejada].Value);
+
+            return idSelecionado;
+        }
     }
 }

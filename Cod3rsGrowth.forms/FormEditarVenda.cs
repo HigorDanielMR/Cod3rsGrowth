@@ -6,23 +6,19 @@ namespace Cod3rsGrowth.Forms
 {
     public partial class FormEditarVenda : Form
     {
-        private Venda _venda = new Venda();
-        private int _idDaEdicao;
         private ServicoCarro _servico;
+        private Venda _venda = new Venda();
         private ServicoVenda _servicoVenda;
-        private ValidacoesVenda _validacoesVenda;
         private List<Carro> carro = new List<Carro>();
         private FiltroCarro _filtro = new FiltroCarro();
         private FiltroVenda _filtroVenda = new FiltroVenda();
         private List<string> comboBoxSelecionarCarro = new List<string>();
 
-        public FormEditarVenda(int IdVenda, ServicoCarro servicoCarro, ServicoVenda servico, ValidacoesVenda validacoes, Venda venda)
+        public FormEditarVenda(ServicoCarro servicoCarro, ServicoVenda servico, Venda venda)
         {
             _venda = venda;
-            _idDaEdicao = IdVenda;
             _servicoVenda = servico;
             _servico = servicoCarro;
-            _validacoesVenda = validacoes;
 
             InitializeComponent();
         }
@@ -55,7 +51,7 @@ namespace Cod3rsGrowth.Forms
 
                 var vendaEditada = new Venda
                 {
-                    Id = _idDaEdicao,
+                    Id = _venda.Id,
                     Cpf = txtCpf.Text,
                     Email = txtEmail.Text,
                     IdDoCarroVendido = IdDoCarroComprado,
@@ -66,7 +62,7 @@ namespace Cod3rsGrowth.Forms
                 };
 
                 _servicoVenda.Editar(vendaEditada);
-                MessageBox.Show($"Venda {_idDaEdicao} editada com successo!", "Editando venda");
+                MessageBox.Show($"Venda {_venda.Id} editada com successo!", "Editando venda");
                 this.Close();
             }
             catch (Exception ex)
@@ -85,7 +81,7 @@ namespace Cod3rsGrowth.Forms
 
                 foreach( var vendas in venda)
                 {
-                    if (venda.Count != 0 && vendas.Id != _idDaEdicao)
+                    if (venda.Count != 0 && vendas.Id != _venda.Id)
                         carros = carros.Where(x => x.Id != vendas.IdDoCarroVendido).ToList();
                     else
                         carros.ToList();
