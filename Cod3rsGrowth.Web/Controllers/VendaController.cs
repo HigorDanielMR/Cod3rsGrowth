@@ -31,7 +31,7 @@ namespace Cod3rsGrowth.Web.Controllers
         public IActionResult CriarVenda([FromBody] Venda venda)
         {
             _servico.Criar(venda);
-            return CreatedAtRoute(new { }, venda);
+            return Created($"api/Venda/{venda.Id}", venda);
         }
 
         [HttpPut("{Id}")]

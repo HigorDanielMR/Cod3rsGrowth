@@ -30,7 +30,9 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpPost]
         public IActionResult CriarCarro([FromBody] Carro carro)
         {
-            return Ok(_servico.Criar(carro));
+            _servico.Criar(carro);
+            return Created($"api/Carro/{carro.Id}", carro);
+
         }
 
         [HttpPut("{Id}")]

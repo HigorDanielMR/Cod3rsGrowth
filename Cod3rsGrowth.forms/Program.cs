@@ -8,6 +8,7 @@ using Cod3rsGrowth.Servicos.Validadores;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
 using Cod3rsGrowth.Dominio.CriacaoDasTabelas;
 using Microsoft.Extensions.DependencyInjection;
+using Cod3rsGrowth.Forms.InjecaoForms;
 
 namespace Cod3rsGrowth.forms
 {
@@ -52,13 +53,7 @@ namespace Cod3rsGrowth.forms
                 {
                     var stringDeConexao = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 
-                    servicos.AddTransient<ServicoCarro>();
-                    servicos.AddTransient<ServicoVenda>();
-                    servicos.AddTransient<FormListagem>();
-                    servicos.AddTransient<ValidacoesCarro>();
-                    servicos.AddTransient<ValidacoesVenda>();
-                    servicos.AddTransient<IRepositorioCarro, RepositorioCarro>();
-                    servicos.AddTransient<IRepositorioVenda, RepositorioVenda>();
+                    ModuloDeInjecaoForms.BindService(servicos);
                     servicos.AddScoped(provider => new MeuContextoDeDados(stringDeConexao));
                 });
         }
