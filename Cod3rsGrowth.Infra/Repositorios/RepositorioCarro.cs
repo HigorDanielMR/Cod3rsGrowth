@@ -7,31 +7,24 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     public class RepositorioCarro : IRepositorioCarro
     {
-        private MeuContextoDeDados _connection;
+        private MeuContextoDeDados _conexao;
 
         public RepositorioCarro(MeuContextoDeDados meuContextoDeDados)
         {
-            _connection = meuContextoDeDados;
+            _conexao = meuContextoDeDados;
         }
 
-        public List<Carro> ObterTodos(FiltroCarro filtro)
+        public List<Carro> ObterTodos(FiltroCarro filtroCarro)
         {
-            var query = FiltroParaBusca(_connection.Carro, filtro);
+            var query = FiltroParaBusca(filtroCarro);
+            var carrosFiltrados = query.ToList();
 
-            if (query == null)
-            {
-                return _connection.Carro.ToList();
-            }
-            else
-            {
-                var resultadoFiltro = query.ToList();
-                return resultadoFiltro.ToList();
-            }
+            return carrosFiltrados;
         }
 
         public Carro ObterPorId(int IdDeBusca)
         {
-            var query = from p in _connection.Carro
+            var query = from p in _conexao.Carro
                         where p.Id == IdDeBusca
                         select p;
 
@@ -43,57 +36,48 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            var idDoCarroNoBanco = _connection.InsertWithInt32Identity(carro);
+            var idDoCarroNoBanco = _conexao.InsertWithInt32Identity(carro);
             return ObterPorId(idDoCarroNoBanco);
         }
 
         public Carro Editar(Carro carroAtualizado)
         {
-            var carroDesejado = _connection.Carro.FirstOrDefault(carro => carro.Id == carroAtualizado.Id);
+            var carroDesejado = ObterPorId(carroAtualizado.Id);
 
-            if (carroDesejado != null)
-            {
-                carroDesejado.Cor = carroAtualizado.Cor;
-                carroDesejado.Flex = carroAtualizado.Flex;
-                carroDesejado.Marca = carroAtualizado.Marca;
-                carroDesejado.Modelo = carroAtualizado.Modelo;
-                carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
+            carroDesejado.Cor = carroAtualizado.Cor;
+            carroDesejado.Flex = carroAtualizado.Flex;
+            carroDesejado.Marca = carroAtualizado.Marca;
+            carroDesejado.Modelo = carroAtualizado.Modelo;
+            carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
-                _connection.Update(carroAtualizado);
-            }
-            else
-            {
-                throw new Exception($"Carro com ID {carroAtualizado.Id} não encontrado.");
-            }
-
+            _conexao.Update(carroAtualizado);
             return carroAtualizado;
         }
 
         public void Remover(int Id)
         {
-            _connection.Carro
+            _conexao.Carro
                  .Where(carro => carro.Id == Id)
                  .Delete();
         }
 
-        private static IQueryable<Carro> FiltroParaBusca(ITable<Carro> carros, FiltroCarro? carro)
+        private IQueryable<Carro> FiltroParaBusca(FiltroCarro? filtroCarro)
         {
-            var query = carros.AsQueryable();
+            IQueryable<Carro> query = _conexao.Carro;
 
-            if (carro != null)
-            {
-                if (carro.Modelo != null)
-                    query = query.Where(d => d.Modelo.Contains(carro.Modelo));
+            if (filtroCarro is null) return query;
 
-                if (carro.Cor != null)
-                    query = query.Where(d => d.Cor == carro.Cor);
+            if (filtroCarro.Modelo != null)
+                query = query.Where(d => d.Modelo.Contains(filtroCarro.Modelo));
 
-                if (carro.Marca != null)
-                    query = query.Where(d => d.Marca == carro.Marca);
+            if (filtroCarro.Cor != null)
+                query = query.Where(d => d.Cor == filtroCarro.Cor);
 
-                if (carro.Flex != null)
-                    query = query.Where(d => d.Flex == carro.Flex);
-            }
+            if (filtroCarro.Marca != null)
+                query = query.Where(d => d.Marca == filtroCarro.Marca);
+
+            if (filtroCarro.Flex != null)
+                query = query.Where(d => d.Flex == filtroCarro.Flex);
 
             return query;
         }

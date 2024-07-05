@@ -7,31 +7,24 @@ namespace Cod3rsGrowth.Infra.Repositorios
 {
     public class RepositorioVenda : IRepositorioVenda
     {
-        private MeuContextoDeDados _connection;
+        private MeuContextoDeDados _conexao;
 
         public RepositorioVenda(MeuContextoDeDados meuContextoDeDados)
         {
-            _connection = meuContextoDeDados;
+            _conexao = meuContextoDeDados;
         }
 
         public List<Venda> ObterTodos(FiltroVenda filtro)
         {
-            var query = FiltroParaBusca(_connection.Venda, filtro);
+            var query = FiltroParaBusca(filtro);
+            var vendasFiltradas = query.ToList();
 
-            if (query == null)
-            {
-                return _connection.Venda.ToList();
-            }
-            else
-            {
-                var resultadoFiltro = query.ToList();
-                return resultadoFiltro.ToList();
-            }
+            return vendasFiltradas;
         }
 
         public Venda ObterPorId(int IdDeBusca)
         {
-            var query = from p in _connection.Venda
+            var query = from p in _conexao.Venda
                         where p.Id == IdDeBusca
                         select p;
 
@@ -43,69 +36,60 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Venda Criar(Venda venda)
         {
-            int idDaVendaNoBanco = _connection.InsertWithInt32Identity(venda);
+            int idDaVendaNoBanco = _conexao.InsertWithInt32Identity(venda);
             return ObterPorId(idDaVendaNoBanco);
         }
 
         public Venda Editar(Venda vendaAtualizada)
         {
-            var vendaDesejada = _connection.Venda.FirstOrDefault(venda => venda.Id == vendaAtualizada.Id);
+            var vendaDesejada = ObterPorId(vendaAtualizada.Id);
 
-            if (vendaDesejada != null)
-            {
-                vendaDesejada.Cpf = vendaAtualizada.Cpf;
-                vendaDesejada.Pago = vendaAtualizada.Pago;
-                vendaDesejada.Nome = vendaAtualizada.Nome;
-                vendaDesejada.Email = vendaAtualizada.Email;
-                vendaDesejada.Telefone = vendaAtualizada.Telefone;
-                vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
-                vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
-                vendaDesejada.IdDoCarroVendido = vendaAtualizada.IdDoCarroVendido;
+            vendaDesejada.Cpf = vendaAtualizada.Cpf;
+            vendaDesejada.Pago = vendaAtualizada.Pago;
+            vendaDesejada.Nome = vendaAtualizada.Nome;
+            vendaDesejada.Email = vendaAtualizada.Email;
+            vendaDesejada.Telefone = vendaAtualizada.Telefone;
+            vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
+            vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
+            vendaDesejada.IdDoCarroVendido = vendaAtualizada.IdDoCarroVendido;
 
-                _connection.Update(vendaDesejada);
-            }
-            else
-            {
-                throw new Exception($"Venda com ID {vendaDesejada.Id} não encontrada.");
-            }
-
+            _conexao.Update(vendaDesejada);
             return vendaAtualizada;
         }
 
         public void Remover(int Id)
         {
-            _connection.Venda
+            _conexao.Venda
                 .Where(venda => venda.Id == Id)
                 .Delete();
         }
 
-        private static IQueryable<Venda> FiltroParaBusca(ITable<Venda> vendas, FiltroVenda venda)
+        private IQueryable<Venda> FiltroParaBusca(FiltroVenda filtroVenda)
         {
-            var query = vendas.AsQueryable();
+            IQueryable<Venda> query = _conexao.Venda;
 
-            if (venda != null)
-            {
-                if (venda.Nome != null)
-                    query = query.Where(d => d.Nome.Contains(venda.Nome));
+            if (filtroVenda is null) return query;
 
-                if (venda.Cpf != null)
-                    query = query.Where(d => d.Cpf == venda.Cpf);
+            if (filtroVenda.Nome != null)
+                query = query.Where(d => d.Nome.Contains(filtroVenda.Nome));
 
-                if (venda.DataDeCompraInicial != null)
-                    query = query.Where(d => d.DataDeCompra.Date >= venda.DataDeCompraInicial);
+            if (filtroVenda.Cpf != null)
+                query = query.Where(d => d.Cpf == filtroVenda.Cpf);
 
-                if (venda.DataDeCompraFinal != null)
-                    query = query.Where(d => d.DataDeCompra.Date <= venda.DataDeCompraFinal);
+            if (filtroVenda.DataDeCompraInicial != null)
+                query = query.Where(d => d.DataDeCompra.Date >= filtroVenda.DataDeCompraInicial);
 
-                if (venda.Telefone != null)
-                    query = query.Where(d => d.Telefone == venda.Telefone);
+            if (filtroVenda.DataDeCompraFinal != null)
+                query = query.Where(d => d.DataDeCompra.Date <= filtroVenda.DataDeCompraFinal);
 
-                if (venda.Email != null)
-                    query = query.Where(d => d.Email.Contains(venda.Email));
+            if (filtroVenda.Telefone != null)
+                query = query.Where(d => d.Telefone == filtroVenda.Telefone);
 
-                if (venda.IdDoCarroVendido != null)
-                    query = query.Where(d => d.IdDoCarroVendido == venda.IdDoCarroVendido);
-            }
+            if (filtroVenda.Email != null)
+                query = query.Where(d => d.Email.Contains(filtroVenda.Email));
+
+            if (filtroVenda.IdDoCarroVendido != null)
+                query = query.Where(d => d.IdDoCarroVendido == filtroVenda.IdDoCarroVendido);
 
             return query;
         }

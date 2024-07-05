@@ -11,10 +11,10 @@ namespace Cod3rsGrowth.Forms
         private Carro _carro = new Carro();
         private ServicoCarro _servicoCarro;
 
-        public FormEditarCarro(ServicoCarro servico, Carro carro)
+        public FormEditarCarro(ServicoCarro servicoCarro, Carro carro)
         {
             _carro = carro;
-            _servicoCarro = servico;
+            _servicoCarro = servicoCarro;
             InitializeComponent();
         }
 

@@ -28,11 +28,11 @@ namespace Cod3rsGrowth.Servicos.Servicos
 
         public Carro Criar(Carro carro)
         {
-            var resultado = _validadorCarro.Validate(carro);
+            var retornoValidacaoCarro = _validadorCarro.Validate(carro);
 
-            if (!resultado.IsValid)
+            if (!retornoValidacaoCarro.IsValid)
             {
-                var erros = string.Join(Environment.NewLine, resultado.Errors.Select(x => x.ErrorMessage));
+                var erros = string.Join(Environment.NewLine, retornoValidacaoCarro.Errors.Select(x => x.ErrorMessage));
                 throw new ValidationException(erros);
             }
 

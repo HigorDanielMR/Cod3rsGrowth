@@ -6,43 +6,43 @@ namespace Cod3rsGrowth.Web.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class VendaController : ControllerBase
+    public class VendasController : ControllerBase
     {
         private readonly ServicoVenda _servico;
 
-        public VendaController(ServicoVenda servico)
+        public VendasController(ServicoVenda servico)
         {
             _servico = servico;
         }
 
         [HttpGet]
-        public IActionResult ObterTodasAsVendas([FromQuery] FiltroVenda? filtro)
+        public IActionResult ObterTodos([FromQuery] FiltroVenda? filtro)
         {
             return Ok(_servico.ObterTodos(filtro));
         }
 
         [HttpGet("{Id}")]
-        public IActionResult ObterVendaPorId(int Id)
+        public IActionResult ObterPorId(int Id)
         {
             return Ok(_servico.ObterPorId(Id));
         }
 
         [HttpPost]
-        public IActionResult CriarVenda([FromBody] Venda venda)
+        public IActionResult Criar([FromBody] Venda venda)
         {
-            _servico.Criar(venda);
-            return Created($"api/Venda/{venda.Id}", venda);
+            var vendaNova = _servico.Criar(venda);
+            return Created($"api/Venda/{vendaNova.Id}", vendaNova);
         }
 
-        [HttpPut("{Id}")]
-        public IActionResult EditarVenda(int Id, [FromBody] Venda venda)
+        [HttpPatch("{Id}")]
+        public IActionResult Editar([FromBody] Venda venda)
         {
             _servico.Editar(venda);
-            return NoContent();
+            return Ok();
         }
 
         [HttpDelete("{Id}")]
-        public IActionResult RemoverVenda(int Id)
+        public IActionResult Remover(int Id)
         {
             _servico.Remover(Id);
             return NoContent();

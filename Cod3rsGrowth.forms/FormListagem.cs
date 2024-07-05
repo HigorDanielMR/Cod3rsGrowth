@@ -186,7 +186,7 @@ namespace Cod3rsGrowth.forms
 
         private void AoClicarNoBotaoCriarVenda(object sender, EventArgs e)
         {
-            var formulario = new FormCriarVenda(_validacoesVenda, _servicoVenda, _servicoCarro);
+            var formulario = new FormModificarVenda(_servicoVenda, _servicoCarro);
             formulario.ShowDialog();
             CarregarListasAtualizadas();
         }
@@ -235,7 +235,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}", "Erro ao tentar remver venda");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar remover venda");
             }
         }
 
@@ -246,8 +246,8 @@ namespace Cod3rsGrowth.forms
                 if (TabelaCarro.Rows.Count != 0)
                 {
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
-                    var colunaDesejada = "ColunaIdCarro";
-                    var idSelecionado = ObterIdSelecionado(colunaDesejada, linhaSelecionada, TabelaCarro);
+                    var colunaIdCarro = "ColunaIdCarro";
+                    var idSelecionado = ObterIdSelecionado(colunaIdCarro, linhaSelecionada, TabelaCarro);
 
                     DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
 
@@ -281,8 +281,10 @@ namespace Cod3rsGrowth.forms
 
                     var venda = _servicoVenda.ObterPorId(idSelecionado);
 
-                    var formulario = new FormEditarVenda(_servicoCarro, _servicoVenda, venda);
-                    formulario.ShowDialog();
+                    var formVenda = new FormModificarVenda(_servicoVenda, _servicoCarro);
+                    formVenda.CarregarValoresDaVenda(idSelecionado);
+                    formVenda.AdicionarEventoDeEditar(idSelecionado);
+                    formVenda.ShowDialog();
                     CarregarListasAtualizadas();
                 }
                 else
@@ -308,8 +310,8 @@ namespace Cod3rsGrowth.forms
 
                     var carro = _servicoCarro.ObterPorId(idSelecionado);
 
-                    var formulario = new FormEditarCarro(_servicoCarro, carro);
-                    formulario.ShowDialog();
+                    var formCarro = new FormEditarCarro(_servicoCarro, carro);
+                    formCarro.ShowDialog();
                     AtualizarValorDoVeiculoNaVenda(idSelecionado);
                     CarregarListasAtualizadas();
                 }
@@ -348,7 +350,7 @@ namespace Cod3rsGrowth.forms
                 return;
             }
 
-            _filtroVenda = new FiltroVenda();
+            _filtroVenda = null;
         }
 
         private int ObterIdSelecionado(string coluna, int linha, DataGridView data)

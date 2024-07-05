@@ -63,7 +63,7 @@ namespace Cod3rsGrowth.Forms
 
                 _servicoCarro.Criar(carro);
                 MessageBox.Show("Carro criado com sucesso!");
-                this.Close();
+                Close();
             }
             catch (ValidationException ex)
             {
