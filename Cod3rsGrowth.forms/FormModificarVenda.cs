@@ -6,18 +6,16 @@ namespace Cod3rsGrowth.Forms
 {
     public partial class FormModificarVenda : Form
     {
-        private ServicoCarro _servico;
+        private ServicoCarro _servicoCarro;
         private ServicoVenda _servicoVenda;
         private Venda _venda = new Venda();
         private List<Carro> _carros = new List<Carro>();
-        private FiltroCarro _filtro = new FiltroCarro();
-        private FiltroVenda _filtroVenda = new FiltroVenda();
         private List<string> comboBoxSelecionarCarro = new List<string>();
 
         public FormModificarVenda(ServicoVenda servico, ServicoCarro servicoCarro)
         {
             _servicoVenda = servico;
-            _servico = servicoCarro;
+            _servicoCarro = servicoCarro;
 
             InitializeComponent();
         }
@@ -57,7 +55,7 @@ namespace Cod3rsGrowth.Forms
             try
             {
                 var IdDoCarroComprado = _carros[selecionandoCarro.SelectedIndex].Id;
-                var carroComprado = _servico.ObterPorId(IdDoCarroComprado);
+                var carroComprado = _servicoCarro.ObterPorId(IdDoCarroComprado);
 
                 var vendaEditada = new Venda
                 {
@@ -107,9 +105,9 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                _carros = _servico.ObterTodos(_filtro);
+                _carros = _servicoCarro.ObterTodos();
                 _venda = _servicoVenda.ObterPorId(id);
-                var vendas = _servicoVenda.ObterTodos(_filtroVenda);
+                var vendas = _servicoVenda.ObterTodos();
 
                 foreach (var venda in vendas)
                 {
@@ -136,8 +134,8 @@ namespace Cod3rsGrowth.Forms
         {
             try
             {
-                _carros = _servico.ObterTodos(_filtro);
-                var vendas = _servicoVenda.ObterTodos(_filtroVenda);
+                _carros = _servicoCarro.ObterTodos();
+                var vendas = _servicoVenda.ObterTodos();
 
                 vendas.ForEach(x => {
                     _carros = _carros

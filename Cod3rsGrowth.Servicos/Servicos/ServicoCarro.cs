@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Servicos.Servicos
             _repositorioCarro = repositorioCarro;
         }
 
-        public List<Carro> ObterTodos(FiltroCarro carro)
+        public List<Carro> ObterTodos(FiltroCarro? carro = null)
         {
             return _repositorioCarro.ObterTodos(carro);
         }

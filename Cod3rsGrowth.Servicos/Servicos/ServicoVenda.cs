@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Servicos.Servicos
             _repositorioVenda = repositorioVenda;
         }
 
-        public List<Venda> ObterTodos(FiltroVenda venda)
+        public List<Venda> ObterTodos(FiltroVenda? venda = null)
         {
             return _repositorioVenda.ObterTodos(venda);
         }

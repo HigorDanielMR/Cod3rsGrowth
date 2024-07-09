@@ -14,7 +14,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
             _conexao = meuContextoDeDados;
         }
 
-        public List<Carro> ObterTodos(FiltroCarro filtroCarro)
+        public List<Carro> ObterTodos(FiltroCarro? filtroCarro = null)
         {
             var query = FiltroParaBusca(filtroCarro);
             var carrosFiltrados = query.ToList();

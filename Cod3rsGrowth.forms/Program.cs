@@ -1,14 +1,10 @@
 using System.Configuration;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Hosting;
-using Cod3rsGrowth.Servicos.Servicos;
-using Cod3rsGrowth.Infra.Repositorios;
-using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Servicos.Validadores;
+using Cod3rsGrowth.Forms.InjecaoForms;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
 using Cod3rsGrowth.Dominio.CriacaoDasTabelas;
 using Microsoft.Extensions.DependencyInjection;
-using Cod3rsGrowth.Forms.InjecaoForms;
 
 namespace Cod3rsGrowth.forms
 {

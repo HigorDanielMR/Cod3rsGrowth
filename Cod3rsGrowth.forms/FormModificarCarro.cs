@@ -10,7 +10,6 @@ namespace Cod3rsGrowth.Forms
     public partial class FormModificarCarro : Form
     {
         private Carro _carro;
-        private FiltroCarro _filtroCarro;
         private ServicoCarro _servicoCarro;
 
         public FormModificarCarro(ServicoCarro servico)
