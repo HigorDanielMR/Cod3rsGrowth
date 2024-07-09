@@ -13,18 +13,14 @@ namespace Cod3rsGrowth.forms
 
         private ServicoCarro _servicoCarro;
         private ServicoVenda _servicoVenda;
-        private ValidacoesCarro _validacoesCarro;
-        private ValidacoesVenda _validacoesVenda;
         private FiltroCarro _filtroCarro = new FiltroCarro();
         private FiltroVenda _filtroVenda = new FiltroVenda();
 
-        public FormListagem(ServicoCarro servicoCarro, ValidacoesCarro validacoesCarro, ValidacoesVenda validacoesVenda, ServicoVenda servicoVenda)
+        public FormListagem(ServicoCarro servicoCarro, ServicoVenda servicoVenda)
         {
             _servicoCarro = servicoCarro;
-            _validacoesCarro = validacoesCarro;
 
             _servicoVenda = servicoVenda;
-            _validacoesVenda = validacoesVenda;
 
             InitializeComponent();
         }
@@ -38,8 +34,8 @@ namespace Cod3rsGrowth.forms
 
         private void CarregarListasAtualizadas()
         {
-            TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
-            TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
+            TabelaVenda.DataSource = _servicoVenda.ObterTodos();
+            TabelaCarro.DataSource = _servicoCarro.ObterTodos();
         }
 
         private void CarregarEnums()
@@ -77,7 +73,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar fitrar carros");
             }
 
             TabelaCarro.DataSource = _servicoCarro.ObterTodos(_filtroCarro);
@@ -110,7 +106,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar limpar filtro carro");
             }
         }
 
@@ -123,9 +119,15 @@ namespace Cod3rsGrowth.forms
                     _filtroVenda.Nome = txtProcurarNome.Text;
                 }
 
-                if (!procurarData.Text.IsNullOrEmpty() && procurarData.Text != "  /  /")
+                if (!textBoxDataInicialVenda.Text.IsNullOrEmpty() && textBoxDataInicialVenda.Text != "  /  /")
                 {
-                    _filtroVenda.DataDeCompra = DateTime.ParseExact(procurarData.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    _filtroVenda.DataDeCompraInicial = DateTime.ParseExact(textBoxDataInicialVenda.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    
+                }
+
+                if (!textBoxDataFinalVenda.Text.IsNullOrEmpty() && textBoxDataFinalVenda.Text != "  /  /")
+                {
+                    _filtroVenda.DataDeCompraFinal = DateTime.ParseExact(textBoxDataFinalVenda.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
 
                 if (!txtProcurarEmail.Text.IsNullOrEmpty())
@@ -142,11 +144,11 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar filtrar venda");
             }
         }
 
-        private void AoClicarNoBotaoLimparFIltroDaTabelaVenda(object sender, EventArgs e)
+        private void AoClicarNoBotaoLimparFiltroDaTabelaVenda(object sender, EventArgs e)
         {
             try
             {
@@ -162,29 +164,38 @@ namespace Cod3rsGrowth.forms
                     _filtroVenda.Email = null;
                 txtProcurarEmail.Clear();
 
-                if (_filtroVenda.DataDeCompra != null)
-                    _filtroVenda.DataDeCompra = null;
-                procurarData.Clear();
+                if (_filtroVenda.DataDeCompraFinal != null)
+                    _filtroVenda.DataDeCompraFinal = null;
+                textBoxDataFinalVenda.Clear();
+
+                if (_filtroVenda.DataDeCompraInicial != null)
+                    _filtroVenda.DataDeCompraInicial = null;
+                textBoxDataInicialVenda.Clear();
 
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar limpar filtro venda");
             }
         }
 
         private void AoClicarNoBotaoCriarVenda(object sender, EventArgs e)
         {
-            var formulario = new FormCriarVenda(_validacoesVenda, _servicoVenda, _servicoCarro);
-            formulario.ShowDialog();
+            var FormVenda = new FormModificarVenda(_servicoVenda, _servicoCarro);
+            FormVenda.CarregarComboBoxCarroCriar();
+            FormVenda.AdicionarEventoDeCriar();
+            FormVenda.ShowDialog();
             CarregarListasAtualizadas();
         }
 
         private void AoClicarNoBotaoCriarCarro(object sender, EventArgs e)
         {
-            var formulario = new FormCriarCarro(_servicoCarro, _validacoesCarro);
-            formulario.ShowDialog();
+            var FormCarro = new FormModificarCarro(_servicoCarro);
+            FormCarro.AdicionarEventoDeCriar();
+            FormCarro.CarregarEnums();
+            FormCarro.LimparComboBox();
+            FormCarro.ShowDialog();
             CarregarListasAtualizadas();
         }
 
@@ -192,29 +203,28 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                var tabelaVenda = _servicoVenda.ObterTodos(_filtroVenda);
-                if(tabelaVenda.Count != 0)
+                if (TabelaVenda.Rows.Count != 0)
                 {
-                    var colunaIdVenda = 0;
+                    var colunaIdVenda = "ColunaIdVenda";
+                    var colunaIdCarro = "IdDoCarroVendido";
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
                     var colunaDesejadaIdVenda = TabelaVenda.Columns[colunaIdVenda].Index;
-                    var colunaDesejadaIdCarro = TabelaVenda.Columns["IdDoCarroVendido"].Index;
 
-                    var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdVenda].Value.ToString());
-                    var idCarroSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejadaIdCarro].Value.ToString());
+                    var idDaVendaSelecionada = ObterIdSelecionado(colunaIdVenda, linhaSelecionada, TabelaVenda);
+                    var idDoCarroSelecionado = ObterIdSelecionado(colunaIdCarro, linhaSelecionada, TabelaVenda);
 
-                    DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do ID {idSelecionado}?", "Remover Venda", MessageBoxButtons.YesNo);
+                    DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do ID {idDaVendaSelecionada}?", "Remover Venda", MessageBoxButtons.YesNo);
 
-                    DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir também permanentemente o carro ID {idCarroSelecionado} que está associado a venda ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
+                    DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir também permanentemente o carro ID {idDoCarroSelecionado} que está associado a venda ID {idDaVendaSelecionada}?", "Remover Carro", MessageBoxButtons.YesNo);
 
                     if (resultado == DialogResult.Yes && resultadoRemoverCarro == DialogResult.Yes)
                     {
-                        _servicoVenda.Remover(idSelecionado);
-                        _servicoCarro.Remover(idCarroSelecionado);
+                        _servicoVenda.Remover(idDaVendaSelecionada);
+                        _servicoCarro.Remover(idDoCarroSelecionado);
                     }
                     else if (resultado == DialogResult.Yes)
                     {
-                        _servicoVenda.Remover(idSelecionado);
+                        _servicoVenda.Remover(idDaVendaSelecionada);
                     }
 
                     CarregarListasAtualizadas();
@@ -222,12 +232,11 @@ namespace Cod3rsGrowth.forms
                 else
                 {
                     MessageBox.Show("Não é possível remover, pois, a lista está vazia.", "Erro ao remover Venda");
-
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar remover venda");
             }
         }
 
@@ -235,18 +244,17 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
-                if(tabelaCarro.Count != 0)
+                if (TabelaCarro.Rows.Count != 0)
                 {
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
-                    var colunaDeseada = 0;
-                    var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaDeseada].Value.ToString());
+                    var colunaIdCarro = "ColunaIdCarro";
+                    var idDoCarroSelecionado = ObterIdSelecionado(colunaIdCarro, linhaSelecionada, TabelaCarro);
 
-                    DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro ID {idSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
+                    DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir permanentemente o carro ID {idDoCarroSelecionado}?", "Remover Carro", MessageBoxButtons.YesNo);
 
                     if (resultadoRemoverCarro == DialogResult.Yes)
                     {
-                        _servicoCarro.Remover(idSelecionado);
+                        _servicoCarro.Remover(idDoCarroSelecionado);
                     }
 
                     CarregarListasAtualizadas();
@@ -258,7 +266,7 @@ namespace Cod3rsGrowth.forms
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar remover carro");
             }
         }
 
@@ -266,29 +274,18 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                var tabelaVenda = _servicoVenda.ObterTodos(_filtroVenda);
-                if( tabelaVenda.Count != 0)
+                if (TabelaVenda.Rows.Count != 0)
                 {
-                    var colunaDesejada = 0;
+                    var colunaDesejada = "ColunaIdVenda";
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
-                    var idSelecionado = int.Parse(TabelaVenda.Rows[linhaSelecionada].Cells[colunaDesejada].Value.ToString());
+                    var idDaVendaSelecionada = ObterIdSelecionado(colunaDesejada, linhaSelecionada, TabelaVenda);
 
-                    var colunaCpf = 2;
-                    var colunaData = 6;
-                    var colunaNome = 1;
-                    var colunaValor = 4;
-                    var colunaEmail = 3;
-                    var colunaTelefone = 4;
-
-                    var cpf = TabelaVenda.Rows[linhaSelecionada].Cells[colunaCpf].Value.ToString();
-                    var data = TabelaVenda.Rows[linhaSelecionada].Cells[colunaData].Value.ToString();
-                    var nome = TabelaVenda.Rows[linhaSelecionada].Cells[colunaNome].Value.ToString();
-                    var valor = TabelaCarro.Rows[linhaSelecionada].Cells[colunaValor].Value.ToString();
-                    var email = TabelaVenda.Rows[linhaSelecionada].Cells[colunaEmail].Value.ToString();
-                    var telefone = TabelaVenda.Rows[linhaSelecionada].Cells[colunaTelefone].Value.ToString();
-
-                    var formulario = new FormEditarVenda(idSelecionado, _servicoCarro, _servicoVenda, _validacoesVenda, nome, cpf, telefone, email, data, valor);
-                    formulario.ShowDialog();
+                    var formVenda = new FormModificarVenda(_servicoVenda, _servicoCarro);
+                    formVenda.CarregarValoresDaVenda(idDaVendaSelecionada);
+                    formVenda.AdicionarEventoDeEditar(idDaVendaSelecionada);
+                    formVenda.CarregarComboBoxCarroEditar(idDaVendaSelecionada);
+                    formVenda.Text = "Editando Venda";
+                    formVenda.ShowDialog();
                     CarregarListasAtualizadas();
                 }
                 else
@@ -296,9 +293,9 @@ namespace Cod3rsGrowth.forms
                     MessageBox.Show("Não é possível editar, pois, a lista está vazia.", "Erro ao editar Venda");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição de venda");
             }
         }
 
@@ -306,27 +303,18 @@ namespace Cod3rsGrowth.forms
         {
             try
             {
-                var tabelaCarro = _servicoCarro.ObterTodos(_filtroCarro);
-                if (tabelaCarro.Count != 0)
+                if (TabelaCarro.Rows.Count != 0)
                 {
-                    var colunaID = 0;
+                    var colunaID = "ColunaIdCarro";
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
-                    var idSelecionado = int.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaID].Value.ToString());
+                    var idSelecionado = ObterIdSelecionado(colunaID, linhaSelecionada, TabelaCarro);
 
-                    var colunaCor = 3;
-                    var colunaFlex = 5;
-                    var colunaMarca = 1;
-                    var colunaValor = 4;
-                    var colunaModelo = 2;
-
-                    var cor =(Cores) TabelaCarro.Rows[linhaSelecionada].Cells[colunaCor].Value;
-                    var marca = (Marcas) TabelaCarro.Rows[linhaSelecionada].Cells[colunaMarca].Value;
-                    var valor = TabelaCarro.Rows[linhaSelecionada].Cells[colunaValor].Value.ToString();
-                    var modelo = TabelaCarro.Rows[linhaSelecionada].Cells[colunaModelo].Value.ToString();
-                    var flex = bool.Parse(TabelaCarro.Rows[linhaSelecionada].Cells[colunaFlex].Value.ToString());
-
-                    var formulario = new FormEditarCarro(modelo,cor, marca, valor, flex, _servicoCarro, idSelecionado);
-                    formulario.ShowDialog();
+                    var formCarro = new FormModificarCarro(_servicoCarro);
+                    formCarro.CarregarEnums();
+                    formCarro.CarregarValoresDoCarro(idSelecionado);
+                    formCarro.AdicionarEventoDeEditar(idSelecionado);
+                    formCarro.Text = "Editando Carro";
+                    formCarro.ShowDialog();
                     AtualizarValorDoVeiculoNaVenda(idSelecionado);
                     CarregarListasAtualizadas();
                 }
@@ -335,21 +323,15 @@ namespace Cod3rsGrowth.forms
                     MessageBox.Show("Não é possível editar, pois, a lista está vazia.", "Erro ao editar Carro");
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição carro");
             }
         }
 
         private void AtualizarValorDoVeiculoNaVenda(int idDoCarro)
         {
             var carro = _servicoCarro.ObterPorId(idDoCarro);
-
-            if (carro == null)
-            {
-                throw new Exception("Carro não encontrado");
-            }
-
             var valorDoCarro = carro.ValorDoVeiculo;
             _filtroVenda.IdDoCarroVendido = idDoCarro;
             List<Venda> vendas = _servicoVenda.ObterTodos(_filtroVenda);
@@ -365,7 +347,14 @@ namespace Cod3rsGrowth.forms
                 return;
             }
 
-            _filtroVenda = new FiltroVenda();
+            _filtroVenda = null;
+        }
+
+        private int ObterIdSelecionado(string coluna, int linha, DataGridView data)
+        {
+            var idSelecionado = Convert.ToInt32(data.Rows[linha].Cells[coluna].Value);
+
+            return idSelecionado;
         }
 
     }

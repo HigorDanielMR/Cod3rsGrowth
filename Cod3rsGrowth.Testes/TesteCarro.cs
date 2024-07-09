@@ -56,10 +56,12 @@ namespace Cod3rsGrowth.Testes
                     Marca = Marcas.Volkswagen
                 }
             };
+
             foreach (var carro in listaDeCarros)
             {
                 _servicoCarro.Criar(carro);
             }
+
             return listaDeCarros;
         }
 

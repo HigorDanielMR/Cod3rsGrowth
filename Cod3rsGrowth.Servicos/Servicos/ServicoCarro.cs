@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Servicos.Servicos
             _repositorioCarro = repositorioCarro;
         }
 
-        public List<Carro> ObterTodos(FiltroCarro carro)
+        public List<Carro> ObterTodos(FiltroCarro? carro = null)
         {
             return _repositorioCarro.ObterTodos(carro);
         }
@@ -28,23 +28,27 @@ namespace Cod3rsGrowth.Servicos.Servicos
 
         public Carro Criar(Carro carro)
         {
-            var resultado = _validadorCarro.Validate(carro);
-            if (!resultado.IsValid)
+            var retornoValidacaoCarro = _validadorCarro.Validate(carro);
+
+            if (!retornoValidacaoCarro.IsValid)
             {
-                var erros = string.Join(Environment.NewLine, resultado.Errors.Select(x => x.ErrorMessage));
+                var erros = string.Join(Environment.NewLine, retornoValidacaoCarro.Errors.Select(x => x.ErrorMessage));
                 throw new ValidationException(erros);
             }
+
             return _repositorioCarro.Criar(carro);
         }
 
         public Carro Editar(Carro carro)
         {
             var resultado = _validadorCarro.Validate(carro);
+
             if (!resultado.IsValid)
             {
                 var erros = string.Join(Environment.NewLine, resultado.Errors.Select(x => x.ErrorMessage));
                 throw new ValidationException(erros);
             }
+
             return _repositorioCarro.Editar(carro);
         }
 

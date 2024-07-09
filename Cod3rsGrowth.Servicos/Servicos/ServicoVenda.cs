@@ -16,7 +16,7 @@ namespace Cod3rsGrowth.Servicos.Servicos
             _repositorioVenda = repositorioVenda;
         }
 
-        public List<Venda> ObterTodos(FiltroVenda venda)
+        public List<Venda> ObterTodos(FiltroVenda? venda = null)
         {
             return _repositorioVenda.ObterTodos(venda);
         }
@@ -29,22 +29,26 @@ namespace Cod3rsGrowth.Servicos.Servicos
         public Venda Criar(Venda venda)
         {
             var resultado = _validadorVenda.Validate(venda);
+
             if (!resultado.IsValid)
             {
                 var erros = string.Join(Environment.NewLine, resultado.Errors.Select(x => x.ErrorMessage));
                 throw new ValidationException(erros);
             }
+
             return _repositorioVenda.Criar(venda);
         }
 
         public Venda Editar(Venda venda)
         {
             var resultado = _validadorVenda.Validate(venda, options => options.IncludeRuleSets("Editar").IncludeRulesNotInRuleSet());
+
             if (!resultado.IsValid)
             {
                 var erros = string.Join(Environment.NewLine, resultado.Errors.Select(x => x.ErrorMessage));
                 throw new ValidationException(erros);
             }
+
             return _repositorioVenda.Editar(venda);
         }
 

@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms
 {
-    partial class FormCriarVenda
+    partial class FormModificarVenda
     {
         /// <summary>
         /// Required designer variable.
@@ -38,7 +38,7 @@
             label5 = new Label();
             selecionandoCarro = new ComboBox();
             label6 = new Label();
-            AdicionarVenda = new Button();
+            SalvarVenda = new Button();
             AoClicarNoBotaoCancelarDeCriarVenda = new Button();
             panel1 = new Panel();
             panel2 = new Panel();
@@ -135,19 +135,18 @@
             label6.TabIndex = 15;
             label6.Text = "Carro Comprado";
             // 
-            // AdicionarVenda
+            // SalvarVenda
             // 
-            AdicionarVenda.BackColor = Color.DarkGray;
-            AdicionarVenda.FlatStyle = FlatStyle.Flat;
-            AdicionarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AdicionarVenda.Location = new Point(12, 23);
-            AdicionarVenda.MaximumSize = new Size(94, 28);
-            AdicionarVenda.Name = "AdicionarVenda";
-            AdicionarVenda.Size = new Size(94, 28);
-            AdicionarVenda.TabIndex = 16;
-            AdicionarVenda.Text = "Adicionar";
-            AdicionarVenda.UseVisualStyleBackColor = false;
-            AdicionarVenda.Click += AoClicarNoBotaoAdicionarVenda;
+            SalvarVenda.BackColor = Color.DarkGray;
+            SalvarVenda.FlatStyle = FlatStyle.Flat;
+            SalvarVenda.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            SalvarVenda.Location = new Point(12, 23);
+            SalvarVenda.MaximumSize = new Size(94, 28);
+            SalvarVenda.Name = "SalvarVenda";
+            SalvarVenda.Size = new Size(94, 28);
+            SalvarVenda.TabIndex = 16;
+            SalvarVenda.Text = "Adicionar";
+            SalvarVenda.UseVisualStyleBackColor = false;
             // 
             // AoClicarNoBotaoCancelarDeCriarVenda
             // 
@@ -165,7 +164,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(AdicionarVenda);
+            panel1.Controls.Add(SalvarVenda);
             panel1.Controls.Add(AoClicarNoBotaoCancelarDeCriarVenda);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 261);
@@ -191,16 +190,15 @@
             panel2.Size = new Size(284, 261);
             panel2.TabIndex = 18;
             // 
-            // FormCriarVenda
+            // FormModificarVenda
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(284, 324);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "FormCriarVenda";
+            Name = "FormModificarVenda";
             Text = "Cadastro de Venda";
-            Load += AoCarregarFormCriarVenda;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
@@ -218,7 +216,7 @@
         private Label label5;
         private ComboBox selecionandoCarro;
         private Label label6;
-        private Button AdicionarVenda;
+        private Button SalvarVenda;
         private Button AoClicarNoBotaoCancelarDeCriarVenda;
         private Panel panel1;
         private Panel panel2;

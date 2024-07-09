@@ -1,10 +1,7 @@
 using System.Configuration;
 using FluentMigrator.Runner;
 using Microsoft.Extensions.Hosting;
-using Cod3rsGrowth.Servicos.Servicos;
-using Cod3rsGrowth.Infra.Repositorios;
-using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.Servicos.Validadores;
+using Cod3rsGrowth.Forms.InjecaoForms;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
 using Cod3rsGrowth.Dominio.CriacaoDasTabelas;
 using Microsoft.Extensions.DependencyInjection;
@@ -20,15 +17,14 @@ namespace Cod3rsGrowth.forms
         {
             ApplicationConfiguration.Initialize();
 
-
             using (var serviceProvider = CriarServicoDeMigracao())
             using (var scopo = serviceProvider.CreateScope())
             {
                 AtualizarBancoDeDados(scopo.ServiceProvider);
             }
+
             var host = CriarHostBuider().Build();
             ServiceProvider = host.Services;
-
             Application.Run(ServiceProvider.GetRequiredService<FormListagem>());
         }
 
@@ -53,17 +49,7 @@ namespace Cod3rsGrowth.forms
                 {
                     var stringDeConexao = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 
-                    servicos.AddTransient<ServicoCarro>();
-                    servicos.AddTransient<ServicoVenda>();
-
-                    servicos.AddTransient<FormListagem>();
-
-                    servicos.AddTransient<ValidacoesCarro>();
-                    servicos.AddTransient<ValidacoesVenda>();
-
-                    servicos.AddTransient<IRepositorioCarro, RepositorioCarro>();
-                    servicos.AddTransient<IRepositorioVenda, RepositorioVenda>();
-
+                    ModuloDeInjecaoForms.BindService(servicos);
                     servicos.AddScoped(provider => new MeuContextoDeDados(stringDeConexao));
                 });
         }
