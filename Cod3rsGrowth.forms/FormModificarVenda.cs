@@ -1,7 +1,6 @@
 ﻿using FluentValidation;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
-using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -9,8 +8,8 @@ namespace Cod3rsGrowth.Forms
     {
         private ServicoCarro _servico;
         private ServicoVenda _servicoVenda;
-        private List<Carro> _carros = new List<Carro>();
         private Venda _venda = new Venda();
+        private List<Carro> _carros = new List<Carro>();
         private FiltroCarro _filtro = new FiltroCarro();
         private FiltroVenda _filtroVenda = new FiltroVenda();
         private List<string> comboBoxSelecionarCarro = new List<string>();
@@ -23,22 +22,6 @@ namespace Cod3rsGrowth.Forms
             InitializeComponent();
         }
 
-        private void AoCarregarFormCriarVenda(object sender, EventArgs e)
-        {
-            CarregarComboBoxCarro();
-        }
-
-        private void AoClicarNoBotaoCancelarDeVenda(object sender, EventArgs e)
-        {
-            try
-            {
-                Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Erro ao cancelar");
-            }
-        }
 
         private void AoClicarNoBotaoAdicionarVenda(object sender, EventArgs e)
         {
@@ -69,54 +52,6 @@ namespace Cod3rsGrowth.Forms
             }
         }
 
-        private void CarregarComboBoxCarro()
-        {
-            try
-            {
-                var carros = _servico.ObterTodos(_filtro);
-                var vendas = _servicoVenda.ObterTodos(_filtroVenda);
-
-                vendas.ForEach(x => {
-                    carros = carros
-                    .Where(c => c.Id != x.IdDoCarroVendido)
-                    .ToList();
-                });
-
-                carros.ForEach(car =>
-                {
-                    carros.Add(car);
-                    comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
-                });
-
-                selecionandoCarro.DataSource = comboBoxSelecionarCarro;
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Erro ao carregar comboBox");
-            }
-        }
-        public void CarregarValoresDaVenda(int id)
-        {
-            var vendaSelecionada = _servicoVenda.ObterPorId(id);
-
-            txtCpf.Text = vendaSelecionada.Cpf;
-            txtEmail.Text = vendaSelecionada.Email;
-            txtNome.Text = vendaSelecionada.Nome;
-            txtTelefone.Text = vendaSelecionada.Telefone;
-        }
-
-        private void AoSelecionarCarro(object sender, EventArgs e)
-        {
-            try
-            {
-                var carroSelecionado = selecionandoCarro.SelectedItem;
-            }
-            catch(Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}");
-            }
-        }
-        
         private void AoClicarSalvarEdicao(object sender, EventArgs e, int id)
         {
             try
@@ -146,6 +81,18 @@ namespace Cod3rsGrowth.Forms
             }
         } 
 
+        private void AoClicarNoBotaoCancelarDeVenda(object sender, EventArgs e)
+        {
+            try
+            {
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Erro ao cancelar");
+            }
+        }
+
         public void AdicionarEventoDeEditar(int id)
         {
             SalvarVenda.Click += (sender, e) => AoClicarSalvarEdicao(sender, e, id);
@@ -154,6 +101,83 @@ namespace Cod3rsGrowth.Forms
         public void AdicionarEventoDeCriar()
         {
             SalvarVenda.Click += (sender, e) => AoClicarNoBotaoAdicionarVenda(sender, e);
+        }
+
+        public void CarregarComboBoxCarroEditar(int id)
+        {
+            try
+            {
+                _carros = _servico.ObterTodos(_filtro);
+                _venda = _servicoVenda.ObterPorId(id);
+                var vendas = _servicoVenda.ObterTodos(_filtroVenda);
+
+                foreach (var venda in vendas)
+                {
+                    if (vendas.Count != 0 && venda.Id != _venda.Id)
+                        _carros = _carros.Where(x => x.Id != venda.IdDoCarroVendido).ToList();
+                    else
+                        _carros.ToList();
+                }
+
+                foreach (var car in _carros)
+                {
+                    comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
+                }
+
+                selecionandoCarro.DataSource = comboBoxSelecionarCarro;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Erro ao carregar comboBox");
+            }
+        }
+
+        public void CarregarComboBoxCarroCriar()
+        {
+            try
+            {
+                _carros = _servico.ObterTodos(_filtro);
+                var vendas = _servicoVenda.ObterTodos(_filtroVenda);
+
+                vendas.ForEach(x => {
+                    _carros = _carros
+                    .Where(c => c.Id != x.IdDoCarroVendido)
+                    .ToList();
+                });
+
+                _carros.ForEach(car =>
+                {
+                    comboBoxSelecionarCarro.Add($"ID: {car.Id} Modelo: {car.Modelo} Cor: {car.Cor}");
+                });
+
+                selecionandoCarro.DataSource = comboBoxSelecionarCarro;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Erro ao carregar comboBox");
+            }
+        }
+
+        public void CarregarValoresDaVenda(int id)
+        {
+            var vendaSelecionada = _servicoVenda.ObterPorId(id);
+
+            txtCpf.Text = vendaSelecionada.Cpf;
+            txtEmail.Text = vendaSelecionada.Email;
+            txtNome.Text = vendaSelecionada.Nome;
+            txtTelefone.Text = vendaSelecionada.Telefone;
+        }
+
+        private void AoSelecionarCarro(object sender, EventArgs e)
+        {
+            try
+            {
+                var carroSelecionado = selecionandoCarro.SelectedItem;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}");
+            }
         }
     }
 }

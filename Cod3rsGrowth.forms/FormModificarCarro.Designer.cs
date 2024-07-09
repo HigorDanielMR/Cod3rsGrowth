@@ -1,6 +1,6 @@
 ﻿namespace Cod3rsGrowth.Forms
 {
-    partial class FormCriarCarro
+    partial class FormModificarCarro
     {
         /// <summary>
         /// Required designer variable.
@@ -36,7 +36,7 @@
             label3 = new Label();
             label4 = new Label();
             selecionarFlex = new CheckBox();
-            AdicionarCarro = new Button();
+            SalvarCarro = new Button();
             CancelarCarro = new Button();
             selecionarValorDoVeiculo = new TextBox();
             panel1 = new Panel();
@@ -119,19 +119,18 @@
             selecionarFlex.Text = "Flex";
             selecionarFlex.UseVisualStyleBackColor = true;
             // 
-            // AdicionarCarro
+            // SalvarCarro
             // 
-            AdicionarCarro.BackColor = Color.DarkGray;
-            AdicionarCarro.FlatStyle = FlatStyle.Flat;
-            AdicionarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            AdicionarCarro.Location = new Point(11, 26);
-            AdicionarCarro.MaximumSize = new Size(94, 28);
-            AdicionarCarro.Name = "AdicionarCarro";
-            AdicionarCarro.Size = new Size(94, 28);
-            AdicionarCarro.TabIndex = 9;
-            AdicionarCarro.Text = "Adicionar";
-            AdicionarCarro.UseVisualStyleBackColor = false;
-            AdicionarCarro.Click += AoClicarNoBotaoAdicionar;
+            SalvarCarro.BackColor = Color.DarkGray;
+            SalvarCarro.FlatStyle = FlatStyle.Flat;
+            SalvarCarro.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            SalvarCarro.Location = new Point(11, 26);
+            SalvarCarro.MaximumSize = new Size(94, 28);
+            SalvarCarro.Name = "SalvarCarro";
+            SalvarCarro.Size = new Size(94, 28);
+            SalvarCarro.TabIndex = 9;
+            SalvarCarro.Text = "Adicionar";
+            SalvarCarro.UseVisualStyleBackColor = false;
             // 
             // CancelarCarro
             // 
@@ -162,7 +161,7 @@
             // 
             // panel1
             // 
-            panel1.Controls.Add(AdicionarCarro);
+            panel1.Controls.Add(SalvarCarro);
             panel1.Controls.Add(CancelarCarro);
             panel1.Dock = DockStyle.Bottom;
             panel1.Location = new Point(0, 199);
@@ -187,14 +186,14 @@
             panel2.Size = new Size(284, 199);
             panel2.TabIndex = 15;
             // 
-            // FormCriarCarro
+            // FormModificarCarro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(284, 262);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Name = "FormCriarCarro";
+            Name = "FormModificarCarro";
             Text = "Cadastro de Carro";
             Load += AoCarregarFormCriarCarro;
             panel1.ResumeLayout(false);
@@ -213,7 +212,7 @@
         private Label label3;
         private Label label4;
         private CheckBox selecionarFlex;
-        private Button AdicionarCarro;
+        private Button SalvarCarro;
         private Button CancelarCarro;
         private NumericUpDown numericUpDown1;
         private TextBox selecionarValorDoVeiculo;

@@ -199,7 +199,6 @@
             Controls.Add(panel1);
             Name = "FormModificarVenda";
             Text = "Cadastro de Venda";
-            Load += AoCarregarFormCriarVenda;
             panel1.ResumeLayout(false);
             panel2.ResumeLayout(false);
             panel2.PerformLayout();

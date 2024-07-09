@@ -123,15 +123,15 @@ namespace Cod3rsGrowth.forms
                     _filtroVenda.Nome = txtProcurarNome.Text;
                 }
 
-                if (!procurarDataInicial.Text.IsNullOrEmpty() && procurarDataInicial.Text != "  /  /")
+                if (!textBoxDataInicialVenda.Text.IsNullOrEmpty() && textBoxDataInicialVenda.Text != "  /  /")
                 {
-                    _filtroVenda.DataDeCompraInicial = DateTime.ParseExact(procurarDataInicial.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    _filtroVenda.DataDeCompraInicial = DateTime.ParseExact(textBoxDataInicialVenda.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                     
                 }
 
-                if (!procurarDataFinal.Text.IsNullOrEmpty() && procurarDataFinal.Text != "  /  /")
+                if (!textBoxDataFinalVenda.Text.IsNullOrEmpty() && textBoxDataFinalVenda.Text != "  /  /")
                 {
-                    _filtroVenda.DataDeCompraFinal = DateTime.ParseExact(procurarDataFinal.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    _filtroVenda.DataDeCompraFinal = DateTime.ParseExact(textBoxDataFinalVenda.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
 
                 if (!txtProcurarEmail.Text.IsNullOrEmpty())
@@ -170,11 +170,11 @@ namespace Cod3rsGrowth.forms
 
                 if (_filtroVenda.DataDeCompraFinal != null)
                     _filtroVenda.DataDeCompraFinal = null;
-                procurarDataFinal.Clear();
+                textBoxDataFinalVenda.Clear();
 
                 if (_filtroVenda.DataDeCompraInicial != null)
                     _filtroVenda.DataDeCompraInicial = null;
-                procurarDataInicial.Clear();
+                textBoxDataInicialVenda.Clear();
 
                 TabelaVenda.DataSource = _servicoVenda.ObterTodos(_filtroVenda);
             }
@@ -186,15 +186,20 @@ namespace Cod3rsGrowth.forms
 
         private void AoClicarNoBotaoCriarVenda(object sender, EventArgs e)
         {
-            var formulario = new FormModificarVenda(_servicoVenda, _servicoCarro);
-            formulario.ShowDialog();
+            var FormVenda = new FormModificarVenda(_servicoVenda, _servicoCarro);
+            FormVenda.CarregarComboBoxCarroCriar();
+            FormVenda.AdicionarEventoDeCriar();
+            FormVenda.ShowDialog();
             CarregarListasAtualizadas();
         }
 
         private void AoClicarNoBotaoCriarCarro(object sender, EventArgs e)
         {
-            var formulario = new FormCriarCarro(_servicoCarro, _validacoesCarro);
-            formulario.ShowDialog();
+            var FormCarro = new FormModificarCarro(_servicoCarro);
+            FormCarro.AdicionarEventoDeCriar();
+            FormCarro.CarregarEnums();
+            FormCarro.LimparComboBox();
+            FormCarro.ShowDialog();
             CarregarListasAtualizadas();
         }
 
@@ -279,11 +284,11 @@ namespace Cod3rsGrowth.forms
                     var linhaSelecionada = TabelaVenda.CurrentCell.RowIndex;
                     var idSelecionado = ObterIdSelecionado(colunaDesejada, linhaSelecionada, TabelaVenda);
 
-                    var venda = _servicoVenda.ObterPorId(idSelecionado);
-
                     var formVenda = new FormModificarVenda(_servicoVenda, _servicoCarro);
                     formVenda.CarregarValoresDaVenda(idSelecionado);
                     formVenda.AdicionarEventoDeEditar(idSelecionado);
+                    formVenda.CarregarComboBoxCarroEditar(idSelecionado);
+                    formVenda.Text = "Editando Venda";
                     formVenda.ShowDialog();
                     CarregarListasAtualizadas();
                 }
@@ -308,9 +313,11 @@ namespace Cod3rsGrowth.forms
                     var linhaSelecionada = TabelaCarro.CurrentCell.RowIndex;
                     var idSelecionado = ObterIdSelecionado(colunaID, linhaSelecionada, TabelaCarro);
 
-                    var carro = _servicoCarro.ObterPorId(idSelecionado);
-
-                    var formCarro = new FormEditarCarro(_servicoCarro, carro);
+                    var formCarro = new FormModificarCarro(_servicoCarro);
+                    formCarro.CarregarEnums();
+                    formCarro.CarregarValoresDoCarro(idSelecionado);
+                    formCarro.AdicionarEventoDeEditar(idSelecionado);
+                    formCarro.Text = "Editando Carro";
                     formCarro.ShowDialog();
                     AtualizarValorDoVeiculoNaVenda(idSelecionado);
                     CarregarListasAtualizadas();
@@ -329,12 +336,6 @@ namespace Cod3rsGrowth.forms
         private void AtualizarValorDoVeiculoNaVenda(int idDoCarro)
         {
             var carro = _servicoCarro.ObterPorId(idDoCarro);
-
-            if (carro == null)
-            {
-                throw new Exception("Carro não encontrado");
-            }
-
             var valorDoCarro = carro.ValorDoVeiculo;
             _filtroVenda.IdDoCarroVendido = idDoCarro;
             List<Venda> vendas = _servicoVenda.ObterTodos(_filtroVenda);

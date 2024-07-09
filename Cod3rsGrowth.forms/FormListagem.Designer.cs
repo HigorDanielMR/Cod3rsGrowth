@@ -29,9 +29,9 @@
         private void InitializeComponent()
         {
             components = new System.ComponentModel.Container();
-            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
-            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle5 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle6 = new DataGridViewCellStyle();
             TabelaCarro = new DataGridView();
             ColunaIdCarro = new DataGridViewTextBoxColumn();
             ColunaMarca = new DataGridViewTextBoxColumn();
@@ -60,12 +60,12 @@
             CriarVenda = new Button();
             panel4 = new Panel();
             label7 = new Label();
-            procurarDataFinal = new MaskedTextBox();
+            textBoxDataFinalVenda = new MaskedTextBox();
             panel8 = new Panel();
             LimparFIltroVenda = new Button();
             FiltrarVenda = new Button();
             label4 = new Label();
-            procurarDataInicial = new MaskedTextBox();
+            textBoxDataInicialVenda = new MaskedTextBox();
             label5 = new Label();
             txtProcurarEmail = new TextBox();
             CPF = new Label();
@@ -159,9 +159,9 @@
             // ColunaValorDoVeiculo
             // 
             ColunaValorDoVeiculo.DataPropertyName = "ValorDoVeiculo";
-            dataGridViewCellStyle1.Format = "C2";
-            dataGridViewCellStyle1.NullValue = null;
-            ColunaValorDoVeiculo.DefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle4.Format = "C2";
+            dataGridViewCellStyle4.NullValue = null;
+            ColunaValorDoVeiculo.DefaultCellStyle = dataGridViewCellStyle4;
             ColunaValorDoVeiculo.HeaderText = "Preço";
             ColunaValorDoVeiculo.Name = "ColunaValorDoVeiculo";
             ColunaValorDoVeiculo.Width = 62;
@@ -385,10 +385,10 @@
             // 
             panel4.BackColor = Color.Transparent;
             panel4.Controls.Add(label7);
-            panel4.Controls.Add(procurarDataFinal);
+            panel4.Controls.Add(textBoxDataFinalVenda);
             panel4.Controls.Add(panel8);
             panel4.Controls.Add(label4);
-            panel4.Controls.Add(procurarDataInicial);
+            panel4.Controls.Add(textBoxDataInicialVenda);
             panel4.Controls.Add(label5);
             panel4.Controls.Add(txtProcurarEmail);
             panel4.Controls.Add(CPF);
@@ -412,14 +412,14 @@
             label7.TabIndex = 17;
             label7.Text = "Data Final";
             // 
-            // procurarDataFinal
+            // textBoxDataFinalVenda
             // 
-            procurarDataFinal.Location = new Point(512, 37);
-            procurarDataFinal.Mask = "00/00/0000";
-            procurarDataFinal.Name = "procurarDataFinal";
-            procurarDataFinal.Size = new Size(79, 23);
-            procurarDataFinal.TabIndex = 5;
-            procurarDataFinal.ValidatingType = typeof(DateTime);
+            textBoxDataFinalVenda.Location = new Point(512, 37);
+            textBoxDataFinalVenda.Mask = "00/00/0000";
+            textBoxDataFinalVenda.Name = "textBoxDataFinalVenda";
+            textBoxDataFinalVenda.Size = new Size(79, 23);
+            textBoxDataFinalVenda.TabIndex = 5;
+            textBoxDataFinalVenda.ValidatingType = typeof(DateTime);
             // 
             // panel8
             // 
@@ -472,14 +472,14 @@
             label4.TabIndex = 13;
             label4.Text = "Data Inicial";
             // 
-            // procurarDataInicial
+            // textBoxDataInicialVenda
             // 
-            procurarDataInicial.Location = new Point(427, 37);
-            procurarDataInicial.Mask = "00/00/0000";
-            procurarDataInicial.Name = "procurarDataInicial";
-            procurarDataInicial.Size = new Size(79, 23);
-            procurarDataInicial.TabIndex = 4;
-            procurarDataInicial.ValidatingType = typeof(DateTime);
+            textBoxDataInicialVenda.Location = new Point(427, 37);
+            textBoxDataInicialVenda.Mask = "00/00/0000";
+            textBoxDataInicialVenda.Name = "textBoxDataInicialVenda";
+            textBoxDataInicialVenda.Size = new Size(79, 23);
+            textBoxDataInicialVenda.TabIndex = 4;
+            textBoxDataInicialVenda.ValidatingType = typeof(DateTime);
             // 
             // label5
             // 
@@ -616,9 +616,9 @@
             // 
             ColunaDataDeCompra.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ColunaDataDeCompra.DataPropertyName = "DataDeCompra";
-            dataGridViewCellStyle2.Format = "d";
-            dataGridViewCellStyle2.NullValue = null;
-            ColunaDataDeCompra.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle5.Format = "d";
+            dataGridViewCellStyle5.NullValue = null;
+            ColunaDataDeCompra.DefaultCellStyle = dataGridViewCellStyle5;
             ColunaDataDeCompra.HeaderText = "Data da compra";
             ColunaDataDeCompra.Name = "ColunaDataDeCompra";
             ColunaDataDeCompra.ReadOnly = true;
@@ -628,9 +628,9 @@
             // 
             ColunaValorTotal.AutoSizeMode = DataGridViewAutoSizeColumnMode.AllCells;
             ColunaValorTotal.DataPropertyName = "ValorTotal";
-            dataGridViewCellStyle3.Format = "C2";
-            dataGridViewCellStyle3.NullValue = null;
-            ColunaValorTotal.DefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle6.Format = "C2";
+            dataGridViewCellStyle6.NullValue = null;
+            ColunaValorTotal.DefaultCellStyle = dataGridViewCellStyle6;
             ColunaValorTotal.HeaderText = "Valor total";
             ColunaValorTotal.Name = "ColunaValorTotal";
             ColunaValorTotal.ReadOnly = true;
@@ -772,7 +772,7 @@
         private Panel panel5;
         private Panel panel4;
         private Label label4;
-        private MaskedTextBox procurarDataInicial;
+        private MaskedTextBox textBoxDataInicialVenda;
         private Label label5;
         private TextBox txtProcurarEmail;
         private Label CPF;
@@ -806,7 +806,7 @@
         private DataGridViewTextBoxColumn ColunaCor;
         private DataGridViewTextBoxColumn ColunaValorDoVeiculo;
         private DataGridViewCheckBoxColumn ColunaFlex;
-        private MaskedTextBox procurarDataFinal;
+        private MaskedTextBox textBoxDataFinalVenda;
         private Label label7;
     }
 }

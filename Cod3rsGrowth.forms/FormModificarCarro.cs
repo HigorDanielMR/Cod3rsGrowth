@@ -7,40 +7,30 @@ using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.Forms
 {
-    public partial class FormCriarCarro : Form
+    public partial class FormModificarCarro : Form
     {
+        private Carro _carro;
         private FiltroCarro _filtroCarro;
         private ServicoCarro _servicoCarro;
-        private ValidacoesCarro _validacoes;
 
-        public FormCriarCarro(ServicoCarro servico, ValidacoesCarro validacoes)
+        public FormModificarCarro(ServicoCarro servico)
         {
             _servicoCarro = servico;
-            _validacoes = validacoes;
 
             InitializeComponent();
         }
 
         private void AoCarregarFormCriarCarro(object sender, EventArgs e)
         {
-            try
-            {
-                CarregarEnums();
-                LimparComboBox();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"{ex.Message}", "Erro ao carregar metodos");
-            }
         }
 
-        private void CarregarEnums()
+        public void CarregarEnums()
         {
             selecionarCor.DataSource = Enum.GetValues(typeof(Cores));
             selecionarMarca.DataSource = Enum.GetValues(typeof(Marcas));
         }
 
-        private void LimparComboBox()
+        public void LimparComboBox()
         {
             selecionarCor.SelectedItem = null;
             selecionarMarca.SelectedItem = null;
@@ -80,6 +70,32 @@ namespace Cod3rsGrowth.Forms
             catch (Exception ex)
             {
                 MessageBox.Show($"{ex.Message}", "Erro ao cancelar");
+            }
+        }
+
+        private void AoClicarNoBotaoSalvarEdicaoCarro(object sender, EventArgs e)
+        {
+            try
+            {
+                var valorDoVeiculoConvertido = decimal.Parse(selecionarValorDoVeiculo.Text);
+
+                var carroEditado = new Carro
+                {
+                    Id = _carro.Id,
+                    Modelo = txtModelo.Text,
+                    Flex = selecionarFlex.Checked,
+                    Cor = (Cores)selecionarCor.SelectedIndex,
+                    ValorDoVeiculo = valorDoVeiculoConvertido,
+                    Marca = (Marcas)selecionarMarca.SelectedIndex
+                };
+
+                _servicoCarro.Editar(carroEditado);
+                MessageBox.Show($"Carro com ID {_carro.Id} editado com sucesso!", "Sucesso");
+                Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar salvar carro");
             }
         }
 
@@ -141,6 +157,27 @@ namespace Cod3rsGrowth.Forms
             {
                 MessageBox.Show($"{ex.Message}");
             }
+        }
+
+        public void AdicionarEventoDeEditar(int id)
+        {
+            SalvarCarro.Click += (sender, e) => AoClicarNoBotaoSalvarEdicaoCarro(sender, e);
+        }
+
+        public void AdicionarEventoDeCriar()
+        {
+            SalvarCarro.Click += (sender, e) => AoClicarNoBotaoAdicionar(sender, e);
+        }
+
+        public void CarregarValoresDoCarro(int id)
+        {
+            _carro = _servicoCarro.ObterPorId(id);
+
+            txtModelo.Text = _carro.Modelo;
+            selecionarFlex.Checked = _carro.Flex;
+            selecionarCor.SelectedItem = _carro.Cor;
+            selecionarMarca.SelectedItem = _carro.Marca;
+            selecionarValorDoVeiculo.Text = _carro.ValorDoVeiculo.ToString();
         }
     }
 }
