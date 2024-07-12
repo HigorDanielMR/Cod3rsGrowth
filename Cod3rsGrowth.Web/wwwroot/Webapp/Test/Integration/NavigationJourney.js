@@ -2,11 +2,10 @@ sap.ui.define([
 	"sap/ui/test/opaQunit",
 	"./pages/App"
 ], (opaTest) => {
-	"use strict";
 
 	QUnit.module("Navigation");
 
-	opaTest("Should open the Hello dialog", (Given, When, Then) => {
+	opaTest("Should open the Hello dialog", function (Given, When, Then) {
 		// Arrangements
 		Given.iStartMyUIComponent({
 			componentConfig: {
@@ -19,8 +18,5 @@ sap.ui.define([
 
 		// Assertions
 		Then.onTheAppPage.iShouldSeeTheHelloDialog();
-
-		// Cleanup
-		Then.iTeardownMyApp();
 	});
 });

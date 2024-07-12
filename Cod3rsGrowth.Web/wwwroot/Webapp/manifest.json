@@ -14,6 +14,15 @@
 		"type": "application",
 		"applicationVersion": {
 			"version": "1.0.0"
+		},
+		"dataSources": {
+			"invoiceRemote": {
+				"uri": "V2/Northwind/Northwind.svc/",
+				"type": "OData",
+				"settings": {
+					"odataVersion": "2.0"
+				}
+			}
 		}
 	},
 	"sap.ui": {
@@ -43,6 +52,11 @@
 					"fallbackLocale": ""
 				}
 			}
+		},
+		"rootView": {
+			"viewName": "ui5.walkthrough.view.App",
+			"type": "XML",
+			"id": "app"
 		}
 	}
 }

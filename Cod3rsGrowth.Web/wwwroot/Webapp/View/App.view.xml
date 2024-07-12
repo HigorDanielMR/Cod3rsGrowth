@@ -2,10 +2,10 @@
 	controllerName="ui5.walkthrough.controller.App"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc">
-    <App>
+    <App id="app">
     <Page>
       <headerContent>
-        <Button id="pressMeButton" text="Press me" press="onPress" visible="true"/>
+        <Button id="botao" text="Press me" press="onPress" visible="true"/>
       </headerContent>
     </Page>
   </App>

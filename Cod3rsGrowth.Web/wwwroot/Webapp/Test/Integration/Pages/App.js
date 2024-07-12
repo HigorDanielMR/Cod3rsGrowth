@@ -1,25 +1,28 @@
 sap.ui.define([
 	"sap/ui/test/Opa5",
-	"sap/ui/test/actions/Press"
-], (Opa5, Press) => {
+	"sap/ui/test/actions/Press",
+	"sap/ui/test/matchers/PropertyStrictEquals"
+], (Opa5, Press, PropertyStrictEquals) => {
 	"use strict";
 
 	const sViewName = "ui5.walkthrough.view.App";
+	const idDoBotao = "botao"
 
 	Opa5.createPageObjects({
 		onTheAppPage: {
 			arrangements : {
-				euInicioMeuApp : function () {
+				euInicioMeuApp() {
 					return this.iStartMyUIComponent("../index.html");
 				}
 			},
 			actions: {
-				iPressTheSayHelloWithDialogButton() {
+				iPressTheSayHelloWithDialogButton()
+				{
 					return this.waitFor({
-						viewName: sViewName,
-						id: "pressMeButton",
-						actions: new Press(),
-						errorMessage: "Botão não encontrado!"
+						viewName : sViewName,
+            			id : idDoBotao,
+            			actions : new Press(),
+            			errorMessage : "O botão não foi encontrado!"
 					});
 				}
 			},
@@ -28,12 +31,15 @@ sap.ui.define([
 				iShouldSeeTheHelloDialog() {
 					return this.waitFor({
 						viewName : sViewName,
-						id : "pressMeButton",
-						success() {
-							// we set the view busy, so we need to query the parent of the app
-							Opa5.assert.ok(true, "The dialog is open");
+						id : idDoBotao,
+						matchers : new PropertyStrictEquals({
+							name : "text",
+							value : "Alguém clicou aqui"
+						}),
+						success : function (oButton) {
+							Opa5.assert.ok(true, "O texto do botão foi alterado para: " + oButton.getText());
 						},
-						errorMessage: "Did not find the dialog control"
+						errorMessage : "O texto do botão não foi alterado!"
 					});
 				}
 			}

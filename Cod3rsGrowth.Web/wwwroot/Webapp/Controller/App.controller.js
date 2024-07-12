@@ -4,12 +4,12 @@ sap.ui.define(["sap/ui/core/mvc/Controller"], function(Controller) {
         onInit: function() {
             var that = this;
             window.setTimeout(function() {
-                that.byId("pressMeButton").setVisible(true);
+                that.byId("botao").setVisible(true);
             }, Math.random() * 10000);
        },
 
     onPress: function() {
-            this.byId("pressMeButton").setText("Alguém clicou aqui");
+            this.byId("botao").setText("Alguém clicou aqui");
     }
 
     });
