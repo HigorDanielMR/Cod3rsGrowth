@@ -1,3 +1,5 @@
 .vs
+.config
+node_modules
 bin/
 obj/
