@@ -7,5 +7,9 @@
     },
     "devDependencies": {
         "@ui5/cli": "^3.11.0"
+    },
+    "dependencies": {
+        "D": "^1.0.0",
+        "i": "^0.3.7"
     }
 }
