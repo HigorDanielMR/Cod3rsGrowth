@@ -1,6 +1,6 @@
 sap.ui.define(["sap/ui/core/mvc/Controller"], function(Controller) {
     "use strict";
-    return Controller.extend("ui5.walkthrough.view.App", {
+    return Controller.extend("ui5.carro.view.App", {
         onInit: function() {
             var that = this;
             window.setTimeout(function() {

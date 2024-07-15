@@ -3,6 +3,6 @@ sap.ui.define([
 ], (XMLView) => {
 	"use strict";
 	XMLView.create({
-		viewName: "ui5.walkthrough.view.App"
+		viewName: "ui5.carro.view.App"
 	}).then((oView) => oView.placeAt("content"));
 });

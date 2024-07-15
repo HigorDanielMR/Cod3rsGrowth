@@ -3,11 +3,11 @@ sap.ui.define([
  ], (UIComponent) => {
     "use strict";
  
-    return UIComponent.extend("ui5.walkthrough.Component", {
+    return UIComponent.extend("ui5.carro.Component", {
          metadata : {
             "interfaces": ["sap.ui.core.IAsyncContentCreation"],
             "rootView": {
-               "viewName": "ui5.walkthrough.view.App",
+                "viewName": "ui5.carro.view.App",
                "type": "XML",
                "id": "app"
             }

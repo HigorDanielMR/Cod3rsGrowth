@@ -9,7 +9,7 @@ sap.ui.define([
 		// Arrangements
 		Given.iStartMyUIComponent({
 			componentConfig: {
-				name: "ui5.walkthrough"
+				name: "ui5.carro"
 			}
 		});
 

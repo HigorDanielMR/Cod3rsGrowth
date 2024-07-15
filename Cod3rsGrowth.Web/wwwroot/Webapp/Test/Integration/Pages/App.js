@@ -5,7 +5,7 @@ sap.ui.define([
 ], (Opa5, Press, PropertyStrictEquals) => {
 	"use strict";
 
-	const sViewName = "ui5.walkthrough.view.App";
+	const sViewName = "ui5.carro.view.App";
 	const idDoBotao = "botao"
 
 	Opa5.createPageObjects({
