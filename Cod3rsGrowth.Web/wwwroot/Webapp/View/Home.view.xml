@@ -1,0 +1,10 @@
+<mvc:View
+   controllerName="ui5.carro.controller.Home"
+   xmlns="sap.m"
+   xmlns:mvc="sap.ui.core.mvc">
+   <Page title="{i18n>Listagem.Title}" class="sapUiResponsiveContentPadding">
+      <content>
+               <Button id="botao" text="Press me" press="onPress" visible="true"/>
+      </content>
+   </Page>
+</mvc:View>

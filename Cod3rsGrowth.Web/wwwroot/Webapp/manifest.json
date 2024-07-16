@@ -1,62 +1,100 @@
 {
-	"_version": "1.58.0",
-	"sap.app": {
-		"id": "ui5.carro",
-		"i18n": {
-			"bundleUrl": "i18n/i18n.properties",
-			"supportedLocales": [
-				""
-			],
-			"fallbackLocale": ""
-		},
-		"title": "{{appTitle}}",
-		"description": "{{appDescription}}",
-		"type": "application",
-		"applicationVersion": {
-			"version": "1.0.0"
-		},
-		"dataSources": {
-			"invoiceRemote": {
-				"uri": "V2/Northwind/Northwind.svc/",
-				"type": "OData",
-				"settings": {
-					"odataVersion": "2.0"
-				}
-			}
-		}
-	},
-	"sap.ui": {
-		"technology": "UI5",
-		"deviceTypes": {
-			"desktop": true,
-			"tablet": true,
-			"phone": true
-		}
-	},
-	"sap.ui5": {
-		"dependencies": {
-			"minUI5Version": "1.108.0",
-			"libs": {
-				"sap.m": {},
-				"sap.ui.core": {}
-			}
-		},
-		"models": {
-			"i18n": {
-				"type": "sap.ui.model.resource.ResourceModel",
-				"settings": {
-					"bundleName": "ui5.carro.i18n.i18n",
-					"supportedLocales": [
-						""
-					],
-					"fallbackLocale": ""
-				}
-			}
-		},
-		"rootView": {
-			"viewName": "ui5.carro.view.App",
-			"type": "XML",
-			"id": "app"
-		}
-	}
+    "_version": "1.58.0",
+    "sap.app": {
+        "id": "ui5.carro",
+        "i18n": {
+            "bundleUrl": "i18n/i18n.properties",
+            "supportedLocales": [
+                ""
+            ],
+            "fallbackLocale": ""
+        },
+        "title": "",
+        "description": "",
+        "type": "application",
+        "applicationVersion": {
+            "version": "1.0.0"
+        },
+        "dataSources": {
+            "invoiceRemote": {
+                "uri": "V2/Northwind/Northwind.svc/",
+                "type": "OData",
+                "settings": {
+                    "odataVersion": "2.0"
+                }
+            }
+        }
+    },
+    "sap.ui": {
+        "technology": "UI5",
+        "deviceTypes": {
+            "desktop": true,
+            "tablet": true,
+            "phone": true
+        }
+    },
+    "sap.ui5": {
+        "contentDensities": {
+            "compact": true,
+            "cozy": true
+        },
+        "rootView": {
+            "viewName": "ui5.carro.view.App",
+            "type": "XML",
+            "async": true,
+            "id": "app"
+        },
+        "dependencies": {
+            "minUI5Version": "1.108.0",
+            "libs": {
+                "sap.ui.core": {},
+                "sap.m": {}
+            }
+        },
+        "models": {
+            "i18n": {
+                "type": "sap.ui.model.resource.ResourceModel",
+                "settings": {
+                    "bundleName": "ui5.carro.i18n.i18n",
+                    "supportedLocales": [
+                        ""
+                    ],
+                    "fallbackLocale": ""
+                }
+            }
+        },
+        "routing": {
+            "config": {
+                "routerClass": "sap.m.routing.Router",
+                "type": "View",
+                "viewType": "XML",
+                "path": "ui5.carro.view",
+                "controlId": "app",
+                "controlAggregation": "pages",
+                "transition": "slide",
+                "bypassed": {
+                    "target": "notFound"
+                },
+                "async": true
+            },
+            "routes": [{
+                "pattern": "",
+                "name": "appHome",
+                "target": "home"
+            }],
+            "targets": {
+                "home": {
+                    "id": "home",
+                    "name": "Home",
+                    "level": 1
+                },
+                "notFound": {
+                   "id": "notFound",
+                   "name": "NotFound",
+                   "transition": "show"
+                }
+            }
+        }
+    }
 }
+ 

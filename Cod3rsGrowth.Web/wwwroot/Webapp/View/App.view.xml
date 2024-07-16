@@ -2,11 +2,7 @@
 	controllerName="ui5.carro.controller.App"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc">
-    <App id="app">
-    <Page>
-      <headerContent>
-        <Button id="botao" text="Press me" press="onPress" visible="true"/>
-      </headerContent>
-    </Page>
-  </App>
+	<Shell>
+		<App id="app"/>
+	</Shell>
 </mvc:View>

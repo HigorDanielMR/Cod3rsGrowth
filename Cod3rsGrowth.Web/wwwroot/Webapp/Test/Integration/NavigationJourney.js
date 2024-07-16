@@ -14,9 +14,9 @@ sap.ui.define([
 		});
 
 		//Actions
-		When.onTheAppPage.iPressTheSayHelloWithDialogButton();
+		When.onTheAppPage.euPressionoOBotao();
 
 		// Assertions
-		Then.onTheAppPage.iShouldSeeTheHelloDialog();
+		Then.onTheAppPage.euVerificoSeOTextoFoiAlterado();
 	});
 });
