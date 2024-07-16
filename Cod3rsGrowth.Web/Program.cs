@@ -40,6 +40,7 @@ app.UseFileServer(new FileServerOptions
            Path.Combine(builder.Environment.ContentRootPath, "wwwroot")),
     EnableDirectoryBrowsing = true
 });
+app.UseDefaultFiles();
 app.MapControllers();
 app.UseAuthorization();
 app.UseHttpsRedirection();

@@ -1,0 +1,15 @@
+{
+    "name": "ui5.carro",
+    "version": "1.0.0",
+    "description": "The UI5 walkthrough application",
+    "scripts": {
+        "start": "ui5 serve -o Test/Integration/opaTests.qunit.html"
+    },
+    "devDependencies": {
+        "@ui5/cli": "^3.11.0"
+    },
+    "dependencies": {
+        "D": "^1.0.0",
+        "i": "^0.3.7"
+    }
+}

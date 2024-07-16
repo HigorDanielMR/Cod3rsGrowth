@@ -1,17 +1,11 @@
 sap.ui.define([
-    "ui5/carro/controller/BaseController",
-    "sap/ui/model/resource/ResourceModel"
+    "ui5/carro/controller/BaseController"
 
 ], function (BaseController, ResourceModel) {
     "use strict";
 
     return BaseController.extend("ui5.carro.controller.Home", {
         onInit: function () {
-            const modeloI18n = new ResourceModel({
-                bundleName: "ui5.carro.i18n.i18n"
-            });
-            this.getView().setModel(modeloI18n, "i18n");
-
             var that = this;
             window.setTimeout(function() {
                 that.byId("botao");
