@@ -5,10 +5,13 @@ using Cod3rsGrowth.Servicos.Validadores;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
 using Cod3rsGrowth.Web.DetalhesDosProblemas;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
+using Microsoft.Extensions.FileProviders;
 
 var stringDeConexao = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddMvc();
+builder.Services.AddDirectoryBrowser();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
 builder.Services.AddProblemDetails();
@@ -30,6 +33,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true});
+app.UseFileServer(new FileServerOptions
+{
+    FileProvider = new PhysicalFileProvider(
+           Path.Combine(builder.Environment.ContentRootPath, "wwwroot")),
+    EnableDirectoryBrowsing = true
+});
 app.MapControllers();
 app.UseAuthorization();
 app.UseHttpsRedirection();
