@@ -5,7 +5,7 @@ sap.ui.define([
 ], (Opa5, Press, PropertyStrictEquals) => {
 	"use strict";
 
-	const sViewName = "ui5.carro.view.App";
+	const sViewName = "ui5.carro.view.Home";
 	const idDoBotao = "botao"
 
 	Opa5.createPageObjects({
@@ -16,7 +16,7 @@ sap.ui.define([
 				}
 			},
 			actions: {
-				iPressTheSayHelloWithDialogButton()
+				euPressionoOBotao()
 				{
 					return this.waitFor({
 						viewName : sViewName,
@@ -28,7 +28,7 @@ sap.ui.define([
 			},
 
 			assertions: {
-				iShouldSeeTheHelloDialog() {
+				euVerificoSeOTextoFoiAlterado() {
 					return this.waitFor({
 						viewName : sViewName,
 						id : idDoBotao,

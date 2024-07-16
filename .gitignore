@@ -1,5 +1,7 @@
 .vs
 .config
 node_modules
+packagem.json
+ui5.yaml
 bin/
 obj/
