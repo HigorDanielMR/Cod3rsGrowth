@@ -1,7 +1,8 @@
 .vs
 .config
 node_modules
-packagem.json
+package.json
+package-lock.json
 ui5.yaml
 bin/
 obj/
