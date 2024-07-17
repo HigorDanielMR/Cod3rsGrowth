@@ -1,0 +1,67 @@
+﻿<mvc:View
+	controllerName="ui5.carro.controller.ListagemVenda"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	
+		
+	<Table
+		id="ListagemVendas"
+		inset="false"
+		items="{path: 'Vendas>/'}">
+		<headerToolbar>
+         <Toolbar>
+            <Title text="{i18n>invoiceListTitle.Vendas}"/>
+            <ToolbarSpacer/>
+            <SearchField 
+               width="50%" 
+               search=".onFilterInvoices"/>
+         </Toolbar>
+      </headerToolbar>
+		<columns>
+			<Column>
+				<Text text="Id" />
+			</Column>
+			<Column >
+				<Text text="Nome" />
+			</Column>
+			<Column >
+				<Text text="CPF" />
+			</Column>
+			<Column >
+				<Text text="Email" />
+			</Column>
+			<Column >
+				<Text text="Telefone" />
+			</Column>
+			<Column>
+				<Text text="Id do Carro" />
+			</Column>
+			<Column >
+				<Text text="Data De Compra" />
+			</Column>
+			<Column>
+				<Text text="Valor Total" />
+			</Column>
+			<Column>
+				<Text text="Pago" />
+			</Column>
+		</columns>
+		<items>
+			<ColumnListItem>
+				<cells>
+					<Text text="{Vendas>id}" />
+					<Text text="{Vendas>nome}" />
+					<Text text="{Vendas>cpf}" />
+					<Text text="{Vendas>email}" />
+					<Text text="{Vendas>telefone}" />
+					<Text text="{Vendas>idDoCarroVendido}" />
+					<Text text="{Vendas>dataDeCompra}"/>
+					<Text text="R$ {Vendas>valorTotal}"/>
+					<Text text="{Vendas>pago}" />
+				</cells>
+			</ColumnListItem>
+		</items>
+	</Table>
+</mvc:View>
