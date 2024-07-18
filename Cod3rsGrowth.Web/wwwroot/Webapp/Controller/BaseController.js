@@ -5,8 +5,9 @@ sap.ui.define([
 ], function(Controller, History, UIComponent) {
 	"use strict";
 
-	return Controller.extend("ui5.carro.controller.BaseController", {
+	var voltarUmaPagina = -1;
 
+	return Controller.extend("ui5.carro.controller.BaseController", {
 		getRouter : function () {
 			return UIComponent.getRouterFor(this);
 		},
@@ -18,7 +19,7 @@ sap.ui.define([
 			previousHash = history.getPreviousHash();
 
 			if (previousHash !== undefined) {
-				window.history.go(-1);
+				window.history.go(voltarUmaPagina);
 			} else {
 				this.getRouter().navTo("appListagem", {}, true /*no history*/);
 			}

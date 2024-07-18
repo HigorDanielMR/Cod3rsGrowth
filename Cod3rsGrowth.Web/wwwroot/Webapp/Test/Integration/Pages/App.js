@@ -6,7 +6,7 @@ sap.ui.define([
 	"use strict";
 
 	const sViewName = "ui5.carro.view.ListagemVenda";
-	const idDoBotao = "botao"
+	const idDoInput = "FiltroNome"
 
 	Opa5.createPageObjects({
 		onTheAppPage: {
@@ -16,13 +16,13 @@ sap.ui.define([
 				}
 			},
 			actions: {
-				euPressionoOBotao()
+				euPressionooInput()
 				{
 					return this.waitFor({
 						viewName : sViewName,
             			id : idDoBotao,
             			actions : new Press(),
-            			errorMessage : "O botão não foi encontrado!"
+            			errorMessage : "O input não foi encontrado!"
 					});
 				}
 			},

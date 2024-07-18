@@ -14,7 +14,7 @@ sap.ui.define([
 		});
 
 		//Actions
-		When.onTheAppPage.euPressionoOBotao();
+		When.onTheAppPage.euPressionooInput();
 
 		// Assertions
 		Then.onTheAppPage.euVerificoSeOTextoFoiAlterado();
