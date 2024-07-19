@@ -1,8 +1,9 @@
 sap.ui.define([
     "ui5/carro/controller/BaseController",
+    "sap/ui/core/format/DateFormat",
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter"
-], function (BaseController, JSONModel, Formatter) {
+], function (BaseController, DateFormat, JSONModel, Formatter) {
     "use strict";
 
     var NomeDaAPI = "Vendas"
@@ -50,22 +51,32 @@ sap.ui.define([
                 })
                 .catch((err) => console.error(err));
         },
-        filtroDataInicial() {
-            fetch(`http://localhost:5071/api/Vendas?DataDeCompraInicial=${this.oView.byId("FiltroDataInicial").getValue()}`)
+        FiltrarData() {
+            const dataInicial = this.oView.byId("FiltroDataInicial").getValue();
+            const dataFinal = this.oView.byId("FiltroDataFinal").getValue();
+
+            var oDateFormat = DateFormat.getDateInstance({
+                pattern: "dd/MM/YYYY"
+            });
+
+            let url = `http://localhost:5071/api/Vendas`;
+
+            if (dataInicial && dataFinal) {
+                const formatandoDataInicial = oDateFormat.format(new Date(dataInicial)).toString();
+                const formatandoDataFinal = oDateFormat.format(new Date(dataFinal)).toString();
+                url += `?DataDeCompraInicial=${formatandoDataInicial}&DataDeCompraFinal=${formatandoDataFinal}`;
+            } else if (dataInicial) {
+                const formatandoDataInicial = oDateFormat.format(new Date(dataInicial)).toString();
+                url += `?DataDeCompraInicial=${formatandoDataInicial}`;
+            } else if (dataFinal) {
+                const formatandoDataFinal = oDateFormat.format(new Date(dataFinal)).toString();
+                url += `?DataDeCompraFinal=${formatandoDataFinal}`;
+            }
+
+            fetch(url)
                 .then((res) => res.json())
                 .then((data) => {
-                    const jsonModel = new JSONModel(data)
-
-                    this.getView().setModel(jsonModel, NomeDaAPI);
-                })
-                .catch((err) => console.error(err));
-        },
-        filtroDatFinal() {
-            fetch(`http://localhost:5071/api/Vendas?DataDeCompraFinal=${this.oView.byId("FiltroDataFial").getValue()}`)
-                .then((res) => res.json())
-                .then((data) => {
-                    const jsonModel = new JSONModel(data)
-
+                    const jsonModel = new JSONModel(data);
                     this.getView().setModel(jsonModel, NomeDaAPI);
                 })
                 .catch((err) => console.error(err));

@@ -6,7 +6,7 @@
 	xmlns:tnt="sap.tnt">
 	
 	<Table
-		id="ListagemVendas"
+		id="TabelaVendas"
 		inset="false"
 		items="{path: 'Vendas>/'}">
 		<headerToolbar>
@@ -28,16 +28,16 @@
 			   id="FiltroTelefone"
                search=".filtroTelefone"
 			   placeholder="Telefone"/>
-			 <SearchField
+			 <Input
                width="170px"
 			   id="FiltroDataInicial"
-               search=".filtroDataInicial"
 			   placeholder="Data Inicial"/>
-			 <SearchField
+			 <Input
                width="170px"
-			   id="FiltroDatFinal"
-               search=".filtroDatFinal"
+			   id="FiltroDataFinal"
 			   placeholder="Data Final"/>
+			<Button text="Filtrar Data"
+					press="FiltrarData"/>
          </Toolbar>
       </headerToolbar>
 		<columns>

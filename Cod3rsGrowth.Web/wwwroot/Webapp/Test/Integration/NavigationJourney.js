@@ -14,9 +14,13 @@ sap.ui.define([
 		});
 
 		//Actions
-		When.onTheAppPage.euPressionooInput();
+		When.onTheAppPage.euClicoNaSearchFildDoFiltroNome();
+		When.onTheAppPage.euClicoNaSearchFildDoFiltroCpf();
+		When.onTheAppPage.euClicoNaSearchFildDoFiltroTelefone();
 
 		// Assertions
-		Then.onTheAppPage.euVerificoSeOTextoFoiAlterado();
+		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoNome();
+		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf();
+		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone();
 	});
 });

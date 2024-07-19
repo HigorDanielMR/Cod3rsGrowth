@@ -2,6 +2,7 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
+using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -29,7 +30,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
                         select p;
 
             var resultado = query.FirstOrDefault()
-                ?? throw new Exception($"Carro com ID {IdDeBusca} não encontrado.");
+                ?? throw new Exception($"Venda com ID {IdDeBusca} não encontrado.");
 
             return resultado;
         }
@@ -76,11 +77,23 @@ namespace Cod3rsGrowth.Infra.Repositorios
             if (filtroVenda.Cpf != null)
                 query = query.Where(d => d.Cpf == filtroVenda.Cpf);
 
-            if (filtroVenda.DataDeCompraInicial != null)
-                query = query.Where(d => d.DataDeCompra.Date >= filtroVenda.DataDeCompraInicial);
+            if (!string.IsNullOrEmpty(filtroVenda.DataDeCompraInicial))
+            {
+                DateTime dataInicial;
+                if (DateTime.TryParse(filtroVenda.DataDeCompraInicial, out dataInicial))
+                {
+                    query = query.Where(d => d.DataDeCompra.Date >= dataInicial.Date);
+                }
+            }
 
-            if (filtroVenda.DataDeCompraFinal != null)
-                query = query.Where(d => d.DataDeCompra.Date <= filtroVenda.DataDeCompraFinal);
+            if (!string.IsNullOrEmpty(filtroVenda.DataDeCompraFinal))
+            {
+                DateTime dataFinal;
+                if (DateTime.TryParse(filtroVenda.DataDeCompraFinal, out dataFinal))
+                {
+                    query = query.Where(d => d.DataDeCompra.Date <= dataFinal.Date);
+                }
+            }
 
             if (filtroVenda.Telefone != null)
                 query = query.Where(d => d.Telefone == filtroVenda.Telefone);
