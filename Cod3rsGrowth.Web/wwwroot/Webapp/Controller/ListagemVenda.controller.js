@@ -12,7 +12,7 @@ sap.ui.define([
         formatter: Formatter,
 
         onInit() {
-                fetch("http://localhost:5071/api/Vendas")
+            fetch("http://localhost:5071/api/Vendas")
                 .then((res) => res.json())
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
@@ -51,26 +51,19 @@ sap.ui.define([
                 })
                 .catch((err) => console.error(err));
         },
-        FiltrarData() {
-            const dataInicial = this.oView.byId("FiltroDataInicial").getValue();
-            const dataFinal = this.oView.byId("FiltroDataFinal").getValue();
 
-            var oDateFormat = DateFormat.getDateInstance({
-                pattern: "dd/MM/YYYY"
-            });
+        filtrarDatas() {
+            const dataInicial = this.coletarDataInicial();
+            const dataFinal = this.coletarDataFinal();
 
             let url = `http://localhost:5071/api/Vendas`;
 
             if (dataInicial && dataFinal) {
-                const formatandoDataInicial = oDateFormat.format(new Date(dataInicial)).toString();
-                const formatandoDataFinal = oDateFormat.format(new Date(dataFinal)).toString();
-                url += `?DataDeCompraInicial=${formatandoDataInicial}&DataDeCompraFinal=${formatandoDataFinal}`;
+                url += `?DataDeCompraInicial=${dataInicial}&DataDeCompraFinal=${dataFinal}`;
             } else if (dataInicial) {
-                const formatandoDataInicial = oDateFormat.format(new Date(dataInicial)).toString();
-                url += `?DataDeCompraInicial=${formatandoDataInicial}`;
+                url += `?DataDeCompraInicial=${dataInicial}`;
             } else if (dataFinal) {
-                const formatandoDataFinal = oDateFormat.format(new Date(dataFinal)).toString();
-                url += `?DataDeCompraFinal=${formatandoDataFinal}`;
+                url += `?DataDeCompraFinal=${dataFinal}`;
             }
 
             fetch(url)
@@ -80,7 +73,18 @@ sap.ui.define([
                     this.getView().setModel(jsonModel, NomeDaAPI);
                 })
                 .catch((err) => console.error(err));
-        }
+        },
 
+        coletarDataInicial() {
+            const dataInicial = this.oView.byId("FiltroDataInicial").getValue();
+            if (!dataInicial) return '';
+            return dataInicial;
+        },
+
+        coletarDataFinal() {
+            const dataFinal = this.oView.byId("FiltroDataFinal").getValue();
+            if (!dataFinal) return '';
+            return dataFinal;
+        }
     });
 });

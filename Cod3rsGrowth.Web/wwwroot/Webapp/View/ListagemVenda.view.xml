@@ -37,7 +37,7 @@
 			   id="FiltroDataFinal"
 			   placeholder="Data Final"/>
 			<Button text="Filtrar Data"
-					press="FiltrarData"/>
+					press=".filtrarDatas"/>
          </Toolbar>
       </headerToolbar>
 		<columns>
