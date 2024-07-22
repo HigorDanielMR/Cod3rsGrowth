@@ -1,14 +1,12 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
-    "sap/ui/test/actions/Press",
-    "sap/ui/test/matchers/PropertyStrictEquals",
     "sap/ui/test/actions/EnterText",
-    'sap/ui/test/matchers/AggregationLengthEquals'
-], (Opa5, Press, PropertyStrictEquals, EnterText, AggregationLengthEquals) => {
+    "sap/ui/test/matchers/AggregationLengthEquals"
+
+], (Opa5, EnterText, AggregationLengthEquals) => {
     "use strict";
 
     const sViewName = "ui5.carro.view.ListagemVenda";
-    const idDoInput = "FiltroNome"
 
     Opa5.createPageObjects({
         onTheAppPage: {
@@ -18,17 +16,17 @@ sap.ui.define([
                 }
             },
             actions: {
-                euClicoNaSearchFildDoFiltroNome: function () {
+                euPreenchoOInputDoFiltroNome: function () {
                     return this.waitFor({
                         id: "FiltroNome",
                         viewName: sViewName,
                         actions: new EnterText({
                             text: "Adriana"
                         }),
-                        errorMessage: "SearchField não encontrado."
+                        errorMessage: "Input não encontrado."
                     });
                 },
-                euClicoNaSearchFildDoFiltroCpf: function () {
+                euPreenchoOInputDoFiltroCpf: function () {
                     return this.waitFor({
                         id: "FiltroCpf",
                         viewName: sViewName,
@@ -38,7 +36,7 @@ sap.ui.define([
                         errorMessage: "SearchField não encontrado."
                     });
                 },
-                euClicoNaSearchFildDoFiltroTelefone: function () {
+                euPreenchoOInputDoFiltroTelefone: function () {
                     return this.waitFor({
                         id: "FiltroTelefone",
                         viewName: sViewName,
@@ -47,71 +45,106 @@ sap.ui.define([
                         }),
                         errorMessage: "SearchField não encontrado."
                     });
+                },
+                euPreenchoOInputDoFiltroDataInicial: function () {
+                    return this.waitFor({
+                        id: "FiltroDataInicial",
+                        viewName: sViewName,
+                        actions: new EnterText({
+                            text: "18/07/2024"
+                        }),
+                        errorMessage: "SearchField não encontrado."
+                    });
+                },
+                euPreenchoOInputDoFiltroDataFinal: function () {
+                    return this.waitFor({
+                        id: "FiltroDataFinal",
+                        viewName: sViewName,
+                        actions: new EnterText({
+                            text: "04/07/2024"
+                        }),
+                        errorMessage: "SearchField não encontrado."
+                    });
                 }
             },
 
             assertions: {
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoNome: function () {
+                    const tamanhoEsperado = 1
                     return this.waitFor({
                         viewName: sViewName,
                         id: "TabelaVendas",
-                        matchers: function (oTable) {
-                            var aCells = oTable.getItems()[0].getCells();
-
-                            let result = aCells.map((cell) => {
-                                return cell.getText().includes("Adriana");
-                            })
-
-                            if (result)
-                                return true;
-                            return false;
-                        },
+                        matchers: new AggregationLengthEquals({
+                            name: "items",
+                            length: tamanhoEsperado
+                        }),
                         success: function () {
-                            Opa5.assert.ok(true, "A tabela foi filtrada apenas com o nome desejado.");
+                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
                         },
-                        errorMessage: "A tabela não contem os valores esperados"
+                        errorMessage: "A pagina não contem o numero de items esperados"
                     });
                 },
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf: function () {
+                    const tamanhoEsperado = 1
+
                     return this.waitFor({
                         viewName: sViewName,
                         id: "TabelaVendas",
-                        matchers: function (oTable) {
-                            var aCells = oTable.getItems()[0].getCells();
-
-                            let result = aCells.map((cell) => {
-                                return cell.getText().includes("546.516.516-51");
-                            })
-
-                            if (result)
-                                return true;
-                            return false;
-                        },
+                        matchers: new AggregationLengthEquals({
+                            name: "items",
+                            length: tamanhoEsperado
+                        }),
                         success: function () {
-                            Opa5.assert.ok(true, "A tabela foi filtrada apenas com o cpf desejado.");
+                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
                         },
-                        errorMessage: "A tabela não contem os valores esperados"
+                        errorMessage: "A pagina não contem o numero de items esperados"
                     });
                 },
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone: function () {
+                    const tamanhoEsperado = 1
                     return this.waitFor({
                         viewName: sViewName,
                         id: "TabelaVendas",
-                        matchers: function (oTable) {
-                            var aCells = oTable.getItems()[0].getCells();
-
-                            let result = aCells.map((cell) => {
-                                return cell.getText().includes("(65) 16516-1651");
-                            })
-
-                            if (result)
-                                return true;
-                            return false;
-                        },
+                        matchers: new AggregationLengthEquals({
+                            name: "items",
+                            length: tamanhoEsperado
+                        }),
                         success: function () {
-                            Opa5.assert.ok(true, "A tabela foi filtrada apenas com o telefone desejado.");
+                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
                         },
-                        errorMessage: "A tabela não contem os valores esperados"
+                        errorMessage: "A pagina não contem o numero de items esperados"
+                    });
+                },
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial: function () {
+                    const tamanhoEsperado = 2
+
+                    return this.waitFor({
+                        viewName: sViewName,
+                        id: "TabelaVendas",
+                        matchers: new AggregationLengthEquals({
+                            name: "items",
+                            length: tamanhoEsperado
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
+                        },
+                        errorMessage: "A pagina não contem o numero de items esperados"
+                    });
+                },
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal: function () {
+                    const tamanhoEsperado = 2
+
+                    return this.waitFor({
+                        viewName: sViewName,
+                        id: "TabelaVendas",
+                        matchers: new AggregationLengthEquals({
+                            name: "items",
+                            length: tamanhoEsperado
+                        }),
+                        success: function () {
+                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
+                        },
+                        errorMessage: "A pagina não contem o numero de items esperados"
                     });
                 }
             }
