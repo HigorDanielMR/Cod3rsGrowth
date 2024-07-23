@@ -75,4 +75,6 @@
 			</ColumnListItem>
 		</items>
 	</Table>
+
+	<Button text="Adicionar" press=".adicionar"/>
 </mvc:View>

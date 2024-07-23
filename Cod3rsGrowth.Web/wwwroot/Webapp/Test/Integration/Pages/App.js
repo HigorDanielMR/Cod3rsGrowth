@@ -90,8 +90,14 @@ sap.ui.define([
                             name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
-                        success: function () {
-                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
+                        success: function (oTable) {
+                            var items = oTable.getItems();
+                            var verificarItems = items.every((item, indice, lista) => {
+                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("nome");
+
+                                return itemDesejado === 'Adriana';
+                            });
+                            Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
@@ -106,8 +112,14 @@ sap.ui.define([
                             name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
-                        success: function () {
-                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
+                        success: function (oTable) {
+                            var items = oTable.getItems();
+                            var verificarItems = items.every((item, indice, lista) => {
+                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("cpf");
+
+                                return itemDesejado === '546.516.516-51';
+                            });
+                            Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
@@ -121,8 +133,14 @@ sap.ui.define([
                             name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
-                        success: function () {
-                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
+                        success: function (oTable) {
+                            var items = oTable.getItems();
+                            var verificarItems = items.every((item, indice, lista) => {
+                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("telefone");
+
+                                return itemDesejado === '(65) 16516-1651';
+                            });
+                            Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
@@ -137,8 +155,13 @@ sap.ui.define([
                             name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
-                        success: function () {
-                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
+                        success: function (oTable) {
+                            var items = oTable.getItems();
+                            var verificarItems = items.every((item, indice, lista) => {
+                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra");
+                                return itemDesejado >= '18/07/2024';
+                            });
+                            Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
@@ -153,8 +176,14 @@ sap.ui.define([
                             name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
-                        success: function () {
-                            Opa5.assert.ok(true, `A pagina contem ${tamanhoEsperado} items esperados`);
+                        success: function (oTable) {
+                            var items = oTable.getItems();
+                            var verificarItems = items.every((item, indice, lista) => {
+                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra").split("T");
+                                var dataFormatada = itemDesejado[0];
+                                return dataFormatada >= '04/07/2024';
+                            });
+                            Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
