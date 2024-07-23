@@ -82,6 +82,11 @@
           "pattern": "",
           "name": "appListagem",
           "target": "listagem"
+        },
+        {
+          "pattern": "AdicionarVenda",
+          "name": "appAdicionarVenda",
+          "target": "adicionarVenda"
         }
       ],
       "targets": {
@@ -89,6 +94,10 @@
           "id": "listagem",
           "name": "ListagemVenda",
           "level": 1
+        },
+        "adicionarVenda": {
+          "id": "adicionarVenda",
+          "name": "AdicionarVenda"
         },
         "notFound": {
           "id": "notFound",

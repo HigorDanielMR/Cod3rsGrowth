@@ -76,5 +76,5 @@
 		</items>
 	</Table>
 
-	<Button text="Adicionar" press=".adicionar"/>
+	<Button text="Adicionar" press=".adicionarVenda"/>
 </mvc:View>

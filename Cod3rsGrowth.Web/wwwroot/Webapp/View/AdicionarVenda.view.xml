@@ -1,0 +1,18 @@
+﻿<mvc:View
+	controllerName="ui5.carro.controller.AdicionarVenda"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+	
+	<Page title="Adicionar Venda">
+		<Input width="auto" id="InputNome" placeholder="{i18n>Input.Nome}"/>
+		<MaskInput mask="999.999.999-99" width="140px" id="InputCpf" placeholder="{i18n>Input.CPF}"/>
+		<Input width="auto" id="FiltroNome" placeholder="Email"/>
+		<ComboBox></ComboBox>
+		<MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}"/>
+		<CheckBox text="Pago" selected="true" />
+	</Page>
+	<Button text="Adicionar" press=".adicionarVenda"/>
+	<Button text="Cancelar" press=".cancelar"/>
+</mvc:View>

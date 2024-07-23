@@ -2,6 +2,7 @@ sap.ui.define([
     "ui5/carro/controller/BaseController",
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter"
+
 ], function (BaseController, JSONModel, Formatter) {
     "use strict";
 
@@ -97,6 +98,9 @@ sap.ui.define([
                     this.getView().setModel(new JSONModel(data), NomeDaAPI);
                 })
                 .catch((err) => console.error(err));
+        },
+        adicionarVenda() {
+            this.getRouter().navTo("appAdicionarVenda", {}, true /*no history*/);
         }
     });
 });
