@@ -121,13 +121,13 @@ namespace Cod3rsGrowth.forms
 
                 if (!textBoxDataInicialVenda.Text.IsNullOrEmpty() && textBoxDataInicialVenda.Text != "  /  /")
                 {
-                    _filtroVenda.DataDeCompraInicial = DateTime.ParseExact(textBoxDataInicialVenda.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    _filtroVenda.DataDeCompraInicial = textBoxDataInicialVenda.Text;
                     
                 }
 
                 if (!textBoxDataFinalVenda.Text.IsNullOrEmpty() && textBoxDataFinalVenda.Text != "  /  /")
                 {
-                    _filtroVenda.DataDeCompraFinal = DateTime.ParseExact(textBoxDataFinalVenda.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    _filtroVenda.DataDeCompraFinal = textBoxDataFinalVenda.Text;
                 }
 
                 if (!txtProcurarEmail.Text.IsNullOrEmpty())

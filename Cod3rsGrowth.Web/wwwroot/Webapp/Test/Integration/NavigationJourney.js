@@ -3,20 +3,59 @@ sap.ui.define([
 	"./pages/App"
 ], (opaTest) => {
 
-	QUnit.module("Navigation");
+	QUnit.module("Posts");
 
-	opaTest("Should open the Hello dialog", function (Given, When, Then) {
-		// Arrangements
+	opaTest("Deve filtrar pelo nome e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5.carro"
 			}
 		});
+		When.onTheAppPage.euPreenchoOInputDoFiltroNome();
+		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoNome();
+		Then.iTeardownMyApp();
+	});
 
-		//Actions
-		When.onTheAppPage.euPressionoOBotao();
+	opaTest("Deve filtrar pelo cpf e atualizar lista filtrada", function (Given, When, Then) {
+		Given.iStartMyUIComponent({
+			componentConfig: {
+				name: "ui5.carro"
+			}
+		});
+		When.onTheAppPage.euPreenchoOInputDoFiltroCpf();
+		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf();
+		Then.iTeardownMyApp();
+	});
 
-		// Assertions
-		Then.onTheAppPage.euVerificoSeOTextoFoiAlterado();
+	opaTest("Deve filtrar pelo telefone e atualizar lista filtrada", function (Given, When, Then) {
+		Given.iStartMyUIComponent({
+			componentConfig: {
+				name: "ui5.carro"
+			}
+		});
+		When.onTheAppPage.euPreenchoOInputDoFiltroTelefone();
+		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone();
+		Then.iTeardownMyApp();
+	});
+
+	opaTest("Deve filtrar pela data inicial e atualizar lista filtrada", function (Given, When, Then) {
+		Given.iStartMyUIComponent({
+			componentConfig: {
+				name: "ui5.carro"
+			}
+		});
+		When.onTheAppPage.euPreenchoOInputDoFiltroDataInicial();
+		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial();
+		Then.iTeardownMyApp();
+	});
+	opaTest("Deve filtrar pela data final e atualizar lista filtrada", function (Given, When, Then) {
+		Given.iStartMyUIComponent({
+			componentConfig: {
+				name: "ui5.carro"
+			}
+		});
+		When.onTheAppPage.euPreenchoOInputDoFiltroDataFinal();
+		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal();
+		Then.iTeardownMyApp();
 	});
 });

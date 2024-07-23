@@ -8,6 +8,11 @@
 
   <ItemGroup>
     <Content Remove="App.Config" />
+    <Content Remove="wwwroot\Webapp\Controller\Worklist.controller.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="wwwroot\Webapp\Controller\Worklist.controller.js" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,10 +31,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cod3rsGrowth.Infra\Cod3rsGrowth.Infra.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Webapp\" />
   </ItemGroup>
 
 </Project>
