@@ -13,40 +13,40 @@
          <Toolbar>
 			<Title text="{i18n>invoiceListTitle.Vendas}"/>
             <ToolbarSpacer/>
-			 <Input width="auto" id="FiltroNome" placeholder="Nome" liveChange="aoAlterarFiltro"/>
-			 <MaskInput mask="999.999.999-99" id="FiltroCpf" placeholder="CPF" liveChange="aoAlterarFiltro"/>
-			 <MaskInput mask="(99) 99999-9999" width="190px" id="FiltroTelefone" placeholder="Telefone" liveChange="aoAlterarFiltro"/>
-			 <MaskInput mask="99/99/9999" width="170px" id="FiltroDataInicial" placeholder="Data Inicial" liveChange="aoAlterarFiltro"/>
-			 <MaskInput mask="99/99/9999" width="170px" id="FiltroDataFinal" placeholder="Data Final" liveChange="aoAlterarFiltro"/>
+			 <Input width="auto" id="FiltroNome" placeholder="{i18n>Input.Nome}" liveChange=".aoFiltrar"/>
+			 <MaskInput mask="999.999.999-99" width="140px" id="FiltroCpf" placeholder="{i18n>Input.CPF}" change=".aoFiltrar"/>
+			 <MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}" change=".aoFiltrar"/>
+			 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataInicial" placeholder="{i18n>Input.DataInicial}" change=".aoFiltrar"/>
+			 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataFinal" placeholder="{i18n>Input.DataFInal}" change=".aoFiltrar"/>
          </Toolbar>
       </headerToolbar>
 		<columns>
 			<Column>
-				<Text text="Id" />
+				<Text text="{i18n>Coluna.ID}"/>
 			</Column>
 			<Column >
-				<Text text="Nome" />
+				<Text text="{i18n>Coluna.Nome}"/>
 			</Column>
 			<Column >
-				<Text text="CPF" />
-			</Column>
-			<Column >
-				<Text text="Email" />
-			</Column>
-			<Column >
-				<Text text="Telefone" />
+				<Text text="{i18n>Coluna.CPF}"/>
 			</Column>
 			<Column>
-				<Text text="Id do Carro" />
+				<Text text="{i18n>Coluna.Email}" />
 			</Column>
 			<Column >
-				<Text text="Data De Compra" />
+				<Text text="{i18n>Coluna.Telefone}" />
+			</Column>
+			<Column >
+				<Text text="{i18n>Coluna.IdDoCarro}" />
 			</Column>
 			<Column>
-				<Text text="Valor Total" />
+				<Text text="{i18n>Coluna.DataDeCompra}" />
+			</Column>
+			<Column >
+				<Text text="{i18n>Coluna.ValorTotal}" />
 			</Column>
 			<Column>
-				<Text text="Pago" />
+				<Text text="{i18n>Coluna.Pago}" />
 			</Column>
 		</columns>
 		<items>

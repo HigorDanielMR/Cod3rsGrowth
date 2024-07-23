@@ -6,12 +6,21 @@ sap.ui.define([
     "use strict";
 
     var NomeDaAPI = "Vendas"
+    var idDoFiltroNome = "FiltroNome"
+    var idDoFiltroCpf = "FiltroCpf"
+    var idDoFiltroTelefone = "FiltroTelefone"
+    var idDoFiltroDataInicial = "FiltroDataInicial"
+    var idDOFiltroDataFinal = "FiltroDataFinal"
+    var quantidadeDeCaracteresDoCpf = 14
+    var quantidadeDeCaracteresDoTelefone = 15
+    var url = "http://localhost:5071/api/Vendas"    
+
 
     return BaseController.extend("ui5.carro.controller.ListagemVenda", {
         formatter: Formatter,
 
         onInit() {
-            fetch("http://localhost:5071/api/Vendas")
+            fetch(url)
                 .then((res) => res.json())
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
@@ -22,66 +31,67 @@ sap.ui.define([
         },
 
         coletarNome() {
-            const nome = this.oView.byId("FiltroNome").getValue();
+            const nome = this.oView.byId(idDoFiltroNome).getValue();
             return nome;
         },
 
         coletarCpf() {
-            const cpf = this.oView.byId("FiltroCpf").getValue();
+            const cpf = this.oView.byId(idDoFiltroCpf).getValue();
+            if (cpf.length < quantidadeDeCaracteresDoCpf) return '';
             return cpf;
         },
 
         coletarTelefone() {
-            const telefone = this.oView.byId("FiltroTelefone").getValue();
+            const telefone = this.oView.byId(idDoFiltroTelefone).getValue();
+            if (telefone.length < quantidadeDeCaracteresDoTelefone) return '';
             return telefone;
         },
 
         coletarDataInicial() {
-            const dataInicial = this.oView.byId("FiltroDataInicial").getValue();
+            const dataInicial = this.oView.byId(idDoFiltroDataInicial).getValue();
             if (!dataInicial) return '';
             return dataInicial;
         },
 
         coletarDataFinal() {
-            const dataFinal = this.oView.byId("FiltroDataFinal").getValue();
+            const dataFinal = this.oView.byId(idDOFiltroDataFinal).getValue();
             if (!dataFinal) return '';
             return dataFinal;
         },
 
-        aoAlterarFiltro() {
-            let url = "http://localhost:5071/api/Vendas?";
+        aoFiltrar() {
+           let urlDoFiltro = url+"?";
             const nome = this.coletarNome();
             const cpf = this.coletarCpf();
             const telefone = this.coletarTelefone();
             const dataInicial = this.coletarDataInicial();
             const dataFinal = this.coletarDataFinal();
 
-
             if (nome) {
-                url += "Nome=" + nome + "&";
+                urlDoFiltro += "Nome=" + nome + "&";
             }
 
             if (cpf) {
-                url += "Cpf=" + cpf + "&";
+                urlDoFiltro += "Cpf=" + cpf + "&";
             }
 
             if (telefone) {
-                url += "Telefone=" + telefone + "&";
+                urlDoFiltro += "Telefone=" + telefone + "&";
             }
 
             if (dataInicial && dataFinal) {
-                url += "DataDeCompraInicial=" + dataInicial + "&" + "DataDeCompraFInal" + dataFinal;
+                urlDoFiltro += "DataDeCompraInicial=" + dataInicial + "&" + "DataDeCompraFInal" + dataFinal;
             }
 
             else if (dataInicial) {
-                url += "DataDeCompraInicial=" + dataInicial;
+                urlDoFiltro += "DataDeCompraInicial=" + dataInicial;
             }
 
             else if (dataFinal) {
-                url += "DataDeCompraFinal=" + dataFinal;
+                urlDoFiltro += "DataDeCompraFinal=" + dataFinal;
             }
 
-            fetch(url)
+            fetch(urlDoFiltro)
                 .then((res) => res.json())
                 .then((data) => {
                     this.getView().setModel(new JSONModel(data), NomeDaAPI);

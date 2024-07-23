@@ -7,6 +7,18 @@ sap.ui.define([
     "use strict";
 
     const sViewName = "ui5.carro.view.ListagemVenda";
+    var idDaTabela = "TabelaVendas"
+    var idDoFiltroNome = "FiltroNome";
+    var nomeParaInserir = "Adriana";
+    var idDoFiltroCpf = "FiltroCpf";
+    var cpfParaInserir = "54651651651";
+    var idDoFiltroTelefone = "FiltroTelefone";
+    var telefoneParaInserir = "65165161651";
+    var idDoFiltroDataInicial = "FiltroDataInicial";
+    var dataInicialParaInserir = "18072024";
+    var idDoFiltroDataFinal = "FiltroDataFinal";
+    var dataFinalParaInserir = "04072024";
+    var tagDasLinhas = "items";
 
     Opa5.createPageObjects({
         onTheAppPage: {
@@ -18,50 +30,50 @@ sap.ui.define([
             actions: {
                 euPreenchoOInputDoFiltroNome: function () {
                     return this.waitFor({
-                        id: "FiltroNome",
+                        id: idDoFiltroNome,
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "Adriana"
+                            text: nomeParaInserir
                         }),
                         errorMessage: "Input não encontrado."
                     });
                 },
                 euPreenchoOInputDoFiltroCpf: function () {
                     return this.waitFor({
-                        id: "FiltroCpf",
+                        id: idDoFiltroCpf,
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "54651651651"
+                            text: cpfParaInserir
                         }),
                         errorMessage: "Input não encontrado."
                     });
                 },
                 euPreenchoOInputDoFiltroTelefone: function () {
                     return this.waitFor({
-                        id: "FiltroTelefone",
+                        id: idDoFiltroTelefone,
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "65165161651"
+                            text: telefoneParaInserir
                         }),
                         errorMessage: "Input não encontrado."
                     });
                 },
                 euPreenchoOInputDoFiltroDataInicial: function () {
                     return this.waitFor({
-                        id: "FiltroDataInicial",
+                        id: idDoFiltroDataInicial,
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "18072024"
+                            text: dataInicialParaInserir
                         }),
                         errorMessage: "Input não encontrado."
                     });
                 },
                 euPreenchoOInputDoFiltroDataFinal: function () {
                     return this.waitFor({
-                        id: "FiltroDataFinal",
+                        id: idDoFiltroDataFinal,
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "04072024"
+                            text: dataFinalParaInserir
                         }),
                         errorMessage: "Input não encontrado."
                     });
@@ -73,9 +85,9 @@ sap.ui.define([
                     const tamanhoEsperado = 1
                     return this.waitFor({
                         viewName: sViewName,
-                        id: "TabelaVendas",
+                        id: idDaTabela,
                         matchers: new AggregationLengthEquals({
-                            name: "items",
+                            name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
                         success: function () {
@@ -89,9 +101,9 @@ sap.ui.define([
 
                     return this.waitFor({
                         viewName: sViewName,
-                        id: "TabelaVendas",
+                        id: idDaTabela,
                         matchers: new AggregationLengthEquals({
-                            name: "items",
+                            name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
                         success: function () {
@@ -104,9 +116,9 @@ sap.ui.define([
                     const tamanhoEsperado = 1
                     return this.waitFor({
                         viewName: sViewName,
-                        id: "TabelaVendas",
+                        id: idDaTabela,
                         matchers: new AggregationLengthEquals({
-                            name: "items",
+                            name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
                         success: function () {
@@ -120,9 +132,9 @@ sap.ui.define([
 
                     return this.waitFor({
                         viewName: sViewName,
-                        id: "TabelaVendas",
+                        id: idDaTabela,
                         matchers: new AggregationLengthEquals({
-                            name: "items",
+                            name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
                         success: function () {
@@ -136,9 +148,9 @@ sap.ui.define([
 
                     return this.waitFor({
                         viewName: sViewName,
-                        id: "TabelaVendas",
+                        id: idDaTabela,
                         matchers: new AggregationLengthEquals({
-                            name: "items",
+                            name: tagDasLinhas,
                             length: tamanhoEsperado
                         }),
                         success: function () {
