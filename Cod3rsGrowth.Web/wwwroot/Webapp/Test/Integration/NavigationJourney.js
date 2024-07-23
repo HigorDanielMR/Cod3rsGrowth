@@ -3,9 +3,9 @@ sap.ui.define([
 	"./pages/App"
 ], (opaTest) => {
 
-	QUnit.module("Navigation");
+	QUnit.module("Posts");
 
-	opaTest("Should open the Hello dialog", function (Given, When, Then) {
+	opaTest("Deve filtrar pelo nome e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5.carro"
@@ -14,7 +14,9 @@ sap.ui.define([
 		When.onTheAppPage.euPreenchoOInputDoFiltroNome();
 		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoNome();
 		Then.iTeardownMyApp();
+	});
 
+	opaTest("Deve filtrar pelo cpf e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5.carro"
@@ -23,7 +25,9 @@ sap.ui.define([
 		When.onTheAppPage.euPreenchoOInputDoFiltroCpf();
 		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf();
 		Then.iTeardownMyApp();
+	});
 
+	opaTest("Deve filtrar pelo telefone e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5.carro"
@@ -32,7 +36,9 @@ sap.ui.define([
 		When.onTheAppPage.euPreenchoOInputDoFiltroTelefone();
 		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone();
 		Then.iTeardownMyApp();
+	});
 
+	opaTest("Deve filtrar pela data inicial e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5.carro"
@@ -41,7 +47,8 @@ sap.ui.define([
 		When.onTheAppPage.euPreenchoOInputDoFiltroDataInicial();
 		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial();
 		Then.iTeardownMyApp();
-
+	});
+	opaTest("Deve filtrar pela data final e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5.carro"
@@ -51,5 +58,4 @@ sap.ui.define([
 		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal();
 		Then.iTeardownMyApp();
 	});
-	opaTest()
 });

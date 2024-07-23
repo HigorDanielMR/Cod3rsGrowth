@@ -48,44 +48,43 @@ sap.ui.define([
             return dataFinal;
         },
 
-        aoAlterarFiltrar() {
+        aoAlterarFiltro() {
+            let url = "http://localhost:5071/api/Vendas?";
             const nome = this.coletarNome();
             const cpf = this.coletarCpf();
             const telefone = this.coletarTelefone();
             const dataInicial = this.coletarDataInicial();
             const dataFinal = this.coletarDataFinal();
 
-            let url = "http://localhost:5071/api/Vendas?";
 
             if (nome) {
-                url += `Nome=${nome}&`
+                url += "Nome=" + nome + "&";
             }
 
             if (cpf) {
-                url += `Cpf=${cpf}&`
+                url += "Cpf=" + cpf + "&";
             }
 
             if (telefone) {
-                url += `Telefone=${telefone}&`
+                url += "Telefone=" + telefone + "&";
             }
 
             if (dataInicial && dataFinal) {
-                url += `DataDeCompraInicial=${dataInicial}&DataDeCompraFinal=${dataFinal}`;
+                url += "DataDeCompraInicial=" + dataInicial + "&" + "DataDeCompraFInal" + dataFinal;
             }
 
             else if (dataInicial) {
-                url += `DataDeCompraInicial=${dataInicial}`;
+                url += "DataDeCompraInicial=" + dataInicial;
             }
 
             else if (dataFinal) {
-                url += `DataDeCompraFinal=${dataFinal}`;
+                url += "DataDeCompraFinal=" + dataFinal;
             }
 
             fetch(url)
                 .then((res) => res.json())
                 .then((data) => {
-                    const jsonModel = new JSONModel(data);
-                    this.getView().setModel(jsonModel, NomeDaAPI);
+                    this.getView().setModel(new JSONModel(data), NomeDaAPI);
                 })
                 .catch((err) => console.error(err));
         }

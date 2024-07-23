@@ -31,9 +31,9 @@ sap.ui.define([
                         id: "FiltroCpf",
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "546.516.516-51"
+                            text: "54651651651"
                         }),
-                        errorMessage: "SearchField não encontrado."
+                        errorMessage: "Input não encontrado."
                     });
                 },
                 euPreenchoOInputDoFiltroTelefone: function () {
@@ -41,9 +41,9 @@ sap.ui.define([
                         id: "FiltroTelefone",
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "(65) 16516-1651"
+                            text: "65165161651"
                         }),
-                        errorMessage: "SearchField não encontrado."
+                        errorMessage: "Input não encontrado."
                     });
                 },
                 euPreenchoOInputDoFiltroDataInicial: function () {
@@ -51,9 +51,9 @@ sap.ui.define([
                         id: "FiltroDataInicial",
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "18/07/2024"
+                            text: "18072024"
                         }),
-                        errorMessage: "SearchField não encontrado."
+                        errorMessage: "Input não encontrado."
                     });
                 },
                 euPreenchoOInputDoFiltroDataFinal: function () {
@@ -61,9 +61,9 @@ sap.ui.define([
                         id: "FiltroDataFinal",
                         viewName: sViewName,
                         actions: new EnterText({
-                            text: "04/07/2024"
+                            text: "04072024"
                         }),
-                        errorMessage: "SearchField não encontrado."
+                        errorMessage: "Input não encontrado."
                     });
                 }
             },

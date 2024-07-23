@@ -7,17 +7,17 @@
 	
 	<Table
 		id="TabelaVendas"
-		inset="false"
+		width="auto"
 		items="{path: 'Vendas>/'}">
 		<headerToolbar>
          <Toolbar>
 			<Title text="{i18n>invoiceListTitle.Vendas}"/>
             <ToolbarSpacer/>
-			 <Input name="filtro" width="auto" id="FiltroNome" placeholder="Nome" liveChange="aoAlterarFiltrar"/>
-			 <MaskInput name="filtro" mask="999.999.999-99"  id="FiltroCpf" search=".filtroCpf" placeholder="CPF" liveChange="aoAlterarFiltrar"/>
-			 <MaskInput name="filtro" mask="(99) 99999-9999" width="190px" id="FiltroTelefone" placeholder="Telefone" liveChange="aoAlterarFiltrar"/>
-			 <MaskInput name="filtro" mask="99/99/9999" width="170px" id="FiltroDataInicial" placeholder="Data Inicial" liveChange="aoAlterarFiltrar"/>
-			 <MaskInput name="filtro" mask="99/99/9999" width="170px" id="FiltroDataFinal" placeholder="Data Final" liveChange="aoAlterarFiltrar"/>
+			 <Input width="auto" id="FiltroNome" placeholder="Nome" liveChange="aoAlterarFiltro"/>
+			 <MaskInput mask="999.999.999-99" id="FiltroCpf" placeholder="CPF" liveChange="aoAlterarFiltro"/>
+			 <MaskInput mask="(99) 99999-9999" width="190px" id="FiltroTelefone" placeholder="Telefone" liveChange="aoAlterarFiltro"/>
+			 <MaskInput mask="99/99/9999" width="170px" id="FiltroDataInicial" placeholder="Data Inicial" liveChange="aoAlterarFiltro"/>
+			 <MaskInput mask="99/99/9999" width="170px" id="FiltroDataFinal" placeholder="Data Final" liveChange="aoAlterarFiltro"/>
          </Toolbar>
       </headerToolbar>
 		<columns>

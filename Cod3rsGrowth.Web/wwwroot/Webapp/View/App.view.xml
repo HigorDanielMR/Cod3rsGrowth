@@ -4,6 +4,5 @@
 	xmlns:mvc="sap.ui.core.mvc">
 	<Shell>
 		<App id="app"/>
-		<mvc:XMLView viewName="ui5.carro.view.ListagemVenda"/>
 	</Shell>
 </mvc:View>
