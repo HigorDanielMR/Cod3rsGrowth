@@ -61,7 +61,7 @@ sap.ui.define([
         },
 
         aoFiltrar() {
-           let urlDoFiltro = url+"?";
+            let urlDoFiltro = url + "?";
             const nome = this.coletarNome();
             const cpf = this.coletarCpf();
             const telefone = this.coletarTelefone();
@@ -95,10 +95,13 @@ sap.ui.define([
             fetch(urlDoFiltro)
                 .then((res) => res.json())
                 .then((data) => {
-                    this.getView().setModel(new JSONModel(data), NomeDaAPI);
+                    const jsonModel = new JSONModel(data)
+
+                    this.getView().setModel(jsonModel, NomeDaAPI);
                 })
                 .catch((err) => console.error(err));
         },
+
         adicionarVenda() {
             this.getRouter().navTo("appAdicionarVenda", {}, true /*no history*/);
         }

@@ -1,75 +1,125 @@
 ﻿<mvc:View
 	controllerName="ui5.carro.controller.AdicionarVenda"
-	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
-	xmlns="sap.m">
-	<App>
-		<Page title="Adicionar Venda">
-			<Panel>
-				<Input width="auto" id="InputNome" placeholder="{i18n>Input.Nome}"/>
-				<MaskInput mask="999.999.999-99" width="140px" id="InputCpf" placeholder="{i18n>Input.CPF}"/>
-				<Input width="auto" id="InputEmail" placeholder="Email"/>
-				<MaskInput mask="(99) 99999-9999" width="140px" id="InputTelefone" placeholder="{i18n>Input.Telefone}"/>
-				<CheckBox text="Pago" id="InputPago" selected="true" />
-				<Button text="Adicionar" press=".adicionarVenda"/>
-				<Button text="Cancelar" press=".cancelar"/>
-			</Panel>
-
-			<Panel>
-				<Table
-					id="TabelaCarrosDisponiveis"
-					width="auto"
-					mode="MultiSelect"
-					items="{path: 'Carros>/'}">
-					<headerToolbar>
-						<Toolbar>
-							<Title text="Carros Disponiveis"/>
-						</Toolbar>
-					</headerToolbar>
-					<columns>
-						<Column>
-							<Text text="ID"/>
-						</Column>
-						<Column >
-							<Text text="Marca"/>
-						</Column>
-						<Column >
-							<Text text="Modelo"/>
-						</Column>
-						<Column>
-							<Text text="Cor" />
-						</Column>
-						<Column >
-							<Text text="Valor Do Veiculo" />
-						</Column>
-						<Column >
-							<Text text="Flex" />
-						</Column>
-					</columns>
-					<items>
-						<ColumnListItem>
-							<cells>
-								<Text text="{Carros>id}" />
-								<Text text="{
-									path:'Carros>marca',
-									formatter: '.formatter.formatarMarca'
-								}" />
-								<Text text="{Carros>modelo}" />
-								<Text text="{path:'Carros>marca',
-									formatter: '.formatter.formatarCor'
-								}" />
-								<Text text="{
-									path:'Carros>valorDoVeiculo',
-									formatter: '.formatter.formatarValorDaMoeda'
-								}"/>
-								<ObjectStatus
-									text="{ path: 'Carros>flex', formatter: '.formatter.formatarFlex' }"
-									state="{= ${Carros>flex} === false ? 'Error' : 'Success'}"/>
-							</cells>
-						</ColumnListItem>
-					</items>
-				</Table>
-			</Panel>
-		</Page>
-	</App>
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" >
+	<VBox class="sapUiSmallMargin">
+		<f:Form id="FormToolbar"
+		editable="true"
+		ariaLabelledBy="Title1">
+		<f:toolbar>
+			<Toolbar id="TB1">
+				<Title id="Title1" text="Adicionar Vendas"/>
+				<ToolbarSpacer />
+			</Toolbar>
+		</f:toolbar>
+		<f:layout>
+			<f:ResponsiveGridLayout
+				labelSpanXL="4"
+				labelSpanL="3"
+				labelSpanM="4"
+				labelSpanS="12"
+				adjustLabelSpan="false"
+				emptySpanXL="0"
+				emptySpanL="4"
+				emptySpanM="0"
+				emptySpanS="0"
+				columnsXL="2"
+				columnsL="1"
+				columnsM="1"
+				singleContainerFullSize="false" />
+		</f:layout>
+		<f:formContainers>
+			<f:FormContainer>
+				<f:formElements>
+					<f:FormElement label="Nome">
+						<f:fields>
+							<Input width="380px" id="InputNome"/>
+						</f:fields>
+					</f:FormElement>
+					<f:FormElement label="CPF">
+						<f:fields>
+							<MaskInput width="380px" mask="999.999.999-99" id="InputCpf"/>
+						</f:fields>
+					</f:FormElement>
+					<f:FormElement label="E-mail">
+						<f:fields>
+							<Input width="380px" id="InputEmail"/>
+						</f:fields>
+					</f:FormElement>
+					<f:FormElement label="Telefone">
+						<f:fields>
+							<MaskInput mask="(99) 99999-9999" id="InputTelefone"/>
+							<CheckBox text="Pago" width="40px" id="InputPago" selected="true" />
+						</f:fields>
+					</f:FormElement>
+				</f:formElements>
+			</f:FormContainer>
+		</f:formContainers>
+	</f:Form>
+		<Panel>
+			<Table
+				id="TabelaCarrosDisponiveis"
+				mode="MultiSelect"
+				onChange="carregarCarrosDisponiveis"
+				items="{path: 'Carros>/'}"
+				selectionChange=".selecionandoCarro">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="Carros Disponiveis"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column>
+						<Text text="ID"/>
+					</Column>
+					<Column >
+						<Text text="Marca"/>
+					</Column>
+					<Column >
+						<Text text="Modelo"/>
+					</Column>
+					<Column>
+						<Text text="Cor" />
+					</Column>
+					<Column >
+						<Text text="Valor Do Veiculo" />
+					</Column>
+					<Column >
+						<Text text="Flex" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Carros>id}" />
+							<Text text="{
+								path:'Carros>marca',
+								formatter: '.formatter.formatarMarca'
+							}" />
+							<Text text="{Carros>modelo}" />
+							<Text text="{path:'Carros>marca',
+								formatter: '.formatter.formatarCor'
+							}" />
+							<Text text="{
+								path:'Carros>valorDoVeiculo',
+								formatter: '.formatter.formatarValorDaMoeda'
+							}"/>
+							<ObjectStatus
+								text="{ path: 'Carros>flex', formatter: '.formatter.formatarFlex' }"
+								state="{= ${Carros>flex} === false ? 'Error' : 'Success'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</Panel>
+		
+		<Panel>
+			<Button text="Adicionar" press=".selecionandoCarro"/>
+			<Button text="Selecionar" press=".selecionarCarro"/>
+			<Button text="Cancelar" press=".cancelar"/>
+		</Panel>
+	</VBox>
 </mvc:View>
