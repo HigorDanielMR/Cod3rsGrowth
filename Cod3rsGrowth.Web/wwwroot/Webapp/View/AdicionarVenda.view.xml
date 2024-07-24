@@ -1,18 +1,75 @@
 ﻿<mvc:View
 	controllerName="ui5.carro.controller.AdicionarVenda"
-	xmlns="sap.m"
-	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"
-	xmlns:tnt="sap.tnt">
-	
-	<Page title="Adicionar Venda">
-		<Input width="auto" id="InputNome" placeholder="{i18n>Input.Nome}"/>
-		<MaskInput mask="999.999.999-99" width="140px" id="InputCpf" placeholder="{i18n>Input.CPF}"/>
-		<Input width="auto" id="FiltroNome" placeholder="Email"/>
-		<ComboBox></ComboBox>
-		<MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}"/>
-		<CheckBox text="Pago" selected="true" />
-	</Page>
-	<Button text="Adicionar" press=".adicionarVenda"/>
-	<Button text="Cancelar" press=".cancelar"/>
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns="sap.m">
+	<App>
+		<Page title="Adicionar Venda">
+			<Panel>
+				<Input width="auto" id="InputNome" placeholder="{i18n>Input.Nome}"/>
+				<MaskInput mask="999.999.999-99" width="140px" id="InputCpf" placeholder="{i18n>Input.CPF}"/>
+				<Input width="auto" id="InputEmail" placeholder="Email"/>
+				<MaskInput mask="(99) 99999-9999" width="140px" id="InputTelefone" placeholder="{i18n>Input.Telefone}"/>
+				<CheckBox text="Pago" id="InputPago" selected="true" />
+				<Button text="Adicionar" press=".adicionarVenda"/>
+				<Button text="Cancelar" press=".cancelar"/>
+			</Panel>
+
+			<Panel>
+				<Table
+					id="TabelaCarrosDisponiveis"
+					width="auto"
+					mode="MultiSelect"
+					items="{path: 'Carros>/'}">
+					<headerToolbar>
+						<Toolbar>
+							<Title text="Carros Disponiveis"/>
+						</Toolbar>
+					</headerToolbar>
+					<columns>
+						<Column>
+							<Text text="ID"/>
+						</Column>
+						<Column >
+							<Text text="Marca"/>
+						</Column>
+						<Column >
+							<Text text="Modelo"/>
+						</Column>
+						<Column>
+							<Text text="Cor" />
+						</Column>
+						<Column >
+							<Text text="Valor Do Veiculo" />
+						</Column>
+						<Column >
+							<Text text="Flex" />
+						</Column>
+					</columns>
+					<items>
+						<ColumnListItem>
+							<cells>
+								<Text text="{Carros>id}" />
+								<Text text="{
+									path:'Carros>marca',
+									formatter: '.formatter.formatarMarca'
+								}" />
+								<Text text="{Carros>modelo}" />
+								<Text text="{path:'Carros>marca',
+									formatter: '.formatter.formatarCor'
+								}" />
+								<Text text="{
+									path:'Carros>valorDoVeiculo',
+									formatter: '.formatter.formatarValorDaMoeda'
+								}"/>
+								<ObjectStatus
+									text="{ path: 'Carros>flex', formatter: '.formatter.formatarFlex' }"
+									state="{= ${Carros>flex} === false ? 'Error' : 'Success'}"/>
+							</cells>
+						</ColumnListItem>
+					</items>
+				</Table>
+			</Panel>
+		</Page>
+	</App>
 </mvc:View>
