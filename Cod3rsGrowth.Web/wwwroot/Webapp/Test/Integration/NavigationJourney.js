@@ -57,5 +57,16 @@ sap.ui.define([
 		When.onTheAppPage.euPreenchoOInputDoFiltroDataFinal();
 		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal();
 		Then.iTeardownMyApp();
+
+	});
+
+	opaTest("Deve clicar no botão adicionar", function (Given, When, Then) {
+		Given.iStartMyUIComponent({
+			componentConfig: {
+				name: "ui5.carro"
+			}
+		});
+		When.onTheAppPage.euClicoNoBotaoAdicionar();
+		Then.onTheAppPage.euVerificoSeOBotaoFoiClicado();
 	});
 });

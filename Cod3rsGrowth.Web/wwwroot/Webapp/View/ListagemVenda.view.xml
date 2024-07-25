@@ -78,7 +78,7 @@
 		<footer>
 			<OverflowToolbar>
 				<ToolbarSpacer/>
-				<Button text="Adicionar" press=".adicionarVenda"/>
+				<Button text="Adicionar" press=".adicionarVenda" id="botaoAdicionarVenda"/>
 			</OverflowToolbar>
 		</footer>
 	</Page>

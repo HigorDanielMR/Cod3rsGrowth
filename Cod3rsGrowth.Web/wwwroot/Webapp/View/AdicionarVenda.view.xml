@@ -5,6 +5,17 @@
 	xmlns:f="sap.ui.layout.form"
 	xmlns:core="sap.ui.core"
 	xmlns="sap.m" >
+
+	<MessageStrip
+				text="Carro não selecionado"
+				visible="false"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="erroSelecionarCarro">
+	</MessageStrip>
+	
 	<VBox class="sapUiSmallMargin">
 		<f:Form id="FormToolbar"
 		editable="true"
@@ -36,22 +47,22 @@
 				<f:formElements>
 					<f:FormElement label="Nome">
 						<f:fields>
-							<Input width="380px" id="InputNome"/>
+							<Input width="380px" id="InputNome" liveChange=".coletarNome"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="CPF">
 						<f:fields>
-							<MaskInput width="380px" mask="999.999.999-99" id="InputCpf"/>
+							<MaskInput width="380px" mask="999.999.999-99" id="InputCpf" change=".coletarCpf"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="E-mail">
 						<f:fields>
-							<Input width="380px" id="InputEmail"/>
+							<Input width="380px" id="InputEmail" liveChange=".coletarEmail"/>
 						</f:fields>
 					</f:FormElement>
 					<f:FormElement label="Telefone">
 						<f:fields>
-							<MaskInput mask="(99) 99999-9999" id="InputTelefone"/>
+							<MaskInput mask="(99) 99999-9999" id="InputTelefone" change=".coletarTelefone"/>
 							<CheckBox text="Pago" width="40px" id="InputPago" selected="true" />
 						</f:fields>
 					</f:FormElement>
@@ -62,10 +73,8 @@
 		<Panel>
 			<Table
 				id="TabelaCarrosDisponiveis"
-				mode="MultiSelect"
-				onChange="carregarCarrosDisponiveis"
-				items="{path: 'Carros>/'}"
-				selectionChange=".selecionandoCarro">
+				mode="SingleSelectLeft"
+				items="{path: 'Carros>/'}">
 				<headerToolbar>
 					<Toolbar>
 						<Title text="Carros Disponiveis"/>
@@ -117,8 +126,7 @@
 		</Panel>
 		
 		<Panel>
-			<Button text="Adicionar" press=".selecionandoCarro"/>
-			<Button text="Selecionar" press=".selecionarCarro"/>
+			<Button text="Adicionar" press=".adicionarVenda"/>
 			<Button text="Cancelar" press=".cancelar"/>
 		</Panel>
 	</VBox>

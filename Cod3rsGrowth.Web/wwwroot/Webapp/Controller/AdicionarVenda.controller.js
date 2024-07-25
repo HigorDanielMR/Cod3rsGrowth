@@ -2,15 +2,15 @@
     "ui5/carro/controller/BaseController",
     "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
-    "ui5/carro/model/formatter"
+    "ui5/carro/model/formatter",
+    "sap/m/MessageToast",
+    "ui5/carro/model/validacao"
 
-], function (BaseController, History, JSONModel, Formatter) {
+], function (BaseController, History, JSONModel, Formatter, MessageToast, validacao) {
     "use strict";
 
     var NomeDaAPICarro = "Carros"
-    var NomeDaAPIVenda = "Vendas"
-    var urlCarro = "http://localhost:5071/api/Carros/Disponiveis"    
-    var urlVenda = "http://localhost:5071/api/Vendas"
+    var urlCarro = "http://localhost:5071/api/Carros/Disponiveis"
     var idDoInputNome = "InputNome"
     var idDoInputTelefone = "InputTelefone"
     var idDoInputCpf = "InputCpf"
@@ -46,72 +46,90 @@
         },
 
         coletarNome() {
-            const nome = this.oView.byId(idDoInputNome).getValue();
+            const inputNome = this.oView.byId(idDoInputNome);
+            const nome = inputNome.getValue();
+            validacao.validarNome(inputNome, nome);
             return nome;
         },
 
         coletarCpf() {
-            const cpf = this.oView.byId(idDoInputCpf).getValue();
+            const inputCpf = this.oView.byId(idDoInputCpf);
+            const cpf = inputCpf.getValue();
+            validacao.validarCpf(inputCpf, cpf);
             return cpf;
         },
 
         coletarTelefone() {
-            const telefone = this.oView.byId(idDoInputTelefone).getValue();
+            const inputTelefone = this.oView.byId(idDoInputTelefone);
+            const telefone = inputTelefone.getValue();
+            validacao.validarTelefone(inputTelefone, telefone);
             return telefone;
         },
         coletarEmail() {
-            const telefone = this.oView.byId(idDoInputEmail).getValue();
-            return telefone;
+            const inputEmail = this.oView.byId(idDoInputEmail);
+            const email = inputEmail.getValue();
+            validacao.validarEmail(inputEmail, email);
+            return email;
         },
         coletarPago() {
-            const telefone = this.oView.byId(idDoInputPago).getSelected();
-            return telefone;
+            const pago = this.oView.byId(idDoInputPago).getSelected();
+            return pago;
         },
-        selecionandoCarro: function (oEvent) {
-            var oTable = oEvent.getSource(); 
-            var aSelectedItems = oTable.getSelectedItems(); 
 
-            var aSelectedCars = []; 
-            
-            for (var i = 0; i < aSelectedItems.length; i++) {
-                var oSelectedItem = aSelectedItems[i];
-                var oBindingContext = oSelectedItem.getBindingContext("Carros");
-                var oSelectedCar = oBindingContext.getObject();
-                
-                aSelectedCars.push(oSelectedCar);
+        formatarData(data) {
+            const novaData = new Date(data);
+
+            const dia = novaData.getDate().toString().padStart(2, '0');
+            const mes = (novaData.getMonth() + 1).toString().padStart(2, '0');
+            const ano = novaData.getFullYear();
+
+            return `${ano}-${mes}-${dia}`;
+        },
+
+        selecionarCarro() {
+            var oTable = this.getView().byId("TabelaCarrosDisponiveis");
+            var aSelectedItems = oTable.getSelectedItems();
+
+            if (aSelectedItems.length === 0) {
+                this.getView().byId("erroSelecionarCarro").setVisible(true);
             }
+            else {
+                this.getView().byId("erroSelecionarCarro").setVisible(false);
+            }
+
+            var oSelectedItem = aSelectedItems[0];
+            var oBindingContext = oSelectedItem.getBindingContext("Carros");
+            var oSelectedCar = oBindingContext.getObject();
             
-            console.log("Carros selecionados:", aSelectedCars);
-            
+            return oSelectedCar;
         },
 
         adicionarVenda() {
-            
-            var serviceUrl = "http://localhost:5071/api/Vendas/";
-            var oDataModel = new sap.ui.model.odata.ODataModel(serviceUrl, true);
+            var urlPost = "http://localhost:5071/api/Vendas/";
+            var carroEscolhido = this.selecionarCarro();
+            var data = Date.now();
 
             var venda = {
+                "nome": this.coletarNome(),
+                "cpf": this.coletarCpf(),
+                "email": this.coletarEmail(),
+                "telefone": this.coletarTelefone(),
+                "idDoCarroVendido": carroEscolhido.id,
+                "dataDeCompra": this.formatarData(data),
+                "valorTotal": carroEscolhido.valorDoVeiculo,
+                "pago": this.coletarPago()
+            }
+
+            fetch(urlPost, {
                 method: "POST",
-                vendaNova: {
-                    "nome": coletarNome(),
-                    "cpf": coletarCpf(),
-                    "email": coletarEmail(),
-                    "telefone": coletarTelefone(),
-                    "idDoCarroVendido": selecionadnoCarro(),
-                    "dataDeCompra": Date.now(),
-                    "valorTotal": selecionadnoCarro().valorDoVeiculo,
-                    "pago": coletarPago()
-                },
-                success: function () {
-                    console.log("Requisição POST bem-sucedida!");
-                },
-                error: function () {
-                    console.error("Falha na requisição POST.");
-                }
-            };
+                body: JSON.stringify(venda),
+                headers: { "Content-type": "application/json; charset=UTF-8" }
+            })
+                .then(response => response.json())
+                .then(json => console.log(json))
+                .catch(err => console.log(err));
 
-            oDataModel.callFunction("NomeDaSuaFuncaoImport", mParameters);
-
+            MessageToast.show("Venda criada com sucesso!");
         }
     });
 }, true);
