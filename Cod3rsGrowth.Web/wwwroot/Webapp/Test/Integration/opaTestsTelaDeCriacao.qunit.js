@@ -8,7 +8,7 @@ sap.ui.require([
 	await Core.ready();
 
 	sap.ui.require([
-		"ui5/carro/test/integration/NavigationJourney"
+		"ui5/carro/test/integration/JornadaTelaDeCriacao"
 	], () => {
 		QUnit.start();
 	});

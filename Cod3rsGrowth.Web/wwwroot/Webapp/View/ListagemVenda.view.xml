@@ -5,80 +5,85 @@
 	xmlns:core="sap.ui.core"
 	xmlns:tnt="sap.tnt">
 
-	<Page title="{i18n>invoiceListTitle.Vendas}">
-		<Table
-			id="TabelaVendas"
-			width="auto"
-			items="{path: 'Vendas>/'}">
-			<headerToolbar>
-			 <Toolbar>
-				<ToolbarSpacer/>
-				 <Input width="auto" id="FiltroNome" placeholder="{i18n>Input.Nome}" liveChange=".aoFiltrar"/>
-				 <MaskInput mask="999.999.999-99" width="140px" id="FiltroCpf" placeholder="{i18n>Input.CPF}" change=".aoFiltrar"/>
-				 <MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}" change=".aoFiltrar"/>
-				 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataInicial" placeholder="{i18n>Input.DataInicial}" change=".aoFiltrar"/>
-				 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataFinal" placeholder="{i18n>Input.DataFInal}" change=".aoFiltrar"/>
-			 </Toolbar>
-		  </headerToolbar>
-			<columns>
-				<Column>
-					<Text text="{i18n>Coluna.ID}"/>
-				</Column>
-				<Column >
-					<Text text="{i18n>Coluna.Nome}"/>
-				</Column>
-				<Column >
-					<Text text="{i18n>Coluna.CPF}"/>
-				</Column>
-				<Column>
-					<Text text="{i18n>Coluna.Email}" />
-				</Column>
-				<Column >
-					<Text text="{i18n>Coluna.Telefone}" />
-				</Column>
-				<Column >
-					<Text text="{i18n>Coluna.IdDoCarro}" />
-				</Column>
-				<Column>
-					<Text text="{i18n>Coluna.DataDeCompra}" />
-				</Column>
-				<Column >
-					<Text text="{i18n>Coluna.ValorTotal}" />
-				</Column>
-				<Column>
-					<Text text="{i18n>Coluna.Pago}" />
-				</Column>
-			</columns>
-			<items>
-				<ColumnListItem>
-					<cells>
-						<Text text="{Vendas>id}" />
-						<Text text="{Vendas>nome}" />
-						<Text text="{Vendas>cpf}" />
-						<Text text="{Vendas>email}" />
-						<Text text="{Vendas>telefone}" />
-						<Text text="{Vendas>idDoCarroVendido}" />
-						<Text text="{
-							  path:'Vendas>dataDeCompra',
-							  formatter: '.formatter.formatarData'
-							  }"/>
-						<Text text="{
-							  path:'Vendas>valorTotal',
-							  formatter: '.formatter.formatarValorDaMoeda'
-							  }"/>
-						<ObjectStatus
-							text="{ path: 'Vendas>pago', formatter: '.formatter.alterarStatusDoPagamento' }"
-							state="{= ${Vendas>pago} === false ? 'Error' : 'Success'}"
-						/>
+	<Page title="{i18n>invoiceListTitle.ListagemVendas}">
+		<Panel>
+			<Table
+				alternateRowColors="true"
+				id="TabelaVendas"
+				width="auto"
+				selectionChange="carregarListaDeVendas"
+				items="{path: 'Vendas>/'}">
+				<headerToolbar>
+				 <Toolbar>
+					<ToolbarSpacer/>
+					 <Input width="auto" id="FiltroNome" placeholder="{i18n>Input.Nome}" liveChange=".aoFiltrar"/>
+					 <MaskInput mask="999.999.999-99" width="140px" id="FiltroCpf" placeholder="{i18n>Input.CPF}" change=".aoFiltrar"/>
+					 <MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}" change=".aoFiltrar"/>
+					 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataInicial" placeholder="{i18n>Input.DataInicial}" change=".aoFiltrar"/>
+					 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataFinal" placeholder="{i18n>Input.DataFInal}" change=".aoFiltrar"/>
+					 <Button icon="sap-icon://refresh" id="atualizarTabela" press=".carregarListaDeVendas"/>
+				 </Toolbar>
+			  </headerToolbar>
+				<columns>
+					<Column width="50px">
+						<Text text="{i18n>Coluna.ID}"/>
+					</Column>
+					<Column width="auto">
+						<Text text="{i18n>Coluna.Nome}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>Coluna.CPF}"/>
+					</Column>
+					<Column width="200px">
+						<Text text="{i18n>Coluna.Email}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>Coluna.Telefone}" />
+					</Column>
+					<Column width="100px">
+						<Text text="{i18n>Coluna.IdDoCarro}" />
+					</Column>
+					<Column>
+						<Text text="{i18n>Coluna.DataDeCompra}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>Coluna.ValorTotal}" />
+					</Column>
+					<Column>
+						<Text text="{i18n>Coluna.Pago}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Vendas>id}" />
+							<Text text="{Vendas>nome}" />
+							<Text text="{Vendas>cpf}" />
+							<Text text="{Vendas>email}" />
+							<Text text="{Vendas>telefone}" />
+							<Text text="{Vendas>idDoCarroVendido}" />
+							<Text text="{
+								  path:'Vendas>dataDeCompra',
+								  formatter: '.formatter.formatarData'
+								  }"/>
+							<Text text="{
+								  path:'Vendas>valorTotal',
+								  formatter: '.formatter.formatarValorDaMoeda'
+								  }"/>
+							<ObjectStatus
+								text="{ path: 'Vendas>pago', formatter: '.formatter.alterarStatusDoPagamento' }"
+								state="{= ${Vendas>pago} === false ? 'Error' : 'Success'}"
+							/>
 
-					</cells>
-				</ColumnListItem>
-			</items>
-		</Table>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</Panel>
 		<footer>
 			<OverflowToolbar>
 				<ToolbarSpacer/>
-				<Button text="Adicionar" press=".adicionarVenda" id="botaoAdicionarVenda"/>
+				<Button icon="sap-icon://add" text="{i18n>Botao.Adicionar}" press=".adicionarVenda" id="botaoAdicionarVenda"/>
 			</OverflowToolbar>
 		</footer>
 	</Page>

@@ -7,20 +7,19 @@ sap.ui.define([
     "use strict";
 
     var NomeDaAPI = "Vendas"
-    var idDoFiltroNome = "FiltroNome"
     var idDoFiltroCpf = "FiltroCpf"
-    var idDoFiltroTelefone = "FiltroTelefone"
-    var idDoFiltroDataInicial = "FiltroDataInicial"
-    var idDOFiltroDataFinal = "FiltroDataFinal"
+    var idDoFiltroNome = "FiltroNome"
     var quantidadeDeCaracteresDoCpf = 14
     var quantidadeDeCaracteresDoTelefone = 15
+    var idDoFiltroTelefone = "FiltroTelefone"
+    var idDOFiltroDataFinal = "FiltroDataFinal"
     var url = "http://localhost:5071/api/Vendas"    
+    var idDoFiltroDataInicial = "FiltroDataInicial"
 
 
     return BaseController.extend("ui5.carro.controller.ListagemVenda", {
         formatter: Formatter,
-
-        onInit() {
+        carregarListaDeVendas() {
             fetch(url)
                 .then((res) => res.json())
                 .then((data) => {
@@ -29,6 +28,10 @@ sap.ui.define([
                     this.getView().setModel(jsonModel, NomeDaAPI);
                 })
                 .catch((err) => console.error(err));
+        },
+
+        onInit() {
+            this.carregarListaDeVendas();
         },
 
         coletarNome() {
@@ -62,11 +65,11 @@ sap.ui.define([
 
         aoFiltrar() {
             let urlDoFiltro = url + "?";
-            const nome = this.coletarNome();
             const cpf = this.coletarCpf();
+            const nome = this.coletarNome();
             const telefone = this.coletarTelefone();
-            const dataInicial = this.coletarDataInicial();
             const dataFinal = this.coletarDataFinal();
+            const dataInicial = this.coletarDataInicial();
 
             if (nome) {
                 urlDoFiltro += "Nome=" + nome + "&";
@@ -81,7 +84,7 @@ sap.ui.define([
             }
 
             if (dataInicial && dataFinal) {
-                urlDoFiltro += "DataDeCompraInicial=" + dataInicial + "&" + "DataDeCompraFInal" + dataFinal;
+                urlDoFiltro += "DataDeCompraInicial=" + dataInicial + "&" + "DataDeCompraFInal=" + dataFinal;
             }
 
             else if (dataInicial) {
@@ -103,7 +106,7 @@ sap.ui.define([
         },
 
         adicionarVenda() {
-            this.getRouter().navTo("appAdicionarVenda", {}, true /*no history*/);
+            this.getRouter().navTo("appAdicionarVenda", {}, true);
         }
     });
 });

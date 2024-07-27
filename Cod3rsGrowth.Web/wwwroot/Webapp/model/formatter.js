@@ -12,6 +12,7 @@
             var sFormattedDate = oDateFormat.format(new Date(date));
             return sFormattedDate;
         },
+
         formatarValorDaMoeda: function (value) {
             var oNumberFormat = NumberFormat.getCurrencyInstance({
                 currencyCode: false
@@ -19,6 +20,7 @@
 
             return oNumberFormat.format(value, "R$");
         },
+
         alterarStatusDoPagamento: function (StatusPagamento) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             switch (StatusPagamento) {
@@ -102,6 +104,7 @@
                     return Marca;
             }
         },
+
         formatarCor(Cor) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             switch (Cor) {
@@ -154,4 +157,4 @@
             }
         }
     }
-}, /* bExport= */ true);
+}, true);

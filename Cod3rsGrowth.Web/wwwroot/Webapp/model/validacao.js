@@ -1,6 +1,7 @@
 ﻿sap.ui.define([
     "sap/ui/core/format/DateFormat",
     "sap/ui/core/format/NumberFormat"
+
 ], function () {
     "use strict";
     
@@ -65,7 +66,6 @@
         validarTelefone(inputTelefone,telefone) {
             telefone = inputTelefone.getValue().trim();
             var telefoneSemMascara = telefone.replace(/[\W_]/g, "");
-
 
             if (telefoneSemMascara === '') {
                 inputTelefone.setValueState(sap.ui.core.ValueState.Error);

@@ -7,42 +7,30 @@ sap.ui.define([
 ], (Opa5, EnterText, AggregationLengthEquals, Press) => {
     "use strict";
 
-    const viewListagem = "ui5.carro.view.ListagemVenda";
+    var tagDasLinhas = "items";
     var idDaTabela = "TabelaVendas"
-    var idDoFiltroNome = "FiltroNome";
     var nomeParaInserir = "Adriana";
     var idDoFiltroCpf = "FiltroCpf";
+    var idDoFiltroNome = "FiltroNome";
     var cpfParaInserir = "54651651651";
-    var idDoFiltroTelefone = "FiltroTelefone";
-    var telefoneParaInserir = "65165161651";
-    var idDoFiltroDataInicial = "FiltroDataInicial";
-    var dataInicialParaInserir = "18072024";
-    var idDoFiltroDataFinal = "FiltroDataFinal";
     var dataFinalParaInserir = "04072024";
-    var tagDasLinhas = "items";
-
-    var viewCriacao = "ui5.carro.view.AdicionarVenda"
+    var telefoneParaInserir = "65165161651";
+    var dataInicialParaInserir = "18072024";
+    var idDoFiltroTelefone = "FiltroTelefone";
+    var idDoFiltroDataFinal = "FiltroDataFinal";
+    var idDoFiltroDataInicial = "FiltroDataInicial";
+    const viewListagem = "ui5.carro.view.ListagemVenda";
     var idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
-    var idInputNomeTelaDeCriacao = "InputNome";
-    var idInputCpfTelaDeCriacao = "InputCpf";
-    var idInputEmailTelaDeCriacao = "InputEmail";
-    var idInputTelefoneTelaDeCriacao = "InputTelefone";
-    var idInputPagoTelaDeCriacao = "InputPago";
-    var nomeParaInserirCriacao = "Julio Rodrigues";
-    var cpfParaInserirCriacao = "12345678911";
-    var emailParaInserirCriacao = "julio@gmail.com";
-    var telefoneParaInserirCriacao = "62992810844"
-    var idDaTabelaCarros = "TabelaCarrosDisponiveis";
 
     Opa5.createPageObjects({
-        onTheAppPage: {
+        naTelaDeListagem: {
             arrangements: {
                 euInicioMeuApp() {
                     return this.iStartMyUIComponent("../index.html");
                 }
             },
             actions: {
-                euPreenchoOInputDoFiltroNome: function () {
+                euPreenchoOInputDoFiltroNome() {
                     return this.waitFor({
                         id: idDoFiltroNome,
                         viewName: viewListagem,
@@ -52,7 +40,8 @@ sap.ui.define([
                         errorMessage: "Input não encontrado."
                     });
                 },
-                euPreenchoOInputDoFiltroCpf: function () {
+
+                euPreenchoOInputDoFiltroCpf() {
                     return this.waitFor({
                         id: idDoFiltroCpf,
                         viewName: viewListagem,
@@ -62,7 +51,8 @@ sap.ui.define([
                         errorMessage: "Input não encontrado."
                     });
                 },
-                euPreenchoOInputDoFiltroTelefone: function () {
+
+                euPreenchoOInputDoFiltroTelefone() {
                     return this.waitFor({
                         id: idDoFiltroTelefone,
                         viewName: viewListagem,
@@ -72,7 +62,8 @@ sap.ui.define([
                         errorMessage: "Input não encontrado."
                     });
                 },
-                euPreenchoOInputDoFiltroDataInicial: function () {
+
+                euPreenchoOInputDoFiltroDataInicial() {
                     return this.waitFor({
                         id: idDoFiltroDataInicial,
                         viewName: viewListagem,
@@ -82,6 +73,7 @@ sap.ui.define([
                         errorMessage: "Input não encontrado."
                     });
                 },
+
                 euPreenchoOInputDoFiltroDataFinal() {
                     return this.waitFor({
                         id: idDoFiltroDataFinal,
@@ -100,68 +92,11 @@ sap.ui.define([
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
                     })
-                },
-
-                euInsiroONomeNoInputNome() {
-                    return this.waitFor({
-                        id: idInputNomeTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new EnterText({
-                            text: nomeParaInserirCriacao
-                        }),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
-                euInsiroOCpfNoInputCpf() {
-                    return this.waitFor({
-                        id: idInputCpfTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new EnterText({
-                            text: cpfParaInserirCriacao
-                        }),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
-                euInsiroOEmailNoInputEmail() {
-                    return this.waitFor({
-                        id: idInputEmailTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new EnterText({
-                            text: emailParaInserirCriacao
-                        }),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
-                euInsiroOTelefoneNoInputTelefone() {
-                    return this.waitFor({
-                        id: idInputTelefoneTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new EnterText({
-                            text: telefoneParaInserirCriacao
-                        }),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
-                euClicoNoInputPago() {
-                    return this.waitFor({
-                        id: idInputEmailTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new Press(),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
-                euClicoNaTabelaCarro() {
-                    return this.waitFor({
-                        id: idDaTabelaCarros,
-                        viewName: viewCriacao,
-                        actions: new Press(),
-                        errorMessage: "Tabela não encontrada."
-                    })
                 }
             },
 
             assertions: {
-                euVerificoSeATabelaFoiFiltradaComoOEsperadoNome: function () {
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoNome() {
                     const tamanhoEsperado = 1
                     return this.waitFor({
                         viewName: viewListagem,
@@ -182,7 +117,8 @@ sap.ui.define([
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
                 },
-                euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf: function () {
+
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf() {
                     const tamanhoEsperado = 1
 
                     return this.waitFor({
@@ -204,7 +140,8 @@ sap.ui.define([
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
                 },
-                euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone: function () {
+
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone() {
                     const tamanhoEsperado = 1
                     return this.waitFor({
                         viewName: viewListagem,
@@ -225,7 +162,8 @@ sap.ui.define([
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
                 },
-                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial: function () {
+
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial() {
                     const tamanhoEsperado = 3
 
                     return this.waitFor({
@@ -238,15 +176,16 @@ sap.ui.define([
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.every((item, indice, lista) => {
-                                item = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra");
-                                return item <= '18/07/2024';
+                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra");
+                                return itemDesejado >= '2024-07-18';
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
                 },
-                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal: function () {
+
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal() {
                     const tamanhoEsperado = 2
 
                     return this.waitFor({
@@ -261,7 +200,7 @@ sap.ui.define([
                             var verificarItems = items.every((item, indice, lista) => {
                                 var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra").split("T");
                                 var dataFormatada = itemDesejado[0];
-                                return dataFormatada >= '04/07/2024';
+                                return dataFormatada <= '2024-07-04';
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
@@ -276,81 +215,6 @@ sap.ui.define([
                         },
                         errorMessage: "O botão não foi clicado"
                     });
-                },
-                euVerificoSeOTextoFoiInseridoNoInputNome() {
-                    return this.waitFor({
-                        sucess() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: "O texto não foi adicionado."
-                    });
-                },
-                euVerificoSeOTextoFoiInseridoNoInputCpf() {
-                    return this.waitFor({
-                        sucess() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: "O texto não foi adicionado."
-                    });
-                },
-
-                euVerificoSeOTextoFoiInseridoNoInputEmail() {
-                    return this.waitFor({
-                        sucess() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: "O texto não foi adicionado."
-                    });
-                },
-                euVerificoSeOTextoFoiInseridoNoInputTelefone() {
-                    return this.waitFor({
-                        sucess() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: "O texto não foi adicionado."
-                    });
-                },
-                euVerificoSeOInputPagoFoiPressionado() {
-                    return this.waitFor({
-                        sucess() {
-                            Opa5.assert.ok(true, `Input pago clicado com sucesso.`);
-                        },
-                        errorMessage: "O texto não foi adicionado."
-                    });
-                },
-                euVereificoSeATabelaFoiPressionada() {
-                    return this.waitFor({
-                        viewName: viewCriacao,
-                        id: idDaTabelaCarros,
-                        matchers: new AggregationLengthEquals({
-                            name: tagDasLinhas,
-                        }),
-                        success: function (oTable) {
-
-                            var oTable = this.getView().byId("TabelaCarrosDisponiveis");
-                            var aSelectedItems = oTable.getSelectedItems();
-
-                            if (aSelectedItems.length === 0) {
-                                this.getView().byId("erroSelecionarCarro").setVisible(true);
-                            }
-                            else {
-                                this.getView().byId("erroSelecionarCarro").setVisible(false);
-                            }
-
-                            var oSelectedItem = aSelectedItems[0];
-                            var oBindingContext = oSelectedItem.getBindingContext("Carros");
-                            var oSelectedCar = oBindingContext.getObject();
-
-                            var items = oTable.getItems();
-                            var verificarItems = items.every((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra").split("T");
-                                var dataFormatada = itemDesejado[0];
-                                return dataFormatada >= '04/07/2024';
-                            });
-                            Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
-                        },
-                        errorMessage: "A pagina não contem o numero de items esperados"
-                    })
                 }
             }
         }

@@ -7,7 +7,7 @@
 	xmlns="sap.m" >
 
 	<MessageStrip
-				text="Carro não selecionado"
+				text="{i18n>Validacao.CarroNaoSelecionado}"
 				visible="false"
 				type="Error"
 				showIcon="true"
@@ -15,89 +15,101 @@
 				class="sapUiMediumMarginBottom"
 				id="erroSelecionarCarro">
 	</MessageStrip>
+
+	<MessageStrip
+				text="{i18n>TelaDeCriacao.VendaCriadaComSucesso}"
+				visible="false"
+				type="Success"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="sucessoAoCriarVenda">
+	</MessageStrip>
 	
 	<VBox class="sapUiSmallMargin">
 		<f:Form id="FormToolbar"
-		editable="true"
-		ariaLabelledBy="Title1">
-		<f:toolbar>
-			<Toolbar id="TB1">
-				<Title id="Title1" text="Adicionar Vendas"/>
-				<ToolbarSpacer />
-			</Toolbar>
-		</f:toolbar>
-		<f:layout>
-			<f:ResponsiveGridLayout
-				labelSpanXL="4"
-				labelSpanL="3"
-				labelSpanM="4"
-				labelSpanS="12"
-				adjustLabelSpan="false"
-				emptySpanXL="0"
-				emptySpanL="4"
-				emptySpanM="0"
-				emptySpanS="0"
-				columnsXL="2"
-				columnsL="1"
-				columnsM="1"
-				singleContainerFullSize="false" />
-		</f:layout>
-		<f:formContainers>
-			<f:FormContainer>
-				<f:formElements>
-					<f:FormElement label="Nome">
-						<f:fields>
-							<Input width="380px" id="InputNome" liveChange=".coletarNome"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label="CPF">
-						<f:fields>
-							<MaskInput width="380px" mask="999.999.999-99" id="InputCpf" change=".coletarCpf"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label="E-mail">
-						<f:fields>
-							<Input width="380px" id="InputEmail" liveChange=".coletarEmail"/>
-						</f:fields>
-					</f:FormElement>
-					<f:FormElement label="Telefone">
-						<f:fields>
-							<MaskInput mask="(99) 99999-9999" id="InputTelefone" change=".coletarTelefone"/>
-							<CheckBox text="Pago" width="40px" id="InputPago" selected="true" />
-						</f:fields>
-					</f:FormElement>
-				</f:formElements>
-			</f:FormContainer>
-		</f:formContainers>
-	</f:Form>
+		editable="true">
+			<f:toolbar>
+				<Toolbar id="TB1">
+					<Button icon="sap-icon://arrow-left" press=".voltarParaATelaDeListagem" id="voltarParaAListagem"/>
+					<Title id="Title1" text="{i18n>TelaDeCriacaoVenda.AdicionarVenda}"/>
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:layout>
+				<f:ResponsiveGridLayout
+					labelSpanXL="4"
+					labelSpanL="3"
+					labelSpanM="4"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="0"
+					emptySpanL="4"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Nome}">
+							<f:fields>
+								<Input width="380px" id="InputNome" change=".coletarNome"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Cpf}">
+							<f:fields>
+								<MaskInput width="380px" mask="999.999.999-99" id="InputCpf" change=".coletarCpf"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Email}">
+							<f:fields>
+								<Input width="380px" id="InputEmail" change=".coletarEmail"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Telefone}">
+							<f:fields>
+								<MaskInput mask="(99) 99999-9999" id="InputTelefone" change=".coletarTelefone"/>
+								<CheckBox text="{i18n>TelaDeCriacaoVenda.Pago}" width="40px" id="InputPago" selected="true" />
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
 		<Panel>
 			<Table
+				alternateRowColors="true"
 				id="TabelaCarrosDisponiveis"
 				mode="SingleSelectLeft"
+				includeItemInSelection="true"
 				items="{path: 'Carros>/'}">
 				<headerToolbar>
 					<Toolbar>
-						<Title text="Carros Disponiveis"/>
+						<Title text="{i18n>TelaDeCriacaoVenda.CarrosDisponiveis}"/>
 					</Toolbar>
 				</headerToolbar>
 				<columns>
+					<Column width="50px">
+						<Text text="{i18n>TelaDeCriacaoVenda.ID}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.Marca}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.Modelo}"/>
+					</Column>
 					<Column>
-						<Text text="ID"/>
+						<Text text="{i18n>TelaDeCriacaoVenda.Cor}" />
 					</Column>
 					<Column >
-						<Text text="Marca"/>
+						<Text text="{i18n>TelaDeCriacaoVenda.ValorDoVeiculo}" />
 					</Column>
 					<Column >
-						<Text text="Modelo"/>
-					</Column>
-					<Column>
-						<Text text="Cor" />
-					</Column>
-					<Column >
-						<Text text="Valor Do Veiculo" />
-					</Column>
-					<Column >
-						<Text text="Flex" />
+						<Text text="{i18n>TelaDeCriacaoVenda.Flex}" />
 					</Column>
 				</columns>
 				<items>
@@ -126,8 +138,7 @@
 		</Panel>
 		
 		<Panel>
-			<Button text="Adicionar" press=".adicionarVenda"/>
-			<Button text="Cancelar" press=".cancelar"/>
+			<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".adicionarVenda"/>
 		</Panel>
 	</VBox>
 </mvc:View>

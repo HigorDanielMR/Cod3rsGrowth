@@ -21,7 +21,7 @@ sap.ui.define([
 			if (previousHash !== undefined) {
 				window.history.go(voltarUmaPagina);
 			} else {
-				this.getRouter().navTo("appListagem", {}, true /*no history*/);
+				this.getRouter().navTo("appListagem", {}, true);
 			}
 		}
 

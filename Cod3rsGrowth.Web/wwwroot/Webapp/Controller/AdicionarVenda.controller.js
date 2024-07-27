@@ -9,13 +9,13 @@
 ], function (BaseController, History, JSONModel, Formatter, MessageToast, validacao) {
     "use strict";
 
-    var NomeDaAPICarro = "Carros"
-    var urlCarro = "http://localhost:5071/api/Carros/Disponiveis"
-    var idDoInputNome = "InputNome"
-    var idDoInputTelefone = "InputTelefone"
     var idDoInputCpf = "InputCpf"
-    var idDoInputEmail = "InputEmail"
+    var NomeDaAPICarro = "Carros"
     var idDoInputPago = "InputPago"
+    var idDoInputNome = "InputNome"
+    var idDoInputEmail = "InputEmail"
+    var idDoInputTelefone = "InputTelefone"
+    var urlCarro = "http://localhost:5071/api/Carros/Disponiveis"
 
 
     return BaseController.extend("ui5.carro.controller.AdicionarVenda", {
@@ -30,19 +30,6 @@
                     this.getView().setModel(jsonModel, NomeDaAPICarro);
                 })
                 .catch((err) => console.error(err));
-        },
-
-        cancelar() {
-            var history, previousHash;
-
-            history = History.getInstance();
-            previousHash = history.getPreviousHash();
-
-            if (previousHash !== undefined) {
-                window.history.go(voltarUmaPagina);
-            } else {
-                this.getRouter().navTo("appListagem", {}, true /*no history*/);
-            }
         },
 
         coletarNome() {
@@ -129,7 +116,21 @@
                 .then(json => console.log(json))
                 .catch(err => console.log(err));
 
-            MessageToast.show("Venda criada com sucesso!");
+            this.getView().byId("sucessoAoCriarVenda").setVisible(true);
+
+        },
+
+        voltarParaATelaDeListagem() {
+            var history, previousHash;
+
+            history = History.getInstance();
+            previousHash = history.getPreviousHash();
+
+            if (previousHash !== undefined) {
+                window.history.go(voltarUmaPagina);
+            } else {
+                this.getRouter().navTo("appListagem", {}, true\);
+            }
         }
     });
 }, true);

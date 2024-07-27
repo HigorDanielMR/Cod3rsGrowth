@@ -1,6 +1,7 @@
-sap.ui.define([
+﻿sap.ui.define([
 	"sap/ui/test/opaQunit",
 	"./pages/App"
+
 ], (opaTest) => {
 
 	QUnit.module("Posts");
@@ -11,8 +12,8 @@ sap.ui.define([
 				name: "ui5.carro"
 			}
 		});
-		When.onTheAppPage.euPreenchoOInputDoFiltroNome();
-		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoNome();
+		When.naTelaDeListagem.euPreenchoOInputDoFiltroNome();
+		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoNome();
 		Then.iTeardownMyApp();
 	});
 
@@ -22,8 +23,8 @@ sap.ui.define([
 				name: "ui5.carro"
 			}
 		});
-		When.onTheAppPage.euPreenchoOInputDoFiltroCpf();
-		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf();
+		When.naTelaDeListagem.euPreenchoOInputDoFiltroCpf();
+		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf();
 		Then.iTeardownMyApp();
 	});
 
@@ -33,8 +34,8 @@ sap.ui.define([
 				name: "ui5.carro"
 			}
 		});
-		When.onTheAppPage.euPreenchoOInputDoFiltroTelefone();
-		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone();
+		When.naTelaDeListagem.euPreenchoOInputDoFiltroTelefone();
+		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone();
 		Then.iTeardownMyApp();
 	});
 
@@ -44,8 +45,8 @@ sap.ui.define([
 				name: "ui5.carro"
 			}
 		});
-		When.onTheAppPage.euPreenchoOInputDoFiltroDataInicial();
-		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial();
+		When.naTelaDeListagem.euPreenchoOInputDoFiltroDataInicial();
+		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial();
 		Then.iTeardownMyApp();
 	});
 	opaTest("Deve filtrar pela data final e atualizar lista filtrada", function (Given, When, Then) {
@@ -54,19 +55,20 @@ sap.ui.define([
 				name: "ui5.carro"
 			}
 		});
-		When.onTheAppPage.euPreenchoOInputDoFiltroDataFinal();
-		Then.onTheAppPage.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal();
+		When.naTelaDeListagem.euPreenchoOInputDoFiltroDataFinal();
+		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal();
 		Then.iTeardownMyApp();
 
 	});
 
-	opaTest("Deve clicar no bot�o adicionar", function (Given, When, Then) {
+	opaTest("Deve clicar no botão adicionar", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5.carro"
 			}
 		});
-		When.onTheAppPage.euClicoNoBotaoAdicionar();
-		Then.onTheAppPage.euVerificoSeOBotaoFoiClicado();
+		When.naTelaDeListagem.euClicoNoBotaoAdicionar();
+		Then.naTelaDeListagem.euVerificoSeOBotaoFoiClicado();
+		Then.iTeardownMyApp();
 	});
 });
