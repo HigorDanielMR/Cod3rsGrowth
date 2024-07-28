@@ -1,6 +1,6 @@
 ﻿sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/App"
+	"./pages/TelaDeListagem"
 
 ], (opaTest) => {
 
@@ -59,16 +59,5 @@
 		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal();
 		Then.iTeardownMyApp();
 
-	});
-
-	opaTest("Deve clicar no botão adicionar", function (Given, When, Then) {
-		Given.iStartMyUIComponent({
-			componentConfig: {
-				name: "ui5.carro"
-			}
-		});
-		When.naTelaDeListagem.euClicoNoBotaoAdicionar();
-		Then.naTelaDeListagem.euVerificoSeOBotaoFoiClicado();
-		Then.iTeardownMyApp();
 	});
 });

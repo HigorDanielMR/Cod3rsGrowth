@@ -129,7 +129,7 @@
             if (previousHash !== undefined) {
                 window.history.go(voltarUmaPagina);
             } else {
-                this.getRouter().navTo("appListagem", {}, true\);
+                this.getRouter().navTo("appListagem", {}, true);
             }
         }
     });

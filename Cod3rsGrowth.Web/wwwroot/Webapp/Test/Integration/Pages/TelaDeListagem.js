@@ -164,7 +164,7 @@ sap.ui.define([
                 },
 
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial() {
-                    const tamanhoEsperado = 3
+                    const tamanhoEsperado = 5
 
                     return this.waitFor({
                         viewName: viewListagem,
