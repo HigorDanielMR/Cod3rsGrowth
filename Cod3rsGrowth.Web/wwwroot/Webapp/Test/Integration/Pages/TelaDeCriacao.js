@@ -19,10 +19,10 @@
     var telefoneParaInserirCriacao = "62992810844"
     var emailParaInserirCriacao = "teste@gmail.com"
     var idDaTabelaCarros = "TabelaCarrosDisponiveis"
-    var viewCriacao = "ui5.carro.view.AdicionarVenda"
+    var viewCriacao = "AdicionarVenda"
     var idInputTelefoneTelaDeCriacao = "InputTelefone"
     var idDoBotaoAdicionarVenda = "botaoAdicionarVenda"
-    const viewListagem = "ui5.carro.view.ListagemVenda"
+    const viewListagem = "ListagemVenda"
     var idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao"
     var idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem"
     
@@ -111,7 +111,7 @@
                         viewName: viewCriacao,
                         matchers: new PropertyStrictEquals({
                             name: "id",
-                            value: "__item1-__component0---adicionarVenda--TabelaCarrosDisponiveis-0"
+                            value: "__item6-__component5---adicionarVenda--TabelaCarrosDisponiveis-0"
                         }),
                         actions: new Press(),
                         errorMessage: "Tabela não contém carros."
@@ -197,7 +197,7 @@
                         success() {
                             Opa5.assert.ok(true, `Input pago clicado com sucesso.`);
                         },
-                        errorMessage: "O texto não foi adicionado."
+                        errorMessage: "Input não encontrado."
                     });
                 },
 

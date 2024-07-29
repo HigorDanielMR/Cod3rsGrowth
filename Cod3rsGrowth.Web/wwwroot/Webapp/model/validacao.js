@@ -63,7 +63,7 @@
             return cpf;
         },
 
-        validarTelefone(inputTelefone,telefone) {
+        validarTelefone(inputTelefone, telefone) {
             telefone = inputTelefone.getValue().trim();
             var telefoneSemMascara = telefone.replace(/[\W_]/g, "");
 
@@ -85,7 +85,7 @@
             return telefone;
         },
 
-        validarEmail(inputEmail,email) {
+        validarEmail(inputEmail, email) {
             email = inputEmail.getValue().trim();
             var regexParaEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 

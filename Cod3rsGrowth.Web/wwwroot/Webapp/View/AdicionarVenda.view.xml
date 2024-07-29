@@ -31,7 +31,7 @@
 		editable="true">
 			<f:toolbar>
 				<Toolbar id="TB1">
-					<Button icon="sap-icon://arrow-left" press=".voltarParaATelaDeListagem" id="voltarParaAListagem"/>
+					<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagem"/>
 					<Title id="Title1" text="{i18n>TelaDeCriacaoVenda.AdicionarVenda}"/>
 					<ToolbarSpacer />
 				</Toolbar>
@@ -57,22 +57,22 @@
 					<f:formElements>
 						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Nome}">
 							<f:fields>
-								<Input width="380px" id="InputNome" change=".coletarNome"/>
+								<Input width="380px" id="InputNome" change=".aoColetarNome"/>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Cpf}">
 							<f:fields>
-								<MaskInput width="380px" mask="999.999.999-99" id="InputCpf" change=".coletarCpf"/>
+								<MaskInput width="380px" mask="999.999.999-99" id="InputCpf" change=".aoColetarCpf"/>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Email}">
 							<f:fields>
-								<Input width="380px" id="InputEmail" change=".coletarEmail"/>
+								<Input width="380px" id="InputEmail" change=".aoColetarEmail"/>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Telefone}">
 							<f:fields>
-								<MaskInput mask="(99) 99999-9999" id="InputTelefone" change=".coletarTelefone"/>
+								<MaskInput mask="(99) 99999-9999" id="InputTelefone" change=".aoColetarTelefone"/>
 								<CheckBox text="{i18n>TelaDeCriacaoVenda.Pago}" width="40px" id="InputPago" selected="true" />
 							</f:fields>
 						</f:FormElement>
@@ -138,7 +138,7 @@
 		</Panel>
 		
 		<Panel>
-			<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".adicionarVenda"/>
+			<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarDeveAdicionarVenda"/>
 		</Panel>
 	</VBox>
 </mvc:View>

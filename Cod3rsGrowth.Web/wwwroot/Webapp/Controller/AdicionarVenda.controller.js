@@ -9,8 +9,8 @@
 ], function (BaseController, History, JSONModel, Formatter, MessageToast, validacao) {
     "use strict";
 
+    var ModeloCarro = "Carros"
     var idDoInputCpf = "InputCpf"
-    var NomeDaAPICarro = "Carros"
     var idDoInputPago = "InputPago"
     var idDoInputNome = "InputNome"
     var idDoInputEmail = "InputEmail"
@@ -22,58 +22,89 @@
         formatter: Formatter,
 
         onInit() {
+            this._carregarCarros();
+        },
+
+        _carregarCarros() {
             fetch(urlCarro)
                 .then((res) => res.json())
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
 
-                    this.getView().setModel(jsonModel, NomeDaAPICarro);
+                    this.getView().setModel(jsonModel, ModeloCarro);
                 })
                 .catch((err) => console.error(err));
         },
 
-        coletarNome() {
+        aoColetarNome() {
             const inputNome = this.oView.byId(idDoInputNome);
             const nome = inputNome.getValue();
             validacao.validarNome(inputNome, nome);
             return nome;
         },
 
-        coletarCpf() {
+        aoColetarCpf() {
             const inputCpf = this.oView.byId(idDoInputCpf);
             const cpf = inputCpf.getValue();
             validacao.validarCpf(inputCpf, cpf);
             return cpf;
         },
 
-        coletarTelefone() {
+        aoColetarTelefone() {
             const inputTelefone = this.oView.byId(idDoInputTelefone);
             const telefone = inputTelefone.getValue();
             validacao.validarTelefone(inputTelefone, telefone);
             return telefone;
         },
-        coletarEmail() {
+
+        aoColetarEmail() {
             const inputEmail = this.oView.byId(idDoInputEmail);
             const email = inputEmail.getValue();
             validacao.validarEmail(inputEmail, email);
             return email;
         },
-        coletarPago() {
+
+        aoColetarPago() {
             const pago = this.oView.byId(idDoInputPago).getSelected();
             return pago;
         },
 
-        formatarData(data) {
-            const novaData = new Date(data);
-
-            const dia = novaData.getDate().toString().padStart(2, '0');
-            const mes = (novaData.getMonth() + 1).toString().padStart(2, '0');
-            const ano = novaData.getFullYear();
-
-            return `${ano}-${mes}-${dia}`;
+        aoSelecionarCarro() {
+            var carroSelecionado = this._coletarCarroSelecionado();
+            return carroSelecionado;
         },
 
-        selecionarCarro() {
+        aoClicarDeveAdicionarVenda() {
+            this.processarEvento(() => {
+                var urlPost = "http://localhost:5071/api/Vendas/";
+                var carroEscolhido = this.aoSelecionarCarro();
+                var data = Date.now();
+
+                var venda = {
+                    "nome": this.aoColetarNome(),
+                    "cpf": this.aoColetarCpf(),
+                    "email": this.aoColetarEmail(),
+                    "telefone": this.aoColetarTelefone(),
+                    "idDoCarroVendido": carroEscolhido.id,
+                    "dataDeCompra": this.formatarData(data),
+                    "valorTotal": carroEscolhido.valorDoVeiculo,
+                    "pago": this.aoColetarPago()
+                }
+
+                fetch(urlPost, {
+                    method: "POST",
+                    body: JSON.stringify(venda),
+                    headers: { "Content-type": "application/json; charset=UTF-8" }
+                })
+                    .then(response => response.json())
+                    .then(json => console.log(json))
+                    .catch(err => console.log(err));
+
+                this.getView().byId("sucessoAoCriarVenda").setVisible(true);
+            })
+        },
+
+        _coletarCarroSelecionado() {
             var oTable = this.getView().byId("TabelaCarrosDisponiveis");
             var aSelectedItems = oTable.getSelectedItems();
 
@@ -87,50 +118,23 @@
             var oSelectedItem = aSelectedItems[0];
             var oBindingContext = oSelectedItem.getBindingContext("Carros");
             var oSelectedCar = oBindingContext.getObject();
-            
+
             return oSelectedCar;
         },
 
-        adicionarVenda() {
-            var urlPost = "http://localhost:5071/api/Vendas/";
-            var carroEscolhido = this.selecionarCarro();
-            var data = Date.now();
+        aoClicarDeveVoltarParaATelaDeListagem() {
+            this.processarEvento(() => {
+                var history, previousHash;
 
-            var venda = {
-                "nome": this.coletarNome(),
-                "cpf": this.coletarCpf(),
-                "email": this.coletarEmail(),
-                "telefone": this.coletarTelefone(),
-                "idDoCarroVendido": carroEscolhido.id,
-                "dataDeCompra": this.formatarData(data),
-                "valorTotal": carroEscolhido.valorDoVeiculo,
-                "pago": this.coletarPago()
-            }
+                history = History.getInstance();
+                previousHash = history.getPreviousHash();
 
-            fetch(urlPost, {
-                method: "POST",
-                body: JSON.stringify(venda),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
+                if (previousHash !== undefined) {
+                    window.history.go(voltarUmaPagina);
+                } else {
+                    this.getRouter().navTo("appListagem", {}, true);
+                }
             })
-                .then(response => response.json())
-                .then(json => console.log(json))
-                .catch(err => console.log(err));
-
-            this.getView().byId("sucessoAoCriarVenda").setVisible(true);
-
-        },
-
-        voltarParaATelaDeListagem() {
-            var history, previousHash;
-
-            history = History.getInstance();
-            previousHash = history.getPreviousHash();
-
-            if (previousHash !== undefined) {
-                window.history.go(voltarUmaPagina);
-            } else {
-                this.getRouter().navTo("appListagem", {}, true);
-            }
         }
     });
 }, true);

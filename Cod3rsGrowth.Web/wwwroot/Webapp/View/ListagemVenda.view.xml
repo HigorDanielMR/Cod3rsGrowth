@@ -21,7 +21,7 @@
 					 <MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}" change=".aoFiltrar"/>
 					 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataInicial" placeholder="{i18n>Input.DataInicial}" change=".aoFiltrar"/>
 					 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataFinal" placeholder="{i18n>Input.DataFInal}" change=".aoFiltrar"/>
-					 <Button icon="sap-icon://refresh" id="atualizarTabela" press=".carregarListaDeVendas"/>
+					 <Button icon="sap-icon://refresh" id="atualizarTabela" press=".aoClicarDeveCarregarListaDeVendasATualizada"/>
 				 </Toolbar>
 			  </headerToolbar>
 				<columns>

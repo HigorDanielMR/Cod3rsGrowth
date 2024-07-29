@@ -8,11 +8,7 @@ sap.ui.define([
 	QUnit.module("Posts");
 
 	opaTest("Deve clicar no botao adicionar", function (Given, When, Then) {
-		Given.iStartMyUIComponent({
-			componentConfig: {
-				name: "ui5.carro"
-			}
-		});
+		Given.iStartMyApp();
 		When.naTelaDeListagem.euClicoNoBotaoAdicionar();
 		Then.naTelaDeListagem.euVerificoSeOBotaoFoiClicado();
 		

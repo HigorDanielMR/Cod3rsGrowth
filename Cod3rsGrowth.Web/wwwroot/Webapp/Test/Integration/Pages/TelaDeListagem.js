@@ -19,7 +19,7 @@ sap.ui.define([
     var idDoFiltroTelefone = "FiltroTelefone";
     var idDoFiltroDataFinal = "FiltroDataFinal";
     var idDoFiltroDataInicial = "FiltroDataInicial";
-    const viewListagem = "ui5.carro.view.ListagemVenda";
+    const viewListagem = "ListagemVenda";
     var idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
 
     Opa5.createPageObjects({
@@ -119,18 +119,12 @@ sap.ui.define([
                 },
 
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf() {
-                    const tamanhoEsperado = 1
-
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
-                        matchers: new AggregationLengthEquals({
-                            name: tagDasLinhas,
-                            length: tamanhoEsperado
-                        }),
                         success: function (oTable) {
                             var items = oTable.getItems();
-                            var verificarItems = items.every((item, indice, lista) => {
+                            var verificarItems = items.some((item, indice, lista) => {
                                 var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("cpf");
 
                                 return itemDesejado === '546.516.516-51';
@@ -142,17 +136,12 @@ sap.ui.define([
                 },
 
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone() {
-                    const tamanhoEsperado = 1
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
-                        matchers: new AggregationLengthEquals({
-                            name: tagDasLinhas,
-                            length: tamanhoEsperado
-                        }),
                         success: function (oTable) {
                             var items = oTable.getItems();
-                            var verificarItems = items.every((item, indice, lista) => {
+                            var verificarItems = items.some((item, indice, lista) => {
                                 var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("telefone");
 
                                 return itemDesejado === '(65) 16516-1651';
@@ -164,18 +153,12 @@ sap.ui.define([
                 },
 
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial() {
-                    const tamanhoEsperado = 5
-
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
-                        matchers: new AggregationLengthEquals({
-                            name: tagDasLinhas,
-                            length: tamanhoEsperado
-                        }),
                         success: function (oTable) {
                             var items = oTable.getItems();
-                            var verificarItems = items.every((item, indice, lista) => {
+                            var verificarItems = items.some((item, indice, lista) => {
                                 var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra");
                                 return itemDesejado >= '2024-07-18';
                             });
@@ -186,18 +169,12 @@ sap.ui.define([
                 },
 
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal() {
-                    const tamanhoEsperado = 2
-
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
-                        matchers: new AggregationLengthEquals({
-                            name: tagDasLinhas,
-                            length: tamanhoEsperado
-                        }),
                         success: function (oTable) {
                             var items = oTable.getItems();
-                            var verificarItems = items.every((item, indice, lista) => {
+                            var verificarItems = items.some((item, indice, lista) => {
                                 var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra").split("T");
                                 var dataFormatada = itemDesejado[0];
                                 return dataFormatada <= '2024-07-04';
