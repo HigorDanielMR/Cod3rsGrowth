@@ -87,6 +87,11 @@
           "pattern": "AdicionarVenda",
           "name": "appAdicionarVenda",
           "target": "adicionarVenda"
+        },
+        {
+          "pattern": "detalhes/{id}",
+          "name": "appDetalhes",
+          "target": "detalhes"
         }
       ],
       "targets": {
@@ -103,6 +108,10 @@
           "id": "notFound",
           "name": "NotFound",
           "transition": "show"
+        },
+        "detalhes": {
+          "id": "detalhes",
+          "name": "Detalhes"
         }
       }
     }

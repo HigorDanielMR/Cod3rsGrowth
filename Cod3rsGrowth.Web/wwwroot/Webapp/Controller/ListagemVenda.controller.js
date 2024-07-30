@@ -6,7 +6,8 @@ sap.ui.define([
 ], function (BaseController, JSONModel, Formatter) {
     "use strict";
 
-    const NomeDaAPI = "Vendas"
+    const modeloVenda = "Vendas"
+    const ID = "id"
     const RotaListagem = "appListagem"
     const idDoFiltroCpf = "FiltroCpf"
     const idDoFiltroNome = "FiltroNome"
@@ -31,7 +32,7 @@ sap.ui.define([
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
 
-                    this.getView().setModel(jsonModel, NomeDaAPI);
+                    this.getView().setModel(jsonModel, modeloVenda);
                 })
                 .catch((err) => console.error(err));
         },
@@ -110,7 +111,7 @@ sap.ui.define([
                     .then((data) => {
                         const jsonModel = new JSONModel(data)
 
-                        this.getView().setModel(jsonModel, NomeDaAPI);
+                        this.getView().setModel(jsonModel, modeloVenda);
                     })
                     .catch((err) => console.error(err));
             })
@@ -120,6 +121,14 @@ sap.ui.define([
             this.processarEvento(() => {
                 this.getRouter().navTo("appAdicionarVenda", {}, true);  
             })
+        },
+
+        aoPressionar(oEvent) {
+            const oItem = oEvent.getSource();
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("appDetalhes", {
+                id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(ID))
+            });
         }
     });
 });

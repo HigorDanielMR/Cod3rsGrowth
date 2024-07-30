@@ -1,0 +1,57 @@
+﻿<mvc:View
+	controllerName="ui5.carro.controller.Detalhes"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form">
+	<Page
+		id="TelaDeDetalhes"
+		title="{i18n>DetalhesVenda.Titulo} {Venda>id}"
+		showNavButton="true"
+		navButtonPress=".aoClicarVoltarParaTelaDeListagem"
+		class="sapUiResponsiveContentPadding"
+		binding="{Venda>/}">
+
+		<content>
+			<Panel
+				id="detalhesVenda"
+				width="auto">
+				<headerToolbar>
+				</headerToolbar>
+				<content>
+					<f:SimpleForm
+						editable="false"
+						labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4"
+						columnsL="1" columnsM="1">
+						<f:content>
+							<Label text="{i18n>DetalhesVenda.Nome}"/>
+							<Text text="{Venda>nome}"/>
+							<Label text="{i18n>DetalhesVenda.Cpf}"/>
+							<Text text="{Venda>cpf}"/>
+							<Label text="{i18n>DetalhesVenda.Telefone}"/>
+							<Text text="{Venda>telefone}"/>
+							<Label text="{i18n>DetalhesVenda.Email}"/>
+							<Text text="{Venda>email}"/>
+							<Label text="{i18n>DetalhesVenda.IdDoCarroVendido}"/>
+							<Text text="{Venda>idDoCarroVendido}"/>
+							<Label text="{i18n>DetalhesVenda.DataDeCompra}"/>
+							<Text text="{
+								  path:'Venda>dataDeCompra',
+								  formatter: '.formatter.formatarData'
+								  }"/>
+							<Label text="{i18n>DetalhesVenda.ValorTotal}"/>
+							<Text text="{
+								  path:'Venda>valorTotal',
+								  formatter: '.formatter.formatarValorDaMoeda'
+								  }"/>
+							<Label text="{i18n>DetalhesVenda.Pago}"/>
+							<ObjectStatus
+								text="{ path: 'Venda>pago', formatter: '.formatter.alterarStatusDoPagamento' }"
+								state="{= ${Venda>pago} === false ? 'Error' : 'Success'}"
+							/>
+						</f:content>
+					</f:SimpleForm>
+				</content>
+			</Panel>
+		</content>
+	</Page>
+</mvc:View>

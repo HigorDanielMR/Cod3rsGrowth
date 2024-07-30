@@ -18,7 +18,7 @@
     const idDoInputNome = "InputNome"
     const idDoInputEmail = "InputEmail"
     const idDoInputTelefone = "InputTelefone"
-    const idDaTabelkaCarrosDisponiveis = "TabelaCarrosDisponiveis"
+    const idDaTabelaCarrosDisponiveis = "TabelaCarrosDisponiveis"
     let urlCarro = "http://localhost:5071/api/Carros/Disponiveis"
 
 
@@ -111,7 +111,7 @@
         },
 
         _obterCarroSelecionado() {
-            const Tabela = this.getView().byId(idDaTabelkaCarrosDisponiveis);
+            const Tabela = this.getView().byId(idDaTabelaCarrosDisponiveis);
             const ListaComCarroSelecionado = Tabela.getSelectedItems();
 
             if (ListaComCarroSelecionado.length === estiverVazio) {
