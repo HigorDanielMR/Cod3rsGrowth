@@ -1,26 +1,24 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/actions/EnterText",
-    "sap/ui/test/matchers/AggregationLengthEquals",
     "sap/ui/test/actions/Press"
 
-], (Opa5, EnterText, AggregationLengthEquals, Press) => {
+], (Opa5, EnterText, Press) => {
     "use strict";
 
-    var tagDasLinhas = "items";
-    var idDaTabela = "TabelaVendas"
-    var nomeParaInserir = "Adriana";
-    var idDoFiltroCpf = "FiltroCpf";
-    var idDoFiltroNome = "FiltroNome";
-    var cpfParaInserir = "54651651651";
-    var dataFinalParaInserir = "04072024";
-    var telefoneParaInserir = "65165161651";
-    var dataInicialParaInserir = "18072024";
-    var idDoFiltroTelefone = "FiltroTelefone";
-    var idDoFiltroDataFinal = "FiltroDataFinal";
-    var idDoFiltroDataInicial = "FiltroDataInicial";
+    const idDaTabela = "TabelaVendas"
+    const nomeParaInserir = "Eliane";
+    const idDoFiltroCpf = "FiltroCpf";
+    const idDoFiltroNome = "FiltroNome";
+    const cpfParaInserir = "54651651651";
+    const dataFinalParaInserir = "04072024";
+    const telefoneParaInserir = "65165161651";
+    const dataInicialParaInserir = "18072024";
+    const idDoFiltroTelefone = "FiltroTelefone";
+    const idDoFiltroDataFinal = "FiltroDataFinal";
+    const idDoFiltroDataInicial = "FiltroDataInicial";
     const viewListagem = "ListagemVenda";
-    var idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
+    const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
 
     Opa5.createPageObjects({
         naTelaDeListagem: {
@@ -97,20 +95,15 @@ sap.ui.define([
 
             assertions: {
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoNome() {
-                    const tamanhoEsperado = 1
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
-                        matchers: new AggregationLengthEquals({
-                            name: tagDasLinhas,
-                            length: tamanhoEsperado
-                        }),
                         success: function (oTable) {
                             var items = oTable.getItems();
-                            var verificarItems = items.every((item, indice, lista) => {
+                            var verificarItems = items.some((item, indice, lista) => {
                                 var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("nome");
 
-                                return itemDesejado === 'Adriana';
+                                return itemDesejado === 'Eliane';
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },

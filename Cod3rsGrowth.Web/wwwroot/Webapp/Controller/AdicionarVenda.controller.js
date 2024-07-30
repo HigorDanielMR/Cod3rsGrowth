@@ -3,26 +3,30 @@
     "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter",
-    "sap/m/MessageToast",
-    "ui5/carro/model/validacao"
+    "ui5/carro/model/validacao",
+	"sap/m/MessageBox"
 
-], function (BaseController, History, JSONModel, Formatter, MessageToast, validacao) {
+], function (BaseController, History, JSONModel, Formatter, validacao, MessageBox) {
     "use strict";
 
-    var ModeloCarro = "Carros"
-    var idDoInputCpf = "InputCpf"
-    var idDoInputPago = "InputPago"
-    var idDoInputNome = "InputNome"
-    var idDoInputEmail = "InputEmail"
-    var idDoInputTelefone = "InputTelefone"
-    var urlCarro = "http://localhost:5071/api/Carros/Disponiveis"
+    const modeloCarro = "Carros"
+    const estiverVazio = 0;
+    const primeiroCarro = 0;
+    const RotaCriar = "appAdicionarVenda"
+    const idDoInputCpf = "InputCpf"
+    const idDoInputPago = "InputPago"
+    const idDoInputNome = "InputNome"
+    const idDoInputEmail = "InputEmail"
+    const idDoInputTelefone = "InputTelefone"
+    const idDaTabelkaCarrosDisponiveis = "TabelaCarrosDisponiveis"
+    let urlCarro = "http://localhost:5071/api/Carros/Disponiveis"
 
 
     return BaseController.extend("ui5.carro.controller.AdicionarVenda", {
         formatter: Formatter,
 
         onInit() {
-            this._carregarCarros();
+            this.aoCoincidirRota();
         },
 
         _carregarCarros() {
@@ -31,9 +35,16 @@
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
 
-                    this.getView().setModel(jsonModel, ModeloCarro);
+                    this.getView().setModel(jsonModel, modeloCarro);
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => MessageBox.error(err));
+        },
+
+        aoCoincidirRota() {
+            this.processarEvento(() => {
+                var rota = sap.ui.core.UIComponent.getRouterFor(this);
+                rota.getRoute(RotaCriar).attachMatched(this._carregarCarros, this);
+            });
         },
 
         aoColetarNome() {
@@ -64,23 +75,18 @@
             return email;
         },
 
-        aoColetarPago() {
+        aoObterStatusPagamento() {
             const pago = this.oView.byId(idDoInputPago).getSelected();
             return pago;
         },
 
-        aoSelecionarCarro() {
-            var carroSelecionado = this._coletarCarroSelecionado();
-            return carroSelecionado;
-        },
-
-        aoClicarDeveAdicionarVenda() {
+        aoClicarNoBotaoAdicionarDeveAdicionarVenda() {
             this.processarEvento(() => {
-                var urlPost = "http://localhost:5071/api/Vendas/";
-                var carroEscolhido = this.aoSelecionarCarro();
-                var data = Date.now();
+                const urlPost = "http://localhost:5071/api/Vendas/";
+                const carroEscolhido = this._obterCarroSelecionado();
+                const data = Date.now();
 
-                var venda = {
+                const venda = {
                     "nome": this.aoColetarNome(),
                     "cpf": this.aoColetarCpf(),
                     "email": this.aoColetarEmail(),
@@ -88,7 +94,7 @@
                     "idDoCarroVendido": carroEscolhido.id,
                     "dataDeCompra": this.formatarData(data),
                     "valorTotal": carroEscolhido.valorDoVeiculo,
-                    "pago": this.aoColetarPago()
+                    "pago": this.aoObterStatusPagamento()
                 }
 
                 fetch(urlPost, {
@@ -104,22 +110,22 @@
             })
         },
 
-        _coletarCarroSelecionado() {
-            var oTable = this.getView().byId("TabelaCarrosDisponiveis");
-            var aSelectedItems = oTable.getSelectedItems();
+        _obterCarroSelecionado() {
+            const Tabela = this.getView().byId(idDaTabelkaCarrosDisponiveis);
+            const ListaComCarroSelecionado = Tabela.getSelectedItems();
 
-            if (aSelectedItems.length === 0) {
+            if (ListaComCarroSelecionado.length === estiverVazio) {
                 this.getView().byId("erroSelecionarCarro").setVisible(true);
             }
             else {
                 this.getView().byId("erroSelecionarCarro").setVisible(false);
             }
 
-            var oSelectedItem = aSelectedItems[0];
-            var oBindingContext = oSelectedItem.getBindingContext("Carros");
-            var oSelectedCar = oBindingContext.getObject();
+            const CarroSelecionado = ListaComCarroSelecionado[primeiroCarro];
+            const ContextoAssociado = CarroSelecionado.getBindingContext(modeloCarro);
+            const Carro = ContextoAssociado.getObject();
 
-            return oSelectedCar;
+            return Carro;
         },
 
         aoClicarDeveVoltarParaATelaDeListagem() {

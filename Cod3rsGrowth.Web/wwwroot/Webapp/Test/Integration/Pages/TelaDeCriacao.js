@@ -1,30 +1,29 @@
 ﻿sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/actions/EnterText",
-    "sap/ui/test/matchers/AggregationLengthEquals",
     "sap/ui/test/actions/Press",
     "sap/ui/test/matchers/PropertyStrictEquals"
 
-], function (Opa5, EnterText, AggregationLengthEquals, Press, PropertyStrictEquals) {
+], function (Opa5, EnterText, Press, PropertyStrictEquals) {
     "use strict";
 
-    var idDaTabelaVenda = "TabelaVendas"
-    var nomeParaInserirCriacao = "Eliane"
-    var idInputCpfTelaDeCriacao = "InputCpf"
-    var cpfParaInserirCriacao = "12345678911"
-    var idInputPagoTelaDeCriacao = "InputPago"
-    var idDoBotaoAtualizar = "atualizarTabela"
-    var idInputNomeTelaDeCriacao = "InputNome"
-    var idInputEmailTelaDeCriacao = "InputEmail"
-    var telefoneParaInserirCriacao = "62992810844"
-    var emailParaInserirCriacao = "teste@gmail.com"
-    var idDaTabelaCarros = "TabelaCarrosDisponiveis"
-    var viewCriacao = "AdicionarVenda"
-    var idInputTelefoneTelaDeCriacao = "InputTelefone"
-    var idDoBotaoAdicionarVenda = "botaoAdicionarVenda"
+    const idDaTabelaVenda = "TabelaVendas"
+    const nomeParaInserirCriacao = "Eliane"
+    const idInputCpfTelaDeCriacao = "InputCpf"
+    const cpfParaInserirCriacao = "12345678911"
+    const idInputPagoTelaDeCriacao = "InputPago"
+    const idDoBotaoAtualizar = "atualizarTabela"
+    const idInputNomeTelaDeCriacao = "InputNome"
+    const idInputEmailTelaDeCriacao = "InputEmail"
+    const telefoneParaInserirCriacao = "62992810844"
+    const emailParaInserirCriacao = "teste@gmail.com"
+    const idDaTabelaCarros = "TabelaCarrosDisponiveis"
+    const viewCriacao = "AdicionarVenda"
+    const idInputTelefoneTelaDeCriacao = "InputTelefone"
+    const idDoBotaoAdicionarVenda = "botaoAdicionarVenda"
     const viewListagem = "ListagemVenda"
-    var idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao"
-    var idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem"
+    const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao"
+    const idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem"
     
     Opa5.createPageObjects({
         naTelaDeCriacao: {

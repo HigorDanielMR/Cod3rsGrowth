@@ -138,7 +138,7 @@
 		</Panel>
 		
 		<Panel>
-			<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarDeveAdicionarVenda"/>
+			<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda"/>
 		</Panel>
 	</VBox>
 </mvc:View>

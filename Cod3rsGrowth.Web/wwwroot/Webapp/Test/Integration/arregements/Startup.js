@@ -14,8 +14,8 @@
 		 * @param {boolean} [oOptionsParameter.autoWait=true] Automatically wait for pending requests while the application is starting up.
 		 */
 
-		iStartMyApp (oOptionsParameter) {
-			var oOptions = oOptionsParameter || {};
+		iStartMyApp(oOptionsParameter) {
+			let oOptions = oOptionsParameter || {};
 
 			oOptions.delay = oOptions.delay || 1;
 			this.iStartMyUIComponent({

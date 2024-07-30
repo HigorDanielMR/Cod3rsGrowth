@@ -6,19 +6,25 @@ sap.ui.define([
 ], function (BaseController, JSONModel, Formatter) {
     "use strict";
 
-    var NomeDaAPI = "Vendas"
-    var idDoFiltroCpf = "FiltroCpf"
-    var idDoFiltroNome = "FiltroNome"
-    var quantidadeDeCaracteresDoCpf = 14
-    var quantidadeDeCaracteresDoTelefone = 15
-    var idDoFiltroTelefone = "FiltroTelefone"
-    var idDOFiltroDataFinal = "FiltroDataFinal"
-    var url = "http://localhost:5071/api/Vendas"    
-    var idDoFiltroDataInicial = "FiltroDataInicial"
+    const NomeDaAPI = "Vendas"
+    const RotaListagem = "appListagem"
+    const idDoFiltroCpf = "FiltroCpf"
+    const idDoFiltroNome = "FiltroNome"
+    const quantidadeDeCaracteresDoCpf = 14
+    const quantidadeDeCaracteresDoTelefone = 15
+    const idDoFiltroTelefone = "FiltroTelefone"
+    let url = "http://localhost:5071/api/Vendas"    
+    const idDOFiltroDataFinal = "FiltroDataFinal"
+    const idDoFiltroDataInicial = "FiltroDataInicial"
 
 
     return BaseController.extend("ui5.carro.controller.ListagemVenda", {
         formatter: Formatter,
+
+        onInit() {
+            this.aoCoincidirRota();
+        },
+
         _carregarListaDeVendas() {
             fetch(url)
                 .then((res) => res.json())
@@ -30,14 +36,13 @@ sap.ui.define([
                 .catch((err) => console.error(err));
         },
 
-        onInit() {
-            this._carregarListaDeVendas();
+        aoCoincidirRota() {
+            this.processarEvento(() => {
+                var rota = sap.ui.core.UIComponent.getRouterFor(this);
+                rota.getRoute(RotaListagem).attachMatched(this._carregarListaDeVendas, this);
+            });
         },
-
-        aoClicarDeveCarregarListaDeVendasATualizada() {
-            this._carregarListaDeVendas();
-        },
-
+        
         aoColetarNome() {
             const nome = this.oView.byId(idDoFiltroNome).getValue();
             return nome;

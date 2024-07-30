@@ -9,7 +9,7 @@
 
         validarNome(inputNome, nome) {
             nome = inputNome.getValue().trim();
-            var regexParaConterApenasLetras = /^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]+$/;
+            const regexParaConterApenasLetras = /^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]+$/;
 
             if (nome === '') {
                 inputNome.setValueState(sap.ui.core.ValueState.Error);
@@ -37,8 +37,8 @@
 
         validarCpf(inputCpf, cpf) {
             cpf = inputCpf.getValue();
-            var cpfSemMascara = cpf.replace(/[\W_]/g, "");
-            var regexParaVerificarSeOsNumerosSaoSequenciais = /^(\d)\1+$/;
+            const cpfSemMascara = cpf.replace(/[\W_]/g, "");
+            const regexParaVerificarSeOsNumerosSaoSequenciais = /^(\d)\1+$/;
 
             if (cpfSemMascara === '') {
                 inputCpf.setValueState(sap.ui.core.ValueState.Error);
@@ -65,7 +65,7 @@
 
         validarTelefone(inputTelefone, telefone) {
             telefone = inputTelefone.getValue().trim();
-            var telefoneSemMascara = telefone.replace(/[\W_]/g, "");
+            const telefoneSemMascara = telefone.replace(/[\W_]/g, "");
 
             if (telefoneSemMascara === '') {
                 inputTelefone.setValueState(sap.ui.core.ValueState.Error);
@@ -87,7 +87,7 @@
 
         validarEmail(inputEmail, email) {
             email = inputEmail.getValue().trim();
-            var regexParaEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            const regexParaEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
 
             if (email === '') {
                 inputEmail.setValueState(sap.ui.core.ValueState.Error);

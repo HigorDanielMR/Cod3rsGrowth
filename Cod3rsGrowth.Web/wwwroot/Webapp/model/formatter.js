@@ -6,15 +6,15 @@
 
     return {
         formatarData: function (date) {
-            var oDateFormat = DateFormat.getDateInstance({
+            const oDateFormat = DateFormat.getDateInstance({
                 pattern: "dd/MM/YYYY"
             });
-            var sFormattedDate = oDateFormat.format(new Date(date));
+            const sFormattedDate = oDateFormat.format(new Date(date));
             return sFormattedDate;
         },
 
         formatarValorDaMoeda: function (value) {
-            var oNumberFormat = NumberFormat.getCurrencyInstance({
+            const oNumberFormat = NumberFormat.getCurrencyInstance({
                 currencyCode: false
             });
 

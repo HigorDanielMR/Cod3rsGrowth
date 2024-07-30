@@ -3,6 +3,7 @@ sap.ui.define([
 	"sap/ui/core/routing/History",
 	"sap/ui/core/UIComponent",
 	"sap/m/MessageBox"
+
 ], function (Controller, History, UIComponent, MessageBox) {
 	"use strict";
 
@@ -13,7 +14,7 @@ sap.ui.define([
 			return UIComponent.getRouterFor(this);
 		},
 
-		onNavBack() {
+		aoClicarNoBotaoVoltarDeveRetornarATelaDeListagem() {
 			var history, previousHash;
 
 			history = History.getInstance();
@@ -25,12 +26,12 @@ sap.ui.define([
 				this.getRouter().navTo("appListagem", {}, true);
 			}
 		},
+
 		processarEvento(action) {
-			const tipoDaPromise = "catch",
-				tipoBuscado = "function";
 			try {
 				var promise = action();
-				if (promise && typeof (promise[tipoDaPromise]) == tipoBuscado) {
+
+				if (promise && typeof promise.catch === 'function') {
 					promise.catch(error => MessageBox.error(error.message));
 				}
 			} catch (error) {
@@ -39,11 +40,11 @@ sap.ui.define([
 		},
 
 		formatarData(data) {
-			const novaData = new Date(data);
+			var novaData = new Date(data);
 
-			const dia = novaData.getDate().toString().padStart(2, '0');
-			const mes = (novaData.getMonth() + 1).toString().padStart(2, '0');
-			const ano = novaData.getFullYear();
+			var dia = novaData.getDate().toString().padStart(2, '0');
+			var mes = (novaData.getMonth() + 1).toString().padStart(2, '0');
+			var ano = novaData.getFullYear();
 
 			return `${ano}-${mes}-${dia}`;
 		}
