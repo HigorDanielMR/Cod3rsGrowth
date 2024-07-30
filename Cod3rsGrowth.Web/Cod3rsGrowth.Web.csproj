@@ -9,14 +9,17 @@
   <ItemGroup>
     <Content Remove="App.Config" />
     <Content Remove="wwwroot\Webapp\Controller\Worklist.controller.js" />
+    <Content Remove="wwwroot\Webapp\model\validacao.js" />
   </ItemGroup>
 
   <ItemGroup>
     <_ContentIncludedByDefault Remove="wwwroot\Webapp\Controller\Worklist.controller.js" />
+    <_ContentIncludedByDefault Remove="wwwroot\Webapp\model\validacao.js" />
   </ItemGroup>
 
   <ItemGroup>
     <None Include="App.Config" />
+    <None Include="wwwroot\Webapp\model\validacao.js" />
   </ItemGroup>
 
   <ItemGroup>

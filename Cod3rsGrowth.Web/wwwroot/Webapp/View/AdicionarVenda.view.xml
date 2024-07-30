@@ -1,0 +1,144 @@
+﻿<mvc:View
+	controllerName="ui5.carro.controller.AdicionarVenda"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" >
+
+	<MessageStrip
+				text="{i18n>Validacao.CarroNaoSelecionado}"
+				visible="false"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="erroSelecionarCarro">
+	</MessageStrip>
+
+	<MessageStrip
+				text="{i18n>TelaDeCriacao.VendaCriadaComSucesso}"
+				visible="false"
+				type="Success"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="sucessoAoCriarVenda">
+	</MessageStrip>
+	
+	<VBox class="sapUiSmallMargin">
+		<f:Form id="FormToolbar"
+		editable="true">
+			<f:toolbar>
+				<Toolbar id="TB1">
+					<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagem"/>
+					<Title id="Title1" text="{i18n>TelaDeCriacaoVenda.AdicionarVenda}"/>
+					<ToolbarSpacer />
+				</Toolbar>
+			</f:toolbar>
+			<f:layout>
+				<f:ResponsiveGridLayout
+					labelSpanXL="4"
+					labelSpanL="3"
+					labelSpanM="4"
+					labelSpanS="12"
+					adjustLabelSpan="false"
+					emptySpanXL="0"
+					emptySpanL="4"
+					emptySpanM="0"
+					emptySpanS="0"
+					columnsXL="2"
+					columnsL="1"
+					columnsM="1"
+					singleContainerFullSize="false" />
+			</f:layout>
+			<f:formContainers>
+				<f:FormContainer>
+					<f:formElements>
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Nome}">
+							<f:fields>
+								<Input width="380px" id="InputNome" change=".aoColetarNome"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Cpf}">
+							<f:fields>
+								<MaskInput width="380px" mask="999.999.999-99" id="InputCpf" change=".aoColetarCpf"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Email}">
+							<f:fields>
+								<Input width="380px" id="InputEmail" change=".aoColetarEmail"/>
+							</f:fields>
+						</f:FormElement>
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Telefone}">
+							<f:fields>
+								<MaskInput mask="(99) 99999-9999" id="InputTelefone" change=".aoColetarTelefone"/>
+								<CheckBox text="{i18n>TelaDeCriacaoVenda.Pago}" width="40px" id="InputPago" selected="true" />
+							</f:fields>
+						</f:FormElement>
+					</f:formElements>
+				</f:FormContainer>
+			</f:formContainers>
+		</f:Form>
+		<Panel>
+			<Table
+				alternateRowColors="true"
+				id="TabelaCarrosDisponiveis"
+				mode="SingleSelectLeft"
+				includeItemInSelection="true"
+				items="{path: 'Carros>/'}">
+				<headerToolbar>
+					<Toolbar>
+						<Title text="{i18n>TelaDeCriacaoVenda.CarrosDisponiveis}"/>
+					</Toolbar>
+				</headerToolbar>
+				<columns>
+					<Column width="50px">
+						<Text text="{i18n>TelaDeCriacaoVenda.ID}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.Marca}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.Modelo}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>TelaDeCriacaoVenda.Cor}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.ValorDoVeiculo}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.Flex}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Carros>id}" />
+							<Text text="{
+								path:'Carros>marca',
+								formatter: '.formatter.formatarMarca'
+							}" />
+							<Text text="{Carros>modelo}" />
+							<Text text="{path:'Carros>marca',
+								formatter: '.formatter.formatarCor'
+							}" />
+							<Text text="{
+								path:'Carros>valorDoVeiculo',
+								formatter: '.formatter.formatarValorDaMoeda'
+							}"/>
+							<ObjectStatus
+								text="{ path: 'Carros>flex', formatter: '.formatter.formatarFlex' }"
+								state="{= ${Carros>flex} === false ? 'Error' : 'Success'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</Panel>
+		
+		<Panel>
+			<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda"/>
+		</Panel>
+	</VBox>
+</mvc:View>

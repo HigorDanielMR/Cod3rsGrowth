@@ -10,7 +10,8 @@ using Microsoft.Extensions.FileProviders;
 var stringDeConexao = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddMvc();
+builder.Services.AddMvc(); 
+builder.Services.AddHttpClient();
 builder.Services.AddDirectoryBrowser();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();

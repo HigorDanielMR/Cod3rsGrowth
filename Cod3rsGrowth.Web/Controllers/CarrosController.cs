@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
+using System.Net.Http;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
@@ -9,16 +10,34 @@ namespace Cod3rsGrowth.Web.Controllers
     public class CarrosController : ControllerBase
     {
         private readonly ServicoCarro _servico;
+        private readonly ServicoVenda _servicoVenda;
 
-        public CarrosController(ServicoCarro servico)
+        public CarrosController(ServicoCarro servico, ServicoVenda servicoVenda)
         {
             _servico = servico;
+            _servicoVenda = servicoVenda;
         }
 
         [HttpGet]
         public IActionResult ObterTodos([FromQuery] FiltroCarro? filtro)
         {
             return Ok(_servico.ObterTodos(filtro));
+        }
+
+        [HttpGet("Disponiveis")]
+        public IActionResult ObterTodos()
+        {
+            var vendas = _servicoVenda.ObterTodos();
+            var carros = _servico.ObterTodos();
+            List<Carro> carrosDisponiveis = new List<Carro>();
+
+            vendas.ForEach(x => {
+                carros = carros
+                .Where(c => c.Id != x.IdDoCarroVendido)
+                .ToList();
+            });
+
+            return Ok(carros);
         }
 
         [HttpGet("{Id}")]
