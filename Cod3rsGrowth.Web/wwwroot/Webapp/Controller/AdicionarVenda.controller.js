@@ -9,14 +9,14 @@
 ], function (BaseController, History, JSONModel, Formatter, validacao, MessageBox) {
     "use strict";
 
-    const modeloCarro = "Carros"
     const estiverVazio = 0;
     const primeiroCarro = 0;
-    const RotaCriar = "appAdicionarVenda"
+    const modeloCarro = "Carros"
     const idDoInputCpf = "InputCpf"
     const idDoInputPago = "InputPago"
     const idDoInputNome = "InputNome"
     const idDoInputEmail = "InputEmail"
+    const RotaCriar = "appAdicionarVenda"
     const idDoInputTelefone = "InputTelefone"
     const idDaTabelaCarrosDisponiveis = "TabelaCarrosDisponiveis"
     let urlCarro = "http://localhost:5071/api/Carros/Disponiveis"

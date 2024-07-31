@@ -6,10 +6,10 @@ sap.ui.define([
 ], function (BaseController, JSONModel, Formatter) {
     "use strict";
 
-    const modeloVenda = "Vendas"
     const ID = "id"
-    const RotaListagem = "appListagem"
+    const modeloVenda = "Vendas"
     const idDoFiltroCpf = "FiltroCpf"
+    const RotaListagem = "appListagem"
     const idDoFiltroNome = "FiltroNome"
     const quantidadeDeCaracteresDoCpf = 14
     const quantidadeDeCaracteresDoTelefone = 15
@@ -17,7 +17,6 @@ sap.ui.define([
     let url = "http://localhost:5071/api/Vendas"    
     const idDOFiltroDataFinal = "FiltroDataFinal"
     const idDoFiltroDataInicial = "FiltroDataInicial"
-
 
     return BaseController.extend("ui5.carro.controller.ListagemVenda", {
         formatter: Formatter,

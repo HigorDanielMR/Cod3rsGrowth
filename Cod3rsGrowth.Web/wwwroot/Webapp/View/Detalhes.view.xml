@@ -23,8 +23,10 @@
 						labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4"
 						columnsL="1" columnsM="1">
 						<f:content>
+							<Label text="{i18n>DetalhesVenda.ID}"/>
+							<Text text="{Venda>id}" id="idDetalhes"/>
 							<Label text="{i18n>DetalhesVenda.Nome}"/>
-							<Text text="{Venda>nome}"/>
+							<Text text="{Venda>nome}" id="nomeDetalhes"/>
 							<Label text="{i18n>DetalhesVenda.Cpf}"/>
 							<Text text="{Venda>cpf}"/>
 							<Label text="{i18n>DetalhesVenda.Telefone}"/>

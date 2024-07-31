@@ -5,10 +5,14 @@
 
 ], (opaTest) => {
 
-	QUnit.module("Nvegation");
+	QUnit.module("Teste tela de detalhes");
 
-	opaTest("Deve clicar no botao adicionar", function (Given, When, Then) {
+	opaTest("Deve clicar no primeiro item da lista e verificar os dados dos detalhes", function (Given, When, Then) {
 		Given.iStartMyApp();
+		When.naTelaDeDetalhes.euClicoNaTabelaVenda();
+		When.naTelaDeDetalhes.euClicoNaVendaSelecionada();
+		Then.naTelaDeDetalhes.euVerificoSeOIdEstaComoOEsperado();
+		Then.naTelaDeDetalhes.euVerificoSeNomeEstaComoOEsperado();
 
 	});
 });

@@ -37,8 +37,9 @@
 
         validarCpf(inputCpf, cpf) {
             cpf = inputCpf.getValue();
-            const cpfSemMascara = cpf.replace(/[\W_]/g, "");
+            const regexParaCaracteresEspeciais = /[\W_]/g;
             const regexParaVerificarSeOsNumerosSaoSequenciais = /^(\d)\1+$/;
+            const cpfSemMascara = cpf.replace(regexParaCaracteresEspeciais, "");
 
             if (cpfSemMascara === '') {
                 inputCpf.setValueState(sap.ui.core.ValueState.Error);
@@ -65,7 +66,9 @@
 
         validarTelefone(inputTelefone, telefone) {
             telefone = inputTelefone.getValue().trim();
-            const telefoneSemMascara = telefone.replace(/[\W_]/g, "");
+            const regexParaCaracteresEspeciais = /[\W_]/g;
+
+            const telefoneSemMascara = telefone.replace(regexParaCaracteresEspeciais, "");
 
             if (telefoneSemMascara === '') {
                 inputTelefone.setValueState(sap.ui.core.ValueState.Error);

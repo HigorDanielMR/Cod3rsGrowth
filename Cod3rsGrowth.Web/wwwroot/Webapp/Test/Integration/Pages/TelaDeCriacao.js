@@ -7,23 +7,26 @@
 ], function (Opa5, EnterText, Press, PropertyStrictEquals) {
     "use strict";
 
-    const idDaTabelaVenda = "TabelaVendas"
-    const nomeParaInserirCriacao = "Eliane"
-    const idInputCpfTelaDeCriacao = "InputCpf"
-    const cpfParaInserirCriacao = "12345678911"
-    const idInputPagoTelaDeCriacao = "InputPago"
-    const idDoBotaoAtualizar = "atualizarTabela"
-    const idInputNomeTelaDeCriacao = "InputNome"
-    const idInputEmailTelaDeCriacao = "InputEmail"
-    const telefoneParaInserirCriacao = "62992810844"
-    const emailParaInserirCriacao = "teste@gmail.com"
-    const idDaTabelaCarros = "TabelaCarrosDisponiveis"
-    const viewCriacao = "AdicionarVenda"
-    const idInputTelefoneTelaDeCriacao = "InputTelefone"
-    const idDoBotaoAdicionarVenda = "botaoAdicionarVenda"
-    const viewListagem = "ListagemVenda"
-    const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao"
-    const idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem"
+    const propriedadeNome = "nome";
+    const contextoVendas = "Vendas";
+    const viewCriacao = "AdicionarVenda";
+    const viewListagem = "ListagemVenda";
+    const idDaTabelaVenda = "TabelaVendas";
+    const nomeParaInserirCriacao = "Eliane";
+    const idInputCpfTelaDeCriacao = "InputCpf";
+    const cpfParaInserirCriacao = "12345678911";
+    const idInputPagoTelaDeCriacao = "InputPago";
+    const idDoBotaoAtualizar = "atualizarTabela";
+    const idInputNomeTelaDeCriacao = "InputNome";
+    const idInputEmailTelaDeCriacao = "InputEmail";
+    const telefoneParaInserirCriacao = "62992810844";
+    const emailParaInserirCriacao = "teste@gmail.com";
+    const idDaTabelaCarros = "TabelaCarrosDisponiveis";
+    const idInputTelefoneTelaDeCriacao = "InputTelefone";
+    const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
+    const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao";
+    const idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
+    const idDoCarroSelecionadoTabelaCarro = "__item6-__component5---adicionarVenda--TabelaCarrosDisponiveis-0";
     
     Opa5.createPageObjects({
         naTelaDeCriacao: {
@@ -32,6 +35,7 @@
                     return this.iStartMyUIComponent("../index.html");
                 }
             },
+
             actions: {
                 euClicoNoBotaoAdicionar() {
                     return this.waitFor({
@@ -110,7 +114,7 @@
                         viewName: viewCriacao,
                         matchers: new PropertyStrictEquals({
                             name: "id",
-                            value: "__item6-__component5---adicionarVenda--TabelaCarrosDisponiveis-0"
+                            value: idDoCarroSelecionadoTabelaCarro
                         }),
                         actions: new Press(),
                         errorMessage: "Tabela não contém carros."
@@ -201,13 +205,14 @@
                 },
 
                 euVereificoSeATabelaFoiPressionada() {
+                    const tiveUmItem = 1;
                     return this.waitFor({
                         viewName: viewCriacao,
                         id: idDaTabelaCarros,
-                        success: function (oTable) {
-                            var aSelectedItems = oTable.getSelectedItems();
-                            var verificarItems = aSelectedItems.every((item, indice, lista) => {
-                                if (aSelectedItems.length == 1) {
+                        success(tabela) {
+                            var itemsSelecionados = tabela.getSelectedItems();
+                            var verificarItems = itemsSelecionados.every(() => {
+                                if (itemsSelecionados.length === tiveUmItem) {
                                     return true;
                                 }
                             });
@@ -242,8 +247,8 @@
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var itemEncontrado = items.some(function (item) {
-                                var nomeDesejado = item.getBindingContext("Vendas").getProperty("nome");
-                                return nomeDesejado === "Eliane";
+                                var nomeDesejado = item.getBindingContext(contextoVendas).getProperty(propriedadeNome);
+                                return nomeDesejado === nomeParaInserirCriacao;
                             });
                             Opa5.assert.ok(itemEncontrado, "A venda foi criada com sucesso.");
                         },

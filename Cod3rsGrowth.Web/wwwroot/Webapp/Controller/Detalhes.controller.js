@@ -7,10 +7,10 @@
 ], function (BaseController, Formatter, History, JSONModel) {
     "use strict";
 
+    const voltarUmaPagina = -1;
     const modeloVenda = "Venda"
     const rotaDetalhe = "appDetalhes"
     const urlObterPorId = "http://localhost:5071/api/Vendas/"
-    const voltarUmaPagina = -1;
 
     return BaseController.extend("ui5.carro.controller.Detalhes", {
         formatter: Formatter,
