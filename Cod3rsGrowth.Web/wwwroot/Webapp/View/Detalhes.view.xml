@@ -10,50 +10,44 @@
 		navButtonPress=".aoClicarVoltarParaTelaDeListagem"
 		class="sapUiResponsiveContentPadding"
 		binding="{Venda>/}">
-
-		<content>
-			<Panel
-				id="detalhesVenda"
-				width="auto">
-				<headerToolbar>
-				</headerToolbar>
 				<content>
-					<f:SimpleForm
-						editable="false"
-						labelSpanL="3" labelSpanM="3" emptySpanL="4" emptySpanM="4"
-						columnsL="1" columnsM="1">
-						<f:content>
-							<Label text="{i18n>DetalhesVenda.ID}"/>
-							<Text text="{Venda>id}" id="idDetalhes"/>
-							<Label text="{i18n>DetalhesVenda.Nome}"/>
-							<Text text="{Venda>nome}" id="nomeDetalhes"/>
-							<Label text="{i18n>DetalhesVenda.Cpf}"/>
-							<Text text="{Venda>cpf}"/>
-							<Label text="{i18n>DetalhesVenda.Telefone}"/>
-							<Text text="{Venda>telefone}"/>
-							<Label text="{i18n>DetalhesVenda.Email}"/>
-							<Text text="{Venda>email}"/>
-							<Label text="{i18n>DetalhesVenda.IdDoCarroVendido}"/>
-							<Text text="{Venda>idDoCarroVendido}"/>
-							<Label text="{i18n>DetalhesVenda.DataDeCompra}"/>
-							<Text text="{
+					<VBox class="sapUiSmallMargin">
+						<f:SimpleForm
+							editable="true"
+							layout="ColumnLayout"
+							columnsM="3"
+							columnsL="4"
+							columnsXL="6">
+							<f:content>
+								<Label text="{i18n>DetalhesVenda.ID}" textAlign="Left"/>
+								<Text text="{Venda>id}" id="idDetalhes" />
+								<Label text="{i18n>DetalhesVenda.Nome}" textAlign="Left"/>
+								<Text text="{Venda>nome}" id="nomeDetalhes"/>
+								<Label text="{i18n>DetalhesVenda.Cpf}" textAlign="Left"/>
+								<Text text="{Venda>cpf}" />
+								<Label text="{i18n>DetalhesVenda.Telefone}" textAlign="Left"/>
+								<Text text="{Venda>telefone}"/>
+								<Label text="{i18n>DetalhesVenda.Email}" textAlign="Left"/>
+								<Text text="{Venda>email}"/>
+								<Label text="{i18n>DetalhesVenda.IdDoCarroVendido}" textAlign="Left"/>
+								<Text text="{Venda>idDoCarroVendido}" />
+								<Label text="{i18n>DetalhesVenda.DataDeCompra}" textAlign="Left"/>
+								<Text text="{
 								  path:'Venda>dataDeCompra',
 								  formatter: '.formatter.formatarData'
 								  }"/>
-							<Label text="{i18n>DetalhesVenda.ValorTotal}"/>
-							<Text text="{
+								<Label text="{i18n>DetalhesVenda.ValorTotal}" textAlign="Left"/>
+								<Text text="{
 								  path:'Venda>valorTotal',
 								  formatter: '.formatter.formatarValorDaMoeda'
-								  }"/>
-							<Label text="{i18n>DetalhesVenda.Pago}"/>
-							<ObjectStatus
-								text="{ path: 'Venda>pago', formatter: '.formatter.alterarStatusDoPagamento' }"
-								state="{= ${Venda>pago} === false ? 'Error' : 'Success'}"
-							/>
-						</f:content>
-					</f:SimpleForm>
+								  }" wrap="false"/>
+								<Label text="{i18n>DetalhesVenda.Pago}" textAlign="Left"/>
+								<ObjectStatus
+									text="{ path: 'Venda>pago', formatter: '.formatter.alterarStatusDoPagamento' }"
+									state="{= ${Venda>pago} === false ? 'Error' : 'Success'}" />
+							</f:content>
+						</f:SimpleForm>
+					</VBox>
 				</content>
-			</Panel>
-		</content>
 	</Page>
 </mvc:View>
