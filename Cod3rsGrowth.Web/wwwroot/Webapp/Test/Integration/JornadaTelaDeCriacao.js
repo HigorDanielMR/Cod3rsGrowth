@@ -5,7 +5,7 @@ sap.ui.define([
 
 ], (opaTest) => {
 
-	QUnit.module("Posts");
+	QUnit.module("Teste tela de criação");
 
 	opaTest("Deve clicar no botao adicionar", function (Given, When, Then) {
 		Given.iStartMyApp();

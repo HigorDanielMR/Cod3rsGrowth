@@ -2,6 +2,7 @@
     "sap/ui/test/Opa5",
     "./arregements/Startup",
     "./JornadaTelaDeListagem",
+    "./JornadaTelaDeDetalhes",
     "./JornadaTelaDeCriacao"
 ], function (Opa5, Startup) {
     "use Strict";

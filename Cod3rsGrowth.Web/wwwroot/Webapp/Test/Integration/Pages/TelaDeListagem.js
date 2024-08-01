@@ -6,18 +6,23 @@ sap.ui.define([
 ], (Opa5, EnterText, Press) => {
     "use strict";
 
-    const idDaTabela = "TabelaVendas"
-    const nomeParaInserir = "Eliane";
+    const propriedadeCpf = "cpf";
+    const propriedadeNome = "nome";
+    const contextoVendas = "Vendas";
+    const nomeParaInserir = "Adriana";
+    const idDaTabela = "TabelaVendas";
     const idDoFiltroCpf = "FiltroCpf";
     const idDoFiltroNome = "FiltroNome";
     const cpfParaInserir = "54651651651";
+    const viewListagem = "ListagemVenda";
+    const propriedadeTelefone = "telefone";
     const dataFinalParaInserir = "04072024";
     const telefoneParaInserir = "65165161651";
     const dataInicialParaInserir = "18072024";
     const idDoFiltroTelefone = "FiltroTelefone";
     const idDoFiltroDataFinal = "FiltroDataFinal";
+    const propriedadeDataDeCompra = "dataDeCompra";
     const idDoFiltroDataInicial = "FiltroDataInicial";
-    const viewListagem = "ListagemVenda";
     const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
 
     Opa5.createPageObjects({
@@ -27,6 +32,7 @@ sap.ui.define([
                     return this.iStartMyUIComponent("../index.html");
                 }
             },
+
             actions: {
                 euPreenchoOInputDoFiltroNome() {
                     return this.waitFor({
@@ -103,7 +109,7 @@ sap.ui.define([
                             var verificarItems = items.some((item, indice, lista) => {
                                 var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("nome");
 
-                                return itemDesejado === 'Eliane';
+                                return itemDesejado === 'Adriana';
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },

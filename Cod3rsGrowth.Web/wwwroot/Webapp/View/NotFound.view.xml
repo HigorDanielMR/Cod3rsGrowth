@@ -8,6 +8,6 @@
 	   text="{i18n>NotFound.DesculpeMasORecursoSolicitadoNaoEstaDisponivel}"
 	   description="{i18n>NotFound.VerifiqueOURLETenteNovamente}"
 	   showNavButton="true"
-	   navButtonPress="onNavBack"/>
+	   navButtonPress=".aoClicarVoltarParaTelaDeListagem"/>
 
 </mvc:View>

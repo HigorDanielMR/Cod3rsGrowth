@@ -6,9 +6,10 @@ sap.ui.define([
 ], function (BaseController, JSONModel, Formatter) {
     "use strict";
 
-    const NomeDaAPI = "Vendas"
-    const RotaListagem = "appListagem"
+    const ID = "id"
+    const modeloVenda = "Vendas"
     const idDoFiltroCpf = "FiltroCpf"
+    const RotaListagem = "appListagem"
     const idDoFiltroNome = "FiltroNome"
     const quantidadeDeCaracteresDoCpf = 14
     const quantidadeDeCaracteresDoTelefone = 15
@@ -16,7 +17,6 @@ sap.ui.define([
     let url = "http://localhost:5071/api/Vendas"    
     const idDOFiltroDataFinal = "FiltroDataFinal"
     const idDoFiltroDataInicial = "FiltroDataInicial"
-
 
     return BaseController.extend("ui5.carro.controller.ListagemVenda", {
         formatter: Formatter,
@@ -31,7 +31,7 @@ sap.ui.define([
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
 
-                    this.getView().setModel(jsonModel, NomeDaAPI);
+                    this.getView().setModel(jsonModel, modeloVenda);
                 })
                 .catch((err) => console.error(err));
         },
@@ -110,7 +110,7 @@ sap.ui.define([
                     .then((data) => {
                         const jsonModel = new JSONModel(data)
 
-                        this.getView().setModel(jsonModel, NomeDaAPI);
+                        this.getView().setModel(jsonModel, modeloVenda);
                     })
                     .catch((err) => console.error(err));
             })
@@ -120,6 +120,14 @@ sap.ui.define([
             this.processarEvento(() => {
                 this.getRouter().navTo("appAdicionarVenda", {}, true);  
             })
+        },
+
+        aoPressionar(oEvent) {
+            const oItem = oEvent.getSource();
+            const oRouter = this.getOwnerComponent().getRouter();
+            oRouter.navTo("appDetalhes", {
+                id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(ID))
+            });
         }
     });
 });
