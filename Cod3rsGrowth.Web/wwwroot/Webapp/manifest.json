@@ -92,6 +92,11 @@
           "pattern": "detalhes/{id}",
           "name": "appDetalhes",
           "target": "detalhes"
+        },
+        {
+          "pattern": "EditarVenda/:id:",
+          "name": "appEditarVenda",
+          "target": "adicionarVenda"
         }
       ],
       "targets": {

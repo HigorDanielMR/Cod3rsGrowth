@@ -11,7 +11,9 @@
 
     const estiverVazio = 0;
     const primeiroCarro = 0;
+    const voltarUmaPagina = -1;
     const modeloCarro = "Carros"
+    const modeloVenda = "Venda"
     const idDoInputCpf = "InputCpf"
     const idDoInputPago = "InputPago"
     const idDoInputNome = "InputNome"
@@ -20,6 +22,7 @@
     const idDoInputTelefone = "InputTelefone"
     const idDaTabelaCarrosDisponiveis = "TabelaCarrosDisponiveis"
     let urlCarro = "http://localhost:5071/api/Carros/Disponiveis"
+    let urlObterVendaPorId = "http://localhost:5071/api/Vendas/"
 
 
     return BaseController.extend("ui5.carro.controller.AdicionarVenda", {
@@ -43,6 +46,8 @@
         aoCoincidirRota() {
             this.processarEvento(() => {
                 var rota = sap.ui.core.UIComponent.getRouterFor(this);
+                rota.getRoute("appEditarVenda").attachMatched(this._mudarTituloDaView, this);
+                rota.getRoute("appEditarVenda").attachMatched(this._obterVendaPorId, this);
                 rota.getRoute(RotaCriar).attachMatched(this._carregarCarros, this);
             });
         },
@@ -126,6 +131,22 @@
             const Carro = ContextoAssociado.getObject();
 
             return Carro;
+        },
+        
+        _mudarTituloDaView(){
+            var Titulo = this.getView().byId("Title1").setText("Editar Venda");
+
+            return Titulo;
+        },   
+
+        _obterVendaPorId: function (oEvent) {
+            let id = oEvent.getParameter("arguments").id;
+            let query = urlObterVendaPorId + id;
+            fetch(query)
+                .then(resp => resp.json())
+                .then(venda => this.getView().setModel(new JSONModel(venda), modeloVenda));
+
+            
         },
 
         aoClicarDeveVoltarParaATelaDeListagem() {

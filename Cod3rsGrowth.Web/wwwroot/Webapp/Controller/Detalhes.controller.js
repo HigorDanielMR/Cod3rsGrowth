@@ -8,6 +8,8 @@
     "use strict";
 
     const voltarUmaPagina = -1;
+    const ID = "id"
+
     const modeloVenda = "Venda"
     const rotaDetalhe = "appDetalhes"
     const urlObterPorId = "http://localhost:5071/api/Vendas/"
@@ -46,6 +48,16 @@
                 } else {
                     this.getRouter().navTo("appListagem", {}, true);
                 }
+            })
+        },
+
+        aoClicarNoBotaoEditarDeveAbrirATelaDeModificarVenda(oEvent){
+            this.processarEvento(() => {
+                const oItem = oEvent.getSource();
+                const oRouter = this.getOwnerComponent().getRouter();
+                oRouter.navTo("appEditarVenda", {
+                    id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(ID))
+                });
             })
         }
     });
