@@ -16,6 +16,17 @@
 				id="erroSelecionarCarro">
 	</MessageStrip>
 
+
+	<MessageStrip
+				text="{i18n>TelaDeCriacao.VendaCriadaComSucesso}"
+				visible="false"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="erroAoCriarVenda">
+	</MessageStrip>
+	
 	<MessageStrip
 				text="{i18n>TelaDeCriacao.VendaCriadaComSucesso}"
 				visible="false"

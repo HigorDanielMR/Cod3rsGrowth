@@ -94,9 +94,9 @@
           "target": "detalhes"
         },
         {
-          "pattern": "EditarVenda/:id:",
+          "pattern": "EditarVenda/{id}",
           "name": "appEditarVenda",
-          "target": "adicionarVenda"
+          "target": "editar"
         }
       ],
       "targets": {
@@ -117,6 +117,10 @@
         "detalhes": {
           "id": "detalhes",
           "name": "Detalhes"
+        },
+        "editar": {
+          "id": "adicionarVenda",
+          "name": "AdicionarVenda"
         }
       }
     }
