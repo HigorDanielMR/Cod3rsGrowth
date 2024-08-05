@@ -64,9 +64,15 @@
 							<Text text="{Vendas>telefone}" />
 							<Text text="{Vendas>idDoCarroVendido}" />
 							<Text text="{
-								  path:'Vendas>dataDeCompra',
-								  formatter: '.formatter.formatarData'
-								  }"/>
+								path: 'Vendas>dataDeCompra',
+								type: 'sap.ui.model.type.Date',
+								formatOptions: {
+								  source: {
+									pattern: 'yyyy-MM-ddTHH:mm:ss'
+								  },
+								  pattern: 'dd/MM/yyyy'
+								}
+							  }" />
 							<Text text="{
 								  path:'Vendas>valorTotal',
 								  formatter: '.formatter.formatarValorDaMoeda'

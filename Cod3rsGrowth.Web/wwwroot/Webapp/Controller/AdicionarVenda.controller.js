@@ -97,20 +97,25 @@
         aoClicarNoBotaoAdicionarDeveAdicionarVenda() {
             this.processarEvento(() => {
                 const url = "http://localhost:5071/api/Vendas/";
+                const nome = this.aoColetarNome();
+                const cpf = this.aoColetarCpf();
+                const email = this.aoColetarEmail();
+                const telefone = this.aoColetarTelefone();
                 const carroEscolhido = this._obterCarroSelecionado();
+                const pago = this.aoObterStatusPagamento();
                 const data = Date.now();
 
                 if (_Rota === "appEditarVenda") {
                     const urlEditar = url + idVenda;
                     const venda = {
                         "id": idVenda,
-                        "nome": this.aoColetarNome(),
-                        "cpf": this.aoColetarCpf(),
-                        "email": this.aoColetarEmail(),
-                        "telefone": this.aoColetarTelefone(),
+                        "nome": nome,
+                        "cpf": cpf,
+                        "email": email,
+                        "telefone": telefone,
                         "idDoCarroVendido": carroEscolhido.id,
                         "valorTotal": carroEscolhido.valorDoVeiculo,
-                        "pago": this.aoObterStatusPagamento()
+                        "pago": pago
                     }
 
                     const metodo = "PATCH"

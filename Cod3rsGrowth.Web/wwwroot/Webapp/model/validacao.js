@@ -31,8 +31,6 @@
                 inputNome.setValueState(sap.ui.core.ValueState.None);
                 inputNome.setValueStateText('');
             }
-
-            return nome;
         },
 
         validarCpf(inputCpf, cpf) {
@@ -60,8 +58,6 @@
                 inputCpf.setValueState(sap.ui.core.ValueState.None);
                 inputCpf.setValueStateText('');
             }
-
-            return cpf;
         },
 
         validarTelefone(inputTelefone, telefone) {
@@ -84,8 +80,6 @@
                 inputTelefone.setValueState(sap.ui.core.ValueState.None);
                 inputTelefone.setValueStateText('');
             }
-
-            return telefone;
         },
 
         validarEmail(inputEmail, email) {
@@ -106,8 +100,6 @@
                 inputEmail.setValueState(sap.ui.core.ValueState.None);
                 inputEmail.setValueStateText('');
             }
-            
-            return email;
         }
     }
 });

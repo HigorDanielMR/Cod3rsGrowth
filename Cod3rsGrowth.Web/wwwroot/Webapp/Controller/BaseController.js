@@ -37,16 +37,6 @@ sap.ui.define([
 			} catch (error) {
 				MessageBox.error(error.message);
 			}
-		},
-
-		formatarData(data) {
-			var novaData = new Date(data);
-
-			var dia = novaData.getDate().toString().padStart(2, '0');
-			var mes = (novaData.getMonth() + 1).toString().padStart(2, '0');
-			var ano = novaData.getFullYear();
-
-			return `${ano}-${mes}-${dia}`;
 		}
 	});
 

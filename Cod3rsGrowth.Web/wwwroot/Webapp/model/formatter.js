@@ -5,7 +5,7 @@
     "use strict";
 
     return {
-        formatarData: function (date) {
+        formatarData(date) {
             const oDateFormat = DateFormat.getDateInstance({
                 pattern: "dd/MM/YYYY"
             });

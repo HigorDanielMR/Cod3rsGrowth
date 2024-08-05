@@ -17,7 +17,8 @@
 							layout="ColumnLayout"
 							columnsM="3"
 							columnsL="4"
-							columnsXL="6">
+							columnsXL="6"
+							width="1500px">
 							<f:content>
 								<Label text="{i18n>DetalhesVenda.ID}" textAlign="Left"/>
 								<Text text="{Venda>id}" id="idDetalhes" />
@@ -34,7 +35,13 @@
 								<Label text="{i18n>DetalhesVenda.DataDeCompra}" textAlign="Left"/>
 								<Text text="{
 								  path:'Venda>dataDeCompra',
-								  formatter: '.formatter.formatarData'
+								  type: 'sap.ui.model.type.Date',
+								formatOptions: {
+								  source: {
+									pattern: 'yyyy-MM-ddTHH:mm:ss'
+								  },
+								  pattern: 'dd/MM/yyyy'
+								}
 								  }" id="dataDeCompraDetalhes"/>
 								<Label text="{i18n>DetalhesVenda.ValorTotal}" textAlign="Left"/>
 								<Text text="{
