@@ -37,7 +37,7 @@
 				id="sucessoAoCriarVenda">
 	</MessageStrip>
 	
-	<VBox class="sapUiSmallMargin">
+	<VBox class="sapUiSmallMargin" backgroundDesign="Solid">
 		<f:Form id="FormToolbar"
 		editable="true">
 			<f:toolbar>
@@ -45,17 +45,18 @@
 					<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagem"/>
 					<Title id="Title1" text="{i18n>TelaDeCriacaoVenda.AdicionarVenda}"/>
 					<ToolbarSpacer />
+					<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda" type="Accept"/>
 				</Toolbar>
 			</f:toolbar>
 			<f:layout>
 				<f:ResponsiveGridLayout
 					labelSpanXL="4"
-					labelSpanL="3"
+					labelSpanL="1"
 					labelSpanM="4"
 					labelSpanS="12"
 					adjustLabelSpan="false"
 					emptySpanXL="0"
-					emptySpanL="4"
+					emptySpanL="5"
 					emptySpanM="0"
 					emptySpanS="0"
 					columnsXL="2"
@@ -68,23 +69,23 @@
 					<f:formElements>
 						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Nome}">
 							<f:fields>
-								<Input width="380px" id="InputNome" change=".aoColetarNome"/>
+								<Input width="380px" id="InputNome" change=".aoColetarNome" required="true"/>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Cpf}">
 							<f:fields>
-								<MaskInput width="380px" mask="999.999.999-99" id="InputCpf" change=".aoColetarCpf"/>
+								<MaskInput width="380px" mask="999.999.999-99" id="InputCpf" change=".aoColetarCpf" required="true"/>
 							</f:fields>
 						</f:FormElement>
 						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Email}">
 							<f:fields>
-								<Input width="380px" id="InputEmail" change=".aoColetarEmail"/>
+								<Input width="380px" id="InputEmail" change=".aoColetarEmail" required="true"/>
 							</f:fields>
 						</f:FormElement>
-						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Telefone}">
+						<f:FormElement label="{i18n>TelaDeCriacaoVenda.Telefone}" >
 							<f:fields>
-								<MaskInput mask="(99) 99999-9999" id="InputTelefone" change=".aoColetarTelefone"/>
-								<CheckBox text="{i18n>TelaDeCriacaoVenda.Pago}" width="40px" id="InputPago" selected="true" />
+								<MaskInput mask="(99) 99999-9999" id="InputTelefone" change=".aoColetarTelefone" required="true"/>
+								<CheckBox text="{i18n>TelaDeCriacaoVenda.Pago}" width="40px" id="InputPago" selected="true"/>
 							</f:fields>
 						</f:FormElement>
 					</f:formElements>
@@ -149,7 +150,6 @@
 		</Panel>
 		
 		<Panel>
-			<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda"/>
 		</Panel>
 	</VBox>
 </mvc:View>

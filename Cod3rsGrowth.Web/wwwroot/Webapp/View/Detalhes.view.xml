@@ -7,6 +7,7 @@
 		id="TelaDeDetalhes"
 		title="{i18n>DetalhesVenda.Titulo} {Venda>id}"
 		showNavButton="true"
+		backgroundDesign="List"
 		navButtonPress=".aoClicarVoltarParaTelaDeListagem"
 		class="sapUiResponsiveContentPadding"
 		binding="{Venda>/}">

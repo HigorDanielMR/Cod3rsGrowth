@@ -15,8 +15,7 @@ sap.ui.define([
     const quantidadeDeCaracteresDoTelefone = 15
     const idDoFiltroTelefone = "FiltroTelefone"
     let url = "http://localhost:5071/api/Vendas"    
-    const idDOFiltroDataFinal = "FiltroDataFinal"
-    const idDoFiltroDataInicial = "FiltroDataInicial"
+    const idDoFiltroData = "FiltroData"
 
     return BaseController.extend("ui5.carro.controller.ListagemVenda", {
         formatter: Formatter,
@@ -24,6 +23,7 @@ sap.ui.define([
         onInit() {
             this.aoCoincidirRota();
         },
+
 
         _carregarListaDeVendas() {
             fetch(url)
@@ -42,7 +42,17 @@ sap.ui.define([
                 rota.getRoute(RotaListagem).attachMatched(this._carregarListaDeVendas, this);
             });
         },
-        
+
+        abrirDatePicker: function (oEvent) {
+            this.getView().byId("FiltroData").openBy(oEvent.getSource().getDomRef());
+        },
+
+        limparFiltroData() {
+            const dataInicial = oEvent.getSource().setDateValue(null);
+            const dataFinal = oEvent.getSource().setSecondDateValue(null);
+
+        },
+
         aoColetarNome() {
             const nome = this.oView.byId(idDoFiltroNome).getValue();
             return nome;
@@ -60,26 +70,26 @@ sap.ui.define([
             return telefone;
         },
 
-        aoColetarDataInicial() {
-            const dataInicial = this.oView.byId(idDoFiltroDataInicial).getValue();
-            if (!dataInicial) return '';
-            return dataInicial;
+        aoColetarDataInicial(oEvent) {
+            const dataInicial = oEvent.getSource().getDateValue();
+            const dataInicialFormatada = Formatter.formatarData(dataInicial);
+            return dataInicialFormatada;
         },
 
-        aoColetarDataFinal() {
-            const dataFinal = this.oView.byId(idDOFiltroDataFinal).getValue();
-            if (!dataFinal) return '';
-            return dataFinal;
+        aoColetarDataFinal(oEvent) {
+            const dataFinal = oEvent.getSource().getSecondDateValue();
+            const dataFinalFormatada = Formatter.formatarData(dataFinal);
+            return dataFinalFormatada;
         },
 
-        aoFiltrar() {
+        aoFiltrar(oEvent) {
             this.processarEvento(() => {
                 let urlDoFiltro = url + "?";
                 const cpf = this.aoColetarCpf();
                 const nome = this.aoColetarNome();
                 const telefone = this.aoColetarTelefone();
-                const dataFinal = this.aoColetarDataFinal();
-                const dataInicial = this.aoColetarDataInicial();
+                const dataInicial = this.aoColetarDataInicial(oEvent);
+                const dataFinal = this.aoColetarDataFinal(oEvent);
 
                 if (nome) {
                     urlDoFiltro += "Nome=" + nome + "&";

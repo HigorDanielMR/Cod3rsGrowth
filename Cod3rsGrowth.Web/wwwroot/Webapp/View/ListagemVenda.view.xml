@@ -5,7 +5,7 @@
 	xmlns:core="sap.ui.core"
 	xmlns:tnt="sap.tnt">
 
-	<Page title="{i18n>invoiceListTitle.ListagemVendas}">
+	<Page title="{i18n>invoiceListTitle.ListagemVendas}" backgroundDesign="List">
 		<Panel>
 			<Table
 				alternateRowColors="true"
@@ -19,8 +19,24 @@
 					 <Input width="auto" id="FiltroNome" placeholder="{i18n>Input.Nome}" liveChange=".aoFiltrar"/>
 					 <MaskInput mask="999.999.999-99" width="140px" id="FiltroCpf" placeholder="{i18n>Input.CPF}" change=".aoFiltrar"/>
 					 <MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}" change=".aoFiltrar"/>
-					 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataInicial" placeholder="{i18n>Input.DataInicial}" change=".aoFiltrar"/>
-					 <MaskInput mask="99/99/9999" width="120px" id="FiltroDataFinal" placeholder="{i18n>Input.DataFInal}" change=".aoFiltrar"/>
+					 <DateRangeSelection id="FiltroData" width="400px"
+							value= "{
+								'type': 'sap.ui.model.type.DateInterval',
+								'formatOptions': {
+									'pattern': 'dd/MM/yyyy'
+								},
+								'parts': [
+									{
+										'type': 'sap.ui.model.type.Date',
+										'path': '/start'
+									},
+									{
+										'type': 'sap.ui.model.type.Date',
+										'path': '/end'
+									}
+								]
+							}"
+						change="aoFiltrar"/>
 				 </Toolbar>
 			  </headerToolbar>
 				<columns>
