@@ -37,6 +37,20 @@ sap.ui.define([
 			} catch (error) {
 				MessageBox.error(error.message);
 			}
+		},
+
+		_erroNaRequisicaoDaApi(erroRfc) {
+			const mensagemErroPrincipal = erroRfc.Extensions.Erros.join(', ');
+			const mensagemErroCompleta = `<p><strong>Status:</strong> ${erroRfc.Status}</p>` +
+				`<p><strong>Detalhes:</strong><br/> ${erroRfc.Detail}</p>` +
+				"<p>Para mais ajuda acesse <a href='//www.sap.com' target='_top'>aqui</a>.";
+
+			MessageBox.error(mensagemErroPrincipal, {
+				title: "Error",
+				details: mensagemErroCompleta,
+				styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+				dependentOn: this.getView()
+			});
 		}
 	});
 

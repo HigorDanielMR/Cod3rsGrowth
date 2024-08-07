@@ -31,9 +31,18 @@
         _obterPorId: function (oEvent) {
             let id = oEvent.getParameter("arguments").id;
             let query = urlObterPorId + id;
+            let sucesso = true;
             fetch(query)
-                .then(resp => resp.json())
-                .then(venda => this.getView().setModel(new JSONModel(venda), modeloVenda));
+                .then((res) => {
+                    if (!res.ok)
+                        sucesso = false;
+                    return res.json()
+                })
+                .then((venda) => {
+                    const jsonModel = new JSONModel(venda)
+                    sucesso ? this.getView().setModel(jsonModel, modeloVenda)
+                        : this._erroNaRequisicaoDaApi(venda);
+                });
         },
 
         aoClicarVoltarParaTelaDeListagem() {

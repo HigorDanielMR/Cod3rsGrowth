@@ -11,11 +11,11 @@
 
     let idVenda;
     var _Rota;
+    let dataEditar;
     const estiverVazio = 0;
     const primeiroCarro = 0;
     const voltarUmaPagina = -1;
     const modeloCarro = "Carros"
-    const modeloVenda = "Venda"
     const idDoInputCpf = "InputCpf"
     const idDoInputPago = "InputPago"
     const idDoInputNome = "InputNome"
@@ -35,12 +35,18 @@
         },
 
         _carregarCarros() {
+            let sucesso = true;
             fetch(urlCarrosDisponiveis)
-                .then((res) => res.json())
-                .then((data) => {
-                    const jsonModel = new JSONModel(data)
+                .then((res) => {
+                    if(!res.ok)
+                        sucesso = false;
+                    return res.json()
+                })
+                .then((carro) => {
+                    const jsonModel = new JSONModel(carro)
 
-                    this.getView().setModel(jsonModel, modeloCarro);
+                    sucesso ? this.getView().setModel(jsonModel, modeloCarro)
+                        : this._erroNaRequisicaoDaApi(carro);
                 })
                 .catch((err) => MessageBox.error(err));
         },
@@ -50,15 +56,38 @@
                 var rota = sap.ui.core.UIComponent.getRouterFor(this);
                 rota.getRoute("appEditarVenda").attachPatternMatched(this._carregarEventosEditar, this);
 
-                rota.getRoute(RotaCriar).attachMatched(this._carregarCarros, this);
+                rota.getRoute(RotaCriar).attachMatched(this._carregarEventosCriar, this);
             });
         },
 
         _carregarEventosEditar(oEvent) {
             this._mudarTituloDaView();
             this._obterVendaPorId(oEvent);
+            this._carregarCarrosEditar(id);
             var oRouter = this.getRouter();
             _Rota = oRouter.getRoute(oEvent.getParameter("name"))._oConfig.name;
+        },
+
+        _carregarEventosCriar(oEvent) {
+            this._mudarTituloDaViewCriar();
+            this._limparInput();
+            this._carregarCarros();
+            var oRouter = this.getRouter();
+            _Rota = oRouter.getRoute(oEvent.getParameter("name"))._oConfig.name;
+        },
+
+        _limparInput() {
+            const nome = this.oView.byId(idDoInputNome).setValue(null);
+            const cpf = this.oView.byId(idDoInputCpf).setValue(null);
+            const email = this.oView.byId(idDoInputEmail).setValue(null);
+            const telefone = this.oView.byId(idDoInputTelefone).setValue(null);
+            const pago = this.oView.byId(idDoInputPago).setSelected(false)
+        },
+
+        _mudarTituloDaViewCriar() {
+            var Titulo = this.getView().byId("Title1").setText("Adicionar Venda");
+
+            return Titulo;
         },
 
         aoColetarNome() {
@@ -114,12 +143,14 @@
                         "email": email,
                         "telefone": telefone,
                         "idDoCarroVendido": carroEscolhido.id,
+                        "dataDeCompra": this._carregarDataDeCompraEditar(dataEditar),
                         "valorTotal": carroEscolhido.valorDoVeiculo,
                         "pago": pago
                     }
-
                     const metodo = "PATCH"
                     this._requisicaoHTTP(metodo, urlEditar, venda)
+                    this.getView().byId("sucessoAoEditarVenda").setVisible(true);
+
                 }
                 else if (_Rota === RotaCriar) {
                     const venda = {
@@ -137,21 +168,20 @@
                     this.getView().byId("sucessoAoCriarVenda").setVisible(true);
 
                 }
-                else {
-                    this.getView().byId("erroAoCriarVenda").setVisible(true);
-
-                }
             })
         },
-
+        
         _requisicaoHTTP(metodo, url, venda) {
             fetch(url, {
                 method: metodo,
                 body: JSON.stringify(venda),
                 headers: { "Content-type": "application/json; charset=UTF-8" }
             })
-                .then(response => response.json())
-                .then(json => console.log(json))
+                .then(res => {
+                    if (!res.ok)
+                        sucesso = false;
+                    return res.json()
+                })
                 .catch(err => console.log(err));
         },
 
@@ -161,6 +191,7 @@
 
             if (ListaComCarroSelecionado.length === estiverVazio) {
                 this.getView().byId("erroSelecionarCarro").setVisible(true);
+                throw new Error('Carro não selecionado');
             }
             else {
                 this.getView().byId("erroSelecionarCarro").setVisible(false);
@@ -187,8 +218,15 @@
                 .then(venda => {
 
                     const id = this._carregarDados(venda)
+                    const data = venda.dataDeCompra;
+                    this._carregarDataDeCompraEditar(data);
                     this._carregarCarrosEditar(id)
                 });
+        },
+
+        _carregarDataDeCompraEditar(data) {
+            dataEditar = data;
+            return dataEditar;
         },
 
         _carregarCarrosEditar(id) {
@@ -221,6 +259,7 @@
             const cpf = this.oView.byId(idDoInputCpf).setValue(venda.cpf);
             const email = this.oView.byId(idDoInputEmail).setValue(venda.email);
             const telefone = this.oView.byId(idDoInputTelefone).setValue(venda.telefone);
+            const pago = this.oView.byId(idDoInputPago).setSelected(venda.pago)
 
             return venda.idDoCarroVendido;
         },

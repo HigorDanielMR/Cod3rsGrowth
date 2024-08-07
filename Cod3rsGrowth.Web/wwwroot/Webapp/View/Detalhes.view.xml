@@ -5,13 +5,17 @@
 	xmlns:f="sap.ui.layout.form">
 	<Page
 		id="TelaDeDetalhes"
-		title="{i18n>DetalhesVenda.Titulo} {Venda>id}"
-		showNavButton="true"
+		showHeader="false"
 		backgroundDesign="List"
-		navButtonPress=".aoClicarVoltarParaTelaDeListagem"
 		class="sapUiResponsiveContentPadding"
 		binding="{Venda>/}">
-				<content>
+			<Toolbar>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://arrow-left" press=".aoClicarVoltarParaTelaDeListagem" id="voltarParaAListagem"/>
+					<Title text="{i18n>DetalhesVenda.Titulo}" width="95%"/>
+					<Button icon="sap-icon://customer-order-entry" text="Editar" id="botaoEditarVenda" press=".aoClicarNoBotaoEditarDeveAbrirATelaDeModificarVenda"/>
+					 
+				 </Toolbar>
 					<VBox class="sapUiSmallMargin">
 						<f:SimpleForm
 							editable="true"
@@ -55,8 +59,6 @@
 									state="{= ${Venda>pago} === false ? 'Error' : 'Success'}" id="statusDePagamentoDetalhes"/>
 							</f:content>
 						</f:SimpleForm>
-						<Button icon="sap-icon://customer-order-entry" text="Editar" id="botaoEditarVenda" press=".aoClicarNoBotaoEditarDeveAbrirATelaDeModificarVenda"/>
 					</VBox>
-				</content>
 	</Page>
 </mvc:View>

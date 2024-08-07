@@ -1,9 +1,10 @@
 sap.ui.define([
     "ui5/carro/controller/BaseController",
     "sap/ui/model/json/JSONModel",
-    "ui5/carro/model/formatter"
+    "ui5/carro/model/formatter",
+    "sap/m/MessageBox"
 
-], function (BaseController, JSONModel, Formatter) {
+], function (BaseController, JSONModel, Formatter, MessageBox) {
     "use strict";
 
     const ID = "id"
@@ -26,12 +27,17 @@ sap.ui.define([
 
 
         _carregarListaDeVendas() {
+            let sucesso = true;
             fetch(url)
-                .then((res) => res.json())
+                .then((res) => {
+                    if (!res.ok)
+                        sucesso = false;
+                    return res.json()
+                })
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
-
-                    this.getView().setModel(jsonModel, modeloVenda);
+                    sucesso ? this.getView().setModel(jsonModel, modeloVenda)
+                        : this._erroNaRequisicaoDaApi(data);
                 })
                 .catch((err) => console.error(err));
         },
@@ -71,19 +77,20 @@ sap.ui.define([
         },
 
         aoColetarDataInicial(oEvent) {
-            const dataInicial = oEvent.getSource().getDateValue();
-            const dataInicialFormatada = Formatter.formatarData(dataInicial);
+            let dataInicial = oEvent.getParameter("from");;
+            let dataInicialFormatada = Formatter.formatarData(dataInicial);
             return dataInicialFormatada;
         },
 
         aoColetarDataFinal(oEvent) {
-            const dataFinal = oEvent.getSource().getSecondDateValue();
-            const dataFinalFormatada = Formatter.formatarData(dataFinal);
+            let dataFinal = oEvent.getParameter("to");
+            let dataFinalFormatada = Formatter.formatarData(dataFinal);
             return dataFinalFormatada;
         },
 
         aoFiltrar(oEvent) {
             this.processarEvento(() => {
+                let sucesso = true;
                 let urlDoFiltro = url + "?";
                 const cpf = this.aoColetarCpf();
                 const nome = this.aoColetarNome();
@@ -116,11 +123,15 @@ sap.ui.define([
                 }
 
                 fetch(urlDoFiltro)
-                    .then((res) => res.json())
-                    .then((data) => {
-                        const jsonModel = new JSONModel(data)
-
-                        this.getView().setModel(jsonModel, modeloVenda);
+                    .then((res) => {
+                        if (!res.ok)
+                            sucesso = false;
+                        return res.json()
+                    })
+                    .then((vendas) => {
+                        const jsonModel = new JSONModel(vendas)
+                        sucesso ? this.getView().setModel(jsonModel, modeloVenda)
+                            : this._erroNaRequisicaoDaApi(vendas);
                     })
                     .catch((err) => console.error(err));
             })

@@ -16,15 +16,14 @@
 				id="erroSelecionarCarro">
 	</MessageStrip>
 
-
 	<MessageStrip
-				text="{i18n>TelaDeCriacao.VendaCriadaComSucesso}"
+				text="Venda editada com sucesso"
 				visible="false"
-				type="Error"
+				type="Success"
 				showIcon="true"
 				showCloseButton="true"
 				class="sapUiMediumMarginBottom"
-				id="erroAoCriarVenda">
+				id="sucessoAoEditarVenda">
 	</MessageStrip>
 	
 	<MessageStrip
@@ -37,15 +36,14 @@
 				id="sucessoAoCriarVenda">
 	</MessageStrip>
 	
-	<VBox class="sapUiSmallMargin" backgroundDesign="Solid">
+	<VBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Row">
 		<f:Form id="FormToolbar"
-		editable="true">
+			editable="true">
 			<f:toolbar>
 				<Toolbar id="TB1">
 					<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagem"/>
 					<Title id="Title1" text="{i18n>TelaDeCriacaoVenda.AdicionarVenda}"/>
 					<ToolbarSpacer />
-					<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda" type="Accept"/>
 				</Toolbar>
 			</f:toolbar>
 			<f:layout>
@@ -100,8 +98,9 @@
 				includeItemInSelection="true"
 				items="{path: 'Carros>/'}">
 				<headerToolbar>
-					<Toolbar>
-						<Title text="{i18n>TelaDeCriacaoVenda.CarrosDisponiveis}"/>
+					<Toolbar height="34.1px">
+						<Title text="{i18n>TelaDeCriacaoVenda.CarrosDisponiveis}" width="90%"/>
+						<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda" type="Accept"/>
 					</Toolbar>
 				</headerToolbar>
 				<columns>
@@ -147,9 +146,6 @@
 					</ColumnListItem>
 				</items>
 			</Table>
-		</Panel>
-		
-		<Panel>
 		</Panel>
 	</VBox>
 </mvc:View>
