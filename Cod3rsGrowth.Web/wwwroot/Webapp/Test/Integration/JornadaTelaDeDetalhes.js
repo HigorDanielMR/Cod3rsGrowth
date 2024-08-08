@@ -8,11 +8,18 @@
 	QUnit.module("Teste tela de detalhes");
 
 	opaTest("Deve clicar no primeiro item da lista e verificar os dados dos detalhes", function (Given, When, Then) {
-		Given.iStartMyApp();
-		When.naTelaDeDetalhes.euClicoNaTabelaVenda();
-		When.naTelaDeDetalhes.euClicoNaVendaSelecionada();
+		Given.iStartMyUIComponent({
+			componentConfig: {
+				name: "ui5/carro"
+			},
+			hash: "detalhes/1"
+		});
 		Then.naTelaDeDetalhes.euVerificoSeOIdEstaComoOEsperado();
 		Then.naTelaDeDetalhes.euVerificoSeNomeEstaComoOEsperado();
+		When.naTelaDeDetalhes.euClicoNoBotaoVoltarParaATelaDeListagem();
+		When.naTelaDeDetalhes.euClicoNaVendaSelecionada();
+		Then.naTelaDeDetalhes.euVerificoSeOIdDoSegundoItemDaListaEstaComoOEsperado();
+		Then.naTelaDeDetalhes.euVerificoSeNomeDopSegundoItemDaListaEstaComoOEsperado();
 
 	});
 });

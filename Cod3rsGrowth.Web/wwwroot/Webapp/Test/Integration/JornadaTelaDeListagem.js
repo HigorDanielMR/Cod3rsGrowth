@@ -29,8 +29,8 @@
 
 	opaTest("Deve filtrar pela data inicial e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyApp();
-		When.naTelaDeListagem.euPreenchoOInputDoFiltroDataInicial();
-		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial();
+		When.naTelaDeListagem.euClicoNoIconeDoDateRangeSelection();
+		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicialEDataFinal();
 		Then.iTeardownMyApp();
 	});
 });

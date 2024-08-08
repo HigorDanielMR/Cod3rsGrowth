@@ -36,7 +36,7 @@
 				id="sucessoAoCriarVenda">
 	</MessageStrip>
 	
-	<VBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Row">
+	<VBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Row" height="400px">
 		<f:Form id="FormToolbar"
 			editable="true">
 			<f:toolbar>
@@ -90,19 +90,21 @@
 				</f:FormContainer>
 			</f:formContainers>
 		</f:Form>
-		<Panel>
+		<Panel height="390px">
+			<headerToolbar>
+				<Toolbar height="44px">
+					<Title text="{i18n>TelaDeCriacaoVenda.CarrosDisponiveis}" width="90%"/>
+					<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda" type="Accept"/>
+				</Toolbar>
+			</headerToolbar>
 			<Table
 				alternateRowColors="true"
 				id="TabelaCarrosDisponiveis"
 				mode="SingleSelectLeft"
 				includeItemInSelection="true"
-				items="{path: 'Carros>/'}">
-				<headerToolbar>
-					<Toolbar height="34.1px">
-						<Title text="{i18n>TelaDeCriacaoVenda.CarrosDisponiveis}" width="90%"/>
-						<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda" type="Accept"/>
-					</Toolbar>
-				</headerToolbar>
+				items="{path: 'Carros>/'}"
+				growingScrollToLoad="true"
+				class="sapUiSmallMarginTop">
 				<columns>
 					<Column width="50px">
 						<Text text="{i18n>TelaDeCriacaoVenda.ID}"/>

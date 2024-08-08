@@ -79,20 +79,14 @@ sap.ui.define([
         aoColetarDataInicial(oEvent) {
             let dataInicial = oEvent.getParameter("from");;
             let dataInicialFormatada = Formatter.formatarData(dataInicial);
-
-            if (dataInicialFormatada === '31/12/1970') {
-                dataInicialFormatada = undefined;
-            }
+            
              return dataInicialFormatada;
         },
 
         aoColetarDataFinal(oEvent) {
             let dataFinal = oEvent.getParameter("to");
             let dataFinalFormatada = Formatter.formatarData(dataFinal);
-
-            if (dataFinalFormatada === '31/12/1970') {
-                dataFinalFormatada = undefined;
-            }
+            
             return dataFinalFormatada;
         },
 

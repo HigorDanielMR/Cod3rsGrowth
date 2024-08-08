@@ -148,7 +148,7 @@
                         "pago": pago
                     }
                     const metodo = "PATCH"
-                    this._requisicaoHTTP(metodo, urlEditar, venda)
+                    this._requisicaoHTTP(urlEditar, metodo, venda)
                     this.getView().byId("sucessoAoEditarVenda").setVisible(true);
 
                 }
@@ -159,29 +159,25 @@
                         "email": this.aoColetarEmail(),
                         "telefone": this.aoColetarTelefone(),
                         "idDoCarroVendido": carroEscolhido.id,
-                        "dataDeCompra": this.formatarData(data),
+                        "dataDeCompra": Formatter.formatarDataParaApi(data),
                         "valorTotal": carroEscolhido.valorDoVeiculo,
                         "pago": this.aoObterStatusPagamento()
                     }
                     const metodo = "POST"
-                    this._requisicaoHTTP(metodo, url, venda)
+                    this._requisicaoHTTP(url, metodo, venda)
                     this.getView().byId("sucessoAoCriarVenda").setVisible(true);
 
                 }
             })
         },
         
-        _requisicaoHTTP(metodo, url, venda) {
+        _requisicaoHTTP(url, metodo, venda) {
             fetch(url, {
                 method: metodo,
                 body: JSON.stringify(venda),
                 headers: { "Content-type": "application/json; charset=UTF-8" }
             })
-                .then(res => {
-                    if (!res.ok)
-                        sucesso = false;
-                    return res.json()
-                })
+                .then(res =>  res.json())
                 .catch(err => console.log(err));
         },
 

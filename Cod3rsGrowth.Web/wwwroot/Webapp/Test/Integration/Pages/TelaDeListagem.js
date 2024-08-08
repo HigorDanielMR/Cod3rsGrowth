@@ -69,27 +69,15 @@ sap.ui.define([
                     });
                 },
 
-                euPreenchoOInputDoFiltroDataInicial() {
+                euClicoNoIconeDoDateRangeSelection() {
                     return this.waitFor({
                         viewName: viewListagem,
-                        matchers: new PropertyStrictEquals({
-                            name: "id",
-                            value: "__component3---listagem--FiltroData-icon"
+                        id: "FiltroData",
+                        actions: new EnterText({
+                            text: "04/07/2024-18/07/2024"
                         }),
-                        actions: new Press(),
                         errorMessage: "Input não encontrado."
                     });
-                },
-                euClicoNoDateRangeSelectionVoltandoUmMes() {
-                    return this.waitFor({
-                        viewName: viewListagem,
-                        matchers: new PropertyStrictEquals({
-                            name: "id",
-                            value: "__component0---listagem--FiltroData-cal--Head-prev"
-                        }),
-                        actions: new Press(),
-                        errorMessage: "Botão não econtrado."
-                    })
                 }
             },
 
@@ -145,7 +133,7 @@ sap.ui.define([
                     });
                 },
 
-                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial() {
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicialEDataFinal() {
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
@@ -153,21 +141,12 @@ sap.ui.define([
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
                                 var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra");
-                                return itemDesejado >= '2024-07-18';
+                                return itemDesejado <= '2024-07-18';
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
                         errorMessage: "A pagina não contem o numero de items esperados"
                     });
-                },
-                euVerificoSeOBotaoFoiClicadoESeOMesMudou() {
-                    return this.waitFor({
-                        viewName: viewListagem,
-                        id: "__component0---listagem--FiltroData-cal--Head-B1",
-                        sucess() {
-
-                        }
-                    })
                 }
             }
         }

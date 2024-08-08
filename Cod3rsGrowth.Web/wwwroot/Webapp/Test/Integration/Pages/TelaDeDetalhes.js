@@ -23,25 +23,27 @@
             },
 
             actions: {
-                euClicoNaTabelaVenda() {
+                euClicoNoBotaoVoltarParaATelaDeListagem() {
                     return this.waitFor({
-                        id: idTabelaVendas,
-                        viewName: viewListagem,
+                        id: "voltarParaAListagem",
+                        viewName: viewDetalhes,
                         actions: new Press(),
-                        errorMessage: "Tabela não encontrada."
+                        errorMessage: "Botão não encontrado"
                     })
                 },
 
                 euClicoNaVendaSelecionada() {
                     return this.waitFor({
-                        controlType: "sap.m.ColumnListItem",
+                        controlType: "sap.m.Text",
                         viewName: viewListagem,
-                        matchers: new PropertyStrictEquals({
-                            name: "id",
-                            value: idDaVendaSelecionadaTabelaVenda
-                        }),
+                        matchers: [
+                            new PropertyStrictEquals({
+                                name: "text",
+                                value: "Higor Daniel"
+                            })
+                        ],
                         actions: new Press(),
-                        errorMessage: "Tabela não contém carros."
+                        errorMessage: "Item com o nome desejado não encontrado"
                     });
                 }
             },
@@ -62,6 +64,34 @@
                 },
                 euVerificoSeNomeEstaComoOEsperado() {
                     var nomeEsperado = "Adriana"
+                    return this.waitFor({
+                        id: idDaTagTextNome,
+                        viewName: viewDetalhes,
+                        controlType: "sap.m.Text",
+                        success: function (texto) {
+                            var nomePreenchido = texto.getText();
+
+                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O nome está como o esperado.");
+                        },
+                        errorMessage: "O nome não como o esperado."
+                    });
+                },
+                euVerificoSeOIdDoSegundoItemDaListaEstaComoOEsperado() {
+                    var idEsperado = "3"
+                    return this.waitFor({
+                        id: idDaTagTextID,
+                        viewName: viewDetalhes,
+                        controlType: "sap.m.Text",
+                        success(texto) {
+                            var idColetado = texto.getText();
+
+                            Opa5.assert.strictEqual(idColetado, idEsperado, "O id está como esperado.")
+                        },
+                        errorMessage: "O id está como o esperado."
+                    });
+                },
+                euVerificoSeNomeDopSegundoItemDaListaEstaComoOEsperado() {
+                    var nomeEsperado = "Higor Daniel"
                     return this.waitFor({
                         id: idDaTagTextNome,
                         viewName: viewDetalhes,

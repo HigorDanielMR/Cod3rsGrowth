@@ -16,7 +16,6 @@
     const idInputCpfTelaDeCriacao = "InputCpf";
     const cpfParaInserirCriacao = "12345678911";
     const idInputPagoTelaDeCriacao = "InputPago";
-    const idDoBotaoAtualizar = "atualizarTabela";
     const idInputNomeTelaDeCriacao = "InputNome";
     const idInputEmailTelaDeCriacao = "InputEmail";
     const telefoneParaInserirCriacao = "62992810844";
@@ -37,15 +36,6 @@
             },
 
             actions: {
-                euClicoNoBotaoAdicionar() {
-                    return this.waitFor({
-                        id: idDoBotaoAdicionarVenda,
-                        viewName: viewListagem,
-                        actions: new Press(),
-                        errorMessage: "Botão não encontrado."
-                    })
-                },
-
                 euInsiroONomeNoInputNome() {
                     return this.waitFor({
                         id: idInputNomeTelaDeCriacao,
@@ -98,23 +88,12 @@
                         errorMessage: "Input não encontrado."
                     })
                 },
-
-                euClicoNaTabelaCarro() {
-                    return this.waitFor({
-                        id: idDaTabelaCarros,
-                        viewName: viewCriacao,
-                        actions: new Press(),
-                        errorMessage: "Tabela não encontrada."
-                    })
-                },
-
                 euSelecionoOItemNaTabela() {
                     return this.waitFor({
-                        controlType: "sap.m.ColumnListItem",
-                        viewName: viewCriacao,
+                        controlType: "sap.m.Text",
                         matchers: new PropertyStrictEquals({
-                            name: "id",
-                            value: idDoCarroSelecionadoTabelaCarro
+                            name: "text",
+                            value: "Creta"
                         }),
                         actions: new Press(),
                         errorMessage: "Tabela não contém carros."
@@ -138,10 +117,9 @@
                         errorMessage: "Botão não encontrado."
                     })
                 },
-
-                euClicoNoBotaoAtualizar() {
+                euClicoNoBotaoAdicionarVenda() {
                     return this.waitFor({
-                        id: idDoBotaoAtualizar,
+                        id: idDoBotaoAdicionarVenda,
                         viewName: viewListagem,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
@@ -150,15 +128,18 @@
             },
 
             assertions: {
-                euVerificoSeOBotaoFoiClicado() {
+                euVerificoSeATelaDeCriacaoFoiCarregada() {
                     return this.waitFor({
+                        id: "Title1",
+                        matchers: new PropertyStrictEquals({
+                            name: "text",
+                            value: "Adicionar Venda"
+                        }),
                         success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
-                        },
-                        errorMessage: "O botão não foi clicado"
-                    });
+                            Opa5.assert.ok(true, "Tela de criacao carregada com sucesso");
+                        }
+                    })
                 },
-
                 euVerificoSeOTextoFoiInseridoNoInputNome() {
                     return this.waitFor({
                         success() {
@@ -253,6 +234,14 @@
                             Opa5.assert.ok(itemEncontrado, "A venda foi criada com sucesso.");
                         },
                         errorMessage: "A venda não foi criada com sucesso."
+                    });
+                },
+                euVerificoSeOBotaoAdicionarVendaFoiClicado() {
+                    return this.waitFor({
+                        success() {
+                            Opa5.assert.ok(true, `O botão foi clicado`);
+                        },
+                        errorMessage: "O botão não foi clicado"
                     });
                 }
             }
