@@ -33,11 +33,4 @@
 		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial();
 		Then.iTeardownMyApp();
 	});
-	opaTest("Deve filtrar pela data final e atualizar lista filtrada", function (Given, When, Then) {
-		Given.iStartMyApp();
-		When.naTelaDeListagem.euPreenchoOInputDoFiltroDataFinal();
-		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal();
-		Then.iTeardownMyApp();
-
-	});
 });

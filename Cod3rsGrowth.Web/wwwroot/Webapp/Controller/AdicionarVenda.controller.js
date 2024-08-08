@@ -61,11 +61,11 @@
         },
 
         _carregarEventosEditar(oEvent) {
+            var oRouter = this.getRouter();
+            _Rota = oRouter.getRoute(oEvent.getParameter("name"))._oConfig.name;
             this._mudarTituloDaView();
             this._obterVendaPorId(oEvent);
             this._carregarCarrosEditar(id);
-            var oRouter = this.getRouter();
-            _Rota = oRouter.getRoute(oEvent.getParameter("name"))._oConfig.name;
         },
 
         _carregarEventosCriar(oEvent) {
