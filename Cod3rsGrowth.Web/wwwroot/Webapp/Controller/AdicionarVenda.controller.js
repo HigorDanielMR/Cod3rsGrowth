@@ -12,10 +12,12 @@
     let idVenda;
     var _Rota;
     let dataEditar;
+    let idCarro;
     const estiverVazio = 0;
     const primeiroCarro = 0;
     const voltarUmaPagina = -1;
     const modeloCarro = "Carros";
+    const modeloVenda = "Venda";
     const ParametroNome = "name";
     const idDoInputCpf = "InputCpf";
     const idDoTituloTela = "Title1";
@@ -44,26 +46,6 @@
             this.aoCoincidirRota();
         },
 
-        _carregarCarros() {
-            let sucesso = true;
-            fetch(urlCarrosDisponiveis)
-                .then((res) => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
-                    return res.json()
-                })
-                .then((carro) => {
-                    const jsonModel = new JSONModel(carro)
-
-                    sucesso ? this.getView().setModel(jsonModel, modeloCarro)
-                        : this._erroNaRequisicaoDaApi(carro);
-                })
-                .catch((err) => {
-                    MessageBox.error(err.message || 'Ocorreu um erro inesperado');
-                });
-        },
-
         aoCoincidirRota() {
             this.processarEvento(() => {
                 var rota = sap.ui.core.UIComponent.getRouterFor(this);
@@ -76,9 +58,10 @@
         _carregarEventosEditar(oEvent) {
             var oRouter = this.getRouter();
             _Rota = oRouter.getRoute(oEvent.getParameter(ParametroNome))._oConfig.name;
-            this._mudarTituloDaViewEdicao();
             this._obterVendaPorId(oEvent);
-            this._carregarCarrosEditar(id);
+            this._mudarTituloDaViewEdicao();
+            this.getView().byId(idDoMessageStripSucessoEdicao).setVisible(false);
+
         },
 
         _carregarEventosCriar(oEvent) {
@@ -109,6 +92,24 @@
             const pago = this.oView.byId(idDoInputPago).setSelected(false)
             this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(false);
             this.getView().byId(idDoMessageStripErroSelecionarCarro).setVisible(false);
+        },
+
+        _carregarCarros() {
+            let sucesso = true;
+            fetch(urlCarrosDisponiveis)
+                .then((res) => {
+                    if (!res.ok) {
+                        sucesso = false;
+                    }
+                    return res.json()
+                })
+                .then((carro) => {
+                    const jsonModel = new JSONModel(carro)
+
+                    sucesso ? this.getView().setModel(jsonModel, modeloCarro)
+                        : this._erroNaRequisicaoDaApi(carro);
+                })
+                .catch((err) => MessageBox.error(err));
         },
 
         _mudarTituloDaViewCriar() {
@@ -151,6 +152,7 @@
 
         aoClicarNoBotaoAdicionarDeveAdicionarVenda() {
             this.processarEvento(() => {
+                let sucesso = true;
                 const url = "http://localhost:5071/api/Vendas/";
                 const nome = this.aoColetarNome();
                 const cpf = this.aoColetarCpf();
@@ -174,9 +176,24 @@
                         "pago": pago
                     }
                     const metodo = "PATCH"
-                    this._requisicaoHTTP(urlEditar, metodo, venda)
-                    this.getView().byId(idDoMessageStripSucessoEdicao).setVisible(true);
 
+                    fetch(urlEditar, {
+                        method: metodo,
+                        body: JSON.stringify(venda),
+                        headers: { "Content-type": "application/json; charset=UTF-8" }
+                    })
+                        .then(res => {
+                            if (!res.ok) {
+                                sucesso = false;
+                            }
+                            return res.json();
+                        })
+                        .then(data => {
+                            if (!sucesso) this._erroNaRequisicaoDaApi(data);
+                        })
+                        .catch(err => { MessageBox.error(err); });
+
+                    this.getView().byId(idDoMessageStripSucessoEdicao).setVisible(true);
                 }
                 else if (_Rota === RotaCriar) {
                     const venda = {
@@ -190,36 +207,25 @@
                         "pago": this.aoObterStatusPagamento()
                     }
                     const metodo = "POST"
-                    this._requisicaoHTTP(url, metodo, venda)
+
+                    fetch(url, {
+                        method: metodo,
+                        body: JSON.stringify(venda),
+                        headers: { "Content-type": "application/json; charset=UTF-8" }
+                    })
+                        .then(res => {
+                            if (!res.ok) {
+                                sucesso = false;
+                            }
+                            return res.json();
+                        })
+                        .then(data => {
+                            if (!sucesso) this._erroNaRequisicaoDaApi(data);
+                        })
+                        .catch(err => { MessageBox.error(err); });
                     this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(true);
                 }
             })
-        },
-        
-        _requisicaoHTTP(url, metodo, venda) {
-            let sucesso = true;
-
-            fetch(url, {
-                method: metodo,
-                body: JSON.stringify(venda),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
-            })
-                .then(res => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    if (sucesso) {
-                        this.getView().setModel(new JSONModel(data), modelo);
-                    } else {
-                        this._erroNaRequisicaoDaApi(data);
-                    }
-                })
-                .catch(err => {
-                    MessageBox.error(err.message || 'Ocorreu um erro inesperado');
-                });
         },
 
         _obterCarroSelecionado() {
@@ -250,6 +256,7 @@
             idVenda = oEvent.getParameter(ParametroArgumento).id;
             let query = urlObterVendaPorId + idVenda;
             let sucesso = true;
+
             fetch(query)
                 .then(res => {
                     if (!res.ok) {
@@ -258,19 +265,19 @@
                     return res.json();
                 })
                 .then(venda => {
+                    
                     if (sucesso) {
-                        const id = this._carregarDados(venda);
+                        let id = this._carregarDados(venda);
+                        idCarro = id;
                         const data = venda.dataDeCompra;
                         this._carregarDataDeCompraEditar(data);
-                        this._carregarCarrosEditar(id);
+                        this._carregarCarrosEditar(idCarro);
                     }
                     else {
                         this._erroNaRequisicaoDaApi(venda);
                     }
                 })
-                .catch(err => {
-                    MessageBox.error(err.message || 'Ocorreu um erro inesperado');
-                });
+                .catch(err => { MessageBox.error(err); });
         },
 
         _carregarDataDeCompraEditar(data) {
@@ -279,49 +286,26 @@
         },
 
         _carregarCarrosEditar(id) {
+
             let query = urlCarroObterPorId + id;
             let carroEspecifico;
-            let sucesso = true;
 
             fetch(urlCarrosDisponiveis)
-                .then(res => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
-                    return res.json()
-                })
+                .then(res => res.json())
                 .then(data => {
-                    if (sucesso) {
-                        this.getView().setModel(new JSONModel(data), modeloCarro);
-                        return fetch(query);
-                    }
-                    else {
-                        this._erroNaRequisicaoDaApi(data);
-                    }
+                    this.getView().setModel(new JSONModel(data), modeloCarro);
+                    return fetch(query);
                 })
-                .then(res => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
-                    return res.json()
-                })
+                .then(resp => resp.json())
                 .then(carro => {
+                    carroEspecifico = carro;
 
-                    if (sucesso) {
-                        carroEspecifico = carro;
+                    const listaDeCarros = this.getView().getModel(modeloCarro).getData();
+                    listaDeCarros.push(carroEspecifico);
 
-                        const listaDeCarros = this.getView().getModel(modeloCarro).getData();
-                        listaDeCarros.push(carroEspecifico);
-
-                        this.getView().getModel(modeloCarro).setData(listaDeCarros);
-                    }
-                    else {
-                        this._erroNaRequisicaoDaApi(carro);
-                    }
+                    this.getView().getModel(modeloCarro).setData(listaDeCarros);
                 })
-                .catch(err => {
-                    MessageBox.error(err.message || 'Ocorreu um erro inesperado');
-                });
+                .catch(err => { MessageBox.error(err); });
         },
 
         _carregarDados(venda) {

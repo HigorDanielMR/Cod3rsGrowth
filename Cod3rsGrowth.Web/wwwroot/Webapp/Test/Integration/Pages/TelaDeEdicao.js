@@ -1,11 +1,11 @@
 ﻿sap.ui.define([
-    "sap/ui/test/Opa5",
-    "sap/ui/test/actions/EnterText",
+    'sap/ui/test/Opa5',
+    'sap/ui/test/matchers/PropertyStrictEquals',
     "sap/ui/test/actions/Press",
-    "sap/ui/test/matchers/PropertyStrictEquals"
+    "sap/ui/test/actions/EnterText"
 
-], function (Opa5, EnterText, Press, PropertyStrictEquals) {
-    "use strict";
+], function (Opa5, PropertyStrictEquals, Press, EnterText) {
+    'use strict';
 
     const propriedadeNome = "nome";
     const contextoVendas = "Vendas";
@@ -25,9 +25,9 @@
     const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
     const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao";
     const idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
-    
+
     Opa5.createPageObjects({
-        naTelaDeCriacao: {
+        naTelaDeDetalhes: {
             arrangements: {
                 euInicioMeuApp() {
                     return this.iStartMyUIComponent("../index.html");
@@ -125,7 +125,6 @@
                     })
                 }
             },
-
             assertions: {
                 euVerificoSeATelaDeCriacaoFoiCarregada() {
                     return this.waitFor({
@@ -219,30 +218,6 @@
                         errorMessage: "O botão não foi clicado"
                     });
                 },
-
-                euVerificoSeAVendaFoiCriada() {
-                    return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabelaVenda,
-                        success: function (oTable) {
-                            var items = oTable.getItems();
-                            var itemEncontrado = items.some(function (item) {
-                                var nomeDesejado = item.getBindingContext(contextoVendas).getProperty(propriedadeNome);
-                                return nomeDesejado === nomeParaInserirCriacao;
-                            });
-                            Opa5.assert.ok(itemEncontrado, "A venda foi criada com sucesso.");
-                        },
-                        errorMessage: "A venda não foi criada com sucesso."
-                    });
-                },
-                euVerificoSeOBotaoAdicionarVendaFoiClicado() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
-                        },
-                        errorMessage: "O botão não foi clicado"
-                    });
-                }
             }
         }
     });
