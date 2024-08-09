@@ -7,16 +7,17 @@ sap.ui.define([
 ], function (BaseController, JSONModel, Formatter, MessageBox) {
     "use strict";
 
-    const ID = "id"
-    const modeloVenda = "Vendas"
-    const idDoFiltroCpf = "FiltroCpf"
-    const RotaListagem = "appListagem"
-    const idDoFiltroNome = "FiltroNome"
-    const quantidadeDeCaracteresDoCpf = 14
-    const quantidadeDeCaracteresDoTelefone = 15
-    const idDoFiltroTelefone = "FiltroTelefone"
-    let url = "http://localhost:5071/api/Vendas"    
-    const idDoFiltroData = "FiltroData"
+    const ID = "id";
+    const modeloVenda = "Vendas";
+    const idDoFiltroCpf = "FiltroCpf";
+    const RotaListagem = "appListagem";
+    const idDoFiltroNome = "FiltroNome";
+    const quantidadeDeCaracteresDoCpf = 14;
+    const quantidadeDeCaracteresDoTelefone = 15;
+    const idDoFiltroTelefone = "FiltroTelefone";
+    let url = "http://localhost:5071/api/Vendas";    
+    const RotaAdicionarVenda = "appAdicionarVenda";
+    const RotaDetalhes = "appDetalhes";
 
     return BaseController.extend("ui5.carro.controller.ListagemVenda", {
         formatter: Formatter,
@@ -24,7 +25,6 @@ sap.ui.define([
         onInit() {
             this.aoCoincidirRota();
         },
-
 
         _carregarListaDeVendas() {
             let sucesso = true;
@@ -48,17 +48,7 @@ sap.ui.define([
                 rota.getRoute(RotaListagem).attachMatched(this._carregarListaDeVendas, this);
             });
         },
-
-        abrirDatePicker: function (oEvent) {
-            this.getView().byId("FiltroData").openBy(oEvent.getSource().getDomRef());
-        },
-
-        limparFiltroData() {
-            const dataInicial = oEvent.getSource().setDateValue(null);
-            const dataFinal = oEvent.getSource().setSecondDateValue(null);
-
-        },
-
+        
         aoColetarNome() {
             const nome = this.oView.byId(idDoFiltroNome).getValue();
             return nome;
@@ -141,14 +131,14 @@ sap.ui.define([
 
         adicionarVenda() {
             this.processarEvento(() => {
-                this.getRouter().navTo("appAdicionarVenda", {}, true);  
+                this.getRouter().navTo(RotaAdicionarVenda, {}, true);  
             })
         },
 
         aoPressionar(oEvent) {
             const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo("appDetalhes", {
+            oRouter.navTo(RotaDetalhes, {
                 id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(ID))
             });
         }

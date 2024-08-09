@@ -8,6 +8,7 @@ sap.ui.define([
 	"use strict";
 
 	var voltarUmaPagina = -1;
+	var RotaListagem = "appListagem";
 
 	return Controller.extend("ui5.carro.controller.BaseController", {
 		getRouter() {
@@ -23,7 +24,7 @@ sap.ui.define([
 			if (previousHash !== undefined) {
 				window.history.go(voltarUmaPagina);
 			} else {
-				this.getRouter().navTo("appListagem", {}, true);
+				this.getRouter().navTo(RotaListagem, {}, true);
 			}
 		},
 

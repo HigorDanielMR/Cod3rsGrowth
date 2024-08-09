@@ -12,6 +12,8 @@
 
     const modeloVenda = "Venda"
     const rotaDetalhe = "appDetalhes"
+    const ParametroArgumento = "arguments";
+    const RotaEditarVenda = "appEditarVenda";
     const urlObterPorId = "http://localhost:5071/api/Vendas/"
 
     return BaseController.extend("ui5.carro.controller.Detalhes", {
@@ -29,7 +31,7 @@
         },
 
         _obterPorId: function (oEvent) {
-            let id = oEvent.getParameter("arguments").id;
+            let id = oEvent.getParameter(ParametroArgumento).id;
             let query = urlObterPorId + id;
             let sucesso = true;
             fetch(query)
@@ -64,7 +66,7 @@
             this.processarEvento(() => {
                 const oItem = oEvent.getSource();
                 const oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo("appEditarVenda", {
+                oRouter.navTo(RotaEditarVenda, {
                     id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(ID))
                 });
             })
