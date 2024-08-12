@@ -1,5 +1,5 @@
 ﻿sap.ui.define([
-    "ui5/carro/controller/BaseController",
+    "ui5/carro/app/common/BaseController",
     "ui5/carro/model/formatter",
     "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel"
@@ -16,7 +16,7 @@
     const RotaEditarVenda = "appEditarVenda";
     const urlObterPorId = "http://localhost:5071/api/Vendas/"
 
-    return BaseController.extend("ui5.carro.controller.Detalhes", {
+    return BaseController.extend("ui5.carro.app.vendas.Detalhes", {
         formatter: Formatter,
 
         onInit: function () {

@@ -1,5 +1,5 @@
 ﻿sap.ui.define([
-    "ui5/carro/controller/BaseController",
+    "ui5/carro/app/common/BaseController",
     "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter",
@@ -39,7 +39,7 @@
     const idDoMessageStripErroSelecionarCarro = "erroSelecionarCarro";
     let urlCarrosDisponiveis = "http://localhost:5071/api/Carros/Disponiveis";
 
-    return BaseController.extend("ui5.carro.controller.AdicionarVenda", {
+    return BaseController.extend("ui5.carro.app.vendas.AdicionarVenda", {
         formatter: Formatter,
 
         onInit() {
@@ -226,6 +226,54 @@
                     this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(true);
                 }
             })
+        },
+
+        _obterDescricaoCor() {
+            fetch(query)
+                .then(res => {
+                    if (!res.ok) {
+                        sucesso = false;
+                    }
+                    return res.json();
+                })
+                .then(venda => {
+
+                    if (sucesso) {
+                        let id = this._carregarDados(venda);
+                        idCarro = id;
+                        const data = venda.dataDeCompra;
+                        this._carregarDataDeCompraEditar(data);
+                        this._carregarCarrosEditar(idCarro);
+                    }
+                    else {
+                        this._erroNaRequisicaoDaApi(venda);
+                    }
+                })
+                .catch(err => { MessageBox.error(err); });
+        },
+
+        _obterDescricaoMarca() {
+            fetch(query)
+                .then(res => {
+                    if (!res.ok) {
+                        sucesso = false;
+                    }
+                    return res.json();
+                })
+                .then(venda => {
+
+                    if (sucesso) {
+                        let id = this._carregarDados(venda);
+                        idCarro = id;
+                        const data = venda.dataDeCompra;
+                        this._carregarDataDeCompraEditar(data);
+                        this._carregarCarrosEditar(idCarro);
+                    }
+                    else {
+                        this._erroNaRequisicaoDaApi(venda);
+                    }
+                })
+                .catch(err => { MessageBox.error(err); });
         },
 
         _obterCarroSelecionado() {

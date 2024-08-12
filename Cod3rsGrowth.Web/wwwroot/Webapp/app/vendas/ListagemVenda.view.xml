@@ -1,5 +1,5 @@
 ﻿<mvc:View
-	controllerName="ui5.carro.controller.ListagemVenda"
+	controllerName="ui5.carro.app.vendas.ListagemVenda"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:core="sap.ui.core"

@@ -1,5 +1,5 @@
 ﻿<mvc:View
-	controllerName="ui5.carro.controller.AdicionarVenda"
+	controllerName="ui5.carro.app.vendas.AdicionarVenda"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:l="sap.ui.layout"
 	xmlns:f="sap.ui.layout.form"
@@ -134,7 +134,7 @@
 								formatter: '.formatter.formatarMarca'
 							}" />
 							<Text text="{Carros>modelo}" />
-							<Text text="{path:'Carros>marca',
+							<Text text="{path:'Carros>cor',
 								formatter: '.formatter.formatarCor'
 							}" />
 							<Text text="{

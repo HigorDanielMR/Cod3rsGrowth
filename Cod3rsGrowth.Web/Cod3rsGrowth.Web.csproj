@@ -36,4 +36,9 @@
     <ProjectReference Include="..\Cod3rsGrowth.Infra\Cod3rsGrowth.Infra.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\Webapp\NovaPasta\" />
+    <Folder Include="wwwroot\Webapp\venda\" />
+  </ItemGroup>
+
 </Project>

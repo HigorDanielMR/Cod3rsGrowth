@@ -1,6 +1,6 @@
 ﻿sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/TelaDeListagem"
+	"./vendas/TelaDeListagem"
 
 ], (opaTest) => {
 

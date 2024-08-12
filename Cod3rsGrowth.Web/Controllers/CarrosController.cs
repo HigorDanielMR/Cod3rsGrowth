@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
 using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servicos.Servicos;
 using System.Net.Http;
+using Cod3rsGrowth.Servicos.ExtensaoDeEnum;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
@@ -66,6 +68,20 @@ namespace Cod3rsGrowth.Web.Controllers
         {
             _servico.Remover(Id);
             return NoContent();
+        }
+
+        [HttpGet("Cor")]
+        public IActionResult ObterDescricaoEnum(Cores cor)
+        {
+            var description = cor.ObterDescricaoEnum();
+            return Ok(new { description });
+        }
+
+        [HttpGet("Marca")]
+        public IActionResult ObterDescricaoEnum(Marcas marca)
+        {
+            var description = marca.ObterDescricaoEnum();
+            return Ok(new { description });
         }
     }
 }

@@ -1,5 +1,5 @@
 sap.ui.define([
-    "ui5/carro/controller/BaseController",
+    "ui5/carro/app/common/BaseController",
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter",
     "sap/m/MessageBox"
@@ -19,7 +19,7 @@ sap.ui.define([
     const RotaAdicionarVenda = "appAdicionarVenda";
     const RotaDetalhes = "appDetalhes";
 
-    return BaseController.extend("ui5.carro.controller.ListagemVenda", {
+    return BaseController.extend("ui5.carro.app.vendas.ListagemVenda", {
         formatter: Formatter,
 
         onInit() {

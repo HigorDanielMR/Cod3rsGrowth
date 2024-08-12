@@ -1,18 +1,18 @@
-sap.ui.define([
+﻿sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/TelaDeCriacao",
-	"./pages/TelaDeListagem"
+	"./vendas/TelaDeEdicao",
+	"./vendas/TelaDeListagem"
 
 ], (opaTest) => {
 
-	QUnit.module("Teste tela de criacao");
+	QUnit.module("Teste tela de edicao");
 
 	opaTest("Deve preencher o valor do input nome", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5/carro"
 			},
-			hash: "AdicionarVenda"
+			hash: "EditarVenda/3"
 		});
 
 		When.naTelaDeCriacao.euInsiroONomeNoInputNome();
@@ -30,13 +30,13 @@ sap.ui.define([
 	});
 
 	opaTest("Deve preencher o valor do input telefone", function (Given, When, Then) {
-		
+
 		When.naTelaDeCriacao.euInsiroOTelefoneNoInputTelefone();
 		Then.naTelaDeCriacao.euVerificoSeOTextoFoiInseridoNoInputTelefone();
 	});
 
 	opaTest("Deve clicar no checkbox pago", function (Given, When, Then) {
-		
+
 		When.naTelaDeCriacao.euClicoNoInputPago();
 		Then.naTelaDeCriacao.euVerificoSeOInputPagoFoiPressionado();
 	});
