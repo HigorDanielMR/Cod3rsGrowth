@@ -13,6 +13,7 @@
     var _Rota;
     let dataEditar;
     let idCarro;
+    let indexCor;
     const estiverVazio = 0;
     const primeiroCarro = 0;
     const voltarUmaPagina = -1;
@@ -228,7 +229,9 @@
             })
         },
 
-        _obterDescricaoCor() {
+        _obterDescricaoCor(indexCor) {
+            let urlObterCor = "http://localhost:5071/api/Carros/Marca?marca="
+
             fetch(query)
                 .then(res => {
                     if (!res.ok) {

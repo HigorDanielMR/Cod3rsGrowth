@@ -35,6 +35,17 @@
             },
 
             actions: {
+                euInsiroONumero4NoInputNome() {
+                    return this.waitFor({
+                        id: idInputNomeTelaDeCriacao,
+                        viewName: viewCriacao,
+                        actions: new EnterText({
+                            text: "4"
+                        }),
+                        errorMessage: "Input não encontrado"
+                    })
+                },
+
                 euInsiroONomeNoInputNome() {
                     return this.waitFor({
                         id: idInputNomeTelaDeCriacao,
@@ -123,22 +134,29 @@
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
                     })
+                },
+                euClicoNoBotaoVoltarParaTelaDeListagem() {
+                    return this.waitFor({
+                        id: idDoBotaoVoltarParaTelaDeListagem,
+                        viewName: viewCriacao,
+                        actions: new Press(),
+                        errorMessage: "Botão não encontrado."
+                    })
                 }
             },
 
             assertions: {
-                euVerificoSeATelaDeCriacaoFoiCarregada() {
+                euVerificoSeOTextoAMensagemDeErroFoiApresentada() {
                     return this.waitFor({
-                        id: "Title1",
-                        matchers: new PropertyStrictEquals({
-                            name: "text",
-                            value: "Adicionar Venda"
-                        }),
-                        success() {
-                            Opa5.assert.ok(true, "Tela de criacao carregada com sucesso");
-                        }
-                    })
+                        id: idInputNomeTelaDeCriacao,
+                        controlType: "sap.m.Input",
+                        success(input) {
+                            Opa5.assert.strictEqual(input.getValueState(), "ValueStateError", "O estado do valor é 'Error'");
+                        },
+                        errorMessage: "O status do input esta incorreto."
+                    });
                 },
+
                 euVerificoSeOTextoFoiInseridoNoInputNome() {
                     return this.waitFor({
                         success() {

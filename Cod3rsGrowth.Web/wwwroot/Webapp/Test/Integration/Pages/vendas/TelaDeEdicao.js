@@ -12,14 +12,14 @@
     const viewCriacao = "AdicionarVenda";
     const viewListagem = "ListagemVenda";
     const idDaTabelaVenda = "TabelaVendas";
-    const nomeParaInserirCriacao = "Eliane";
+    const nomeParaInserirCriacao = "Vitor Godoi";
     const idInputCpfTelaDeCriacao = "InputCpf";
     const cpfParaInserirCriacao = "12345678911";
     const idInputPagoTelaDeCriacao = "InputPago";
     const idInputNomeTelaDeCriacao = "InputNome";
     const idInputEmailTelaDeCriacao = "InputEmail";
     const telefoneParaInserirCriacao = "62992810844";
-    const emailParaInserirCriacao = "teste@gmail.com";
+    const emailParaInserirCriacao = "vitor@hotmail.com";
     const idDaTabelaCarros = "TabelaCarrosDisponiveis";
     const idInputTelefoneTelaDeCriacao = "InputTelefone";
     const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
@@ -27,7 +27,7 @@
     const idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
 
     Opa5.createPageObjects({
-        naTelaDeDetalhes: {
+        naTelaDeEdicao: {
             arrangements: {
                 euInicioMeuApp() {
                     return this.iStartMyUIComponent("../index.html");
@@ -45,54 +45,12 @@
                         errorMessage: "Input não encontrado."
                     })
                 },
-
-                euInsiroOCpfNoInputCpf() {
-                    return this.waitFor({
-                        id: idInputCpfTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new EnterText({
-                            text: cpfParaInserirCriacao
-                        }),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
-
-                euInsiroOEmailNoInputEmail() {
-                    return this.waitFor({
-                        id: idInputEmailTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new EnterText({
-                            text: emailParaInserirCriacao
-                        }),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
-
-                euInsiroOTelefoneNoInputTelefone() {
-                    return this.waitFor({
-                        id: idInputTelefoneTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new EnterText({
-                            text: telefoneParaInserirCriacao
-                        }),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
-
-                euClicoNoInputPago() {
-                    return this.waitFor({
-                        id: idInputPagoTelaDeCriacao,
-                        viewName: viewCriacao,
-                        actions: new Press(),
-                        errorMessage: "Input não encontrado."
-                    })
-                },
                 euSelecionoOItemNaTabela() {
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         matchers: new PropertyStrictEquals({
                             name: "text",
-                            value: "Creta"
+                            value: "Teste"
                         }),
                         actions: new Press(),
                         errorMessage: "Tabela não contém carros."
@@ -126,46 +84,7 @@
                 }
             },
             assertions: {
-                euVerificoSeATelaDeCriacaoFoiCarregada() {
-                    return this.waitFor({
-                        id: "Title1",
-                        matchers: new PropertyStrictEquals({
-                            name: "text",
-                            value: "Adicionar Venda"
-                        }),
-                        success() {
-                            Opa5.assert.ok(true, "Tela de criacao carregada com sucesso");
-                        }
-                    })
-                },
                 euVerificoSeOTextoFoiInseridoNoInputNome() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: "O texto não foi adicionado."
-                    });
-                },
-
-                euVerificoSeOTextoFoiInseridoNoInputCpf() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: "O texto não foi adicionado."
-                    });
-                },
-
-                euVerificoSeOTextoFoiInseridoNoInputEmail() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: "O texto não foi adicionado."
-                    });
-                },
-
-                euVerificoSeOTextoFoiInseridoNoInputTelefone() {
                     return this.waitFor({
                         success() {
                             Opa5.assert.ok(true, `Texto inserido com sucesso.`);

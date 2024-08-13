@@ -39,7 +39,7 @@
                         matchers: [
                             new PropertyStrictEquals({
                                 name: "text",
-                                value: "Higor Daniel"
+                                value: "Higor"
                             })
                         ],
                         actions: new Press(),
@@ -77,7 +77,7 @@
                     });
                 },
                 euVerificoSeOIdDoSegundoItemDaListaEstaComoOEsperado() {
-                    var idEsperado = "3"
+                    var idEsperado = "2"
                     return this.waitFor({
                         id: idDaTagTextID,
                         viewName: viewDetalhes,
@@ -91,7 +91,7 @@
                     });
                 },
                 euVerificoSeNomeDopSegundoItemDaListaEstaComoOEsperado() {
-                    var nomeEsperado = "Higor Daniel"
+                    var nomeEsperado = "Higor"
                     return this.waitFor({
                         id: idDaTagTextNome,
                         viewName: viewDetalhes,
