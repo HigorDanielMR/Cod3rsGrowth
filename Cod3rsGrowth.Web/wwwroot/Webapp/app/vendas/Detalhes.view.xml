@@ -1,53 +1,64 @@
 ﻿<mvc:View
-	controllerName="ui5.carro.controller.Detalhes"
+	controllerName="ui5.carro.app.vendas.Detalhes"
 	xmlns="sap.m"
 	xmlns:mvc="sap.ui.core.mvc"
 	xmlns:f="sap.ui.layout.form">
 	<Page
 		id="TelaDeDetalhes"
-		title="{i18n>DetalhesVenda.Titulo} {Venda>id}"
-		showNavButton="true"
-		navButtonPress=".aoClicarVoltarParaTelaDeListagem"
+		showHeader="false"
+		backgroundDesign="List"
 		class="sapUiResponsiveContentPadding"
 		binding="{Venda>/}">
-				<content>
+			<Toolbar>
+					<ToolbarSpacer/>
+					<Button icon="sap-icon://arrow-left" press=".aoClicarVoltarParaTelaDeListagem" id="voltarParaAListagem"/>
+					<Title text="{i18n>DetalhesVenda.Titulo}" width="95%"/>
+					<Button icon="sap-icon://customer-order-entry" text="Editar" id="botaoEditarVenda" press=".aoClicarNoBotaoEditarDeveAbrirATelaDeModificarVenda"/>
+					 
+				 </Toolbar>
 					<VBox class="sapUiSmallMargin">
 						<f:SimpleForm
 							editable="true"
 							layout="ColumnLayout"
 							columnsM="3"
 							columnsL="4"
-							columnsXL="6">
+							columnsXL="6"
+							width="1500px">
 							<f:content>
 								<Label text="{i18n>DetalhesVenda.ID}" textAlign="Left"/>
 								<Text text="{Venda>id}" id="idDetalhes" />
 								<Label text="{i18n>DetalhesVenda.Nome}" textAlign="Left"/>
 								<Text text="{Venda>nome}" id="nomeDetalhes"/>
 								<Label text="{i18n>DetalhesVenda.Cpf}" textAlign="Left"/>
-								<Text text="{Venda>cpf}" />
+								<Text text="{Venda>cpf}" id="cpfDetalhes"/>
 								<Label text="{i18n>DetalhesVenda.Telefone}" textAlign="Left"/>
-								<Text text="{Venda>telefone}"/>
+								<Text text="{Venda>telefone}" id="telefoneDetalhes"/>
 								<Label text="{i18n>DetalhesVenda.Email}" textAlign="Left"/>
-								<Text text="{Venda>email}"/>
+								<Text text="{Venda>email}" id="emailDetalhes"/>
 								<Label text="{i18n>DetalhesVenda.IdDoCarroVendido}" textAlign="Left"/>
-								<Text text="{Venda>idDoCarroVendido}" />
+								<Text text="{Venda>idDoCarroVendido}" id="idDoCarroDetalhes"/>
 								<Label text="{i18n>DetalhesVenda.DataDeCompra}" textAlign="Left"/>
 								<Text text="{
 								  path:'Venda>dataDeCompra',
-								  formatter: '.formatter.formatarData'
-								  }"/>
+								  type: 'sap.ui.model.type.Date',
+								formatOptions: {
+								  source: {
+									pattern: 'yyyy-MM-ddTHH:mm:ss'
+								  },
+								  pattern: 'dd/MM/yyyy'
+								}
+								  }" id="dataDeCompraDetalhes"/>
 								<Label text="{i18n>DetalhesVenda.ValorTotal}" textAlign="Left"/>
 								<Text text="{
 								  path:'Venda>valorTotal',
 								  formatter: '.formatter.formatarValorDaMoeda'
-								  }" wrap="false"/>
+								  }"/>
 								<Label text="{i18n>DetalhesVenda.Pago}" textAlign="Left"/>
 								<ObjectStatus
 									text="{ path: 'Venda>pago', formatter: '.formatter.alterarStatusDoPagamento' }"
-									state="{= ${Venda>pago} === false ? 'Error' : 'Success'}" />
+									state="{= ${Venda>pago} === false ? 'Error' : 'Success'}" id="statusDePagamentoDetalhes"/>
 							</f:content>
 						</f:SimpleForm>
 					</VBox>
-				</content>
 	</Page>
 </mvc:View>

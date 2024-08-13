@@ -5,11 +5,26 @@
     "use strict";
 
     return {
-        formatarData: function (date) {
+        formatarData(data) {
+
+            if (data === null || data === undefined) {
+                return data;
+            }
             const oDateFormat = DateFormat.getDateInstance({
                 pattern: "dd/MM/YYYY"
             });
-            const sFormattedDate = oDateFormat.format(new Date(date));
+            const sFormattedDate = oDateFormat.format(new Date(data));
+            return sFormattedDate;
+        },
+
+        formatarDataParaApi(data) {
+            if (data === null || data === undefined) {
+                return data;
+            }
+            const oDateFormat = DateFormat.getDateInstance({
+                pattern: "yyyy-MM-dd"
+            });
+            const sFormattedDate = oDateFormat.format(new Date(data));
             return sFormattedDate;
         },
 
@@ -44,7 +59,6 @@
                     return Flex;
             }
         },
-
         formatarMarca(Marca) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             switch (Marca) {

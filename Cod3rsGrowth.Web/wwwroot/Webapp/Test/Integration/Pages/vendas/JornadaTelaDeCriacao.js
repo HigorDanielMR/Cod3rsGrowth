@@ -1,19 +1,19 @@
 sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/TelaDeCriacao",
-	"./pages/TelaDeListagem"
+	"./TelaDeCriacao",
+	"./TelaDeListagem"
 
 ], (opaTest) => {
 
-	QUnit.module("Teste tela de criação");
-
-	opaTest("Deve clicar no botao adicionar", function (Given, When, Then) {
-		Given.iStartMyApp();
-		When.naTelaDeListagem.euClicoNoBotaoAdicionar();
-		Then.naTelaDeListagem.euVerificoSeOBotaoFoiClicado();
-		
-	});
+	QUnit.module("Criacao");
+	
 	opaTest("Deve preencher o valor do input nome", function (Given, When, Then) {
+		Given.iStartMyUIComponent({
+			componentConfig: {
+				name: "ui5/carro"
+			},
+			hash: "AdicionarVenda"
+		});
 		When.naTelaDeCriacao.euInsiroONomeNoInputNome();
 		Then.naTelaDeCriacao.euVerificoSeOTextoFoiInseridoNoInputNome();
 	});
@@ -41,7 +41,6 @@ sap.ui.define([
 	});
 
 	opaTest("Deve selecionar um carro na tabela", function (Given, When, Then) {
-		When.naTelaDeCriacao.euClicoNaTabelaCarro();
 		When.naTelaDeCriacao.euSelecionoOItemNaTabela();
 		Then.naTelaDeCriacao.euVereificoSeATabelaFoiPressionada();
 	});
@@ -49,10 +48,14 @@ sap.ui.define([
 	opaTest("Deve clicar no botao adicionar e verificar se venda foi criada com sucesso", function (Given, When, Then) {
 		When.naTelaDeCriacao.euClicoNoBotaoAdicionarDaTelaDeCriacao();
 		When.naTelaDeCriacao.euClicoNoBotaoVoltarParaTelaDeListagem();
-		When.naTelaDeCriacao.euClicoNoBotaoAtualizar();
 		Then.naTelaDeCriacao.euVerificoSeOBotaoAdicionarFoiClicado();
 		Then.naTelaDeCriacao.euVerificoSeOBotaoVoltarParaATelaDeListagemFoiClicado();
 		Then.naTelaDeCriacao.euVerificoSeAVendaFoiCriada();
+	});
 
+	opaTest("Deve clicar no botao adicionar venda na tela de listagem", function (Given, When, Then) {
+		When.naTelaDeCriacao.euClicoNoBotaoAdicionarVenda();
+		Then.naTelaDeCriacao.euVerificoSeOBotaoAdicionarVendaFoiClicado();
+		Then.iTeardownMyApp();
 	});
 });

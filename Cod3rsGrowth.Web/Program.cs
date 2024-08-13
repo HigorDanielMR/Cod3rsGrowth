@@ -7,8 +7,10 @@ using Cod3rsGrowth.Web.DetalhesDosProblemas;
 using ConfigurationManager = System.Configuration.ConfigurationManager;
 using Microsoft.Extensions.FileProviders;
 
-var stringDeConexao = ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 var builder = WebApplication.CreateBuilder(args);
+var comando = args.FirstOrDefault();
+var stringDeConexao = comando is "--teste" ? ConfigurationManager.ConnectionStrings["ConexaoComBancoTeste"].ToString()
+                        : ConfigurationManager.ConnectionStrings["ConexaoComBanco"].ToString();
 
 builder.Services.AddMvc(); 
 builder.Services.AddHttpClient();
@@ -38,8 +40,22 @@ app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true});
 app.UseFileServer(new FileServerOptions
 {
     FileProvider = new PhysicalFileProvider(
-           Path.Combine(builder.Environment.ContentRootPath, "wwwroot")),
+           Path.Combine(builder.Environment.ContentRootPath, "wwwroot/webapp")),
     EnableDirectoryBrowsing = true
+});
+app.Use(async (context, next) =>
+{
+    if (context.Request.Path.StartsWithSegments("/i18n"))
+    {
+        var filePath = Path.Combine(builder.Environment.ContentRootPath, "wwwroot/webapp/i18n", context.Request.Path.Value.Substring(6));
+        if (File.Exists(filePath))
+        {
+            await context.Response.SendFileAsync(filePath);
+            return;
+        }
+    }
+
+    await next();
 });
 app.UseDefaultFiles();
 app.MapControllers();

@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servicos.Servicos;
 using System.Net.Http;
 

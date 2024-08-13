@@ -12,11 +12,10 @@
     const viewCriacao = "AdicionarVenda";
     const viewListagem = "ListagemVenda";
     const idDaTabelaVenda = "TabelaVendas";
-    const nomeParaInserirCriacao = "Eliane";
+    const nomeParaInserirCriacao = "Teste";
     const idInputCpfTelaDeCriacao = "InputCpf";
     const cpfParaInserirCriacao = "12345678911";
     const idInputPagoTelaDeCriacao = "InputPago";
-    const idDoBotaoAtualizar = "atualizarTabela";
     const idInputNomeTelaDeCriacao = "InputNome";
     const idInputEmailTelaDeCriacao = "InputEmail";
     const telefoneParaInserirCriacao = "62992810844";
@@ -26,7 +25,13 @@
     const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
     const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao";
     const idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
-    const idDoCarroSelecionadoTabelaCarro = "__item6-__component5---adicionarVenda--TabelaCarrosDisponiveis-0";
+    const menssagemErroInputNaoEncontrado = "Input não encontrado.";
+    const menssagemDeErroBotaoNaoEncontrado = "Botão não encontrado.";
+    const menssagemDeErroOBotaoNaoFoiClicado = "O botão não foi clicado";
+    const menssagemDeErroTabelaNaoEncontrada = "Tabela não contém carros.";
+    const menssagemDeErroOCarroNaoFoiSelecionado = "Carro não selecionado";
+    const menssagemDeErroOTextoNaoFoiAdicionado = "O texto não foi adicionado.";
+    const menssagemDeErroAVendaNaoFoiCriadaComSucesso = "A venda não foi criada com sucesso.";
     
     Opa5.createPageObjects({
         naTelaDeCriacao: {
@@ -37,15 +42,6 @@
             },
 
             actions: {
-                euClicoNoBotaoAdicionar() {
-                    return this.waitFor({
-                        id: idDoBotaoAdicionarVenda,
-                        viewName: viewListagem,
-                        actions: new Press(),
-                        errorMessage: "Botão não encontrado."
-                    })
-                },
-
                 euInsiroONomeNoInputNome() {
                     return this.waitFor({
                         id: idInputNomeTelaDeCriacao,
@@ -53,7 +49,7 @@
                         actions: new EnterText({
                             text: nomeParaInserirCriacao
                         }),
-                        errorMessage: "Input não encontrado."
+                        errorMessage: menssagemErroInputNaoEncontrado
                     })
                 },
 
@@ -64,7 +60,7 @@
                         actions: new EnterText({
                             text: cpfParaInserirCriacao
                         }),
-                        errorMessage: "Input não encontrado."
+                        errorMessage: menssagemErroInputNaoEncontrado
                     })
                 },
 
@@ -75,7 +71,7 @@
                         actions: new EnterText({
                             text: emailParaInserirCriacao
                         }),
-                        errorMessage: "Input não encontrado."
+                        errorMessage: menssagemErroInputNaoEncontrado
                     })
                 },
 
@@ -86,7 +82,7 @@
                         actions: new EnterText({
                             text: telefoneParaInserirCriacao
                         }),
-                        errorMessage: "Input não encontrado."
+                        errorMessage: menssagemErroInputNaoEncontrado
                     })
                 },
 
@@ -95,29 +91,18 @@
                         id: idInputPagoTelaDeCriacao,
                         viewName: viewCriacao,
                         actions: new Press(),
-                        errorMessage: "Input não encontrado."
+                        errorMessage: menssagemErroInputNaoEncontrado
                     })
                 },
-
-                euClicoNaTabelaCarro() {
-                    return this.waitFor({
-                        id: idDaTabelaCarros,
-                        viewName: viewCriacao,
-                        actions: new Press(),
-                        errorMessage: "Tabela não encontrada."
-                    })
-                },
-
                 euSelecionoOItemNaTabela() {
                     return this.waitFor({
-                        controlType: "sap.m.ColumnListItem",
-                        viewName: viewCriacao,
+                        controlType: "sap.m.Text",
                         matchers: new PropertyStrictEquals({
-                            name: "id",
-                            value: idDoCarroSelecionadoTabelaCarro
+                            name: "text",
+                            value: "Teste"
                         }),
                         actions: new Press(),
-                        errorMessage: "Tabela não contém carros."
+                        errorMessage: menssagemDeErroTabelaNaoEncontrada
                     })
                 },
 
@@ -126,7 +111,7 @@
                         id: idDoBotaoAdicionarVendaCriacao,
                         viewName: viewCriacao,
                         actions: new Press(),
-                        errorMessage: "Botão não encontrado."
+                        errorMessage: menssagemDeErroBotaoNaoEncontrado
                     })
                 },
 
@@ -135,36 +120,26 @@
                         id: idDoBotaoVoltarParaTelaDeListagem,
                         viewName: viewCriacao,
                         actions: new Press(),
-                        errorMessage: "Botão não encontrado."
+                        errorMessage: menssagemDeErroBotaoNaoEncontrado
                     })
                 },
-
-                euClicoNoBotaoAtualizar() {
+                euClicoNoBotaoAdicionarVenda() {
                     return this.waitFor({
-                        id: idDoBotaoAtualizar,
+                        id: idDoBotaoAdicionarVenda,
                         viewName: viewListagem,
                         actions: new Press(),
-                        errorMessage: "Botão não encontrado."
+                        errorMessage: menssagemDeErroBotaoNaoEncontrado
                     })
                 }
             },
 
             assertions: {
-                euVerificoSeOBotaoFoiClicado() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
-                        },
-                        errorMessage: "O botão não foi clicado"
-                    });
-                },
-
                 euVerificoSeOTextoFoiInseridoNoInputNome() {
                     return this.waitFor({
                         success() {
                             Opa5.assert.ok(true, `Texto inserido com sucesso.`);
                         },
-                        errorMessage: "O texto não foi adicionado."
+                        errorMessage: menssagemDeErroOTextoNaoFoiAdicionado
                     });
                 },
 
@@ -173,7 +148,7 @@
                         success() {
                             Opa5.assert.ok(true, `Texto inserido com sucesso.`);
                         },
-                        errorMessage: "O texto não foi adicionado."
+                        errorMessage: menssagemDeErroOTextoNaoFoiAdicionado
                     });
                 },
 
@@ -182,7 +157,7 @@
                         success() {
                             Opa5.assert.ok(true, `Texto inserido com sucesso.`);
                         },
-                        errorMessage: "O texto não foi adicionado."
+                        errorMessage: menssagemDeErroOTextoNaoFoiAdicionado
                     });
                 },
 
@@ -191,7 +166,7 @@
                         success() {
                             Opa5.assert.ok(true, `Texto inserido com sucesso.`);
                         },
-                        errorMessage: "O texto não foi adicionado."
+                        errorMessage: menssagemDeErroOTextoNaoFoiAdicionado
                     });
                 },
 
@@ -200,7 +175,7 @@
                         success() {
                             Opa5.assert.ok(true, `Input pago clicado com sucesso.`);
                         },
-                        errorMessage: "Input não encontrado."
+                        errorMessage: menssagemErroInputNaoEncontrado
                     });
                 },
 
@@ -218,7 +193,7 @@
                             });
                             Opa5.assert.ok(verificarItems, `Carro selecionado com sucesso.`);
                         },
-                        errorMessage: "Carro não selecionado"
+                        errorMessage: menssagemDeErroOCarroNaoFoiSelecionado
                     })
                 },
 
@@ -227,7 +202,7 @@
                         success() {
                             Opa5.assert.ok(true, `O botão foi clicado`);
                         },
-                        errorMessage: "O botão não foi clicado"
+                        errorMessage: menssagemDeErroOBotaoNaoFoiClicado
                     });
                 },
 
@@ -236,7 +211,7 @@
                         success() {
                             Opa5.assert.ok(true, `O botão foi clicado`);
                         },
-                        errorMessage: "O botão não foi clicado"
+                        errorMessage: menssagemDeErroOBotaoNaoFoiClicado
                     });
                 },
 
@@ -252,7 +227,15 @@
                             });
                             Opa5.assert.ok(itemEncontrado, "A venda foi criada com sucesso.");
                         },
-                        errorMessage: "A venda não foi criada com sucesso."
+                        errorMessage: menssagemDeErroAVendaNaoFoiCriadaComSucesso
+                    });
+                },
+                euVerificoSeOBotaoAdicionarVendaFoiClicado() {
+                    return this.waitFor({
+                        success() {
+                            Opa5.assert.ok(true, `O botão foi clicado`);
+                        },
+                        errorMessage: menssagemDeErroOBotaoNaoFoiClicado
                     });
                 }
             }

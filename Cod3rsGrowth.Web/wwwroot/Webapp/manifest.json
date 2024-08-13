@@ -39,7 +39,7 @@
       "cozy": true
     },
     "rootView": {
-      "viewName": "ui5.carro.view.App",
+      "viewName": "ui5.carro.app.App",
       "type": "XML",
       "async": true,
       "id": "app"
@@ -68,7 +68,7 @@
         "routerClass": "sap.m.routing.Router",
         "type": "View",
         "viewType": "XML",
-        "path": "ui5.carro.view",
+        "path": "ui5.carro",
         "controlId": "app",
         "controlAggregation": "pages",
         "transition": "slide",
@@ -92,26 +92,35 @@
           "pattern": "detalhes/{id}",
           "name": "appDetalhes",
           "target": "detalhes"
+        },
+        {
+          "pattern": "EditarVenda/{id}",
+          "name": "appEditarVenda",
+          "target": "editar"
         }
       ],
       "targets": {
         "listagem": {
           "id": "listagem",
-          "name": "ListagemVenda",
+          "name": "app.vendas.ListagemVenda",
           "level": 1
         },
         "adicionarVenda": {
           "id": "adicionarVenda",
-          "name": "AdicionarVenda"
+          "name": "app.vendas.AdicionarVenda"
         },
         "notFound": {
           "id": "notFound",
-          "name": "NotFound",
+          "name": "app.notfound.NotFound",
           "transition": "show"
         },
         "detalhes": {
           "id": "detalhes",
-          "name": "Detalhes"
+          "name": "app.vendas.Detalhes"
+        },
+        "editar": {
+          "id": "adicionarVenda",
+          "name": "app.vendas.AdicionarVenda"
         }
       }
     }

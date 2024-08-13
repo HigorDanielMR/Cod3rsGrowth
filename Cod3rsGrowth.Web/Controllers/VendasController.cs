@@ -37,8 +37,7 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpPatch("{Id}")]
         public IActionResult Editar([FromBody] Venda venda)
         {
-            _servico.Editar(venda);
-            return Ok();
+            return Ok(_servico.Editar(venda));
         }
 
         [HttpDelete("{Id}")]

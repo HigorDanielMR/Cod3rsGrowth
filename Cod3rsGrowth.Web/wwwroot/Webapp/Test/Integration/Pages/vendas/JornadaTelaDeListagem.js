@@ -1,10 +1,10 @@
 ﻿sap.ui.define([
 	"sap/ui/test/opaQunit",
-	"./pages/TelaDeListagem"
+	"./TelaDeListagem"
 
 ], (opaTest) => {
 
-	QUnit.module("Teste tela de listagem");
+	QUnit.module("Listagem");
 
 	opaTest("Deve filtrar pelo nome e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyApp();
@@ -29,15 +29,8 @@
 
 	opaTest("Deve filtrar pela data inicial e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyApp();
-		When.naTelaDeListagem.euPreenchoOInputDoFiltroDataInicial();
-		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial();
+		When.naTelaDeListagem.euClicoNoIconeDoDateRangeSelection();
+		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicialEDataFinal();
 		Then.iTeardownMyApp();
-	});
-	opaTest("Deve filtrar pela data final e atualizar lista filtrada", function (Given, When, Then) {
-		Given.iStartMyApp();
-		When.naTelaDeListagem.euPreenchoOInputDoFiltroDataFinal();
-		Then.naTelaDeListagem.euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal();
-		Then.iTeardownMyApp();
-
 	});
 });

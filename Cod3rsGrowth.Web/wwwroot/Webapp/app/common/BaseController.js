@@ -8,6 +8,7 @@ sap.ui.define([
 	"use strict";
 
 	var voltarUmaPagina = -1;
+	var RotaListagem = "appListagem";
 
 	return Controller.extend("ui5.carro.controller.BaseController", {
 		getRouter() {
@@ -23,7 +24,7 @@ sap.ui.define([
 			if (previousHash !== undefined) {
 				window.history.go(voltarUmaPagina);
 			} else {
-				this.getRouter().navTo("appListagem", {}, true);
+				this.getRouter().navTo(RotaListagem, {}, true);
 			}
 		},
 
@@ -39,14 +40,18 @@ sap.ui.define([
 			}
 		},
 
-		formatarData(data) {
-			var novaData = new Date(data);
+		_erroNaRequisicaoDaApi(erroRfc) {
+			const mensagemErroPrincipal = erroRfc.Extensions.Erros.join(', ');
+			const mensagemErroCompleta = `<p><strong>Status:</strong> ${erroRfc.Status}</p>` +
+				`<p><strong>Detalhes:</strong><br/> ${erroRfc.Detail}</p>` +
+				"<p>Para mais ajuda acesse <a href='//www.sap.com' target='_top'>aqui</a>.";
 
-			var dia = novaData.getDate().toString().padStart(2, '0');
-			var mes = (novaData.getMonth() + 1).toString().padStart(2, '0');
-			var ano = novaData.getFullYear();
-
-			return `${ano}-${mes}-${dia}`;
+			MessageBox.error(mensagemErroPrincipal, {
+				title: "Error",
+				details: mensagemErroCompleta,
+				styleClass: "sapUiResponsivePadding--header sapUiResponsivePadding--content sapUiResponsivePadding--footer",
+				dependentOn: this.getView()
+			});
 		}
 	});
 

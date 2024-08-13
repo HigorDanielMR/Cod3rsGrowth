@@ -1,9 +1,11 @@
 sap.ui.define([
     "sap/ui/test/Opa5",
     "sap/ui/test/actions/EnterText",
-    "sap/ui/test/actions/Press"
+    "sap/ui/test/actions/Press",
+    "sap/ui/test/matchers/PropertyStrictEquals"
 
-], (Opa5, EnterText, Press) => {
+
+], (Opa5, EnterText, Press, PropertyStrictEquals) => {
     "use strict";
 
     const propriedadeCpf = "cpf";
@@ -16,11 +18,10 @@ sap.ui.define([
     const cpfParaInserir = "54651651651";
     const viewListagem = "ListagemVenda";
     const propriedadeTelefone = "telefone";
-    const dataFinalParaInserir = "04072024";
     const telefoneParaInserir = "65165161651";
-    const dataInicialParaInserir = "18072024";
+    const dataParaInserir = "04/07/2024-18/07/2024";
     const idDoFiltroTelefone = "FiltroTelefone";
-    const idDoFiltroDataFinal = "FiltroDataFinal";
+    const idDoFiltroData = "FiltroData";
     const propriedadeDataDeCompra = "dataDeCompra";
     const idDoFiltroDataInicial = "FiltroDataInicial";
     const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
@@ -67,49 +68,31 @@ sap.ui.define([
                     });
                 },
 
-                euPreenchoOInputDoFiltroDataInicial() {
+                euClicoNoIconeDoDateRangeSelection() {
                     return this.waitFor({
-                        id: idDoFiltroDataInicial,
                         viewName: viewListagem,
+                        id: idDoFiltroData,
                         actions: new EnterText({
-                            text: dataInicialParaInserir
+                            text: dataParaInserir
                         }),
                         errorMessage: "Input não encontrado."
                     });
-                },
-
-                euPreenchoOInputDoFiltroDataFinal() {
-                    return this.waitFor({
-                        id: idDoFiltroDataFinal,
-                        viewName: viewListagem,
-                        actions: new EnterText({
-                            text: dataFinalParaInserir
-                        }),
-                        errorMessage: "Input não encontrado."
-                    });
-                },
-
-                euClicoNoBotaoAdicionar() {
-                    return this.waitFor({
-                        id: idDoBotaoAdicionarVenda,
-                        viewName: viewListagem,
-                        actions: new Press(),
-                        errorMessage: "Botão não encontrado."
-                    })
                 }
             },
 
             assertions: {
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoNome() {
+                    const nomeDesejado = 'Adriana';
+                    const propriedadeDesejada = "nome";
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("nome");
+                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
 
-                                return itemDesejado === 'Adriana';
+                                return itemDesejado === nomeDesejado;
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
@@ -118,15 +101,17 @@ sap.ui.define([
                 },
 
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoCpf() {
+                    const propiedadeDesejada = "cpf";
+                    const cpfDesejado = '546.516.516-51';
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("cpf");
+                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propiedadeDesejada);
 
-                                return itemDesejado === '546.516.516-51';
+                                return itemDesejado === cpfDesejado;
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
@@ -135,15 +120,18 @@ sap.ui.define([
                 },
 
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoTelefone() {
+                    const propriedadeDesejada = "telefone";
+                    const telefoneDesejado = '(65) 16516-1651';
+
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("telefone");
+                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
 
-                                return itemDesejado === '(65) 16516-1651';
+                                return itemDesejado === telefoneDesejado;
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
@@ -151,45 +139,21 @@ sap.ui.define([
                     });
                 },
 
-                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicial() {
+                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataInicialEDataFinal() {
+                    const dataDesejada = '2024-07-18';
+                    const propriedadeDesejada = "dataDeCompra";
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra");
-                                return itemDesejado >= '2024-07-18';
+                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
+                                return itemDesejado <= dataDesejada;
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
                         errorMessage: "A pagina não contem o numero de items esperados"
-                    });
-                },
-
-                euVerificoSeATabelaFoiFiltradaComoOEsperadoDataFinal() {
-                    return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabela,
-                        success: function (oTable) {
-                            var items = oTable.getItems();
-                            var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext("Vendas").getProperty("dataDeCompra").split("T");
-                                var dataFormatada = itemDesejado[0];
-                                return dataFormatada <= '2024-07-04';
-                            });
-                            Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
-                        },
-                        errorMessage: "A pagina não contem o numero de items esperados"
-                    });
-                },
-
-                euVerificoSeOBotaoFoiClicado() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
-                        },
-                        errorMessage: "O botão não foi clicado"
                     });
                 }
             }
