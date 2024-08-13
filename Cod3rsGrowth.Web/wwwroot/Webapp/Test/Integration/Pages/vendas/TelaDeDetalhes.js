@@ -7,12 +7,11 @@
 ], function (Opa5, PropertyStrictEquals, Press, EnterText) {
     'use strict';
 
-    const viewDetalhes = "Detalhes"
-    const idDaTagTextID = "idDetalhes"
-    const viewListagem = "ListagemVenda"
-    const idTabelaVendas = "TabelaVendas"
-    const idDaTagTextNome = "nomeDetalhes"
-    const idDaVendaSelecionadaTabelaVenda = "__item0-__component0---listagem--TabelaVendas-0"
+    const viewDetalhes = "Detalhes";
+    const idDaTagTextID = "idDetalhes";
+    const viewListagem = "ListagemVenda";
+    const idDaTagTextNome = "nomeDetalhes";
+    const idBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
 
     Opa5.createPageObjects({
         naTelaDeDetalhes: {
@@ -25,7 +24,7 @@
             actions: {
                 euClicoNoBotaoVoltarParaATelaDeListagem() {
                     return this.waitFor({
-                        id: "voltarParaAListagem",
+                        id: idBotaoVoltarParaTelaDeListagem
                         viewName: viewDetalhes,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado"

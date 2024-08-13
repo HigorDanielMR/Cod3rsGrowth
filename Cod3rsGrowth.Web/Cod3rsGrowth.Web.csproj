@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\Webapp\NovaPasta\**" />
+    <Compile Remove="wwwroot\Webapp\venda\**" />
+    <Content Remove="wwwroot\Webapp\NovaPasta\**" />
+    <Content Remove="wwwroot\Webapp\venda\**" />
+    <EmbeddedResource Remove="wwwroot\Webapp\NovaPasta\**" />
+    <EmbeddedResource Remove="wwwroot\Webapp\venda\**" />
+    <None Remove="wwwroot\Webapp\NovaPasta\**" />
+    <None Remove="wwwroot\Webapp\venda\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Content Remove="App.Config" />
     <Content Remove="wwwroot\Webapp\Controller\Worklist.controller.js" />
     <Content Remove="wwwroot\Webapp\model\validacao.js" />
@@ -34,11 +45,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Cod3rsGrowth.Infra\Cod3rsGrowth.Infra.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="wwwroot\Webapp\NovaPasta\" />
-    <Folder Include="wwwroot\Webapp\venda\" />
   </ItemGroup>
 
 </Project>

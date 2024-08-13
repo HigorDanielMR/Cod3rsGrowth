@@ -4,40 +4,40 @@
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter",
     "ui5/carro/model/validacao",
+	"sap/m/MessageStrip",
 	"sap/m/MessageBox"
 
-], function (BaseController, History, JSONModel, Formatter, validacao, MessageBox) {
+], function (BaseController, History, JSONModel, Formatter, validacao, MessageStrip, MessageBox) {
     "use strict";
 
+    var _rota;
     let idVenda;
-    var _Rota;
-    let dataEditar;
     let idCarro;
-    let indexCor;
+    let dataEditar;
     const estiverVazio = 0;
     const primeiroCarro = 0;
-    const voltarUmaPagina = -1;
     const modeloCarro = "Carros";
-    const modeloVenda = "Venda";
-    const ParametroNome = "name";
+    const parametroNome = "name";
     const idDoInputCpf = "InputCpf";
     const idDoTituloTela = "Title1";
     const idDoInputPago = "InputPago";
     const idDoInputNome = "InputNome";
     const idDoInputEmail = "InputEmail";
-    const RotaEditar = "appEditarVenda";
-    const RotaCriar = "appAdicionarVenda";
-    const RotaViewListagem = "appListagem";
-    const ParametroArgumento = "arguments";
+    const rotaEditar = "appEditarVenda";
+    const rotaCriar = "appAdicionarVenda";
+    const rotaViewListagem = "appListagem";
+    const parametroArgumento = "arguments";
     const idDoInputTelefone = "InputTelefone";
-    const TextoParaAdicionarTituloEdicao = "Editar Venda";
-    const TextoParaAdicionarTituloCriar = "Adicionar Venda";
+    const textoParaAdicionarTituloEdicao = "Editar Venda";
+    const textoParaAdicionarTituloCriar = "Adicionar Venda";
+    const idDoMessageStripErroCriarVenda = "erroCriarVenda";
+    const idDoMessageStripErroEditarVenda = "erroEditarVenda";
     const idDoMessageStripSucessoEdicao = "sucessoAoEditarVenda";
     const idDoMessageStripSucessoCriacao = "sucessoAoCriarVenda";
     let urlObterVendaPorId = "http://localhost:5071/api/Vendas/";
     const idDaTabelaCarrosDisponiveis = "TabelaCarrosDisponiveis";
     const urlCarroObterPorId = "http://localhost:5071/api/Carros/";
-    const idDoMessageStripErroSelecionarCarro = "erroSelecionarCarro";
+    const mensagemErroCarroNaoSelecionado = "Carro não selecionado";
     let urlCarrosDisponiveis = "http://localhost:5071/api/Carros/Disponiveis";
 
     return BaseController.extend("ui5.carro.app.vendas.AdicionarVenda", {
@@ -50,30 +50,31 @@
         aoCoincidirRota() {
             this.processarEvento(() => {
                 var rota = sap.ui.core.UIComponent.getRouterFor(this);
-                rota.getRoute(RotaEditar).attachPatternMatched(this._carregarEventosEditar, this);
+                rota.getRoute(rotaEditar).attachPatternMatched(this._carregarEventosEditar, this);
 
-                rota.getRoute(RotaCriar).attachMatched(this._carregarEventosCriar, this);
+                rota.getRoute(rotaCriar).attachMatched(this._carregarEventosCriar, this);
             });
         },
 
         _carregarEventosEditar(oEvent) {
             var oRouter = this.getRouter();
-            _Rota = oRouter.getRoute(oEvent.getParameter(ParametroNome))._oConfig.name;
+            _rota = oRouter.getRoute(oEvent.getParameter(parametroNome))._oConfig.name;
             this._obterVendaPorId(oEvent);
             this._mudarTituloDaViewEdicao();
             this.getView().byId(idDoMessageStripSucessoEdicao).setVisible(false);
+            this.getView().byId(idDoMessageStripErroEditarVenda).setVisible(false);
 
         },
 
         _carregarEventosCriar(oEvent) {
             this._mudarTituloDaViewCriar();
-            this._limparInput();
+            this._limparViewDeCriacao();
             this._carregarCarros();
             var oRouter = this.getRouter();
-            _Rota = oRouter.getRoute(oEvent.getParameter(ParametroNome))._oConfig.name;
+            _rota = oRouter.getRoute(oEvent.getParameter(parametroNome))._oConfig.name;
         },
 
-        _limparInput() {
+        _limparViewDeCriacao() {
             const inputNome = this.oView.byId(idDoInputNome);
             const nome = inputNome.setValue(null);
             inputNome.setValueState(sap.ui.core.ValueState.None);
@@ -92,7 +93,7 @@
             inputTelefone.setValueStateText('');
             const pago = this.oView.byId(idDoInputPago).setSelected(false)
             this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(false);
-            this.getView().byId(idDoMessageStripErroSelecionarCarro).setVisible(false);
+            this.getView().byId(idDoMessageStripErroCriarVenda).setVisible(false);
         },
 
         _carregarCarros() {
@@ -110,11 +111,11 @@
                     sucesso ? this.getView().setModel(jsonModel, modeloCarro)
                         : this._erroNaRequisicaoDaApi(carro);
                 })
-                .catch((err) => MessageBox.error(err));
+                .catch((err) => console.log(err));
         },
 
         _mudarTituloDaViewCriar() {
-            var Titulo = this.getView().byId(idDoTituloTela).setText(TextoParaAdicionarTituloCriar);
+            var Titulo = this.getView().byId(idDoTituloTela).setText(textoParaAdicionarTituloCriar);
             return Titulo;
         },
 
@@ -153,17 +154,18 @@
 
         aoClicarNoBotaoAdicionarDeveAdicionarVenda() {
             this.processarEvento(() => {
-                let sucesso = true;
-                const url = "http://localhost:5071/api/Vendas/";
-                const nome = this.aoColetarNome();
-                const cpf = this.aoColetarCpf();
-                const email = this.aoColetarEmail();
-                const telefone = this.aoColetarTelefone();
-                const carroEscolhido = this._obterCarroSelecionado();
-                const pago = this.aoObterStatusPagamento();
-                const data = Date.now();
+                
+                    let sucesso = true;
+                    const url = "http://localhost:5071/api/Vendas/";
+                    const nome = this.aoColetarNome();
+                    const cpf = this.aoColetarCpf();
+                    const email = this.aoColetarEmail();
+                    const telefone = this.aoColetarTelefone();
+                    const carroEscolhido = this._obterCarroSelecionado();
+                    const pago = this.aoObterStatusPagamento();
+                    const data = Date.now();
 
-                if (_Rota === RotaEditar) {
+                if (_rota === rotaEditar) {
                     const urlEditar = url + idVenda;
                     const venda = {
                         "id": idVenda,
@@ -190,13 +192,18 @@
                             return res.json();
                         })
                         .then(data => {
-                            if (!sucesso) this._erroNaRequisicaoDaApi(data);
+                            if (!sucesso) {
+                                this._erroNaRequisicaoDaApi(data);
+                                this.getView().byId(idDoMessageStripErroEditarVenda).setVisible(true);
+                            }
+                            else {
+                                this.getView().byId(idDoMessageStripSucessoEdicao).setVisible(true);
+                            }
                         })
-                        .catch(err => { MessageBox.error(err); });
+                        .catch(err => { console.log(err); });
 
-                    this.getView().byId(idDoMessageStripSucessoEdicao).setVisible(true);
                 }
-                else if (_Rota === RotaCriar) {
+                else if (_rota === rotaCriar) {
                     const venda = {
                         "nome": this.aoColetarNome(),
                         "cpf": this.aoColetarCpf(),
@@ -221,62 +228,17 @@
                             return res.json();
                         })
                         .then(data => {
-                            if (!sucesso) this._erroNaRequisicaoDaApi(data);
+                            if (!sucesso) {
+                                this._erroNaRequisicaoDaApi(data);
+                                this.getView().byId(idDoMessageStripErroCriarVenda).setVisible(true);
+                            }
+                            else {
+                                this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(true);
+                            }
                         })
-                        .catch(err => { MessageBox.error(err); });
-                    this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(true);
+                        .catch(err => { console.log(err); });
                 }
             })
-        },
-
-        _obterDescricaoCor(indexCor) {
-            let urlObterCor = "http://localhost:5071/api/Carros/Marca?marca="
-
-            fetch(query)
-                .then(res => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
-                    return res.json();
-                })
-                .then(venda => {
-
-                    if (sucesso) {
-                        let id = this._carregarDados(venda);
-                        idCarro = id;
-                        const data = venda.dataDeCompra;
-                        this._carregarDataDeCompraEditar(data);
-                        this._carregarCarrosEditar(idCarro);
-                    }
-                    else {
-                        this._erroNaRequisicaoDaApi(venda);
-                    }
-                })
-                .catch(err => { MessageBox.error(err); });
-        },
-
-        _obterDescricaoMarca() {
-            fetch(query)
-                .then(res => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
-                    return res.json();
-                })
-                .then(venda => {
-
-                    if (sucesso) {
-                        let id = this._carregarDados(venda);
-                        idCarro = id;
-                        const data = venda.dataDeCompra;
-                        this._carregarDataDeCompraEditar(data);
-                        this._carregarCarrosEditar(idCarro);
-                    }
-                    else {
-                        this._erroNaRequisicaoDaApi(venda);
-                    }
-                })
-                .catch(err => { MessageBox.error(err); });
         },
 
         _obterCarroSelecionado() {
@@ -284,11 +246,8 @@
             const ListaComCarroSelecionado = Tabela.getSelectedItems();
 
             if (ListaComCarroSelecionado.length === estiverVazio) {
-                this.getView().byId(idDoMessageStripErroSelecionarCarro).setVisible(true);
-                throw new Error('Carro não selecionado');
-            }
-            else {
-                this.getView().byId(idDoMessageStripErroSelecionarCarro).setVisible(false);
+                this.getView().byId(idDoMessageStripErroCriarVenda).setVisible(true);
+                return Error(mensagemErroCarroNaoSelecionado);
             }
 
             const CarroSelecionado = ListaComCarroSelecionado[primeiroCarro];
@@ -299,12 +258,12 @@
         },
         
         _mudarTituloDaViewEdicao() {
-            var Titulo = this.getView().byId(idDoTituloTela).setText(TextoParaAdicionarTituloEdicao);
+            var Titulo = this.getView().byId(idDoTituloTela).setText(textoParaAdicionarTituloEdicao);
             return Titulo;
         },   
 
         _obterVendaPorId(oEvent) {
-            idVenda = oEvent.getParameter(ParametroArgumento).id;
+            idVenda = oEvent.getParameter(parametroArgumento).id;
             let query = urlObterVendaPorId + idVenda;
             let sucesso = true;
 
@@ -328,7 +287,7 @@
                         this._erroNaRequisicaoDaApi(venda);
                     }
                 })
-                .catch(err => { MessageBox.error(err); });
+                .catch(err => { console.log(err); });
         },
 
         _carregarDataDeCompraEditar(data) {
@@ -356,7 +315,7 @@
 
                     this.getView().getModel(modeloCarro).setData(listaDeCarros);
                 })
-                .catch(err => { MessageBox.error(err); });
+                .catch(err => { console.log(err); });
         },
 
         _carregarDados(venda) {
@@ -371,16 +330,10 @@
 
         aoClicarDeveVoltarParaATelaDeListagem() {
             this.processarEvento(() => {
-                var history, previousHash;
+                var history;
 
                 history = History.getInstance();
-                previousHash = history.getPreviousHash();
-
-                if (previousHash !== undefined) {
-                    window.history.go(voltarUmaPagina);
-                } else {
-                    this.getRouter().navTo(RotaViewListagem, {}, true);
-                }
+                this.getRouter().navTo(rotaViewListagem, {}, true);
             })
         }
     });

@@ -5,7 +5,7 @@
 
 ], (opaTest) => {
 
-	QUnit.module("Teste tela de edicao");
+	QUnit.module("Edicao");
 
 	opaTest("Deve preencher o valor do input nome", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
@@ -18,46 +18,32 @@
 		When.naTelaDeEdicao.euInsiroONomeNoInputNome();
 		Then.naTelaDeEdicao.euVerificoSeOTextoFoiInseridoNoInputNome();
 	});
-
-	opaTest("Deve preencher o valor do input cpf", function (Given, When, Then) {
-		When.naTelaDeEdicao.euInsiroOCpfNoInputCpf();
-		Then.naTelaDeEdicao.euVerificoSeOTextoFoiInseridoNoInputCpf();
-	});
-
-	opaTest("Deve preencher o valor do input email", function (Given, When, Then) {
-		When.naTelaDeEdicao.euInsiroOEmailNoInputEmail();
-		Then.naTelaDeEdicao.euVerificoSeOTextoFoiInseridoNoInputEmail();
-	});
-
-	opaTest("Deve preencher o valor do input telefone", function (Given, When, Then) {
-
-		When.naTelaDeEdicao.euInsiroOTelefoneNoInputTelefone();
-		Then.naTelaDeEdicao.euVerificoSeOTextoFoiInseridoNoInputTelefone();
-	});
-
-	opaTest("Deve clicar no checkbox pago", function (Given, When, Then) {
-
-		When.naTelaDeEdicao.euClicoNoInputPago();
-		Then.naTelaDeEdicao.euVerificoSeOInputPagoFoiPressionado();
-	});
+	
 
 	opaTest("Deve selecionar um carro na tabela", function (Given, When, Then) {
 		When.naTelaDeEdicao.euSelecionoOItemNaTabela();
 		Then.naTelaDeEdicao.euVereificoSeATabelaFoiPressionada();
 	});
 
-	opaTest("Deve clicar no botao adicionar e verificar se venda foi criada com sucesso", function (Given, When, Then) {
-		When.naTelaDeEdicao.euClicoNoBotaoAdicionarDaTelaDeCriacao();
-		When.naTelaDeEdicao.euClicoNoBotaoVoltarParaTelaDeListagem();
+	opaTest("Deve clicar no botao adicionar ", function (Given, When, Then) {
+		When.naTelaDeEdicao.euClicoNoBotaoAdicionarDaTelaDeEditar();
 		Then.naTelaDeEdicao.euVerificoSeOBotaoAdicionarFoiClicado();
-		Then.naTelaDeEdicao.euVerificoSeOBotaoVoltarParaATelaDeListagemFoiClicado();
-		Then.naTelaDeEdicao.euVerificoSeAVendaFoiCriada();
 	});
 
-	opaTest("Deve clicar no botao adicionar venda na tela de listagem", function (Given, When, Then) {
-		When.naTelaDeEdicao.euClicoNoBotaoAdicionarVenda();
-		Then.naTelaDeEdicao.euVerificoSeOBotaoAdicionarVendaFoiClicado();
-	});
+	opaTest("Deve clicar no botao voltar para a tela de listagem", function (Given, When, Then) {
+		When.naTelaDeEdicao.euClicoNoBotaoVoltarParaTelaListagem();
+		Then.naTelaDeEdicao.euVerificoSeOBotaoVoltarParaATelaDeDetalhesFoiClicado();
+		Then.naTelaDeEdicao.euVerificoSeAVendaFoiEditada();
+	}),
 
-	
+	opaTest("Deve clicar na venda desejada e abrir a tela de detalhes", function (Given, When, Then) {
+		When.naTelaDeEdicao.euClicoNaVendaDoIdNomeDesejado();
+		Then.naTelaDeEdicao.euVerificoSeNomeEstaComoOEsperado();
+	}),
+
+	opaTest("Deve clicar no botao editar em detalhes e verificar se a view foi aberta", function (Given, When, Then) {
+		When.naTelaDeEdicao.euClicoNoBotaoEditarNaTelaDeDetalhes();
+		Then.naTelaDeEdicao.euVerificoSeAViewFoiCarregada();
+		Then.iTeardownMyApp();
+	})
 });

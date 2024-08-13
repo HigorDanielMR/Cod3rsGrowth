@@ -7,13 +7,12 @@
 ], function (BaseController, Formatter, History, JSONModel) {
     "use strict";
 
-    const voltarUmaPagina = -1;
-    const ID = "id"
-
+    const id = "id"
     const modeloVenda = "Venda"
     const rotaDetalhe = "appDetalhes"
-    const ParametroArgumento = "arguments";
-    const RotaEditarVenda = "appEditarVenda";
+    const rotaListagem = "appListagem";
+    const parametroArgumento = "arguments";
+    const rotaEditarVenda = "appEditarVenda";
     const urlObterPorId = "http://localhost:5071/api/Vendas/"
 
     return BaseController.extend("ui5.carro.app.vendas.Detalhes", {
@@ -25,13 +24,13 @@
 
         aoCoincidirRota: function () {
             this.processarEvento(() => {
-                const oRouter = this.getOwnerComponent().getRouter();
-                oRouter.getRoute(rotaDetalhe).attachMatched(this._obterPorId,this);
+                const rota = this.getOwnerComponent().getRouter();
+                rota.getRoute(rotaDetalhe).attachMatched(this._obterPorId,this);
             });
         },
 
         _obterPorId: function (oEvent) {
-            let id = oEvent.getParameter(ParametroArgumento).id;
+            let id = oEvent.getParameter(parametroArgumento).id;
             let query = urlObterPorId + id;
             let sucesso = true;
             fetch(query)
@@ -49,16 +48,10 @@
 
         aoClicarVoltarParaTelaDeListagem() {
             this.processarEvento(() => {
-                var history, previousHash;
+                var history;
 
                 history = History.getInstance();
-                previousHash = history.getPreviousHash();
-
-                if (previousHash !== undefined) {
-                    window.history.go(voltarUmaPagina);
-                } else {
-                    this.getRouter().navTo("appListagem", {}, true);
-                }
+                this.getRouter().navTo(rotaListagem, {}, true);
             })
         },
 
@@ -66,8 +59,8 @@
             this.processarEvento(() => {
                 const oItem = oEvent.getSource();
                 const oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo(RotaEditarVenda, {
-                    id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(ID))
+                oRouter.navTo(rotaEditarVenda, {
+                    id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(id))
                 });
             })
         }

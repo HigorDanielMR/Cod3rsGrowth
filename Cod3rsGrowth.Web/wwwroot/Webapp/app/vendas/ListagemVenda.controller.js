@@ -7,17 +7,17 @@ sap.ui.define([
 ], function (BaseController, JSONModel, Formatter, MessageBox) {
     "use strict";
 
-    const ID = "id";
+    const id = "id";
     const modeloVenda = "Vendas";
     const idDoFiltroCpf = "FiltroCpf";
-    const RotaListagem = "appListagem";
+    const rotaListagem = "appListagem";
     const idDoFiltroNome = "FiltroNome";
     const quantidadeDeCaracteresDoCpf = 14;
     const quantidadeDeCaracteresDoTelefone = 15;
     const idDoFiltroTelefone = "FiltroTelefone";
     let url = "http://localhost:5071/api/Vendas";    
-    const RotaAdicionarVenda = "appAdicionarVenda";
-    const RotaDetalhes = "appDetalhes";
+    const rotaAdicionarVenda = "appAdicionarVenda";
+    const rotaDetalhes = "appDetalhes";
 
     return BaseController.extend("ui5.carro.app.vendas.ListagemVenda", {
         formatter: Formatter,
@@ -45,7 +45,7 @@ sap.ui.define([
         aoCoincidirRota() {
             this.processarEvento(() => {
                 var rota = sap.ui.core.UIComponent.getRouterFor(this);
-                rota.getRoute(RotaListagem).attachMatched(this._carregarListaDeVendas, this);
+                rota.getRoute(rotaListagem).attachMatched(this._carregarListaDeVendas, this);
             });
         },
         
@@ -131,15 +131,15 @@ sap.ui.define([
 
         adicionarVenda() {
             this.processarEvento(() => {
-                this.getRouter().navTo(RotaAdicionarVenda, {}, true);  
+                this.getRouter().navTo(rotaAdicionarVenda, {}, true);  
             })
         },
 
         aoPressionar(oEvent) {
             const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo(RotaDetalhes, {
-                id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(ID))
+            oRouter.navTo(rotaDetalhes, {
+                id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(id))
             });
         }
     });

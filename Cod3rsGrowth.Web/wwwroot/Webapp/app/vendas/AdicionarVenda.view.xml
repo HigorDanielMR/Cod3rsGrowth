@@ -7,13 +7,23 @@
 	xmlns="sap.m" >
 
 	<MessageStrip
-				text="{i18n>Validacao.CarroNaoSelecionado}"
+				text="{i18n>Validacao.ErroCriarVenda}"
 				visible="false"
 				type="Error"
 				showIcon="true"
 				showCloseButton="true"
 				class="sapUiMediumMarginBottom"
-				id="erroSelecionarCarro">
+				id="erroCriarVenda">
+	</MessageStrip>
+
+	<MessageStrip
+				text="{i18n>Validacao.ErroEditarVenda}"
+				visible="false"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="erroEditarVenda">
 	</MessageStrip>
 
 	<MessageStrip
