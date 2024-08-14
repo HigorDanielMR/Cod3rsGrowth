@@ -12,8 +12,11 @@ sap.ui.define([
 		Then.naTelaDeDetalhesRemover.euVerificoSeNomeEstaComoOEsperado();
 	});
 
-	opaTest("Deve clicar no botao remover e verificar se a messageBox foi aberta conforme o esperado", function (Given, When, Then) {
+	opaTest("Deve clicar no botao remover clicar no botao sim para remover venda e botao nao para remover carro e verificar se a venda foi removida com sucesso", function (Given, When, Then) {
 		When.naTelaDeDetalhesRemover.euClicoNoBotaoRemover();
-		Then.naTelaDeDetalhesRemover.euVerificoSeAMessageBoxDeConfirmarRemoverVendaFoiAberta();
-	})
+		When.naTelaDeDetalhesRemover.euClicoNoBotaoSimDaMessageBox();
+		When.naTelaDeDetalhesRemover.euClicoNoBotaoNaoDaMessageBox();
+		Then.naTelaDeDetalhesRemover.euVerificoSeAVendaFoiRemovidaComSucesso();
+		Then.iTeardownMyApp();
+	});
 });

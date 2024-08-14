@@ -8,10 +8,11 @@ sap.ui.define([
     'use strict';
 
     const viewDetalhes = "Detalhes";
-    const idDaTagTextID = "idDetalhes";
+    const idDaTabela = "TabelaVendas";
     const viewListagem = "ListagemVenda";
+    const contextoVendas = "Vendas";
+    const idBotaoRemover = "botaoRemover";
     const idDaTagTextNome = "nomeDetalhes";
-    const idBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
 
     Opa5.createPageObjects({
         naTelaDeDetalhesRemover: {
@@ -23,13 +24,15 @@ sap.ui.define([
 
             actions: {
                 euClicoNaVendaSelecionada() {
+                    const propriedadeDesejada = "text";
+                    const nomeDesejado = "Teste Remover";
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         viewName: viewListagem,
                         matchers: [
                             new PropertyStrictEquals({
-                                name: "text",
-                                value: "Teste Remover"
+                                name: propriedadeDesejada,
+                                value: nomeDesejado
                             })
                         ],
                         actions: new Press(),
@@ -39,9 +42,47 @@ sap.ui.define([
                 euClicoNoBotaoRemover() {
                     return this.waitFor({
                         viewName: viewDetalhes,
-                        id: "botaoRemover",
+                        id: idBotaoRemover,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
+                    })
+                },
+                euClicoNoBotaoSimDaMessageBox(){
+                    var oOrderNowButton = null;
+                    const botaoSimMessageBox = "Sim";
+                    return this.waitFor({
+                        viewName: viewDetalhes,
+                        searchOpenDialogs: true, 
+                        controlType: "sap.m.Button", 
+                        success(aButtons) {
+                            return aButtons.filter(function (oButton) {
+                                if(oButton.getText() == botaoSimMessageBox) {
+                                    oOrderNowButton = oButton;
+                                    oButton.firePress();
+                                }
+                            });
+                        },
+                        actions: new Press(),
+                        errorMessage: "MessageBox não encontrada."
+                    })
+                },
+                euClicoNoBotaoNaoDaMessageBox(){
+                    var oOrderNowButton = null;
+                    const botaoNaoMessageBox = "Não";
+                    return this.waitFor({
+                        viewName: viewDetalhes,
+                        searchOpenDialogs: true, 
+                        controlType: "sap.m.Button", 
+                        success(aButtons) {
+                            return aButtons.filter(function (oButton) {
+                                if(oButton.getText() == botaoNaoMessageBox) {
+                                    oOrderNowButton = oButton;
+                                    oButton.firePress();
+                                }
+                            });
+                        },
+                        actions: new Press(),
+                        errorMessage: "MessageBox não encontrada."
                     })
                 }
             },
@@ -60,15 +101,23 @@ sap.ui.define([
                         errorMessage: "O nome não como o esperado."
                     });
                 },
-                euVerificoSeAMessageBoxDeConfirmarRemoverVendaFoiAberta() {
-                    this.waitFor({
-                        controlType: "sap.m.MessageBox",
-                        success() {
-                            Opa5.assert.ok(true, "A MessageBox foi aberta!");
-                        },
-                        errorMessage: "Não foi possível encontrar a MessageBox"
-                    });
+                euVerificoSeAVendaFoiRemovidaComSucesso(){
+                    const nomeDesejado = 'Teste Remover';
+                    const propriedadeDesejada = "nome";
+                    return this.waitFor({
+                        viewName: viewListagem,
+                        id: idDaTabela,
+                        success: function (oTable) {
+                            var items = oTable.getItems();
+                            var verificarItems = items.some((item, indice, lista) => {
+                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
 
+                                return itemDesejado === nomeDesejado;
+                            });
+                            if(!verificarItems) Opa5.assert.ok(true, `Venda removida com sucesso.`);
+                        },
+                        errorMessage: "Venda não foi removida."
+                    });
                 }
             }            
         }

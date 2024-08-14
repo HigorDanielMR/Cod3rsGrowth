@@ -32,13 +32,15 @@
                 },
 
                 euClicoNaVendaSelecionada() {
+                    const propriedadeDesejada = "text";
+                    const nomeDesejado = "Higor";
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         viewName: viewListagem,
                         matchers: [
                             new PropertyStrictEquals({
-                                name: "text",
-                                value: "Higor"
+                                name: propriedadeDesejada,
+                                value: nomeDesejado
                             })
                         ],
                         actions: new Press(),

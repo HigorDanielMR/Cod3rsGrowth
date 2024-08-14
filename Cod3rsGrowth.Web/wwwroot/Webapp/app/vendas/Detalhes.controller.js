@@ -58,27 +58,25 @@
             const funcao = this;
             this.processarEvento(() =>{
                 MessageBox.show(
-                    `Deseja excluir a venda com id ${idVenda} ?`,
+                    `Deseja excluir a venda com ID ${idVenda} ?`,
                     {
                         icon: MessageBox.Icon.QUESTION,
                         title: "Confirmar remoção da venda",
-                        actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                        actions: [MessageBox.Action.NO, MessageBox.Action.YES],
                         onClose(oAction) {
                             if (oAction === MessageBox.Action.YES) {
-                                MessageBox.show(`Deseja excluir o carro com id ${idCarro}`,
+                                MessageBox.show(`Deseja excluir o carro com ID ${idCarro} ?`,
                                     {
                                         icon: MessageBox.Icon.QUESTION,
                                         title: "Confirmar remoção do carro",
-                                        actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+                                        actions: [MessageBox.Action.NO, MessageBox.Action.YES],
                                         onClose(action) {
                                             if (action === MessageBox.Action.YES) {
                                                 funcao._remover(urlVenda, metodoDelete, idVenda);
                                                 funcao._remover(urlCarro, metodoDelete, idCarro);
-                                                MessageBox.success("Venda e carro removidos com sucesso");
                                                 funcao.getRouter().navTo(rotaListagem, {}, true);
                                             } else {
                                                 funcao._remover(urlVenda, metodoDelete, idVenda);
-                                                MessageBox.success("Venda removida com sucesso");
                                                 funcao .getRouter().navTo(rotaListagem, {}, true);
                                             }
                                         }
@@ -106,6 +104,10 @@
                         sucesso = false;
                     }
                     return res.json()
+                }).then(data => {
+                    if (!sucesso) {
+                        this._erroNaRequisicaoDaApi(data);
+                    }
                 })
                 .catch((err) => console.log(err));
         },
