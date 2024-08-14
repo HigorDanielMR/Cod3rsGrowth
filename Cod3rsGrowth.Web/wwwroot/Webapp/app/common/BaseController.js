@@ -14,20 +14,6 @@ sap.ui.define([
 		getRouter() {
 			return UIComponent.getRouterFor(this);
 		},
-
-		aoClicarNoBotaoVoltarDeveRetornarATelaDeListagem() {
-			var history, previousHash;
-
-			history = History.getInstance();
-			previousHash = history.getPreviousHash();
-
-			if (previousHash !== undefined) {
-				window.history.go(voltarUmaPagina);
-			} else {
-				this.getRouter().navTo(RotaListagem, {}, true);
-			}
-		},
-
 		processarEvento(action) {
 			try {
 				var promise = action();

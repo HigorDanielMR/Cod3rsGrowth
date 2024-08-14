@@ -57,12 +57,11 @@
         },
 
         _carregarEventosEditar(oEvent) {
+            this._mudarTituloDaViewEdicao();
+            this._removerMessageStrip();
+            this._obterVendaPorId(oEvent);
             var oRouter = this.getRouter();
             _rota = oRouter.getRoute(oEvent.getParameter(parametroNome))._oConfig.name;
-            this._obterVendaPorId(oEvent);
-            this._mudarTituloDaViewEdicao();
-            this.getView().byId(idDoMessageStripSucessoEdicao).setVisible(false);
-            this.getView().byId(idDoMessageStripErroEditarVenda).setVisible(false);
 
         },
 
@@ -70,6 +69,7 @@
             this._mudarTituloDaViewCriar();
             this._limparViewDeCriacao();
             this._carregarCarros();
+            this._removerMessageStrip();
             var oRouter = this.getRouter();
             _rota = oRouter.getRoute(oEvent.getParameter(parametroNome))._oConfig.name;
         },
@@ -92,8 +92,13 @@
             inputTelefone.setValueState(sap.ui.core.ValueState.None);
             inputTelefone.setValueStateText('');
             const pago = this.oView.byId(idDoInputPago).setSelected(false)
+        },
+
+        _removerMessageStrip(){
             this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(false);
             this.getView().byId(idDoMessageStripErroCriarVenda).setVisible(false);
+            this.getView().byId(idDoMessageStripSucessoEdicao).setVisible(false);
+            this.getView().byId(idDoMessageStripErroEditarVenda).setVisible(false);
         },
 
         _carregarCarros() {

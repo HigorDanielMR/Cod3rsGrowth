@@ -24,7 +24,7 @@
             actions: {
                 euClicoNoBotaoVoltarParaATelaDeListagem() {
                     return this.waitFor({
-                        id: idBotaoVoltarParaTelaDeListagem
+                        id: idBotaoVoltarParaTelaDeListagem,
                         viewName: viewDetalhes,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado"

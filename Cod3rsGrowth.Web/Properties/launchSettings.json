@@ -34,7 +34,6 @@
       "dotnetRunMessages": true,
       "launchBrowser": true,
       "launchUrl": "webapp/test/integration/opaTests.qunit.html",
-      //"launchUrl": "",
       "applicationUrl": "http://localhost:5071",
       "commandLineArgs": "--teste",
       "environmentVariables": {
