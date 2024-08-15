@@ -5,7 +5,7 @@
 
 ], (opaTest) => {
 
-	QUnit.module("Detalhes");
+	QUnit.module("Vendas Detalhes");
 
 	opaTest("Deve clicar no primeiro item da lista e verificar os dados dos detalhes", function (Given, When, Then) {
 		Given.iStartMyUIComponent({

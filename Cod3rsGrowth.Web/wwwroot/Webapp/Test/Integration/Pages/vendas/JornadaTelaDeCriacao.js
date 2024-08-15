@@ -5,7 +5,7 @@ sap.ui.define([
 
 ], (opaTest) => {
 
-	QUnit.module("Criacao");
+	QUnit.module("Vendas Criacao");
 	
 	opaTest("Deve preencher o valor do input nome", function (Given, When, Then) {
 		Given.iStartMyUIComponent({

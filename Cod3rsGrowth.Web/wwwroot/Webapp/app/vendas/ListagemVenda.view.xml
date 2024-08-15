@@ -5,8 +5,13 @@
 	xmlns:core="sap.ui.core"
 	xmlns:tnt="sap.tnt">
 
-	<Page title="{i18n>invoiceListTitle.ListagemVendas}" backgroundDesign="List">
-		<Panel>
+	<Page showHeader="false">
+		<Toolbar>
+			<ToolbarSpacer/>
+			<Title text="{i18n>invoiceListTitle.ListagemVendas}" width="100%"/>
+			<Button icon="sap-icon://add" text="{i18n>Botao.Adicionar}" press=".adicionarVenda" id="botaoAdicionarVenda"/>
+		 </Toolbar>
+		<Panel height="360px">
 			<Table
 				alternateRowColors="true"
 				id="TabelaVendas"
@@ -19,7 +24,7 @@
 					 <Input width="auto" id="FiltroNome" placeholder="{i18n>Input.Nome}" liveChange=".aoFiltrar"/>
 					 <MaskInput mask="999.999.999-99" width="140px" id="FiltroCpf" placeholder="{i18n>Input.CPF}" change=".aoFiltrar"/>
 					 <MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}" change=".aoFiltrar"/>
-					 <DateRangeSelection id="FiltroData" width="400px"
+					 <DateRangeSelection id="FiltroData" width="230px" placeholder="Ex: 01/01/2024-08/08/2024"
 							value= "{
 								'type': 'sap.ui.model.type.DateInterval',
 								'formatOptions': {
@@ -99,11 +104,5 @@
 				</items>
 			</Table>
 		</Panel>
-		<footer>
-			<OverflowToolbar>
-				<ToolbarSpacer/>
-				<Button icon="sap-icon://add" text="{i18n>Botao.Adicionar}" press=".adicionarVenda" id="botaoAdicionarVenda"/>
-			</OverflowToolbar>
-		</footer>
 	</Page>
 </mvc:View>

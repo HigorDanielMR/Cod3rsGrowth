@@ -5,7 +5,8 @@
     "./pages/vendas/JornadaTelaDeDetalhes",
     "./pages/vendas/JornadaTelaDeCriacao",
     "./pages/vendas/JornadaTelaDeEdicao",
-    "./pages/vendas/JornadaRemover"
+    "./pages/vendas/JornadaRemover",
+    "./pages/carros/JornadaListagem"
 ], function (Opa5, Startup) {
     "use Strict";
 

@@ -4,7 +4,7 @@
 
 ], (opaTest) => {
 
-	QUnit.module("Listagem");
+	QUnit.module("Vendas Listagem");
 
 	opaTest("Deve filtrar pelo nome e atualizar lista filtrada", function (Given, When, Then) {
 		Given.iStartMyApp();
