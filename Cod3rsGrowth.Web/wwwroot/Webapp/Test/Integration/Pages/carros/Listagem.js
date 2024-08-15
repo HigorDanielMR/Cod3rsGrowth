@@ -1,24 +1,17 @@
 sap.ui.define([
     'sap/ui/test/Opa5',
     'sap/ui/test/matchers/PropertyStrictEquals',
-    "sap/ui/test/actions/Press",
-    "sap/ui/test/actions/EnterText",
-    "sap/ui/test/matchers/AggregationLengthEquals"
+    "sap/ui/test/actions/Press"
 
-], function (Opa5, PropertyStrictEquals, Press, EnterText, AggregationLengthEquals) {
+], function (Opa5, PropertyStrictEquals, Press) {
     'use strict';
 
     const viewDetalhes = "Detalhes";
-    const idDaTabela = "TabelaVendas";
-    const viewListagem = "ListagemVenda";
-    const contextoVendas = "Vendas";
-    const idBotaoRemover = "botaoRemover";
-    const idDaTagTextNome = "nomeDetalhes";
-    const idTagNomeDetalhesCarro = "tagNomeDetalhesCarro"
-    const idDaTabelaCarros = "TabelaCarros";
-    const idTagIdDetalhesCarro = "tagIdDetalhesCarro";
-    const tagDasLinhas = "items";
     const idDaTagTextID = "idDetalhes";
+    const viewListagem = "ListagemVenda";
+    const idDaTagTextNome = "nomeDetalhes";
+    const idTagIdDetalhesCarro = "tagIdDetalhesCarro";
+    const idTagNomeDetalhesCarro = "tagNomeDetalhesCarro";
     const idBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
 
     Opa5.createPageObjects({
@@ -52,7 +45,7 @@ sap.ui.define([
                             })
                         ],
                         actions: new Press(),
-                        errorMessage: "Item com o nome desejado não encontrado"
+                        errorMessage: "Venda com o nome desejado não encontrado"
                     });
                 }
             },
@@ -94,9 +87,9 @@ sap.ui.define([
                         success(texto) {
                             var idColetado = texto.getText();
 
-                            Opa5.assert.strictEqual(idColetado, idEsperado, "O id está como esperado.")
+                            Opa5.assert.strictEqual(idColetado, idEsperado, "O id do carro está como esperado.")
                         },
-                        errorMessage: "O id está como o esperado."
+                        errorMessage: "O id do carro está como o esperado."
                     });
                 },
 
@@ -109,9 +102,9 @@ sap.ui.define([
                         success: function (texto) {
                             var nomePreenchido = texto.getText();
 
-                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O nome está como o esperado.");
+                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O modelo do carro está como o esperado.");
                         },
-                        errorMessage: "O nome não como o esperado."
+                        errorMessage: "O modelo do carro não como o esperado."
                     });
                 },
                 euVerificoSeOIdDoSegundoItemDaListaEstaComoOEsperado() {
@@ -151,9 +144,9 @@ sap.ui.define([
                         success(texto) {
                             var idColetado = texto.getText();
 
-                            Opa5.assert.strictEqual(idColetado, idEsperado, "O id está como esperado.")
+                            Opa5.assert.strictEqual(idColetado, idEsperado, "O id do carro está como esperado.")
                         },
-                        errorMessage: "O id está como o esperado."
+                        errorMessage: "O id do carro está como o esperado."
                     });
                 },
 
@@ -166,9 +159,9 @@ sap.ui.define([
                         success: function (texto) {
                             var nomePreenchido = texto.getText();
 
-                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O nome está como o esperado.");
+                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O modelo do carro está como o esperado.");
                         },
-                        errorMessage: "O nome não como o esperado."
+                        errorMessage: "O modelo do carro não como o esperado."
                     });
                 }
             }            

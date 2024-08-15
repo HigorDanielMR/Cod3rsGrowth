@@ -44,8 +44,8 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpGet("{Id}")]
         public IActionResult ObterPorId(int Id)
         {
-            var obraDesejada = _servico.ObterPorId(Id);
-            return Ok(obraDesejada);
+            var carroDesejado = _servico.ObterPorId(Id);
+            return Ok(carroDesejado);
         }
 
         [HttpPost]
