@@ -104,6 +104,7 @@
 			<headerToolbar>
 				<Toolbar height="44px">
 					<Title text="{i18n>TelaDeCriacaoVenda.CarrosDisponiveis}" width="90%"/>
+					<ObjectStatus id="selecioneUmCarro"	text="Selecione um carro" visible="false" state="Error"/>
 					<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda" type="Accept"/>
 				</Toolbar>
 			</headerToolbar>

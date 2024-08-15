@@ -24,7 +24,7 @@
             actions: {
                 euClicoNoBotaoVoltarParaATelaDeListagem() {
                     return this.waitFor({
-                        id: idBotaoVoltarParaTelaDeListagem
+                        id: idBotaoVoltarParaTelaDeListagem,
                         viewName: viewDetalhes,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado"
@@ -32,13 +32,15 @@
                 },
 
                 euClicoNaVendaSelecionada() {
+                    const propriedadeDesejada = "text";
+                    const nomeDesejado = "Higor";
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         viewName: viewListagem,
                         matchers: [
                             new PropertyStrictEquals({
-                                name: "text",
-                                value: "Higor"
+                                name: propriedadeDesejada,
+                                value: nomeDesejado
                             })
                         ],
                         actions: new Press(),

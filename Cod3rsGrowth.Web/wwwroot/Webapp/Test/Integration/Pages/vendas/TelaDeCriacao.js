@@ -12,7 +12,7 @@
     const viewCriacao = "AdicionarVenda";
     const viewListagem = "ListagemVenda";
     const idDaTabelaVenda = "TabelaVendas";
-    const nomeParaInserirCriacao = "Teste";
+    const nomeParaInserirCriacao = "Teste Remover";
     const idInputCpfTelaDeCriacao = "InputCpf";
     const cpfParaInserirCriacao = "12345678911";
     const idInputPagoTelaDeCriacao = "InputPago";
@@ -95,11 +95,13 @@
                     })
                 },
                 euSelecionoOItemNaTabela() {
+                    const propriedadeDesejada = "text";
+                    const modeloDesejado = "Teste";
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         matchers: new PropertyStrictEquals({
-                            name: "text",
-                            value: "Teste"
+                            name: propriedadeDesejada,
+                            value: modeloDesejado
                         }),
                         actions: new Press(),
                         errorMessage: menssagemDeErroTabelaNaoEncontrada
