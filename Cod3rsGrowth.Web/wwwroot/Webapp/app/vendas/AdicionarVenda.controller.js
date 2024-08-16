@@ -92,7 +92,7 @@
             const telefone = inputTelefone.setValue(null);
             inputTelefone.setValueState(sap.ui.core.ValueState.None);
             inputTelefone.setValueStateText('');
-            const pago = this.oView.byId(idDoInputPago).setSelected(false)
+            const pago = this.oView.byId(idDoInputPago).setState(false)
         },
 
         _removerMessageStrip(){
@@ -155,7 +155,7 @@
         },
 
         aoObterStatusPagamento() {
-            const pago = this.oView.byId(idDoInputPago).getSelected();
+            const pago = this.oView.byId(idDoInputPago).getState();
             return pago;
         },
 
@@ -321,7 +321,7 @@
             const cpf = this.oView.byId(idDoInputCpf).setValue(venda.cpf);
             const email = this.oView.byId(idDoInputEmail).setValue(venda.email);
             const telefone = this.oView.byId(idDoInputTelefone).setValue(venda.telefone);
-            const pago = this.oView.byId(idDoInputPago).setSelected(venda.pago)
+            const pago = this.oView.byId(idDoInputPago).setState(venda.pago)
 
             return venda.idDoCarroVendido;
         },

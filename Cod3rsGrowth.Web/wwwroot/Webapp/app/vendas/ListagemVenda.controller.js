@@ -11,13 +11,13 @@ sap.ui.define([
     const modeloVenda = "Vendas";
     const idDoFiltroCpf = "FiltroCpf";
     const rotaListagem = "appListagem";
+    const rotaDetalhes = "appDetalhes";
     const idDoFiltroNome = "FiltroNome";
     const quantidadeDeCaracteresDoCpf = 14;
     const quantidadeDeCaracteresDoTelefone = 15;
     const idDoFiltroTelefone = "FiltroTelefone";
     let url = "http://localhost:5071/api/Vendas";    
     const rotaAdicionarVenda = "appAdicionarVenda";
-    const rotaDetalhes = "appDetalhes";
 
     return BaseController.extend("ui5.carro.app.vendas.ListagemVenda", {
         formatter: Formatter,

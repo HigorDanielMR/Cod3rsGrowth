@@ -7,9 +7,6 @@ sap.ui.define([
 ], function (Controller, History, UIComponent, MessageBox) {
 	"use strict";
 
-	var voltarUmaPagina = -1;
-	var RotaListagem = "appListagem";
-
 	return Controller.extend("ui5.carro.controller.BaseController", {
 		getRouter() {
 			return UIComponent.getRouterFor(this);
