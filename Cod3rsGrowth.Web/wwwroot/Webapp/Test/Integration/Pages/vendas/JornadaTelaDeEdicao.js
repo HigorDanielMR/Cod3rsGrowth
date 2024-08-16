@@ -5,7 +5,7 @@
 
 ], (opaTest) => {
 
-	QUnit.module("Edicao");
+	QUnit.module("Vendas Edicao");
 
 	opaTest("Deve preencher o valor do input nome", function (Given, When, Then) {
 		Given.iStartMyUIComponent({

@@ -4,7 +4,7 @@ sap.ui.define([
 
 ], (opaTest) => {
 
-	QUnit.module("Remover");
+	QUnit.module("Vendas Remover");
 
 	opaTest("Deve clicar na venda desejada e entrar na view de detalhes", function (Given, When, Then) {
 		Given.iStartMyApp();
