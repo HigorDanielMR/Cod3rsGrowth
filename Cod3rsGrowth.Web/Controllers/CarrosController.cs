@@ -1,8 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Cod3rsGrowth.Dominio.Entidades;
-using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Servicos.Servicos;
-using System.Net.Http;
+using Cod3rsGrowth.Dominio.Enums;
 
 namespace Cod3rsGrowth.Web.Controllers
 {
@@ -46,6 +45,20 @@ namespace Cod3rsGrowth.Web.Controllers
         {
             var carroDesejado = _servico.ObterPorId(Id);
             return Ok(carroDesejado);
+        }
+
+        [HttpGet("Cores")]
+        public IActionResult ObterDescricaoCores()
+        {
+            var cores = ObterEnums.ObterDescricaoEnums<Cores>();
+            return Ok(cores);
+        }
+
+        [HttpGet("Marcas")]
+        public IActionResult ObterDescricaoMarcas()
+        {
+            var marcas = ObterEnums.ObterDescricaoEnums<Marcas>();
+            return Ok(marcas);
         }
 
         [HttpPost]

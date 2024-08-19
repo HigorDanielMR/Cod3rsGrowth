@@ -46,7 +46,7 @@
 				id="sucessoAoCriarVenda">
 	</MessageStrip>
 
-	<Page showHeader="false">
+	<Page showHeader="false" enableScrolling="false">
 		<Panel >
 			<Toolbar >
 				<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagem"/>

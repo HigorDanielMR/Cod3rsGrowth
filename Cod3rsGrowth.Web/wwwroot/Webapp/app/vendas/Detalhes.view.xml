@@ -70,6 +70,7 @@
 						<core:Icon src="sap-icon://insurance-car" color="Tile" />
 						<Title text="{i18n>Detalhes.DadosDoCarros}"/>
 						<ToolbarSpacer />
+						<Button icon="sap-icon://cart-4" text="Adicionar" press="aoClicarNoBotaoAdicionarDoCarro"/>
 					</Toolbar>
 					<VBox class="sapUiSmallMargin"
 						  binding="{Carro>/}"

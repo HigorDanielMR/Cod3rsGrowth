@@ -1,0 +1,28 @@
+<core:FragmentDefinition
+xmlns="sap.m" 
+xmlns:core="sap.ui.core">
+   <Dialog
+      id="helloDialog"
+      title="Hello {/recipient/name}">
+      <content>
+        <Label text="Modelo"/>
+        <Input id="inputModelo"/>
+      </content>
+      <content>
+        <Label text="Marcas"/>
+        <ComboBox items="{
+            path: 'Marcas>/'
+        }"/>
+      </content>
+      <content>
+        <Label text="Cores"/>
+        <ComboBox items="{
+            path: 'Cores>/'
+        }"/>
+      </content>
+      <content>
+        <Label text="Valor"/>
+        <Input />
+      </content>
+    </Dialog>
+</core:FragmentDefinition>

@@ -3,9 +3,15 @@
     "ui5/carro/model/formatter",
     "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/Label",
+    "sap/m/Input",
+    "sap/m/VBox",
+    "sap/m/ComboBox"
 
-], function (BaseController, Formatter, History, JSONModel, MessageBox) {
+], function (BaseController, Formatter, History, JSONModel, MessageBox, Dialog, Button, Label, Input, VBox, ComboBox) {
     "use strict";
 
     let idCarro;
@@ -13,6 +19,8 @@
     const id = "id";
     const modeloVenda = "Venda";
     const modeloCarro = "Carro";
+    const modeloCores = "Cores";
+    const modeloMarcas = "Marcas";
     const metodoDelete = "DELETE";
     const rotaDetalhe = "appDetalhes";
     const rotaListagem = "appListagem";
@@ -116,6 +124,40 @@
                 .catch((err) => console.log(err));
         },
 
+        _carregarDescricaoCores(){
+            let sucesso = true;
+            const urlCores = "http://localhost:5071/api/Carros/Cores"
+            fetch(urlCores)
+                .then((res) => {
+                    if (!res.ok)
+                        sucesso = false;
+                    return res.json()
+                })
+                .then((data) => {
+                    const jsonModel = new JSONModel(data)
+                    sucesso ? this.getView().setModel(jsonModel, modeloCores)
+                        : this._erroNaRequisicaoDaApi(data);
+                })
+                .catch((err) => console.error(err));
+        },
+
+        _carregarDescricaoMarcas(){
+            let sucesso = true;
+            const urlMarcas = "http://localhost:5071/api/Carros/Marcas";
+            fetch(urlMarcas)
+                .then((res) => {
+                    if (!res.ok)
+                        sucesso = false;
+                    return res.json()
+                })
+                .then((data) => {
+                    const jsonModel = new JSONModel(data)
+                    sucesso ? this.getView().setModel(jsonModel, modeloMarcas)
+                        : this._erroNaRequisicaoDaApi(data);
+                })
+                .catch((err) => console.error(err));
+        },
+
         _carregarCarroAssociado(id){
             let sucesso = true;
             let query = urlCarro + id;
@@ -152,6 +194,13 @@
                     id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(id))
                 });
             })
+        },
+        async aoClicarNoBotaoAdicionarDoCarro() {
+            this.oDialog ??= await this.loadFragment({
+                name: "ui5.carro.app.vendas.carros.AdicionarCarro"
+            });
+        
+            this.oDialog.open();
         }
     });
 }, true);
