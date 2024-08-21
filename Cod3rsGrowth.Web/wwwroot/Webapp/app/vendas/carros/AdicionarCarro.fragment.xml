@@ -1,28 +1,62 @@
 <core:FragmentDefinition
-xmlns="sap.m" 
+xmlns="sap.m"
+xmlns:l="sap.ui.layout"
+xmlns:f="sap.ui.layout.form"
 xmlns:core="sap.ui.core">
    <Dialog
       id="helloDialog"
-      title="Hello {/recipient/name}">
-      <content>
-        <Label text="Modelo"/>
-        <Input id="inputModelo"/>
-      </content>
-      <content>
-        <Label text="Marcas"/>
-        <ComboBox items="{
-            path: 'Marcas>/'
-        }"/>
-      </content>
-      <content>
-        <Label text="Cores"/>
-        <ComboBox items="{
-            path: 'Cores>/'
-        }"/>
-      </content>
-      <content>
-        <Label text="Valor"/>
-        <Input />
-      </content>
+      title="Adicionar Carro"
+	  type="Message"
+	  state="Information">
+	   <f:Form
+		   width="450px">
+		   <f:layout>
+			   <f:ColumnLayout
+				   columnsM="2"
+				   columnsL="2"
+				   columnsXL="2"
+							/>
+		   </f:layout>
+		   <f:formContainers>
+			   <f:FormContainer>
+				   <f:formElements>
+					   <f:FormElement label="Modelo">
+						   <f:fields>
+							   <Input width="400px" id="InputModelo" change=".aoColetarModelo" required="true"/>
+						   </f:fields>
+					   </f:FormElement>
+
+					   <f:FormElement label="Marcas">
+						   <f:fields>
+							   <Select id="filtroMarcas" change=".aoColetarMarca" items="{Marcas>/descricao}" width="180px">
+								   <items>
+									   <core:Item key="{path: 'Marcas>text'}" text="{path: 'Marcas>text'}" />
+								   </items>
+							   </Select>
+						   </f:fields>
+					   </f:FormElement>
+						<f:FormElement label="Cores">
+							<f:fields>
+								<Select id="filtroCores" change=".aoColetarCor" items="{Cores>/descricao}" width="180px">
+									<items>
+										<core:Item key="{path: 'Cores>text'}" text="{path: 'Cores>text'}" />
+									</items>
+								</Select>
+							</f:fields>
+						</f:FormElement>
+					   <f:FormElement label="Valor">
+						   <f:fields>
+							   <Input width="auto" id="InputValor" change=".aoColetarValor" required="true"/>
+						   </f:fields>
+					   </f:FormElement>
+					   <f:FormElement label="Flex">
+						   <f:fields>
+							   <Switch type="AcceptReject" state="{/Enabled}" id="InputFlex"/>
+						   </f:fields>
+					   </f:FormElement>
+				   </f:formElements>
+			   </f:FormContainer>
+		   </f:formContainers>
+	   </f:Form>
     </Dialog>
 </core:FragmentDefinition>

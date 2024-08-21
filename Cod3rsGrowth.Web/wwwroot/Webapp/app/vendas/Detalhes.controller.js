@@ -39,8 +39,14 @@
         aoCoincidirRota() {
             this.processarEvento(() => {
                 const rota = this.getOwnerComponent().getRouter();
-                rota.getRoute(rotaDetalhe).attachMatched(this._obterVendaPorId, this);
+                rota.getRoute(rotaDetalhe).attachMatched(this._carregarEventos, this);
             });
+        },
+
+        _carregarEventos(oEvent) {
+            this._obterVendaPorId(oEvent);
+            this._carregarDescricaoCores();
+            this._carregarDescricaoMarcas();
         },
 
         _obterVendaPorId(oEvent) {
@@ -126,7 +132,7 @@
 
         _carregarDescricaoCores(){
             let sucesso = true;
-            const urlCores = "http://localhost:5071/api/Carros/Cores"
+            const urlCores = "http://localhost:5071/api/Carros/Cores";
             fetch(urlCores)
                 .then((res) => {
                     if (!res.ok)
@@ -134,8 +140,11 @@
                     return res.json()
                 })
                 .then((data) => {
-                    const jsonModel = new JSONModel(data)
-                    sucesso ? this.getView().setModel(jsonModel, modeloCores)
+                    sucesso ? this.getView().setModel(new JSONModel({
+                        descricao: data.map((item) => {
+                            return { text: item }
+                        })
+                    }), modeloCores)
                         : this._erroNaRequisicaoDaApi(data);
                 })
                 .catch((err) => console.error(err));
@@ -151,8 +160,11 @@
                     return res.json()
                 })
                 .then((data) => {
-                    const jsonModel = new JSONModel(data)
-                    sucesso ? this.getView().setModel(jsonModel, modeloMarcas)
+                    sucesso ? this.getView().setModel(new JSONModel({
+                        descricao: data.map((item) => {
+                            return { text: item }
+                        })
+                    }), modeloMarcas)
                         : this._erroNaRequisicaoDaApi(data);
                 })
                 .catch((err) => console.error(err));
