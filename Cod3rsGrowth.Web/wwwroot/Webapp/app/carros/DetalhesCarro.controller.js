@@ -19,6 +19,8 @@
     const id = "id";
     const modeloVenda = "Venda";
     const modeloCarro = "Carro";
+    const modeloCores = "Cores";
+    const modeloMarcas = "Marcas";
     const metodoDelete = "DELETE";
     const rotaDetalhe = "appDetalhes";
     const rotaListagem = "appListagem";
@@ -27,7 +29,7 @@
     const urlVenda = "http://localhost:5071/api/Vendas/";
     const urlCarro = "http://localhost:5071/api/Carros/";
 
-    return BaseController.extend("ui5.carro.app.vendas.Detalhes", {
+    return BaseController.extend("ui5.carro.app.carros.DetalhesCarro", {
         formatter: Formatter,
 
         onInit() {
@@ -43,6 +45,8 @@
 
         _carregarEventos(oEvent) {
             this._obterVendaPorId(oEvent);
+            this._carregarDescricaoCores();
+            this._carregarDescricaoMarcas();
         },
 
         _obterVendaPorId(oEvent) {
@@ -102,7 +106,6 @@
                 );
             })
         },
-
         _remover(url, metodo, id){
             url += id;
             let sucesso = true;
@@ -125,6 +128,46 @@
                     }
                 })
                 .catch((err) => console.log(err));
+        },
+
+        _carregarDescricaoCores(){
+            let sucesso = true;
+            const urlCores = "http://localhost:5071/api/Carros/Cores";
+            fetch(urlCores)
+                .then((res) => {
+                    if (!res.ok)
+                        sucesso = false;
+                    return res.json()
+                })
+                .then((data) => {
+                    sucesso ? this.getView().setModel(new JSONModel({
+                        descricao: data.map((item) => {
+                            return { text: item }
+                        })
+                    }), modeloCores)
+                        : this._erroNaRequisicaoDaApi(data);
+                })
+                .catch((err) => console.error(err));
+        },
+
+        _carregarDescricaoMarcas(){
+            let sucesso = true;
+            const urlMarcas = "http://localhost:5071/api/Carros/Marcas";
+            fetch(urlMarcas)
+                .then((res) => {
+                    if (!res.ok)
+                        sucesso = false;
+                    return res.json()
+                })
+                .then((data) => {
+                    sucesso ? this.getView().setModel(new JSONModel({
+                        descricao: data.map((item) => {
+                            return { text: item }
+                        })
+                    }), modeloMarcas)
+                        : this._erroNaRequisicaoDaApi(data);
+                })
+                .catch((err) => console.error(err));
         },
 
         _carregarCarroAssociado(id){

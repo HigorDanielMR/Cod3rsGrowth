@@ -1,0 +1,103 @@
+﻿<mvc:View
+	controllerName="ui5.carro.app.carros.AdicionarCarro"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:l="sap.ui.layout"
+	xmlns:f="sap.ui.layout.form"
+	xmlns:core="sap.ui.core"
+	xmlns="sap.m" >
+
+	<MessageStrip
+				text="Erro ao criar carro"
+				visible="false"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="erroCriarCarro">
+	</MessageStrip>
+	
+	<MessageStrip
+				text="Carro criado com sucesso!"
+				visible="false"
+				type="Success"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="sucessoAoCriarCarro">
+	</MessageStrip>
+
+	<Page showHeader="false" enableScrolling="false">
+		<Panel >
+			<Toolbar >
+				<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagem"/>
+				<ToolbarSpacer width="450px"/>
+				<Title id="Title1" text="Adicionar Carro"/>
+				<ToolbarSpacer />
+				<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="adicionarCarro" press=".aoClicarNoBotaoAdicionarDeveCriarCarro" type="Accept"/>
+			</Toolbar>
+			<FlexBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Column" height="350px" alignItems="Baseline">
+				<Panel height="320px">
+					<Toolbar style="Clear">
+						<core:Icon src="sap-icon://car-rental" color="Tile" />
+						<Title  text="Dados do Carro"/>
+					</Toolbar>
+					<f:Form id="FormToolbar"
+						editable="true" >
+						<f:layout>
+							<f:ColumnLayout
+								columnsM="2"
+								columnsL="2"
+								columnsXL="4"
+							/>
+						</f:layout>
+						<f:formContainers>
+							<f:FormContainer>
+								<f:formElements>
+									<f:FormElement label="Modelo">
+										<f:fields>
+											<Input width="400px" id="InputModelo" required="true"/>
+
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Cores">
+										<f:fields>
+											<Select id="SelecionarCor" items="{Cores>/descricao}" width="400px">
+												<items>
+													<core:Item key="{path: 'Cores>text', formatter: '.formatter.formatarCorParaInteiro'}" text="{path: 'Cores>text'}" />
+												</items>
+											</Select>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Flex">
+										<f:fields>
+											<Switch type="AcceptReject" state="{/Enabled}" id="InputFlex"/>
+										</f:fields>
+									</f:FormElement>
+								</f:formElements>
+							</f:FormContainer>
+						</f:formContainers>
+						<f:formContainers>
+							<f:FormContainer>
+									<f:FormElement label="Valor" >
+										<f:fields>
+											<Input id="InputValor" required="true" width="400px" value="{path: 'modelPath', type: 'sap.ui.model.type.Decimal', formatOptions: {minFractionDigits: 2, maxFractionDigits: 2}}"
+										/>
+										</f:fields>
+									</f:FormElement>
+									<f:FormElement label="Marcas">
+										<f:fields>
+											<Select id="SelecionarMarca" items="{Marcas>/descricao}" width="400px">
+												<items>
+													<core:Item key="{path: 'Marcas>text', formatter: '.formatter.formatarMarcaParaInteiro'}" text="{path: 'Marcas>text'}" />
+												</items>
+											  </Select>
+										</f:fields>
+									</f:FormElement>
+							</f:FormContainer>
+						</f:formContainers>
+					</f:Form>
+				</Panel>
+			</FlexBox>
+		</Panel>
+	</Page>
+</mvc:View>

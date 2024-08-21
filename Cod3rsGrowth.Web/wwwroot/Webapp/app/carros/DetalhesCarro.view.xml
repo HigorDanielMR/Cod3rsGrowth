@@ -1,5 +1,5 @@
 ﻿<mvc:View
-	controllerName="ui5.carro.app.vendas.Detalhes"
+	controllerName="ui5.carro.app.carros.DetalhesCarro"
 	xmlns="sap.m"
 	xmlns:core="sap.ui.core"
 	xmlns:mvc="sap.ui.core.mvc"
@@ -70,6 +70,7 @@
 						<core:Icon src="sap-icon://insurance-car" color="Tile" />
 						<Title text="{i18n>Detalhes.DadosDoCarros}"/>
 						<ToolbarSpacer />
+						<Button icon="sap-icon://cart-4" text="Adicionar" press="aoClicarNoBotaoAdicionarDoCarro"/>
 					</Toolbar>
 					<VBox class="sapUiSmallMargin"
 						  binding="{Carro>/}"

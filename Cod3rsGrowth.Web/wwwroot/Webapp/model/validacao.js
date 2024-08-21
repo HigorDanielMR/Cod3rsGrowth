@@ -118,6 +118,66 @@
             var ehEmailValido = this.validarEmail(email);
 
             return ehNomeValido && ehCpfValido && ehTelefoneValido && ehEmailValido;
+        },
+
+        validarModelo(inputModelo){
+            var modelo = inputModelo.getValue();
+            var limiteMinimoDeCaracteres = 2;
+            var limiteMaximoDeCaracteres = 50;
+            var ehValido = true;
+
+            if (modelo === '') {
+                inputModelo.setValueState(sap.ui.core.ValueState.Error);
+                inputModelo.setValueStateText('Modelo não pode estar em branco.');
+                ehValido = false;
+            }
+            else if (modelo.length < limiteMinimoDeCaracteres) {
+                inputModelo.setValueState(sap.ui.core.ValueState.Error);
+                inputModelo.setValueStateText('Nome não pode ter menos de 2 caracteres.')
+                ehValido = false;
+            }
+            else if (modelo.length > limiteMaximoDeCaracteres){
+                inputModelo.setValueState(sap.ui.core.ValueState.Error);
+                inputModelo.setValueStateText("Modelo não pode ter mais de 50 caracteres.")
+            }
+            else {
+                inputModelo.setValueState(sap.ui.core.ValueState.None);
+                inputModelo.setValueStateText('');
+                ehValido = true;
+            }
+            return ehValido;
+        },
+
+        validarValorDoCarro(inputValor){
+            
+            var valor = inputValor.getValue();
+            var regexParaNumeros = /^[0-9]+$/;
+            const valorPadrao = 0;
+            var ehValido = true;
+
+            if (valor === ''){
+                inputValor.setValueState(sap.ui.core.ValueState.Error);
+                inputValor.setValueStateText('Valor não pode estar vazio.');
+                ehValido = false;
+            }
+            else if(valor.length < valorPadrao){
+                inputValor.setValueState(sap.ui.core.ValueState.Error);
+                inputValor.setValueStateText('Valor deve ser maior ou igual a 0.');
+                ehValido = false;
+            }
+            else {
+                inputValor.setValueState(sap.ui.core.ValueState.None);
+                inputValor.setValueStateText('');
+                ehValido = true;
+            }
+            return ehValido;
+        },
+
+        validarDadosCarro(modelo, valor){
+            var EhModeloValido = this.validarModelo(modelo);
+            var EhValorValido = this.validarValorDoCarro(valor);
+
+            return EhModeloValido && EhValorValido
         }
     }
 });
