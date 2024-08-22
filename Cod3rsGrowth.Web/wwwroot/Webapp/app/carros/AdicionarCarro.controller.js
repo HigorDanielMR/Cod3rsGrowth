@@ -23,6 +23,8 @@
     const rotaListagemCarros = "appListagemCarro";
     const url= "http://localhost:5071/api/Carros/";
     const idDoMessageStripErroCriarCarro = "erroCriarCarro";
+    const urlCores = "http://localhost:5071/api/Carros/Cores";
+    const urlMarcas = "http://localhost:5071/api/Carros/Marcas";
     const idDoMessageStripSucessoCriacao = "sucessoAoCriarCarro";
 
     return BaseController.extend("ui5.carro.app.carros.AdicionarCarro", {
@@ -48,7 +50,6 @@
 
         _carregarDescricaoCores(){
             let sucesso = true;
-            const urlCores = "http://localhost:5071/api/Carros/Cores";
             fetch(urlCores)
                 .then((res) => {
                     if (!res.ok)
@@ -70,7 +71,6 @@
 
         _carregarDescricaoMarcas(){
             let sucesso = true;
-            const urlMarcas = "http://localhost:5071/api/Carros/Marcas";
             fetch(urlMarcas)
                 .then((res) => {
                     if (!res.ok) sucesso = false;

@@ -16,7 +16,7 @@ sap.ui.define([
     const idDoFiltroCpf = "FiltroCpf";
     const idDoFiltroNome = "FiltroNome";
     const cpfParaInserir = "54651651651";
-    const viewListagem = "ListagemVenda";
+    const viewListagem = "vendas.ListagemVenda";
     const propriedadeTelefone = "telefone";
     const telefoneParaInserir = "65165161651";
     const dataParaInserir = "04/07/2024-18/07/2024";

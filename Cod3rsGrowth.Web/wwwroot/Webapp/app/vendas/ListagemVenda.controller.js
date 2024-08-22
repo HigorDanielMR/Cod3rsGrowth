@@ -40,7 +40,7 @@ sap.ui.define([
                     sucesso ? this.getView().setModel(jsonModel, modeloVenda)
                         : this._erroNaRequisicaoDaApi(data);
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => MessageBox.error(err));
         },
 
         aoCoincidirRota() {

@@ -7,9 +7,9 @@ sap.ui.define([
 ], function (Opa5, PropertyStrictEquals, Press, EnterText) {
     'use strict';
 
-    const viewDetalhes = "Detalhes";
+    const viewDetalhes = "vendas.Detalhes";
     const idDaTabela = "TabelaVendas";
-    const viewListagem = "ListagemVenda";
+    const viewListagem = "vendas.ListagemVenda";
     const contextoVendas = "Vendas";
     const idBotaoRemover = "botaoRemover";
     const idDaTagTextNome = "nomeDetalhes";

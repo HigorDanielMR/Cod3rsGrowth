@@ -6,11 +6,12 @@
     "./pages/vendas/JornadaTelaDeCriacao",
     "./pages/vendas/JornadaTelaDeEdicao",
     "./pages/vendas/JornadaRemover",
-    "./pages/carros/JornadaTelaListagemCarro"
+    "./pages/carros/JornadaTelaListagem",
+    "./pages/carros/JornadaTelaCriacao"
 ], function (Opa5, Startup) {
     "use Strict";
 
-    const view = "ui5.carro.app.vendas";
+    const view = "ui5.carro.app";
     Opa5.extendConfig({
         arrangements: new Startup(),
         viewNamespace: view,

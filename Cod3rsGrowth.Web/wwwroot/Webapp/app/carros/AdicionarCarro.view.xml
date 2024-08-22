@@ -29,9 +29,9 @@
 	<Page showHeader="false" enableScrolling="false">
 		<Panel >
 			<Toolbar >
-				<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagem"/>
+				<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagemCarro"/>
 				<ToolbarSpacer width="450px"/>
-				<Title id="Title1" text="Adicionar Carro"/>
+				<Title text="{i18n>AdicionarCarro.AdicionarCarro}"/>
 				<ToolbarSpacer />
 				<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="adicionarCarro" press=".aoClicarNoBotaoAdicionarDeveCriarCarro" type="Accept"/>
 			</Toolbar>
@@ -39,7 +39,7 @@
 				<Panel height="320px">
 					<Toolbar style="Clear">
 						<core:Icon src="sap-icon://car-rental" color="Tile" />
-						<Title  text="Dados do Carro"/>
+						<Title  text="{i18n>AdicionarCarro.DadosDoCarro}"/>
 					</Toolbar>
 					<f:Form id="FormToolbar"
 						editable="true" >
@@ -53,13 +53,13 @@
 						<f:formContainers>
 							<f:FormContainer>
 								<f:formElements>
-									<f:FormElement label="Modelo">
+									<f:FormElement label="{i18n>AdicionarCarro.LabelModelo}">
 										<f:fields>
 											<Input width="400px" id="InputModelo" required="true"/>
 
 										</f:fields>
 									</f:FormElement>
-									<f:FormElement label="Cores">
+									<f:FormElement label="{i18n>AdicionarCarro.LabelCores}">
 										<f:fields>
 											<Select id="SelecionarCor" items="{Cores>/descricao}" width="400px">
 												<items>
@@ -68,7 +68,7 @@
 											</Select>
 										</f:fields>
 									</f:FormElement>
-									<f:FormElement label="Flex">
+									<f:FormElement label="{i18n>AdicionarCarro.LabelFlex}">
 										<f:fields>
 											<Switch type="AcceptReject" state="{/Enabled}" id="InputFlex"/>
 										</f:fields>
@@ -78,12 +78,12 @@
 						</f:formContainers>
 						<f:formContainers>
 							<f:FormContainer>
-									<f:FormElement label="Valor" >
+									<f:FormElement label="{i18n>AdicionarCarro.LabelValor}" >
 										<f:fields>
 											<Input id="InputValor" required="true" width="400px"/>
 										</f:fields>
 									</f:FormElement>
-									<f:FormElement label="Marcas">
+									<f:FormElement label="{i18n>AdicionarCarro.LabelMarcas}">
 										<f:fields>
 											<Select id="SelecionarMarca" items="{Marcas>/descricao}" width="400px">
 												<items>

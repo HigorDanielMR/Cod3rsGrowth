@@ -8,18 +8,20 @@ sap.ui.define([
     "use strict";
 
     const id = "id";    
-    const modeloCarro = "Carros";
-    const rotaListagemCarro = "appListagemCarro";
-    const rotaListagemVenda = "appListagem";
-    const rotaDetalhes = "appDetalhes";
-    const idDoFiltroModelo = "FiltroModelo";
-    const idDoFiltroMarca = "FiltroMarcas";
-    const idDoFiltroCor = "FiltroCores";
-    const idDoFiltroFlex = "FiltroFlex";
     const modeloCores = "Cores";
+    const modeloCarro = "Carros";
     const modeloMarcas = "Marcas";
+    const rotaDetalhes = "appDetalhes";
+    const idDoFiltroFlex = "FiltroFlex";
+    const idDoFiltroCor = "FiltroCores";
+    const idDoFiltroMarca = "FiltroMarcas";
+    const idDoFiltroModelo = "FiltroModelo";
+    const rotaListagemVenda = "appListagem";
+    const rotaListagemCarro = "appListagemCarro";
     let url = "http://localhost:5071/api/Carros/";    
     const rotaAdicionarCarro = "appAdicionarCarro";
+    const urlCores = "http://localhost:5071/api/Carros/Cores";
+    const urlMarcas = "http://localhost:5071/api/Carros/Marcas";
 
     return BaseController.extend("ui5.carro.app.carros.ListagemCarro", {
         formatter: Formatter,
@@ -61,7 +63,6 @@ sap.ui.define([
 
         _carregarDescricaoCores(){
             let sucesso = true;
-            const urlCores = "http://localhost:5071/api/Carros/Cores";
             fetch(urlCores)
                 .then((res) => {
                     if (!res.ok)
@@ -80,12 +81,11 @@ sap.ui.define([
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => MessageBox.error(err));
         },
 
         _carregarDescricaoMarcas(){
             let sucesso = true;
-            const urlMarcas = "http://localhost:5071/api/Carros/Marcas";
             fetch(urlMarcas)
                 .then((res) => {
                     if (!res.ok) sucesso = false;
@@ -103,7 +103,7 @@ sap.ui.define([
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => MessageBox.error(err));
         },        
         
         aoColetarModelo() {
@@ -167,7 +167,7 @@ sap.ui.define([
                         sucesso ? this.getView().setModel(jsonModel, modeloCarro)
                             : this._erroNaRequisicaoDaApi(carros);
                     })
-                    .catch((err) => console.error(err));
+                    .catch((err) => MessageBox.error(err));
             })
         },
 

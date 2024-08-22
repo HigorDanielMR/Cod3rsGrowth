@@ -28,6 +28,7 @@
     const rotaViewListagem = "appListagem";
     const parametroArgumento = "arguments";
     const idDoInputTelefone = "InputTelefone";
+    let urlVenda = "http://localhost:5071/api/Vendas/";
     const textoParaAdicionarTituloEdicao = "Editar Venda";
     const textoParaAdicionarTituloCriar = "Adicionar Venda";
     const idDoMessageStripErroCriarVenda = "erroCriarVenda";
@@ -35,7 +36,6 @@
     const idDoMessageStripSucessoEdicao = "sucessoAoEditarVenda";
     const idObjectStatusCarroNaoSelecionado = "selecioneUmCarro";
     const idDoMessageStripSucessoCriacao = "sucessoAoCriarVenda";
-    let urlObterVendaPorId = "http://localhost:5071/api/Vendas/";
     const idDaTabelaCarrosDisponiveis = "TabelaCarrosDisponiveis";
     const urlCarroObterPorId = "http://localhost:5071/api/Carros/";
     let urlCarrosDisponiveis = "http://localhost:5071/api/Carros/Disponiveis";
@@ -161,7 +161,6 @@
 
         aoClicarNoBotaoAdicionarDeveAdicionarVenda() {
             this.processarEvento(() => {
-                    const url = "http://localhost:5071/api/Vendas/";
                     const nome = this.aoColetarNome();
                     const cpf = this.aoColetarCpf();
                     const email = this.aoColetarEmail();
@@ -180,7 +179,7 @@
                     if(validacaoDados && carroEscolhido){
 
                         if (_rota === rotaEditar) {
-                            const urlEditar = url + idVenda;
+                            const urlEditar = urlVenda + idVenda;
                             const venda = {
                                 "id": idVenda,
                                 "nome": nome,
@@ -207,7 +206,7 @@
                                 "pago": this.aoObterStatusPagamento()
                             }
                             const metodo = "POST"
-                            this._requisicaoHttp(url, metodo, venda, idDoMessageStripSucessoCriacao, idDoMessageStripErroCriarVenda);
+                            this._requisicaoHttp(urlVenda, metodo, venda, idDoMessageStripSucessoCriacao, idDoMessageStripErroCriarVenda);
                         }
                     }
 
@@ -262,7 +261,7 @@
 
         _obterVendaPorId(oEvent) {
             idVenda = oEvent.getParameter(parametroArgumento).id;
-            let query = urlObterVendaPorId + idVenda;
+            let query = urlVenda + idVenda;
             let sucesso = true;
 
             fetch(query)
