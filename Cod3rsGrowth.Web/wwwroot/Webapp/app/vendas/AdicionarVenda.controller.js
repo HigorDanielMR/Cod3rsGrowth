@@ -325,7 +325,7 @@
             return venda.idDoCarroVendido;
         },
 
-        aoClicarDeveVoltarParaATelaDeListagem() {
+        aoClicarVoltarParaATelaDeListagem() {
             this.processarEvento(() => {
                 var history;
 
