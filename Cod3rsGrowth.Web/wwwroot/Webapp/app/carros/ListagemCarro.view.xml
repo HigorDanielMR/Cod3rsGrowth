@@ -1,0 +1,96 @@
+﻿<mvc:View
+	controllerName="ui5.carro.app.carros.ListagemCarro"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+
+	<Page showHeader="false">
+		<Toolbar>
+			<Button icon="sap-icon://navigation-left-arrow" text="{i18n>Botao.ListagemVendas}" press=".aoClicarDeveIParaAListagemVendas"/>
+			<ToolbarSpacer width="380px"/>
+			<Title text="{i18n>ListagemCarros.ListagemDeCarros}" width="100%"/>
+			<Button icon="sap-icon://add" text="{i18n>Botao.Adicionar}" press=".aoClicarNoBotaoAdicionarCarro" id="botaoAdicionarVenda"/>
+		 </Toolbar>
+		 <Panel height="500px">
+			<Table
+				alternateRowColors="true"
+				id="TabelaCarros"
+				includeItemInSelection="true"
+				items="{path: 'Carros>/'}"
+				growingScrollToLoad="true"
+				class="sapUiSmallMarginTop">
+				<headerToolbar>
+					<Toolbar height="55px">
+					   <ToolbarSpacer/>
+					   <core:Icon src="sap-icon://add-filter" color="Tile"/>
+					   <Text text="{i18n>ListagemCarros.FiltroModelo}:"/>
+					   <Input width="auto" id="FiltroModelo" placeholder="Modelo" liveChange=".aoFiltrarCarro"/>
+					   <Text text="{i18n>ListagemCarros.FiltroCores}:"/>
+					   <Select id="FiltroCores" change=".aoFiltrarCarro" items="{Cores>/descricao}" width="180px">
+							<items>
+								<core:Item key="{path: 'Cores>text', formatter: '.formatter.formatarCorParaInteiro'}" text="{path: 'Cores>text'}" />
+							</items>
+						</Select>
+						<Text text="{i18n>ListagemCarros.FiltroMarcas}:"/>
+					    <Select id="FiltroMarcas" change=".aoFiltrarCarro" items="{Marcas>/descricao}" width="180px">
+							<items>
+								<core:Item key="{path: 'Marcas>text', formatter: '.formatter.formatarMarcaParaInteiro'}" text="{path: 'Marcas>text'}" />
+							</items>
+				  		</Select>
+						<Text text="{i18n>ListagemCarros.FiltroFlex}:" width="33px"/>
+						<Select id="FiltroFlex" width="100px" change=".aoFiltrarCarro">
+							<items>
+								<core:Item key="null" text="{i18n>ListagemCarros.FiltroCores.ItemTodos}"/>
+								<core:Item key="true" text="{i18n>ListagemCarros.FiltroCores.ItemSim}"/>
+								<core:Item key="false" text="{i18n>ListagemCarros.FiltroCores.ItemNao}"/>
+							</items>
+						</Select>
+					</Toolbar>
+				 </headerToolbar>
+				<columns>
+					<Column width="50px">
+						<Text text="{i18n>TelaDeCriacaoVenda.ID}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.Marca}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.Modelo}"/>
+					</Column>
+					<Column>
+						<Text text="{i18n>TelaDeCriacaoVenda.Cor}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.ValorDoVeiculo}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>TelaDeCriacaoVenda.Flex}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem>
+						<cells>
+							<Text text="{Carros>id}" />
+							<Text text="{
+								path:'Carros>marca',
+								formatter: '.formatter.formatarMarca'
+							}" />
+							<Text text="{Carros>modelo}" />
+							<Text text="{path:'Carros>cor',
+								formatter: '.formatter.formatarCor'
+							}" />
+							<Text text="{
+								path:'Carros>valorDoVeiculo',
+								formatter: '.formatter.formatarValorDaMoeda'
+							}"/>
+							<ObjectStatus
+								text="{ path: 'Carros>flex', formatter: '.formatter.formatarFlex' }"
+								state="{= ${Carros>flex} === false ? 'Error' : 'Success'}"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</Panel>
+	</Page>
+</mvc:View>

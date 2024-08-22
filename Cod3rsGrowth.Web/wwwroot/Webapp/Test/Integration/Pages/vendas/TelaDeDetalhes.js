@@ -7,10 +7,10 @@
 ], function (Opa5, PropertyStrictEquals, Press, EnterText) {
     'use strict';
 
-    const viewDetalhes = "Detalhes";
     const idDaTagTextID = "idDetalhes";
-    const viewListagem = "ListagemVenda";
+    const viewDetalhes = "vendas.Detalhes";
     const idDaTagTextNome = "nomeDetalhes";
+    const viewListagem = "vendas.ListagemVenda";
     const idBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
 
     Opa5.createPageObjects({

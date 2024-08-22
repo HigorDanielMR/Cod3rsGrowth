@@ -46,10 +46,10 @@
 				id="sucessoAoCriarVenda">
 	</MessageStrip>
 
-	<Page showHeader="false">
+	<Page showHeader="false" enableScrolling="false">
 		<Panel >
 			<Toolbar >
-				<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagem"/>
+				<Button icon="sap-icon://arrow-left" press=".aoClicarBotaoVoltar" id="voltarParaAListagem"/>
 				<ToolbarSpacer width="450px"/>
 				<Title id="Title1" text="{i18n>TelaDeCriacaoVenda.AdicionarVenda}"/>
 				<ToolbarSpacer />

@@ -3,9 +3,15 @@
     "ui5/carro/model/formatter",
     "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
-    "sap/m/MessageBox"
+    "sap/m/MessageBox",
+    "sap/m/Dialog",
+    "sap/m/Button",
+    "sap/m/Label",
+    "sap/m/Input",
+    "sap/m/VBox",
+    "sap/m/ComboBox"
 
-], function (BaseController, Formatter, History, JSONModel, MessageBox) {
+], function (BaseController, Formatter, History, JSONModel, MessageBox, Dialog, Button, Label, Input, VBox, ComboBox) {
     "use strict";
 
     let idCarro;
@@ -31,8 +37,12 @@
         aoCoincidirRota() {
             this.processarEvento(() => {
                 const rota = this.getOwnerComponent().getRouter();
-                rota.getRoute(rotaDetalhe).attachMatched(this._obterVendaPorId, this);
+                rota.getRoute(rotaDetalhe).attachMatched(this._carregarEventos, this);
             });
+        },
+
+        _carregarEventos(oEvent) {
+            this._obterVendaPorId(oEvent);
         },
 
         _obterVendaPorId(oEvent) {
@@ -92,6 +102,7 @@
                 );
             })
         },
+
         _remover(url, metodo, id){
             url += id;
             let sucesso = true;
@@ -152,6 +163,13 @@
                     id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(id))
                 });
             })
+        },
+        async aoClicarNoBotaoAdicionarDoCarro() {
+            this.oDialog ??= await this.loadFragment({
+                name: "ui5.carro.app.vendas.carros.AdicionarCarro"
+            });
+        
+            this.oDialog.open();
         }
     });
 }, true);

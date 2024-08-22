@@ -10,10 +10,10 @@
 
     const propriedadeNome = "nome";
     const contextoVendas = "Vendas";
-    const viewDetalhes = "Detalhes";
+    const viewDetalhes = "vendas.Detalhes";
     const nomePropriedadeText = "text";
-    const viewCriacao = "AdicionarVenda";
-    const viewListagem = "ListagemVenda";
+    const viewCriacao = "vendas.AdicionarVenda";
+    const viewListagem = "vendas.ListagemVenda";
     const idDaTagTextNome = "nomeDetalhes";
     const idDaTabelaVenda = "TabelaVendas";
     const idDoBotaoEditar = "botaoEditarVenda";

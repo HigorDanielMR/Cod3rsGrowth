@@ -18,6 +18,7 @@ sap.ui.define([
     const idDoFiltroTelefone = "FiltroTelefone";
     let url = "http://localhost:5071/api/Vendas";    
     const rotaAdicionarVenda = "appAdicionarVenda";
+    const rotaListagemCarros = "appListagemCarro"
 
     return BaseController.extend("ui5.carro.app.vendas.ListagemVenda", {
         formatter: Formatter,
@@ -39,7 +40,7 @@ sap.ui.define([
                     sucesso ? this.getView().setModel(jsonModel, modeloVenda)
                         : this._erroNaRequisicaoDaApi(data);
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => MessageBox.error(err));
         },
 
         aoCoincidirRota() {
@@ -132,6 +133,12 @@ sap.ui.define([
         adicionarVenda() {
             this.processarEvento(() => {
                 this.getRouter().navTo(rotaAdicionarVenda, {}, true);  
+            })
+        },
+
+        aoClicarDeveIParaAListagemCarro(){
+            this.processarEvento(() => {
+                this.getRouter().navTo(rotaListagemCarros, {}, true);  
             })
         },
 

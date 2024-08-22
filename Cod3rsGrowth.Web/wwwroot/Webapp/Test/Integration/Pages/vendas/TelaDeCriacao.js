@@ -9,8 +9,8 @@
 
     const propriedadeNome = "nome";
     const contextoVendas = "Vendas";
-    const viewCriacao = "AdicionarVenda";
-    const viewListagem = "ListagemVenda";
+    const viewCriacao = "vendas.AdicionarVenda";
+    const viewListagem = "vendas.ListagemVenda";
     const idDaTabelaVenda = "TabelaVendas";
     const nomeParaInserirCriacao = "Teste Remover";
     const idInputCpfTelaDeCriacao = "InputCpf";

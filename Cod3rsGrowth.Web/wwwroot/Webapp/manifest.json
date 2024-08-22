@@ -97,6 +97,26 @@
           "pattern": "EditarVenda/{id}",
           "name": "appEditarVenda",
           "target": "editar"
+        },
+        {
+          "pattern": "ListagemCarro",
+          "name": "appListagemCarro",
+          "target": "listagemCarro"
+        },
+        {
+          "pattern": "AdicionarCarro",
+          "name": "appAdicionarCarro",
+          "target": "adicionarCarro"
+        },
+        {
+          "pattern": "DetalhesCarro/{id}",
+          "name": "appDetalhesCarro",
+          "target": "detalhesCarro"
+        },
+        {
+          "pattern": "EditarCarro/{id}",
+          "name": "appEditarCarro",
+          "target": "editarCarro"
         }
       ],
       "targets": {
@@ -121,6 +141,23 @@
         "editar": {
           "id": "adicionarVenda",
           "name": "app.vendas.AdicionarVenda"
+        },
+        "listagemCarro": {
+          "id": "listagemCarro",
+          "name": "app.carros.ListagemCarro",
+          "level": 1
+        },
+        "adicionarCarro": {
+          "id": "adicionarCarro",
+          "name": "app.carros.AdicionarCarro"
+        },
+        "detalhesCarro": {
+          "id": "detalhesCarro",
+          "name": "app.carros.DetalhesCarro"
+        },
+        "editarCarro": {
+          "id": "adicionarCarro",
+          "name": "app.carros.AdicionarCarro"
         }
       }
     }

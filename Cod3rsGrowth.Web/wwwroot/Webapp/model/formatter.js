@@ -59,6 +59,66 @@
                     return Flex;
             }
         },
+        formatarMarcaParaInteiro(Marca){
+            switch (Marca) {
+                case "Audi":
+                    return 0;
+                case 'Bentley':
+                    return 1;
+                case "BMW":
+                    return 2;
+                case "Bugatti":
+                    return 3;
+                case "Chevrolet":
+                    return 4;
+                case "Ferrari":
+                    return 5;
+                case "Fiat":
+                    return 6;
+                case "Ford":
+                    return 7;
+                case "Honda":
+                    return 8;
+                case "Hyundai":
+                    return 9;
+                case "Jaguar":
+                    return 10;
+                case "Kia":
+                    return 11;
+                case 'Lamborghini':
+                    return 12;
+                case "Land Rover":
+                    return 13;
+                case "Maserati":
+                    return 14;
+                case "Mercedes":
+                    return 15;
+                case "Mitsubishi":
+                    return 16;
+                case "Nissan":
+                    return 17;
+                case "Peugeot":
+                    return 18;
+                case "Porsche":
+                    return 19;
+                case "Renault":
+                    return 20;
+                case "Rolls Royce":
+                    return 21;
+                case "Subaru":
+                    return 22;
+                case "Tesla":
+                    return 23;
+                case "Toyota":
+                    return 24;
+                case "Volkswagen":
+                    return 25;
+                case "Todos":
+                    return null;
+                default:
+                    return Marca;
+            }
+        },
         formatarMarca(Marca) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             switch (Marca) {
@@ -119,6 +179,59 @@
             }
         },
 
+        formatarCorParaInteiro(Cor){
+            switch (Cor) {
+                case "Amarelo":
+                    return 0;
+                case "Azul":
+                    return 1;
+                case "Bege":
+                    return 2;
+                case "Bordô":
+                    return 3;
+                case "Branco":
+                    return 4;
+                case "Cinza":
+                    return 5;
+                case "Ciano":
+                    return 6;
+                case "Dourado":
+                    return 7;
+                case "Grafite":
+                    return 8;
+                case "Laranja":
+                    return 9;
+                case "Magenta":
+                    return 10;
+                case "Marrom":
+                    return 11;
+                case "Prata":
+                    return 12;
+                case "Prateado":
+                    return 13;
+                case "Preto":
+                    return 14;
+                case "Preto":
+                    return 15;
+                case "Rosa":
+                    return 16;
+                case "Roxo":
+                    return 17;
+                case "Turquesa":
+                    return 18;
+                case "Verde":
+                    return 19;
+                case "Vermelho":
+                    return 20;
+                case "Violeta":
+                    return 21;
+                case "Todos":
+                    return null;
+                default:
+                    return Cor;
+            }
+        },
+
         formatarCor(Cor) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             switch (Cor) {
@@ -169,6 +282,17 @@
                 default:
                     return Cor;
             }
+        },
+        formatarFlexFiltro(Flex){
+            switch (Flex) {
+                case "true":
+                     return "true";
+                case "false":
+                    return "false";
+                case "null":
+                    return null;
+            }
+
         }
     }
 }, true);

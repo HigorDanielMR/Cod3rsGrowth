@@ -7,7 +7,8 @@
 
 	<Page showHeader="false">
 		<Toolbar>
-			<ToolbarSpacer width="470px"/>
+			<Button text="Listagem Carros" press=".aoClicarDeveIParaAListagemCarro"/>
+			<ToolbarSpacer width="400px"/>
 			<Title text="{i18n>ListagemVendas.ListagemDeVendas}" width="100%"/>
 			<Button icon="sap-icon://add" text="{i18n>Botao.Adicionar}" press=".adicionarVenda" id="botaoAdicionarVenda"/>
 		 </Toolbar>
