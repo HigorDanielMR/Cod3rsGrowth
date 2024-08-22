@@ -163,13 +163,6 @@
                     id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(id))
                 });
             })
-        },
-        async aoClicarNoBotaoAdicionarDoCarro() {
-            this.oDialog ??= await this.loadFragment({
-                name: "ui5.carro.app.vendas.carros.AdicionarCarro"
-            });
-        
-            this.oDialog.open();
         }
     });
 }, true);

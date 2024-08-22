@@ -11,7 +11,7 @@ sap.ui.define([
     const modeloCores = "Cores";
     const modeloCarro = "Carros";
     const modeloMarcas = "Marcas";
-    const rotaDetalhes = "appDetalhes";
+    const rotaDetalhes = "appDetalhesCarro";
     const idDoFiltroFlex = "FiltroFlex";
     const idDoFiltroCor = "FiltroCores";
     const idDoFiltroMarca = "FiltroMarcas";
@@ -187,7 +187,7 @@ sap.ui.define([
             const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
             oRouter.navTo(rotaDetalhes, {
-                id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(id))
+                id: window.encodeURIComponent(oItem.getBindingContext(modeloCarro).getProperty(id))
             });
         }
     });

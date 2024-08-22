@@ -1,0 +1,63 @@
+<mvc:View
+	controllerName="ui5.carro.app.carros.DetalhesCarro"
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:f="sap.ui.layout.form">
+	<Page
+		id="TelaDeDetalhes"
+		showHeader="false"
+		class="sapUiResponsiveContentPadding">
+		<Panel width="1200px">
+			<Toolbar height="46px">
+				<Button icon="sap-icon://arrow-left" press=".aoClicarVoltarParaTelaDeListagem" id="voltarParaAListagem"/>
+				<ToolbarSpacer width="450px"/>
+				<Title text="{i18n>DetalhesVenda.Detalhes}" titleStyle="H5"/>
+				<ToolbarSpacer width="400px"/>
+				<Button icon="sap-icon://customer-order-entry" text="Editar" id="botaoEditarCarro" press=".aoClicarNoBotaoEditar" type="Neutral"/>
+				<Button icon="sap-icon://decline" text="Remover" type="Reject" id="botaoRemoverCarro" press=".aoClicarNoBotaoRemover"/>
+			</Toolbar>
+			<Toolbar>
+				<core:Icon src="sap-icon://insurance-car" color="Tile" />
+				<Title text="{i18n>Detalhes.DadosDoCarros}"/>
+				<ToolbarSpacer />
+			</Toolbar>
+			<VBox class="sapUiSmallMargin"
+						  binding="{Carro>/}"
+						  height="220px">
+				<f:SimpleForm id="SimpleFormChangeColumn_threeGroups346"
+					editable="true"
+					layout="ColumnLayout"
+					columnsM="3"
+					columnsL="4"
+					columnsXL="5"
+					width="1150px">
+					<f:content>
+						<Label text="ID" textAlign="Left"/>
+						<Text text="{Carro>id}" id="tagIdDetalhesCarro"/>
+						<Label text="Modelo" textAlign="Left"/>
+						<Text text="{Carro>modelo}" id="tagNomeDetalhesCarro"/>
+						<Label text="Marca" textAlign="Left"/>
+						<Text text="{
+											path:'Carro>marca',
+											formatter: '.formatter.formatarMarca'
+										}" />
+						<Label text="Cor" textAlign="Left"/>
+						<Text text="{path:'Carro>cor',
+											formatter: '.formatter.formatarCor'
+										}" />
+						<Label text="Valor" textAlign="Left"/>
+						<Text text="{
+											path:'Carro>valorDoVeiculo',
+											formatter: '.formatter.formatarValorDaMoeda'
+										}"/>
+						<Label text="Flex" textAlign="Left"/>
+						<ObjectStatus
+							text="{ path: 'Carro>flex', formatter: '.formatter.formatarFlex' }"
+							state="{= ${Carro>flex} === false ? 'Error' : 'Success'}"/>
+					</f:content>
+				</f:SimpleForm>
+			</VBox>
+		</Panel>
+	</Page>
+</mvc:View>

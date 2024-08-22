@@ -21,6 +21,7 @@
     const idDoInputMarca = "SelecionarMarca";
     const rotaCriarCarro = "appAdicionarCarro";
     const rotaListagemCarros = "appListagemCarro";
+    const rotaEditarCarro = "appEditarCarro";
     const url= "http://localhost:5071/api/Carros/";
     const idDoMessageStripErroCriarCarro = "erroCriarCarro";
     const urlCores = "http://localhost:5071/api/Carros/Cores";
@@ -38,6 +39,7 @@
             this.processarEvento(() => {
                 var rota = sap.ui.core.UIComponent.getRouterFor(this);
                 rota.getRoute(rotaCriarCarro).attachMatched(this._carregarEventosCriar, this);
+                rota.getRoute(rotaEditarCarro).attachMatched(this._carregarEventosCriar, this);
             });
         },
 
