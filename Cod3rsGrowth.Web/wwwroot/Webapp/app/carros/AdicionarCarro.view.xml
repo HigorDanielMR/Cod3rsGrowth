@@ -80,8 +80,7 @@
 							<f:FormContainer>
 									<f:FormElement label="Valor" >
 										<f:fields>
-											<Input id="InputValor" required="true" width="400px" value="{path: 'modelPath', type: 'sap.ui.model.type.Decimal', formatOptions: {minFractionDigits: 2, maxFractionDigits: 2}}"
-										/>
+											<Input id="InputValor" required="true" width="400px"/>
 										</f:fields>
 									</f:FormElement>
 									<f:FormElement label="Marcas">

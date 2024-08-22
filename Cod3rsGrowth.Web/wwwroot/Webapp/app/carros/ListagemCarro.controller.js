@@ -136,9 +136,11 @@ sap.ui.define([
                 let cor = this.aoColetarCor();
                 let flex = this.aoColetarSeEhFlex();
 
-                if (cor === "Todas" || marca === "Todas"){
+                if (cor === "Todas"){
                     cor = null;
-                    marca = null;
+                }
+                if (marca === "Todas") {
+                    marca = null
                 }
 
                 if (modelo) {

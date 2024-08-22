@@ -10,39 +10,20 @@
 ], function (BaseController, History, JSONModel, Formatter, validacao, MessageStrip, MessageBox) {
     "use strict";
 
-    var _rota;
-    let idVenda;
-    let idCarro;
-    let dataEditar;
+    let _rota;
     const modeloCores = "Cores";
-    const modeloMarcas = "Marcas";
-    const rotaListagemCarros = "appListagemCarro";
-    const estiverVazio = 0;
-    const primeiroCarro = 0;
-    const modeloCarro = "Carros";
     const parametroNome = "name";
-    const idDoInputCpf = "InputCpf";
-    const idDoTituloTela = "Title1";
+    const modeloMarcas = "Marcas";
     const idDoInputFlex = "InputFlex";
-    const idDoInputModelo = "InputModelo";
     const idDoInputValor = "InputValor";
+    const idDoInputCor = "SelecionarCor";
+    const idDoInputModelo = "InputModelo";
     const idDoInputMarca = "SelecionarMarca";
-    const idDoInputCor = "SelecionarCor"
-    const idDoInputEmail = "InputEmail";
-    const rotaEditar = "appEditarVenda";
     const rotaCriarCarro = "appAdicionarCarro";
-    const rotaViewListagem = "appListagem";
-    const parametroArgumento = "arguments";
-    const idDoInputTelefone = "InputTelefone";
-    const textoParaAdicionarTituloEdicao = "Editar Venda";
-    const textoParaAdicionarTituloCriar = "Adicionar Venda";
-    const idDoMessageStripErroCriarCarro = "erroCriarCarro";
-    const idDoMessageStripSucessoEdicao = "sucessoAoEditarVenda";
-    const idObjectStatusCarroNaoSelecionado = "selecioneUmCarro";
-    const idDoMessageStripSucessoCriacao = "sucessoAoCriarCarro";
-    let urlObterVendaPorId = "http://localhost:5071/api/Vendas/";
-    const idDaTabelaCarrosDisponiveis = "TabelaCarrosDisponiveis";
+    const rotaListagemCarros = "appListagemCarro";
     const url= "http://localhost:5071/api/Carros/";
+    const idDoMessageStripErroCriarCarro = "erroCriarCarro";
+    const idDoMessageStripSucessoCriacao = "sucessoAoCriarCarro";
 
     return BaseController.extend("ui5.carro.app.carros.AdicionarCarro", {
         formatter: Formatter,
@@ -84,7 +65,7 @@
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => MessageBox.error(err));
         },
 
         _carregarDescricaoMarcas(){
@@ -105,15 +86,15 @@
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
-                .catch((err) => console.error(err));
+                .catch((err) => MessageBox.error(err));
         },
 
         aoColetarValorDoVeiculo(){
             var inputValor = this.oView.byId(idDoInputValor);
             var valor = inputValor.getValue();
-            return parseInt(valor);
+            return parseFloat(valor);
         },
-
+        
         aoColetarModelo() {
             const inputModelo = this.oView.byId(idDoInputModelo);
             const modelo = inputModelo.getValue();
@@ -122,12 +103,12 @@
 
         aoColetarMarca(){
             const marca = this.oView.byId(idDoInputMarca).getSelectedKey();
-            return marca;
+            return parseInt(marca);
         },
         
         aoColetarCor(){
             const cor = this.oView.byId(idDoInputCor).getSelectedKey();
-            return cor;
+            return parseInt(cor);
         },
 
         aoObterSeEhFlex() {
@@ -158,34 +139,30 @@
                         "flex": flex
                     }
                     const metodo = "POST"
-                    this._requisicaoHttp(url, metodo, carro, idDoMessageStripSucessoCriacao, idDoMessageStripErroCriarCarro);
+                    let sucesso = true;
+                    fetch(url, {
+                        method: metodo,
+                        body: JSON.stringify(carro),
+                        headers: { "Content-type": "application/json; charset=UTF-8" }
+                    })
+                        .then(res => {
+                            if (!res.ok) {
+                                sucesso = false;
+                            }
+                            return res.json();
+                        })
+                        .then(data => {
+                            if (!sucesso) {
+                                this._erroNaRequisicaoDaApi(data);
+                                this.getView().byId(idDoMessageStripErroCriarCarro).setVisible(true);
+                            }
+                            else {
+                                this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(true);
+                            }
+                        })
+                        .catch(err => { MessageBox.error(err); });
                 }
             })
-        },
-
-        _requisicaoHttp(url, metodo, carro, idMessageSucesso, idMessageErro) {
-            let sucesso = true;
-            fetch(url, {
-                method: metodo,
-                body: JSON.stringify(carro),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
-            })
-                .then(res => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    if (!sucesso) {
-                        this._erroNaRequisicaoDaApi(data);
-                        this.getView().byId(idMessageErro).setVisible(true);
-                    }
-                    else {
-                        this.getView().byId(idMessageSucesso).setVisible(true);
-                    }
-                })
-                .catch(err => { MessageBox.error(err); });
         },
 
         aoClicarDeveVoltarParaATelaDeListagem() {

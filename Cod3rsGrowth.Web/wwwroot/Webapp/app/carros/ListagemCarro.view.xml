@@ -8,14 +8,14 @@
 	<Page showHeader="false">
 		<Toolbar>
 			<Button icon="sap-icon://navigation-left-arrow" text="Listagem Vendas" press=".aoClicarDeveIParaAListagemVendas"/>
-			<ToolbarSpacer width="470px"/>
+			<ToolbarSpacer width="380px"/>
 			<Title text="Listagem De Carros" width="100%"/>
 			<Button icon="sap-icon://add" text="{i18n>Botao.Adicionar}" press=".aoClicarNoBotaoAdicionarCarro" id="botaoAdicionarVenda"/>
 		 </Toolbar>
 		 <Panel height="500px">
 			<Table
 				alternateRowColors="true"
-				id="TabelaCarrosDisponiveis"
+				id="TabelaCarros"
 				mode="SingleSelectLeft"
 				includeItemInSelection="true"
 				items="{path: 'Carros>/'}"
@@ -26,7 +26,7 @@
 					   <ToolbarSpacer/>
 					   <core:Icon src="sap-icon://add-filter" color="Tile"/>
 					   <Text text="Modelo: "/>
-					   <Input width="auto" id="FiltroModelo" placeholder="Modelo" change=".aoFiltrarCarro"/>
+					   <Input width="auto" id="FiltroModelo" placeholder="Modelo" liveChange=".aoFiltrarCarro"/>
 					   <Text text="Cores: "/>
 					   <Select id="FiltroCores" change=".aoFiltrarCarro" items="{Cores>/descricao}" width="180px">
 							<items>
