@@ -116,7 +116,7 @@
             return pago;
         },
 
-        aoClicarNoBotaoAdicionarDeveCriarCarro() {
+        aoClicarNoBotaoAdicionarCriarCarro() {
             this.processarEvento(() => {
 
                 var marca = this.aoColetarMarca();
@@ -165,7 +165,7 @@
             })
         },
 
-        aoClicarDeveVoltarParaATelaDeListagem() {
+        aoClicarVoltarParaATelaDeListagem() {
             this.processarEvento(() => {
                 var history;
 

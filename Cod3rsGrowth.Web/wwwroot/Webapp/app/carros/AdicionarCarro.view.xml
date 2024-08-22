@@ -29,11 +29,11 @@
 	<Page showHeader="false" enableScrolling="false">
 		<Panel >
 			<Toolbar >
-				<Button icon="sap-icon://arrow-left" press=".aoClicarDeveVoltarParaATelaDeListagem" id="voltarParaAListagemCarro"/>
+				<Button icon="sap-icon://arrow-left" press=".aoClicarVoltarParaATelaDeListagem" id="voltarParaAListagemCarro"/>
 				<ToolbarSpacer width="450px"/>
 				<Title text="{i18n>AdicionarCarro.AdicionarCarro}"/>
 				<ToolbarSpacer />
-				<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="adicionarCarro" press=".aoClicarNoBotaoAdicionarDeveCriarCarro" type="Accept"/>
+				<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="adicionarCarro" press=".aoClicarNoBotaoAdicionarCriarCarro" type="Accept"/>
 			</Toolbar>
 			<FlexBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Column" height="350px" alignItems="Baseline">
 				<Panel height="320px">
