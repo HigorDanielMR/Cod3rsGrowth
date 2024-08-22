@@ -42,7 +42,7 @@
 						<Title  text="{i18n>AdicionarCarro.DadosDoCarro}"/>
 					</Toolbar>
 					<f:Form id="FormToolbar"
-						editable="true" >
+						editable="true" width="900px">
 						<f:layout>
 							<f:ColumnLayout
 								columnsM="2"
