@@ -165,7 +165,7 @@
             })
         },
 
-        aoClicarVoltarParaATelaDeListagem() {
+        aoClicarBotaoVoltar() {
             this.processarEvento(() => {
                 var history;
 

@@ -29,7 +29,7 @@
 	<Page showHeader="false" enableScrolling="false">
 		<Panel >
 			<Toolbar >
-				<Button icon="sap-icon://arrow-left" press=".aoClicarVoltarParaATelaDeListagem" id="voltarParaAListagemCarro"/>
+				<Button icon="sap-icon://arrow-left" press=".aoClicarBotaoVoltar" id="voltarParaAListagemCarro"/>
 				<ToolbarSpacer width="450px"/>
 				<Title text="{i18n>AdicionarCarro.AdicionarCarro}"/>
 				<ToolbarSpacer />
