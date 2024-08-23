@@ -6,7 +6,7 @@
 
 	QUnit.module("Carro Listagem");
 
-	opaTest("Deve clicar na venda desejada e entrar na view de detalhes", function (Given, When, Then) {
+	opaTest("Deve clicar no carro desejado e entrar na view de detalhes", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5/carro"
@@ -41,7 +41,7 @@
 		Then.naTelaDeDetalhesListagemCarro.euVerificoSeATabelaFoiFiltradaComAMarcaEsperada();
 		Then.iTeardownMyApp();
 	});
-	opaTest("Deve clicar no select de marca selecionar a marca e verificar se a tabela foi filtrada como o desejado", function (Given, When, Then) {
+	opaTest("Deve clicar no select de flex selecionar o tipo flex desejado e verificar se a tabela foi filtrada como o desejado", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5/carro"

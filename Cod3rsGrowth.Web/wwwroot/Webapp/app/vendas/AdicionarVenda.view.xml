@@ -47,7 +47,7 @@
 	</MessageStrip>
 
 	<Page showHeader="false" enableScrolling="false">
-		<Panel >
+		<Panel height="92%">
 			<Toolbar >
 				<Button icon="sap-icon://arrow-left" press=".aoClicarBotaoVoltar" id="voltarParaAListagem"/>
 				<ToolbarSpacer width="450px"/>
@@ -55,7 +55,7 @@
 				<ToolbarSpacer />
 				<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="AdicionarVendaCriacao" press=".aoClicarNoBotaoAdicionarDeveAdicionarVenda" type="Accept"/>
 			</Toolbar>
-			<FlexBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Column" height="800px" alignItems="Baseline">
+			<FlexBox class="sapUiSmallMargin" backgroundDesign="Solid" direction="Column" height="89%" alignItems="Baseline">
 				<Panel height="320px">
 					<Toolbar style="Clear">
 						<core:Icon src="sap-icon://business-card" color="Tile" />
@@ -108,7 +108,7 @@
 						</f:formContainers>
 					</f:Form>
 				</Panel>
-				<Panel height="390px">
+				<Panel height="300px">
 					<headerToolbar>
 						<Toolbar height="44px" style="Clear">
 							<core:Icon src="sap-icon://car-rental" color="Tile" />

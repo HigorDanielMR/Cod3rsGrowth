@@ -6,7 +6,7 @@
 
 	QUnit.module("Carro Criacao");
 
-	opaTest("Deve clicar na venda desejada e entrar na view de detalhes", function (Given, When, Then) {
+	opaTest("Deve editar o carro desejado e verificar se a message strip foi aberta.", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5/carro"
@@ -20,5 +20,7 @@
 		When.naTelaDeAdicionarCarro.euClicoNoSeletESelecionoOTipoFlexDesejado();
 		When.naTelaDeAdicionarCarro.euClicoNoBotaoAdicionarCarro();
 		Then.naTelaDeAdicionarCarro.euVerificoSeAMessageStripDeCarroCriadoComSucessoFoiExibida();
+		Then.iTeardownMyApp();
+
 	});
 });

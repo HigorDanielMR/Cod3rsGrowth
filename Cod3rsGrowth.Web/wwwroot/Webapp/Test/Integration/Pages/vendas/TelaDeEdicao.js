@@ -10,14 +10,14 @@
 
     const propriedadeNome = "nome";
     const contextoVendas = "Vendas";
-    const viewDetalhes = "vendas.Detalhes";
     const nomePropriedadeText = "text";
-    const viewCriacao = "vendas.AdicionarVenda";
-    const viewListagem = "vendas.ListagemVenda";
+    const viewDetalhes = "vendas.Detalhes";
     const idDaTagTextNome = "nomeDetalhes";
     const idDaTabelaVenda = "TabelaVendas";
     const idDoBotaoEditar = "botaoEditarVenda";
+    const viewCriacao = "vendas.AdicionarVenda";
     const nomeParaInserirEditar = "Vitor Godoi";
+    const viewListagem = "vendas.ListagemVenda";
     const idInputNomeTelaDeEditar = "InputNome";
     const idDaTabelaCarros = "TabelaCarrosDisponiveis";
     const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao";

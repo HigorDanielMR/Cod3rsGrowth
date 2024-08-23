@@ -8,12 +8,11 @@ sap.ui.define([
 ], function (BaseController, Formatter, History, JSONModel) {
     "use strict";
 
-    const Id = "id";
     const modeloCarro = "Carro";
     const rotaDetalhe = "appDetalhesCarro";
-    const rotaListagemCarros = "appListagemCarro";
     const parametroArgumento = "arguments";
     const rotaEditarCarro = "appEditarCarro";
+    const rotaListagemCarros = "appListagemCarro";
     const urlCarro = "http://localhost:5071/api/Carros/";
 
     return BaseController.extend("ui5.carro.app.carros.DetalhesCarro", {
@@ -47,7 +46,6 @@ sap.ui.define([
                 .then((carro) => {
                     if (sucesso) {
                         const jsonModel = new JSONModel(carro)
-                        console.log(carro)
                         this.getView().setModel(jsonModel, modeloCarro);
                     }
                     else this._erroNaRequisicaoDaApi(carro);
@@ -62,12 +60,13 @@ sap.ui.define([
                 this.getRouter().navTo(rotaListagemCarros, {}, true);
             })
         },
+        
         aoClicarNoBotaoEditar(oEvent){
             this.processarEvento(() =>{
                 const oItem = oEvent.getSource();
                 const oRouter = this.getOwnerComponent().getRouter();
                 oRouter.navTo(rotaEditarCarro, {
-                    id: window.encodeURIComponent(oItem.getBindingContext(modeloCarro).getProperty(Id))
+                    id: oItem._getPropertiesToPropagate().oModels.Carro.oData.id
                 });
             })
         }

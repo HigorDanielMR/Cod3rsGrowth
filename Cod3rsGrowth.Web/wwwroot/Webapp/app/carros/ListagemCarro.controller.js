@@ -11,12 +11,12 @@ sap.ui.define([
     const modeloCores = "Cores";
     const modeloCarro = "Carros";
     const modeloMarcas = "Marcas";
-    const rotaDetalhes = "appDetalhesCarro";
     const idDoFiltroFlex = "FiltroFlex";
     const idDoFiltroCor = "FiltroCores";
     const idDoFiltroMarca = "FiltroMarcas";
     const idDoFiltroModelo = "FiltroModelo";
     const rotaListagemVenda = "appListagem";
+    const rotaDetalhes = "appDetalhesCarro";
     const rotaListagemCarro = "appListagemCarro";
     let url = "http://localhost:5071/api/Carros/";    
     const rotaAdicionarCarro = "appAdicionarCarro";

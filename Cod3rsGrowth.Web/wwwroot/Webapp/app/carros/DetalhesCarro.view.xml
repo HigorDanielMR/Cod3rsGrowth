@@ -34,9 +34,9 @@
 					width="1150px">
 					<f:content>
 						<Label text="ID" textAlign="Left"/>
-						<Text text="{Carro>id}" id="tagIdDetalhesCarro"/>
+						<Text text="{Carro>id}" id="idCarro"/>
 						<Label text="Modelo" textAlign="Left"/>
-						<Text text="{Carro>modelo}" id="tagNomeDetalhesCarro"/>
+						<Text text="{Carro>modelo}" id="idModelo"/>
 						<Label text="Marca" textAlign="Left"/>
 						<Text text="{
 											path:'Carro>marca',

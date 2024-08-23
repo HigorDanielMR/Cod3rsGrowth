@@ -2,12 +2,11 @@
     "sap/ui/test/Opa5",
     "sap/ui/test/actions/EnterText",
     "sap/ui/test/actions/Press",
-    "sap/ui/test/matchers/PropertyStrictEquals",
     "sap/ui/test/matchers/Properties",
     "sap/ui/test/matchers/Ancestor"
 
 
-], (Opa5, EnterText, Press, PropertyStrictEquals, Properties, Ancestor) => {
+], (Opa5, EnterText, Press, Properties, Ancestor) => {
     "use strict";
 
     const contextoCarros = "Carros";
