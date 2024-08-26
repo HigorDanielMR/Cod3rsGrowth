@@ -7,12 +7,12 @@ sap.ui.define([
 ], function (Opa5, PropertyStrictEquals, Press, EnterText) {
     'use strict';
 
-    const viewDetalhes = "vendas.Detalhes";
-    const idDaTabela = "TabelaVendas";
-    const viewListagem = "vendas.ListagemVenda";
     const contextoVendas = "Vendas";
+    const idDaTabela = "TabelaVendas";
     const idBotaoRemover = "botaoRemover";
     const idDaTagTextNome = "nomeDetalhes";
+    const viewDetalhes = "vendas.Detalhes";
+    const viewListagem = "vendas.ListagemVenda";
 
     Opa5.createPageObjects({
         naTelaDeDetalhesRemover: {
@@ -48,7 +48,6 @@ sap.ui.define([
                     })
                 },
                 euClicoNoBotaoSimDaMessageBox(){
-                    var oOrderNowButton = null;
                     const botaoSimMessageBox = "Sim";
                     return this.waitFor({
                         viewName: viewDetalhes,
@@ -57,7 +56,6 @@ sap.ui.define([
                         success(aButtons) {
                             return aButtons.filter(function (oButton) {
                                 if(oButton.getText() == botaoSimMessageBox) {
-                                    oOrderNowButton = oButton;
                                     oButton.firePress();
                                 }
                             });
@@ -67,7 +65,6 @@ sap.ui.define([
                     })
                 },
                 euClicoNoBotaoNaoDaMessageBox(){
-                    var oOrderNowButton = null;
                     const botaoNaoMessageBox = "Não";
                     return this.waitFor({
                         viewName: viewDetalhes,
@@ -76,7 +73,6 @@ sap.ui.define([
                         success(aButtons) {
                             return aButtons.filter(function (oButton) {
                                 if(oButton.getText() == botaoNaoMessageBox) {
-                                    oOrderNowButton = oButton;
                                     oButton.firePress();
                                 }
                             });

@@ -14,15 +14,15 @@ sap.ui.define([
     const nomeParaInserir = "Adriana";
     const idDaTabela = "TabelaVendas";
     const idDoFiltroCpf = "FiltroCpf";
+    const idDoFiltroData = "FiltroData";
     const idDoFiltroNome = "FiltroNome";
     const cpfParaInserir = "54651651651";
-    const viewListagem = "vendas.ListagemVenda";
     const propriedadeTelefone = "telefone";
     const telefoneParaInserir = "65165161651";
-    const dataParaInserir = "04/07/2024-18/07/2024";
     const idDoFiltroTelefone = "FiltroTelefone";
-    const idDoFiltroData = "FiltroData";
+    const viewListagem = "vendas.ListagemVenda";
     const propriedadeDataDeCompra = "dataDeCompra";
+    const dataParaInserir = "04/07/2024-18/07/2024";
     const idDoFiltroDataInicial = "FiltroDataInicial";
     const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
 

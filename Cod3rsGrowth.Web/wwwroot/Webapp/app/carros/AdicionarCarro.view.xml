@@ -13,7 +13,7 @@
 				showIcon="true"
 				showCloseButton="true"
 				class="sapUiMediumMarginBottom"
-				id="erroCriarCarro">
+				id="erroAoCriarCarro">
 	</MessageStrip>
 	
 	<MessageStrip
@@ -26,12 +26,32 @@
 				id="sucessoAoCriarCarro">
 	</MessageStrip>
 
+	<MessageStrip
+				text="Erro ao editar carro"
+				visible="false"
+				type="Error"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="erroAoEditarCarro">
+	</MessageStrip>
+	
+	<MessageStrip
+				text="Carro editado com sucesso!"
+				visible="false"
+				type="Success"
+				showIcon="true"
+				showCloseButton="true"
+				class="sapUiMediumMarginBottom"
+				id="sucessoAoEditarCarro">
+	</MessageStrip>
+
 	<Page showHeader="false" enableScrolling="false">
 		<Panel >
 			<Toolbar >
 				<Button icon="sap-icon://arrow-left" press=".aoClicarBotaoVoltar" id="voltarParaAListagemCarro"/>
 				<ToolbarSpacer width="450px"/>
-				<Title text="{i18n>AdicionarCarro.AdicionarCarro}"/>
+				<Title id="TituloEditarCarro" text="{i18n>AdicionarCarro.AdicionarCarro}"/>
 				<ToolbarSpacer />
 				<Button icon="sap-icon://cart-4" text="{i18n>Botao.Adicionar}" id="adicionarCarro" press=".aoClicarNoBotaoAdicionarCriarCarro" type="Accept"/>
 			</Toolbar>

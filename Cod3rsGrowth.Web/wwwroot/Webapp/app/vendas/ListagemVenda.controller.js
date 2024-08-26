@@ -17,8 +17,8 @@ sap.ui.define([
     const quantidadeDeCaracteresDoTelefone = 15;
     const idDoFiltroTelefone = "FiltroTelefone";
     let url = "http://localhost:5071/api/Vendas";    
+    const rotaListagemCarros = "appListagemCarro";
     const rotaAdicionarVenda = "appAdicionarVenda";
-    const rotaListagemCarros = "appListagemCarro"
 
     return BaseController.extend("ui5.carro.app.vendas.ListagemVenda", {
         formatter: Formatter,

@@ -1,4 +1,4 @@
-﻿sap.ui.define([
+sap.ui.define([
     'sap/ui/test/Opa5',
     'sap/ui/test/matchers/PropertyStrictEquals',
     "sap/ui/test/actions/Press"
@@ -6,14 +6,14 @@
 ], function (Opa5, PropertyStrictEquals, Press) {
     'use strict';
 
-    const idDaTagTextID = "idDetalhes";
-    const viewDetalhes = "vendas.Detalhes";
-    const idDaTagTextNome = "nomeDetalhes";
-    const viewListagem = "vendas.ListagemVenda";
+    const idDaTagTextID = "idCarro";
+    const idDaTagTextModelo = "idModelo";
+    const viewDetalhes = "carros.DetalhesCarro";
+    const viewListagem = "carros.ListagemCarro";
     const idBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
 
     Opa5.createPageObjects({
-        naTelaDeDetalhes: {
+        naTelaDeDetalhesCarro: {
             arrangements: {
                 euInicioMeuApp() {
                     return this.iStartMyUIComponent("../index.html");
@@ -30,16 +30,16 @@
                     })
                 },
 
-                euClicoNaVendaSelecionada() {
+                euClicoNoCarroDesejado() {
                     const propriedadeDesejada = "text";
-                    const nomeDesejado = "Higor";
+                    const modeloDesejado = "Supra";
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         viewName: viewListagem,
                         matchers: [
                             new PropertyStrictEquals({
                                 name: propriedadeDesejada,
-                                value: nomeDesejado
+                                value: modeloDesejado
                             })
                         ],
                         actions: new Press(),
@@ -62,16 +62,16 @@
                         errorMessage: "O id está como o esperado."
                     });
                 },
-                euVerificoSeNomeEstaComoOEsperado() {
-                    var nomeEsperado = "Adriana"
+                euVerificoSeModeloEstaComoOEsperado() {
+                    var modeloEsperado = "Skyline"
                     return this.waitFor({
-                        id: idDaTagTextNome,
+                        id: idDaTagTextModelo,
                         viewName: viewDetalhes,
                         controlType: "sap.m.Text",
                         success: function (texto) {
-                            var nomePreenchido = texto.getText();
+                            var modeloPreenchido = texto.getText();
 
-                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O nome está como o esperado.");
+                            Opa5.assert.strictEqual(modeloPreenchido, modeloEsperado, "O nome está como o esperado.");
                         },
                         errorMessage: "O nome não como o esperado."
                     });
@@ -90,16 +90,16 @@
                         errorMessage: "O id está como o esperado."
                     });
                 },
-                euVerificoSeNomeDopSegundoItemDaListaEstaComoOEsperado() {
-                    var nomeEsperado = "Higor"
+                euVerificoSeModeloDoSegundoItemDaListaEstaComoOEsperado() {
+                    var modeloEsperado = "Supra"
                     return this.waitFor({
-                        id: idDaTagTextNome,
+                        id: idDaTagTextModelo,
                         viewName: viewDetalhes,
                         controlType: "sap.m.Text",
                         success: function (texto) {
-                            var nomePreenchido = texto.getText();
+                            var modeloPreenchido = texto.getText();
 
-                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O nome está como o esperado.");
+                            Opa5.assert.strictEqual(modeloPreenchido, modeloEsperado, "O nome está como o esperado.");
                         },
                         errorMessage: "O nome não como o esperado."
                     });

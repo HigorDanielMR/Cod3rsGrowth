@@ -69,7 +69,9 @@
 					</Column>
 				</columns>
 				<items>
-					<ColumnListItem>
+					<ColumnListItem
+						type="Navigation"
+						press=".aoPressionar">
 						<cells>
 							<Text text="{Carros>id}" />
 							<Text text="{

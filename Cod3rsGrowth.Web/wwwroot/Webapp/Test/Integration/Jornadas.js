@@ -7,7 +7,10 @@
     "./pages/vendas/JornadaTelaDeEdicao",
     "./pages/vendas/JornadaRemover",
     "./pages/carros/JornadaTelaListagem",
-    "./pages/carros/JornadaTelaCriacao"
+    "./pages/carros/JornadaTelaDeDetalhes",
+    "./pages/carros/JornadaTelaCriacao",
+    "./pages/carros/JornadaTelaDeEdicao"
+    
 ], function (Opa5, Startup) {
     "use Strict";
 

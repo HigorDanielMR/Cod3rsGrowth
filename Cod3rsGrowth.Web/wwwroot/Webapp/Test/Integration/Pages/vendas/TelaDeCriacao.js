@@ -9,14 +9,14 @@
 
     const propriedadeNome = "nome";
     const contextoVendas = "Vendas";
+    const idDaTabelaVenda = "TabelaVendas";
+    const idInputCpfTelaDeCriacao = "InputCpf";
     const viewCriacao = "vendas.AdicionarVenda";
     const viewListagem = "vendas.ListagemVenda";
-    const idDaTabelaVenda = "TabelaVendas";
-    const nomeParaInserirCriacao = "Teste Remover";
-    const idInputCpfTelaDeCriacao = "InputCpf";
     const cpfParaInserirCriacao = "12345678911";
     const idInputPagoTelaDeCriacao = "InputPago";
     const idInputNomeTelaDeCriacao = "InputNome";
+    const nomeParaInserirCriacao = "Teste Remover";
     const idInputEmailTelaDeCriacao = "InputEmail";
     const telefoneParaInserirCriacao = "62992810844";
     const emailParaInserirCriacao = "teste@gmail.com";

@@ -72,8 +72,7 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpPatch("{Id}")]
         public IActionResult Editar([FromBody] Carro carro)
         {
-            _servico.Editar(carro);
-            return Ok();
+            return Ok(_servico.Editar(carro));
         }
 
         [HttpDelete("{Id}")]
