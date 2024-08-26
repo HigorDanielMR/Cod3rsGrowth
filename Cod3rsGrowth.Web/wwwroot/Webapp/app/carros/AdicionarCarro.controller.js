@@ -4,10 +4,9 @@
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter",
     "ui5/carro/model/validacao",
-	"sap/m/MessageStrip",
 	"sap/m/MessageBox"
 
-], function (BaseController, History, JSONModel, Formatter, validacao, MessageStrip, MessageBox) {
+], function (BaseController, History, JSONModel, Formatter, validacao, MessageBox) {
     "use strict";
 
     let _rota;
@@ -53,6 +52,7 @@
         _carregarEventodEditar(oEvent) {
             this._mudarTituloDaViewEdicao();
             this._removerMessageStrip();
+            this._limparInputs();
             this._obterCarroPorId(oEvent);
             this._carregarDescricaoCores();
             this._carregarDescricaoMarcas();
@@ -138,12 +138,14 @@
         aoColetarValorDoVeiculo(){
             var inputValor = this.oView.byId(idDoInputValor);
             var valor = inputValor.getValue();
+            validacao.validarValorDoCarro(inputValor);
             return parseFloat(valor);
         },
         
         aoColetarModelo() {
             const inputModelo = this.oView.byId(idDoInputModelo);
             const modelo = inputModelo.getValue();
+            validacao.validarModelo(inputModelo);
             return modelo;
         },
 
@@ -176,6 +178,11 @@
 
                 let validacaoDados = validacao.validarDadosCarro(inputModelo, inputValor);
 
+                        
+                if(!validacaoDados){
+                    if(_rota === rotaEditarCarro) this.getView().byId(idDoMessageStripErroEditarCarro).setVisible(true);
+                    if(_rota === rotaCriarCarro) this.getView().byId(idDoMessageStripErroCriarCarro).setVisible(true);
+                } 
                 if(validacaoDados){
                     if(_rota === rotaEditarCarro){
                         const urlEditar = url + idCarro;
@@ -190,7 +197,7 @@
                         const metodo = "PATCH"
                         this._requisicaoHttp(urlEditar, metodo, carro, idDoMessageStripSucessoEditar, idDoMessageStripErroEditarCarro)
                     }
-                    else if(_rota === rotaCriarCarro){
+                    if(_rota === rotaCriarCarro){
                         const carro = {
                             "marca": marca,
                             "modelo": modelo,
@@ -225,7 +232,8 @@
                         this._erroNaRequisicaoDaApi(data);
                         this.getView().byId(idMessageErro).setVisible(true);
                     }
-                    else {
+                    if(sucesso) {
+                        this.getView().byId(idMessageErro).setVisible(false);
                         this.getView().byId(idMessageSucesso).setVisible(true);
                     }
                 })

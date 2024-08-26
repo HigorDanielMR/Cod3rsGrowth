@@ -7,15 +7,15 @@ sap.ui.define([
 ], function (Opa5, PropertyStrictEquals, Press, EnterText) {
     'use strict';
 
-    const contextoVendas = "Vendas";
-    const idDaTabela = "TabelaVendas";
-    const idBotaoRemover = "botaoRemover";
-    const idDaTagTextNome = "nomeDetalhes";
-    const viewDetalhes = "vendas.Detalhes";
-    const viewListagem = "vendas.ListagemVenda";
+    const contextoCarros = "Carros";
+    const idDaTabela = "TabelaCarros";
+    const idDaTagTextModelo = "idModelo";
+    const idBotaoRemover = "botaoRemoverCarro";
+    const viewDetalhes = "carros.DetalhesCarro";
+    const viewListagem = "carros.ListagemCarro";
 
     Opa5.createPageObjects({
-        naTelaDeDetalhesRemover: {
+        naTelaDetalhesRemoverCarro: {
             arrangements: {
                 euInicioMeuApp() {
                     return this.iStartMyUIComponent("../index.html");
@@ -23,20 +23,20 @@ sap.ui.define([
             },
 
             actions: {
-                euClicoNaVendaSelecionada() {
+                euClicoNoCarroDesejado() {
                     const propriedadeDesejada = "text";
-                    const nomeDesejado = "Teste Remover";
+                    const modeloDesejado = "M3 Competition";
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         viewName: viewListagem,
                         matchers: [
                             new PropertyStrictEquals({
                                 name: propriedadeDesejada,
-                                value: nomeDesejado
+                                value: modeloDesejado
                             })
                         ],
                         actions: new Press(),
-                        errorMessage: "Item com o nome desejado não encontrado"
+                        errorMessage: "Carro com o modelo desejado não encontrado"
                     });
                 },
                 euClicoNoBotaoRemover() {
@@ -64,15 +64,16 @@ sap.ui.define([
                         errorMessage: "MessageBox não encontrada."
                     })
                 },
-                euClicoNoBotaoOkDaMessageBox(){
-                    const botaoNaoMessageBox = "Ok";
+
+                euClicoNoBotaoOkDaMessageBoxSucesso(){
+                    const botaoSimMessageBox = "Ok";
                     return this.waitFor({
                         viewName: viewDetalhes,
                         searchOpenDialogs: true, 
                         controlType: "sap.m.Button", 
                         success(aButtons) {
                             return aButtons.filter(function (oButton) {
-                                if(oButton.getText() == botaoNaoMessageBox) {
+                                if(oButton.getText() == botaoSimMessageBox) {
                                     oButton.firePress();
                                 }
                             });
@@ -83,32 +84,32 @@ sap.ui.define([
                 }
             },
             assertions: {
-                euVerificoSeNomeEstaComoOEsperado() {
-                    var nomeEsperado = "Teste Remover"
+                euVerificoSeModeloEstaComoOEsperado() {
+                    var modeloEsperado = "M3 Competition"
                     return this.waitFor({
-                        id: idDaTagTextNome,
+                        id: idDaTagTextModelo,
                         viewName: viewDetalhes,
                         controlType: "sap.m.Text",
                         success: function (texto) {
-                            var nomePreenchido = texto.getText();
+                            var modeloPreenchido = texto.getText();
 
-                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O nome está como o esperado.");
+                            Opa5.assert.strictEqual(modeloPreenchido, modeloEsperado, "O modelo está como o esperado.");
                         },
-                        errorMessage: "O nome não como o esperado."
+                        errorMessage: "O modelo não como o esperado."
                     });
                 },
-                euVerificoSeAVendaFoiRemovidaComSucesso(){
-                    const nomeDesejado = 'Teste Remover';
-                    const propriedadeDesejada = "nome";
+                euVerificoSeOCarroFoiRemovidoComSucesso(){
+                    const modeloDesejado = 'M3 Competition';
+                    const propriedadeDesejada = "modelo";
                     return this.waitFor({
                         viewName: viewListagem,
                         id: idDaTabela,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(contextoCarros).getProperty(propriedadeDesejada);
 
-                                return itemDesejado === nomeDesejado;
+                                return itemDesejado === modeloDesejado;
                             });
                             if(!verificarItems) Opa5.assert.ok(true, `Venda removida com sucesso.`);
                         },

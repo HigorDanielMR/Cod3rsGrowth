@@ -5,10 +5,13 @@ sap.ui.define([
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox"
 
-], function (BaseController, Formatter, History, JSONModel) {
+], function (BaseController, Formatter, History, JSONModel, MessageBox) {
     "use strict";
 
+    let idCarro;
+    let sucessoRemover = true;
     const modeloCarro = "Carro";
+    const metodoDelete = "DELETE";
     const rotaDetalhe = "appDetalhesCarro";
     const parametroArgumento = "arguments";
     const rotaEditarCarro = "appEditarCarro";
@@ -35,6 +38,7 @@ sap.ui.define([
 
         _carregarCarro(oEvent) {
             let idDesejado = oEvent.getParameter(parametroArgumento).id;
+            idCarro = idDesejado;
             let query = urlCarro + idDesejado;
             let sucesso = true;
             fetch(query)
@@ -51,6 +55,56 @@ sap.ui.define([
                     else this._erroNaRequisicaoDaApi(carro);
                 });
 
+        },
+
+        aoClicarNoBotaoRemoverCarro() {
+            const funcao = this;
+            this.processarEvento(() =>{
+                MessageBox.information(`Deseja excluir o carro com ID ${idCarro} ?`,
+                    {
+                        title: "Remover carro",
+                        actions: [MessageBox.Action.NO, MessageBox.Action.YES],
+                        onClose(action) {
+                            if (action === MessageBox.Action.YES) {
+                                funcao._remover(urlCarro, metodoDelete, idCarro);
+                            }
+                        }
+                    }
+                );
+            })
+        },
+
+        _remover(url, metodo, id){
+            url += id
+            fetch(url, {
+                method: metodo,
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json',
+                    'Access-Control-Allow-Origin': '*'
+                }
+            })
+                .then(res => {
+                    if(!res.ok){
+                        sucessoRemover = false;
+                    }
+                    if(res.ok) this._sucessoAoRemover();
+                    return res.json()
+                }).then(data => {
+                    if(!sucessoRemover) this._erroNaRequisicaoDaApi(data);
+                })
+                .catch((err) => console.log(err));
+        },
+
+        _sucessoAoRemover(){
+            const funcao = this;
+            MessageBox.success("Carro removido com sucesso!", {
+                actions: ["Ok"],
+                title: "Sucesso",
+                onClose(){
+                    funcao.getRouter().navTo(rotaListagemCarros, {}, true);
+                }
+            });
         },
 
         aoClicarVoltarParaTelaDeListagem() {

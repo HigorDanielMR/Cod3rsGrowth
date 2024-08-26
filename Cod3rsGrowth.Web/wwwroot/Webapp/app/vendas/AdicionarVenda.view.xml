@@ -27,7 +27,7 @@
 	</MessageStrip>
 
 	<MessageStrip
-				text="Venda editada com sucesso"
+				text="{i18n>TelaDeCriacao.VendaEditadaComSucesso}"
 				visible="false"
 				type="Success"
 				showIcon="true"

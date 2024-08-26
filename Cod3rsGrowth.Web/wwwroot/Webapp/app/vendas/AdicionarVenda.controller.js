@@ -4,10 +4,9 @@
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter",
     "ui5/carro/model/validacao",
-	"sap/m/MessageStrip",
 	"sap/m/MessageBox"
 
-], function (BaseController, History, JSONModel, Formatter, validacao, MessageStrip, MessageBox) {
+], function (BaseController, History, JSONModel, Formatter, validacao, MessageBox) {
     "use strict";
 
     var _rota;
@@ -176,6 +175,12 @@
 
                     let validacaoDados = validacao.validarDados(inputNome, inputCpf, inputTelefone, inputEmail);
 
+                    if(!validacaoDados){
+                        if(_rota === rotaCriar) this.getView().byId(idDoMessageStripErroCriarVenda).setVisible(true);
+                        if(_rota === rotaEditar) this.getView().byId(idDoMessageStripErroEditarVenda).setVisible(true);
+
+                    }
+
                     if(validacaoDados && carroEscolhido){
 
                         if (_rota === rotaEditar) {
@@ -232,6 +237,7 @@
                         this.getView().byId(idMessageErro).setVisible(true);
                     }
                     else {
+                        this.getView().byId(idMessageErro).setVisible(false);
                         this.getView().byId(idMessageSucesso).setVisible(true);
                     }
                 })

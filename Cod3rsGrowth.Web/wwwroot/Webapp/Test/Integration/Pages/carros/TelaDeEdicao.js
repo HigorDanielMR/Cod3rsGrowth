@@ -17,6 +17,7 @@ sap.ui.define([
     const idInputModeloTelaDeEditar = "InputModelo";
     const idDoBotaoAdicionarCarro = "adicionarCarro";
     const idDoMessageStripSucessoEditar = "sucessoAoEditarCarro";
+    const idDoMessageStripErroAoEditarCarro = "erroAoEditarCarro"
     
     Opa5.createPageObjects({
         naTelaDeEdicaoCarro: {
@@ -27,6 +28,17 @@ sap.ui.define([
             },
 
             actions: {
+                euLimpoModeloDoInput(){
+                    const modeloVazio = "";
+                    return this.waitFor({
+                        id: idInputModeloTelaDeEditar,
+                        viewName: viewEdicao,
+                        actions: new EnterText({
+                            text: modeloVazio
+                        }),
+                        errorMessage: "Input não encontrado."
+                    })
+                },
                 euInsiroOModeloNoInput() {
                     return this.waitFor({
                         id: idInputModeloTelaDeEditar,
@@ -67,6 +79,22 @@ sap.ui.define([
                 },
             },
             assertions: {
+                euVerificoSeAMessageStripDeErroAoEditarCarroFoiExibida(){
+                    const propriedadeDesejada = "visible";
+                    const valorDesejado = true;
+                    return this.waitFor({
+                        viewName: viewEdicao,
+                        id: idDoMessageStripErroAoEditarCarro,
+                        matchers: new PropertyStrictEquals({
+                            name: propriedadeDesejada,
+                            value: valorDesejado
+                        }),
+                        success() {
+                            Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
+                        },
+                        errorMessage: `Message strip não foi aberta.`
+                    })
+                },
                 euVerificoSeOMessageStripDeSUcessoFoiExibido() {
                     const propriedadeDesejada = "visible";
                     const valorDesejado = true;

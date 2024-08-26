@@ -7,12 +7,8 @@
 ], function (Opa5, EnterText, Press, PropertyStrictEquals) {
     "use strict";
 
-    const propriedadeNome = "nome";
-    const contextoVendas = "Vendas";
-    const idDaTabelaVenda = "TabelaVendas";
     const idInputCpfTelaDeCriacao = "InputCpf";
     const viewCriacao = "vendas.AdicionarVenda";
-    const viewListagem = "vendas.ListagemVenda";
     const cpfParaInserirCriacao = "12345678911";
     const idInputPagoTelaDeCriacao = "InputPago";
     const idInputNomeTelaDeCriacao = "InputNome";
@@ -22,16 +18,13 @@
     const emailParaInserirCriacao = "teste@gmail.com";
     const idDaTabelaCarros = "TabelaCarrosDisponiveis";
     const idInputTelefoneTelaDeCriacao = "InputTelefone";
-    const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
+    const idDoMessageStripErroAoCriarVenda = "erroCriarVenda";
     const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao";
-    const idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
     const menssagemErroInputNaoEncontrado = "Input não encontrado.";
     const menssagemDeErroBotaoNaoEncontrado = "Botão não encontrado.";
-    const menssagemDeErroOBotaoNaoFoiClicado = "O botão não foi clicado";
     const menssagemDeErroTabelaNaoEncontrada = "Tabela não contém carros.";
     const menssagemDeErroOCarroNaoFoiSelecionado = "Carro não selecionado";
-    const menssagemDeErroOTextoNaoFoiAdicionado = "O texto não foi adicionado.";
-    const menssagemDeErroAVendaNaoFoiCriadaComSucesso = "A venda não foi criada com sucesso.";
+    const idDoMessageStripSucessoAoCriarCarro = "sucessoAoCriarVenda";
     
     Opa5.createPageObjects({
         naTelaDeCriacao: {
@@ -115,73 +108,29 @@
                         actions: new Press(),
                         errorMessage: menssagemDeErroBotaoNaoEncontrado
                     })
-                },
-
-                euClicoNoBotaoVoltarParaTelaDeListagem() {
-                    return this.waitFor({
-                        id: idDoBotaoVoltarParaTelaDeListagem,
-                        viewName: viewCriacao,
-                        actions: new Press(),
-                        errorMessage: menssagemDeErroBotaoNaoEncontrado
-                    })
-                },
-                euClicoNoBotaoAdicionarVenda() {
-                    return this.waitFor({
-                        id: idDoBotaoAdicionarVenda,
-                        viewName: viewListagem,
-                        actions: new Press(),
-                        errorMessage: menssagemDeErroBotaoNaoEncontrado
-                    })
                 }
             },
 
             assertions: {
-                euVerificoSeOTextoFoiInseridoNoInputNome() {
+
+                euVerificoSeAMessageStripDeErroAoCriarVendaFoiExibida(){
+                    const propriedadeDesejada = "visible";
+                    const valorDesejado = true;
                     return this.waitFor({
+                        viewName: viewCriacao,
+                        id: idDoMessageStripErroAoCriarVenda,
+                        matchers: new PropertyStrictEquals({
+                            name: propriedadeDesejada,
+                            value: valorDesejado
+                        }),
                         success() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
+                            Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
                         },
-                        errorMessage: menssagemDeErroOTextoNaoFoiAdicionado
-                    });
+                        errorMessage: `Message strip não foi aberta.`
+                    })
                 },
 
-                euVerificoSeOTextoFoiInseridoNoInputCpf() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: menssagemDeErroOTextoNaoFoiAdicionado
-                    });
-                },
-
-                euVerificoSeOTextoFoiInseridoNoInputEmail() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: menssagemDeErroOTextoNaoFoiAdicionado
-                    });
-                },
-
-                euVerificoSeOTextoFoiInseridoNoInputTelefone() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
-                        },
-                        errorMessage: menssagemDeErroOTextoNaoFoiAdicionado
-                    });
-                },
-
-                euVerificoSeOInputPagoFoiPressionado() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `Input pago clicado com sucesso.`);
-                        },
-                        errorMessage: menssagemErroInputNaoEncontrado
-                    });
-                },
-
-                euVereificoSeATabelaFoiPressionada() {
+                euVerificoSeOcarroFoiSelecionado() {
                     const tiveUmItem = 1;
                     return this.waitFor({
                         viewName: viewCriacao,
@@ -199,46 +148,21 @@
                     })
                 },
 
-                euVerificoSeOBotaoAdicionarFoiClicado() {
+                euVerificoSeAMessageStripDeSucessoAoCriarVendaFoiExibida(){
+                    const propriedadeDesejada = "visible";
+                    const valorDesejado = true;
                     return this.waitFor({
+                        viewName: viewCriacao,
+                        id: idDoMessageStripSucessoAoCriarCarro,
+                        matchers: new PropertyStrictEquals({
+                            name: propriedadeDesejada,
+                            value: valorDesejado
+                        }),
                         success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
+                            Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
                         },
-                        errorMessage: menssagemDeErroOBotaoNaoFoiClicado
-                    });
-                },
-
-                euVerificoSeOBotaoVoltarParaATelaDeListagemFoiClicado() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
-                        },
-                        errorMessage: menssagemDeErroOBotaoNaoFoiClicado
-                    });
-                },
-
-                euVerificoSeAVendaFoiCriada() {
-                    return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabelaVenda,
-                        success: function (oTable) {
-                            var items = oTable.getItems();
-                            var itemEncontrado = items.some(function (item) {
-                                var nomeDesejado = item.getBindingContext(contextoVendas).getProperty(propriedadeNome);
-                                return nomeDesejado === nomeParaInserirCriacao;
-                            });
-                            Opa5.assert.ok(itemEncontrado, "A venda foi criada com sucesso.");
-                        },
-                        errorMessage: menssagemDeErroAVendaNaoFoiCriadaComSucesso
-                    });
-                },
-                euVerificoSeOBotaoAdicionarVendaFoiClicado() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
-                        },
-                        errorMessage: menssagemDeErroOBotaoNaoFoiClicado
-                    });
+                        errorMessage: `Message strip não foi aberta.`
+                    })
                 }
             }
         }

@@ -22,6 +22,7 @@
     const idDoBotaoAdicionarCarro = "adicionarCarro";
     const viewAdicionarCarro = "carros.AdicionarCarro";
     const idDoMessageStripSucessoAoCriarCarro = "sucessoAoCriarCarro";
+    const idDoMessageStripErroAoCriarCarro = "erroAoCriarCarro";
 
     Opa5.createPageObjects({
         naTelaDeAdicionarCarro: {
@@ -114,6 +115,22 @@
             },
 
             assertions: {
+                euVerificoSeAMessageStripDeErroAoCriarCarroFoiExibida(){
+                    const propriedadeDesejada = "visible";
+                    const valorDesejado = true;
+                    return this.waitFor({
+                        viewName: viewAdicionarCarro,
+                        id: idDoMessageStripErroAoCriarCarro,
+                        matchers: new PropertyStrictEquals({
+                            name: propriedadeDesejada,
+                            value: valorDesejado
+                        }),
+                        success() {
+                            Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
+                        },
+                        errorMessage: `Message strip não foi aberta.`
+                    })
+                },
                 euVerificoSeAMessageStripDeCarroCriadoComSucessoFoiExibida() {
                     const propriedadeDesejada = "visible";
                     const valorDesejado = true;

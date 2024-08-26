@@ -1,27 +1,20 @@
 ﻿sap.ui.define([
     'sap/ui/test/Opa5',
     'sap/ui/test/matchers/PropertyStrictEquals',
-    'sap/ui/test/matchers/Properties',
     "sap/ui/test/actions/Press",
     "sap/ui/test/actions/EnterText"
 
-], function (Opa5, PropertyStrictEquals, Properties, Press, EnterText) {
+], function (Opa5, PropertyStrictEquals, Press, EnterText) {
     'use strict';
 
-    const propriedadeNome = "nome";
-    const contextoVendas = "Vendas";
     const nomePropriedadeText = "text";
-    const viewDetalhes = "vendas.Detalhes";
-    const idDaTagTextNome = "nomeDetalhes";
-    const idDaTabelaVenda = "TabelaVendas";
-    const idDoBotaoEditar = "botaoEditarVenda";
     const viewCriacao = "vendas.AdicionarVenda";
     const nomeParaInserirEditar = "Vitor Godoi";
-    const viewListagem = "vendas.ListagemVenda";
     const idInputNomeTelaDeEditar = "InputNome";
     const idDaTabelaCarros = "TabelaCarrosDisponiveis";
+    const idDoMessageStripErroAoEditarVenda = "erroEditarVenda";
     const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao";
-    const idDoBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
+    const idDoMessageStripSucessoAoEditarVenda = "sucessoAoEditarVenda";
     
     Opa5.createPageObjects({
         naTelaDeEdicao: {
@@ -32,6 +25,17 @@
             },
 
             actions: {
+                euLimpoOInputNome(){
+                    const nomeVazio = "";
+                    return this.waitFor({
+                        id: idInputNomeTelaDeEditar,
+                        viewName: viewCriacao,
+                        actions: new EnterText({
+                            text: nomeVazio
+                        }),
+                        errorMessage: "Input não encontrado."
+                    })
+                },
                 euInsiroONomeNoInputNome() {
                     return this.waitFor({
                         id: idInputNomeTelaDeEditar,
@@ -62,48 +66,25 @@
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
                     })
-                },
-
-                euClicoNoBotaoVoltarParaTelaListagem() {
-                    return this.waitFor({
-                        id: idDoBotaoVoltarParaTelaDeListagem,
-                        viewName: viewCriacao,
-                        actions: new Press(),
-                        errorMessage: "Botão não encontrado."
-                    })
-                },
-                euClicoNaVendaDoIdNomeDesejado() {
-                    const nomeDesejado = "Vitor Godoi";
-                    return this.waitFor({
-                        controlType: "sap.m.Text",
-                        viewName: viewListagem,
-                        matchers: [
-                            new PropertyStrictEquals({
-                                name: nomePropriedadeText,
-                                value: nomeDesejado
-                            })
-                        ],
-                        actions: new Press(),
-                        errorMessage: "Item com o nome desejado não encontrado"
-                    });
-                },
-                euClicoNoBotaoEditarNaTelaDeDetalhes() {
-                    return this.waitFor({
-                        id: idDoBotaoEditar,
-                        viewName: viewDetalhes,
-                        actions: new Press(),
-                        errorMessage: "Botão não encontrado."
-                    })    
                 }
             },
+
             assertions: {
-                euVerificoSeOTextoFoiInseridoNoInputNome() {
+                euVerificoSeAMessageStripDeErroAoEditarVendaFoiExibida(){
+                    const propriedadeDesejada = "visible";
+                    const valorDesejado = true;
                     return this.waitFor({
+                        viewName: viewCriacao,
+                        id: idDoMessageStripErroAoEditarVenda,
+                        matchers: new PropertyStrictEquals({
+                            name: propriedadeDesejada,
+                            value: valorDesejado
+                        }),
                         success() {
-                            Opa5.assert.ok(true, `Texto inserido com sucesso.`);
+                            Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
                         },
-                        errorMessage: "O texto não foi adicionado."
-                    });
+                        errorMessage: `Message strip não foi aberta.`
+                    })
                 },
 
                 euVereificoSeATabelaFoiPressionada() {
@@ -123,68 +104,21 @@
                         errorMessage: "Carro não selecionado"
                     })
                 },
-
-                euVerificoSeOBotaoAdicionarFoiClicado() {
+                euVerificoSeAMessageStripDeSucessoAoEditarVendaFoiExibida(){
+                    const propriedadeDesejada = "visible";
+                    const valorDesejado = true;
                     return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
-                        },
-                        errorMessage: "O botão não foi clicado"
-                    });
-                },
-
-                euVerificoSeOBotaoVoltarParaATelaDeDetalhesFoiClicado() {
-                    return this.waitFor({
-                        success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
-                        },
-                        errorMessage: "O botão não foi clicado"
-                    });
-                },
-
-                euVerificoSeAVendaFoiEditada() {
-                    return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabelaVenda,
-                        success: function (oTable) {
-                            var items = oTable.getItems();
-                            var itemEncontrado = items.some(function (item) {
-                                var nomeDesejado = item.getBindingContext(contextoVendas).getProperty(propriedadeNome);
-                                return nomeDesejado === nomeParaInserirEditar;
-                            });
-                            Opa5.assert.ok(itemEncontrado, "A venda foi criada com sucesso.");
-                        },
-                        errorMessage: "A venda não foi criada com sucesso."
-                    });
-                },
-                euVerificoSeNomeEstaComoOEsperado() {
-                    var nomeEsperado = "Vitor Godoi"
-                    return this.waitFor({
-                        id: idDaTagTextNome,
-                        viewName: viewDetalhes,
-                        controlType: "sap.m.Text",
-                        success: function (texto) {
-                            var nomePreenchido = texto.getText();
-
-                            Opa5.assert.strictEqual(nomePreenchido, nomeEsperado, "O nome está como o esperado.");
-                        },
-                        errorMessage: "O nome não como o esperado."
-                    });
-                },
-                euVerificoSeAViewFoiCarregada() {
-                    const idDoTitulo = "Title1";
-                    const textoDesejado = "Editar Venda";
-                    return this.waitFor({
-                        id: idDoTitulo,
                         viewName: viewCriacao,
-                        matchers: new Properties({
-                            text: textoDesejado
+                        id: idDoMessageStripSucessoAoEditarVenda,
+                        matchers: new PropertyStrictEquals({
+                            name: propriedadeDesejada,
+                            value: valorDesejado
                         }),
                         success() {
-                            Opa5.assert.ok(true, `O botão foi clicado`);
+                            Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
                         },
-                        errorMessage: "O botão não foi clicado"
-                    });
+                        errorMessage: `Message strip não foi aberta.`
+                    })
                 },
             }
         }

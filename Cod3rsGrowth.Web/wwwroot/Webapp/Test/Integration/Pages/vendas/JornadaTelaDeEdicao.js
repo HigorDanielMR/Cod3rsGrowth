@@ -7,43 +7,24 @@
 
 	QUnit.module("Vendas Edicao");
 
-	opaTest("Deve preencher o valor do input nome", function (Given, When, Then) {
+	opaTest("Deve limpar input nome e verificar se message strip de erro foi aberta.", function(Given, When, Then){
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5/carro"
 			},
 			hash: "EditarVenda/3"
 		});
-
-		When.naTelaDeEdicao.euInsiroONomeNoInputNome();
-		Then.naTelaDeEdicao.euVerificoSeOTextoFoiInseridoNoInputNome();
-	});
-	
-
-	opaTest("Deve selecionar um carro na tabela", function (Given, When, Then) {
-		When.naTelaDeEdicao.euSelecionoOItemNaTabela();
-		Then.naTelaDeEdicao.euVereificoSeATabelaFoiPressionada();
-	});
-
-	opaTest("Deve clicar no botao adicionar ", function (Given, When, Then) {
+		When.naTelaDeEdicao.euLimpoOInputNome();
 		When.naTelaDeEdicao.euClicoNoBotaoAdicionarDaTelaDeEditar();
-		Then.naTelaDeEdicao.euVerificoSeOBotaoAdicionarFoiClicado();
-	});
+		Then.naTelaDeEdicao.euVerificoSeAMessageStripDeErroAoEditarVendaFoiExibida();
+	})
 
-	opaTest("Deve clicar no botao voltar para a tela de listagem", function (Given, When, Then) {
-		When.naTelaDeEdicao.euClicoNoBotaoVoltarParaTelaListagem();
-		Then.naTelaDeEdicao.euVerificoSeOBotaoVoltarParaATelaDeDetalhesFoiClicado();
-		Then.naTelaDeEdicao.euVerificoSeAVendaFoiEditada();
-	}),
-
-	opaTest("Deve clicar na venda desejada e abrir a tela de detalhes", function (Given, When, Then) {
-		When.naTelaDeEdicao.euClicoNaVendaDoIdNomeDesejado();
-		Then.naTelaDeEdicao.euVerificoSeNomeEstaComoOEsperado();
-	}),
-
-	opaTest("Deve clicar no botao editar em detalhes e verificar se a view foi aberta", function (Given, When, Then) {
-		When.naTelaDeEdicao.euClicoNoBotaoEditarNaTelaDeDetalhes();
-		Then.naTelaDeEdicao.euVerificoSeAViewFoiCarregada();
+	opaTest("Deve preencher os dados desejados e verificar se a message strip de sucesso foi aberta.", function (Given, When, Then) {
+		When.naTelaDeEdicao.euInsiroONomeNoInputNome();
+		When.naTelaDeEdicao.euSelecionoOItemNaTabela();
+		When.naTelaDeEdicao.euClicoNoBotaoAdicionarDaTelaDeEditar();
+		Then.naTelaDeEdicao.euVereificoSeATabelaFoiPressionada();
+		Then.naTelaDeEdicao.euVerificoSeAMessageStripDeSucessoAoEditarVendaFoiExibida();
 		Then.iTeardownMyApp();
 	})
 });

@@ -11,13 +11,18 @@ sap.ui.define([
 			componentConfig: {
 				name: "ui5/carro"
 			},
-			hash: "EditarCarro/7"
+			hash: "EditarCarro/6"
 		});
+		When.naTelaDeEdicaoCarro.euLimpoModeloDoInput();
+		When.naTelaDeEdicaoCarro.euClicoNoBotaoAdicionarDaTelaDeEditar();
+		Then.naTelaDeEdicaoCarro.euVerificoSeAMessageStripDeErroAoEditarCarroFoiExibida();
+	});
 
+	opaTest("Deve preencher o valor dos inputs e verificar se a message strip foi aberta.", function(Given, When, Then){
 		When.naTelaDeEdicaoCarro.euInsiroOModeloNoInput();
 		When.naTelaDeEdicaoCarro.euSelecionoAMarcaDesejada();
 		When.naTelaDeEdicaoCarro.euClicoNoBotaoAdicionarDaTelaDeEditar();
 		Then.naTelaDeEdicaoCarro.euVerificoSeOMessageStripDeSUcessoFoiExibido();
 		Then.iTeardownMyApp();
-	});
+	})
 });

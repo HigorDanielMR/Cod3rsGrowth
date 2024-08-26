@@ -15,8 +15,8 @@
 				<ToolbarSpacer width="450px"/>
 				<Title text="{i18n>DetalhesVenda.Detalhes}" titleStyle="H5"/>
 				<ToolbarSpacer width="400px"/>
-				<Button icon="sap-icon://customer-order-entry" text="Editar" id="botaoEditarVenda" press=".aoClicarNoBotaoEditarDeveAbrirATelaDeModificarVenda" type="Neutral"/>
-				<Button icon="sap-icon://decline" text="Remover" type="Reject" id="botaoRemover" press=".aoClicarNoBotaoRemover"/>
+				<Button icon="sap-icon://customer-order-entry" text="{i18n>Botao.Editar}" id="botaoEditarVenda" press=".aoClicarNoBotaoEditarDeveAbrirATelaDeModificarVenda" type="Neutral"/>
+				<Button icon="sap-icon://decline" text="{i18n>Botao.Remover}" type="Reject" id="botaoRemover" press=".aoClicarNoBotaoRemover"/>
 			</Toolbar>
 			<Toolbar>
 				<core:Icon src="sap-icon://information" color="Tile"/>
@@ -82,25 +82,26 @@
 							columnsXL="5"
 							width="1150px">
 							<f:content>
-								<Label text="ID" textAlign="Left"/>
-								<Text text="{Carro>id}" id="tagIdDetalhesCarro"/>
-								<Label text="Modelo" textAlign="Left"/>
-								<Text text="{Carro>modelo}" id="tagNomeDetalhesCarro"/>
-								<Label text="Marca" textAlign="Left"/>
+								<Label text="{i18n>DetalhesCarro.ID}" textAlign="Left"/>
+								<Text text="{Carro>id}" id="idCarro"/>
+								<Label text="{i18n>DetalhesCarro.Modelo}" textAlign="Left"/>
+								<Text text="{Carro>modelo}" id="idModelo"/>
+								<Label text="{i18n>DetalhesCarro.Marca}" textAlign="Left"/>
 								<Text text="{
-											path:'Carro>marca',
-											formatter: '.formatter.formatarMarca'
-										}" />
-								<Label text="Cor" textAlign="Left"/>
-								<Text text="{path:'Carro>cor',
-											formatter: '.formatter.formatarCor'
-										}" />
-								<Label text="Valor" textAlign="Left"/>
+									path:'Carro>marca',
+									formatter: '.formatter.formatarMarca'
+								}" />
+								<Label text="{i18n>DetalhesCarro.Cor}" textAlign="Left"/>
 								<Text text="{
-											path:'Carro>valorDoVeiculo',
-											formatter: '.formatter.formatarValorDaMoeda'
-										}"/>
-								<Label text="Flex" textAlign="Left"/>
+									path:'Carro>cor',
+									formatter: '.formatter.formatarCor'
+								}" />
+								<Label text="{i18n>DetalhesCarro.Valor}" textAlign="Left"/>
+								<Text text="{
+									path:'Carro>valorDoVeiculo',
+									formatter: '.formatter.formatarValorDaMoeda'
+								}"/>
+								<Label text="{i18n>DetalhesCarro.Flex}" textAlign="Left"/>
 								<ObjectStatus
 									text="{ path: 'Carro>flex', formatter: '.formatter.formatarFlex' }"
 									state="{= ${Carro>flex} === false ? 'Error' : 'Success'}"/>
