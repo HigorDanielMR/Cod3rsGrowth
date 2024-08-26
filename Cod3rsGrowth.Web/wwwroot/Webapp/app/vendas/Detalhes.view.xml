@@ -68,7 +68,7 @@
 
 					<Toolbar>
 						<core:Icon src="sap-icon://insurance-car" color="Tile" />
-						<Title text="{i18n>Detalhes.DadosDoCarros}"/>
+						<Title text="{i18n>DetalhesCarro.DadosDoCarros}"/>
 						<ToolbarSpacer />
 					</Toolbar>
 					<VBox class="sapUiSmallMargin"

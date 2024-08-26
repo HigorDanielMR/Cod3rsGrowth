@@ -56,9 +56,16 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Remover(int Id)
         {
-            _conexao.Carro
+            try
+            {
+                _conexao.Carro
                  .Where(carro => carro.Id == Id)
                  .Delete();
+            }
+            catch
+            {
+                throw new Exception("Não é possivel remover um carro que está atribuido a uma venda.");
+            }
         }
 
         private IQueryable<Carro> FiltroParaBusca(FiltroCarro? filtroCarro)
