@@ -65,31 +65,14 @@
         aoClicarNoBotaoRemover() {
             const funcao = this;
             this.processarEvento(() =>{
-                MessageBox.show(
+                MessageBox.information(
                     `Deseja excluir a venda com ID ${idVenda} ?`,
                     {
-                        icon: MessageBox.Icon.QUESTION,
                         title: "Confirmar remoção da venda",
                         actions: [MessageBox.Action.NO, MessageBox.Action.YES],
                         onClose(oAction) {
                             if (oAction === MessageBox.Action.YES) {
-                                MessageBox.show(`Deseja excluir o carro com ID ${idCarro} ?`,
-                                    {
-                                        icon: MessageBox.Icon.QUESTION,
-                                        title: "Confirmar remoção do carro",
-                                        actions: [MessageBox.Action.NO, MessageBox.Action.YES],
-                                        onClose(action) {
-                                            if (action === MessageBox.Action.YES) {
-                                                funcao._remover(urlVenda, metodoDelete, idVenda);
-                                                funcao._remover(urlCarro, metodoDelete, idCarro);
-                                                funcao.getRouter().navTo(rotaListagem, {}, true);
-                                            } else {
-                                                funcao._remover(urlVenda, metodoDelete, idVenda);
-                                                funcao .getRouter().navTo(rotaListagem, {}, true);
-                                            }
-                                        }
-                                    }
-                                );
+                                funcao._remover(urlVenda, metodoDelete, idVenda);
                             }
                         }
                     }
@@ -112,7 +95,7 @@
                     if(!res.ok){
                         sucesso = false;
                     }
-                    console.log(res)
+                    if(res.ok) this._sucessoAoRemover()
                     return res.json()
                 }).then(data => {
                     if (!sucesso) {
@@ -120,6 +103,17 @@
                     }
                 })
                 .catch((err) => console.log(err));
+        },
+
+        _sucessoAoRemover(){
+            const funcao = this;
+            MessageBox.success("Venda removida com sucesso!", {
+                actions: ["Ok"],
+                title: "Sucesso",
+                onClose(){
+                    funcao.getRouter().navTo(rotaListagem, {}, true);
+                }
+            });
         },
 
         _carregarCarroAssociado(id){

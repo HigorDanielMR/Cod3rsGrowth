@@ -7,7 +7,7 @@
 	xmlns="sap.m" >
 
 	<MessageStrip
-				text="Erro ao criar carro"
+				text="{i18n>AdicionarCarro.Erro}"
 				visible="false"
 				type="Error"
 				showIcon="true"
@@ -17,7 +17,7 @@
 	</MessageStrip>
 	
 	<MessageStrip
-				text="Carro criado com sucesso!"
+				text="{i18n>AdicionarCarro.Sucesso}"
 				visible="false"
 				type="Success"
 				showIcon="true"
@@ -27,7 +27,7 @@
 	</MessageStrip>
 
 	<MessageStrip
-				text="Erro ao editar carro"
+				text="{i18n>EditarCarro.Erro}"
 				visible="false"
 				type="Error"
 				showIcon="true"
@@ -37,7 +37,7 @@
 	</MessageStrip>
 	
 	<MessageStrip
-				text="Carro editado com sucesso!"
+				text="{i18n>EditarCarro.Sucesso}"
 				visible="false"
 				type="Success"
 				showIcon="true"
@@ -75,7 +75,7 @@
 								<f:formElements>
 									<f:FormElement label="{i18n>AdicionarCarro.LabelModelo}">
 										<f:fields>
-											<Input width="400px" id="InputModelo" required="true"/>
+											<Input width="400px" id="InputModelo" required="true" change="aoColetarModelo"/>
 
 										</f:fields>
 									</f:FormElement>
@@ -100,7 +100,7 @@
 							<f:FormContainer>
 									<f:FormElement label="{i18n>AdicionarCarro.LabelValor}" >
 										<f:fields>
-											<Input id="InputValor" required="true" width="400px"/>
+											<Input id="InputValor" type="Number" required="true" width="400px" change="aoColetarValorDoVeiculo"/>
 										</f:fields>
 									</f:FormElement>
 									<f:FormElement label="{i18n>AdicionarCarro.LabelMarcas}">

@@ -9,7 +9,8 @@
     "./pages/carros/JornadaTelaListagem",
     "./pages/carros/JornadaTelaDeDetalhes",
     "./pages/carros/JornadaTelaCriacao",
-    "./pages/carros/JornadaTelaDeEdicao"
+    "./pages/carros/JornadaTelaDeEdicao",
+    './pages/carros/JornadaRemover'
     
 ], function (Opa5, Startup) {
     "use Strict";

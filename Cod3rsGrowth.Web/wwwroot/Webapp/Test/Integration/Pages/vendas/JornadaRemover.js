@@ -15,7 +15,7 @@ sap.ui.define([
 	opaTest("Deve clicar no botao remover clicar no botao sim para remover venda e botao nao para remover carro e verificar se a venda foi removida com sucesso", function (Given, When, Then) {
 		When.naTelaDeDetalhesRemover.euClicoNoBotaoRemover();
 		When.naTelaDeDetalhesRemover.euClicoNoBotaoSimDaMessageBox();
-		When.naTelaDeDetalhesRemover.euClicoNoBotaoNaoDaMessageBox();
+		When.naTelaDeDetalhesRemover.euClicoNoBotaoOkDaMessageBox();
 		Then.naTelaDeDetalhesRemover.euVerificoSeAVendaFoiRemovidaComSucesso();
 		Then.iTeardownMyApp();
 	});

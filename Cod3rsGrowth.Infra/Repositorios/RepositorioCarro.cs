@@ -36,19 +36,13 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            var idDoCarroNoBanco = _conexao.InsertWithInt32Identity(carro);
-            return ObterPorId(idDoCarroNoBanco);
+            carro.Id = _conexao.InsertWithInt32Identity(carro);
+            return carro;
         }
 
         public Carro Editar(Carro carroAtualizado)
         {
             var carroDesejado = ObterPorId(carroAtualizado.Id);
-
-            carroDesejado.Cor = carroAtualizado.Cor;
-            carroDesejado.Flex = carroAtualizado.Flex;
-            carroDesejado.Marca = carroAtualizado.Marca;
-            carroDesejado.Modelo = carroAtualizado.Modelo;
-            carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
             _conexao.Update(carroAtualizado);
             return carroAtualizado;
@@ -56,7 +50,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Remover(int Id)
         {
-            _conexao.Carro
+                _conexao.Carro
                  .Where(carro => carro.Id == Id)
                  .Delete();
         }
