@@ -44,6 +44,7 @@
             let query = urlVenda + idDesejado;
             idVenda = idDesejado;
             let sucesso = true;
+
             fetch(query)
                 .then((res) => {
                     if (!res.ok)
@@ -63,16 +64,15 @@
         },
 
         aoClicarNoBotaoRemover() {
-            const funcao = this;
             this.processarEvento(() =>{
                 MessageBox.information(
                     `Deseja excluir a venda com ID ${idVenda} ?`,
                     {
                         title: "Confirmar remoção da venda",
                         actions: [MessageBox.Action.NO, MessageBox.Action.YES],
-                        onClose(oAction) {
+                        onClose:(oAction) => {
                             if (oAction === MessageBox.Action.YES) {
-                                funcao._remover(urlVenda, metodoDelete, idVenda);
+                                this._remover(urlVenda, metodoDelete, idVenda);
                             }
                         }
                     }
@@ -80,38 +80,32 @@
             })
         },
 
-        _remover(url, metodo, id){
-            url += id;
-            let sucesso = true;
-            fetch(url, {
-                method: metodo,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            })
-                .then(res => {
-                    if(!res.ok){
-                        sucesso = false;
-                    }
-                    if(res.ok) this._sucessoAoRemover()
-                    return res.json()
-                }).then(data => {
-                    if (!sucesso) {
-                        this._erroNaRequisicaoDaApi(data);
+        _remover(url, metodo, id) {
+            this.processarEvento(() => {
+                url += id
+
+                fetch(url, {
+                    method: metodo,
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
                 })
-                .catch((err) => console.log(err));
+                    .then(res => {
+                        return res.ok ? this._sucessoAoRemover()
+                            : res.json()
+
+                    }).then(data => {
+                        if (data) this._erroNaRequisicaoDaApi(data);
+                    });
+            })
         },
 
         _sucessoAoRemover(){
-            const funcao = this;
             MessageBox.success("Venda removida com sucesso!", {
                 actions: ["Ok"],
                 title: "Sucesso",
-                onClose(){
-                    funcao.getRouter().navTo(rotaListagem, {}, true);
+                onClose:() => {
+                    this.getRouter().navTo(rotaListagem, {}, true);
                 }
             });
         },
@@ -119,6 +113,7 @@
         _carregarCarroAssociado(id){
             let sucesso = true;
             let query = urlCarro + id;
+
             fetch(query)
                 .then((res) => {
                     if (!res.ok) sucesso = false;
@@ -126,6 +121,7 @@
                 })
                 .then((carro) => {
                     const jsonModel = new JSONModel(carro)
+
                     sucesso ? this.getView().setModel(jsonModel, modeloCarro)
                         : this._erroNaRequisicaoDaApi(carro);
                 });

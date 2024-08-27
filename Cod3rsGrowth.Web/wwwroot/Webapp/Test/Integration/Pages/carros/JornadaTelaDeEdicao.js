@@ -6,7 +6,7 @@ sap.ui.define([
 
 	QUnit.module("Carros Edicao");
 
-	opaTest("Deve preencher o valor dos inputs e verificar se a message strip foi aberta.", function (Given, When, Then) {
+	opaTest("Deve limpar o input modelo e verificar se a message strip foi aberta.", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5/carro"

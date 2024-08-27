@@ -29,6 +29,7 @@ sap.ui.define([
 
         _carregarListaDeVendas() {
             let sucesso = true;
+
             fetch(url)
                 .then((res) => {
                     if (!res.ok)
@@ -37,6 +38,7 @@ sap.ui.define([
                 })
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
+
                     sucesso ? this.getView().setModel(jsonModel, modeloVenda)
                         : this._erroNaRequisicaoDaApi(data);
                 })
@@ -126,7 +128,7 @@ sap.ui.define([
                         sucesso ? this.getView().setModel(jsonModel, modeloVenda)
                             : this._erroNaRequisicaoDaApi(vendas);
                     })
-                    .catch((err) => console.error(err));
+                    .catch((err) => MessageBox.error(err));
             })
         },
 

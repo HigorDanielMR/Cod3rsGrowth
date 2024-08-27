@@ -241,7 +241,7 @@
                         this.getView().byId(idMessageSucesso).setVisible(true);
                     }
                 })
-                .catch(err => { console.log(err); });
+                .catch(err => { MessageBox.error(err); });
         },
 
         _obterCarroSelecionado() {

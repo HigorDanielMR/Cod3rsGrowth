@@ -9,7 +9,6 @@ sap.ui.define([
     "use strict";
 
     let idCarro;
-    let sucessoRemover = true;
     const modeloCarro = "Carro";
     const metodoDelete = "DELETE";
     const rotaDetalhe = "appDetalhesCarro";
@@ -41,6 +40,7 @@ sap.ui.define([
             idCarro = idDesejado;
             let query = urlCarro + idDesejado;
             let sucesso = true;
+
             fetch(query)
                 .then((res) => {
                     if (!res.ok)
@@ -58,15 +58,14 @@ sap.ui.define([
         },
 
         aoClicarNoBotaoRemoverCarro() {
-            const funcao = this;
             this.processarEvento(() => {
                 MessageBox.information(`Deseja excluir o carro com ID ${idCarro} ?`,
                     {
                         title: "Remover carro",
                         actions: [MessageBox.Action.NO, MessageBox.Action.YES],
-                        onClose(action) {
+                        onClose: (action) => {
                             if (action === MessageBox.Action.YES) {
-                                funcao._remover(urlCarro, metodoDelete, idCarro);
+                                this._remover(urlCarro, metodoDelete, idCarro);
                             }
                         }
                     }
@@ -74,9 +73,10 @@ sap.ui.define([
             })
         },
 
-        _remover(url, metodo, id) { debugger
+        _remover(url, metodo, id) {
             this.processarEvento(() => {
                 url += id
+
                 fetch(url, {
                     method: metodo,
                     headers: {
@@ -87,19 +87,19 @@ sap.ui.define([
                         return res.ok ? this._sucessoAoRemover()
                             :  res.json()
 
-                    }).then(data => {
+                    })
+                    .then(data => {
                         if (data) this._erroNaRequisicaoDaApi(data);
                     });
             })
         },
 
         _sucessoAoRemover(){
-            const funcao = this;
             MessageBox.success("Carro removido com sucesso!", {
                 actions: ["Ok"],
                 title: "Sucesso",
-                onClose(){
-                    funcao.getRouter().navTo(rotaListagemCarros, {}, true);
+                onClose:() => {
+                    this.getRouter().navTo(rotaListagemCarros, {}, true);
                 }
             });
         },

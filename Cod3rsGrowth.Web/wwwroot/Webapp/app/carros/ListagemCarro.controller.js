@@ -77,7 +77,8 @@ sap.ui.define([
                         this.getView().setModel(new JSONModel({
                             descricao: cores
                         }), modeloCores);
-                    } else {
+                    }
+                    else {
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
@@ -99,7 +100,8 @@ sap.ui.define([
                         this.getView().setModel(new JSONModel({
                             descricao: marcas
                         }), modeloMarcas);
-                    } else {
+                    }
+                    else {
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
@@ -164,6 +166,7 @@ sap.ui.define([
                     })
                     .then((carros) => {
                         const jsonModel = new JSONModel(carros)
+
                         sucesso ? this.getView().setModel(jsonModel, modeloCarro)
                             : this._erroNaRequisicaoDaApi(carros);
                     })

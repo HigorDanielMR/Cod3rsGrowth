@@ -214,6 +214,7 @@
 
         _requisicaoHttp(url, metodo, carro, idMessageSucesso, idMessageErro) {
             let sucesso = true;
+
             fetch(url, {
                 method: metodo,
                 body: JSON.stringify(carro),
@@ -223,16 +224,14 @@
                     if (!res.ok) {
                         sucesso = false;
                     }
-                    console.log(res)
                     return res.json();
                 })
                 .then(data => {
-                    console.log(data)
                     if (!sucesso) {
                         this._erroNaRequisicaoDaApi(data);
                         this.getView().byId(idMessageErro).setVisible(true);
                     }
-                    if(sucesso) {
+                    else {
                         this.getView().byId(idMessageErro).setVisible(false);
                         this.getView().byId(idMessageSucesso).setVisible(true);
                     }
@@ -266,13 +265,8 @@
                     return res.json();
                 })
                 .then(carro => {
-        
-                    if (sucesso) {
-                        this._carregarDadosCarro(carro);
-                    }
-                    else {
-                        this._erroNaRequisicaoDaApi(carro);
-                    }
+                    sucesso ? this._carregarDadosCarro(carro)
+                        : this._erroNaRequisicaoDaApi(carro);
                 })
                 .catch(err => { MessageBox.error(err); });
         },

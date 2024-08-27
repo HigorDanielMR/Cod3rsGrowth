@@ -1,7 +1,7 @@
-﻿using Cod3rsGrowth.Dominio.Interfaces;
-using Cod3rsGrowth.forms;
-using Cod3rsGrowth.Infra.Repositorios;
+﻿using Cod3rsGrowth.forms;
 using Cod3rsGrowth.Servicos.Servicos;
+using Cod3rsGrowth.Dominio.Interfaces;
+using Cod3rsGrowth.Infra.Repositorios;
 using Cod3rsGrowth.Servicos.Validadores;
 using Microsoft.Extensions.DependencyInjection;
 

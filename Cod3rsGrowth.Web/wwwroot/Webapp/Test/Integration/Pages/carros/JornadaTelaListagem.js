@@ -6,7 +6,7 @@
 
 	QUnit.module("Carro Listagem");
 
-	opaTest("Deve clicar no carro desejado e entrar na view de detalhes", function (Given, When, Then) {
+	opaTest("Deve preencher o filtro modelo como desejado e verificar se foi filtrado com sucesso", function (Given, When, Then) {
 		Given.iStartMyUIComponent({
 			componentConfig: {
 				name: "ui5/carro"

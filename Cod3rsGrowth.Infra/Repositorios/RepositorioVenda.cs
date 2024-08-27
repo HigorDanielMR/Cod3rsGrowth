@@ -2,7 +2,6 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
-using Microsoft.IdentityModel.Tokens;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
@@ -97,12 +96,6 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (filtroVenda.Telefone != null)
                 query = query.Where(d => d.Telefone == filtroVenda.Telefone);
-
-            if (filtroVenda.Email != null)
-                query = query.Where(d => d.Email.Contains(filtroVenda.Email));
-
-            if (filtroVenda.IdDoCarroVendido != null)
-                query = query.Where(d => d.IdDoCarroVendido == filtroVenda.IdDoCarroVendido);
 
             return query;
         }
