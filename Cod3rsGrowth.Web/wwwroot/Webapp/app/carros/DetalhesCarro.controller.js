@@ -59,7 +59,7 @@ sap.ui.define([
 
         aoClicarNoBotaoRemoverCarro() {
             const funcao = this;
-            this.processarEvento(() =>{
+            this.processarEvento(() => {
                 MessageBox.information(`Deseja excluir o carro com ID ${idCarro} ?`,
                     {
                         title: "Remover carro",
@@ -74,26 +74,23 @@ sap.ui.define([
             })
         },
 
-        _remover(url, metodo, id){
-            url += id
-            fetch(url, {
-                method: metodo,
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json',
-                    'Access-Control-Allow-Origin': '*'
-                }
-            })
-                .then(res => {
-                    if(!res.ok){
-                        sucessoRemover = false;
+        _remover(url, metodo, id) { debugger
+            this.processarEvento(() => {
+                url += id
+                fetch(url, {
+                    method: metodo,
+                    headers: {
+                        'Content-Type': 'application/json'
                     }
-                    if(res.ok) this._sucessoAoRemover();
-                    return res.json()
-                }).then(data => {
-                    if(!sucessoRemover) this._erroNaRequisicaoDaApi(data);
                 })
-                .catch((err) => console.log(err));
+                    .then(res => {
+                        return res.ok ? this._sucessoAoRemover()
+                            :  res.json()
+
+                    }).then(data => {
+                        if (data) this._erroNaRequisicaoDaApi(data);
+                    });
+            })
         },
 
         _sucessoAoRemover(){

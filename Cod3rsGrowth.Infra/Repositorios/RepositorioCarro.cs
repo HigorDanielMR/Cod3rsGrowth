@@ -36,19 +36,13 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            var idDoCarroNoBanco = _conexao.InsertWithInt32Identity(carro);
-            return ObterPorId(idDoCarroNoBanco);
+            carro.Id = _conexao.InsertWithInt32Identity(carro);
+            return carro;
         }
 
         public Carro Editar(Carro carroAtualizado)
         {
             var carroDesejado = ObterPorId(carroAtualizado.Id);
-
-            carroDesejado.Cor = carroAtualizado.Cor;
-            carroDesejado.Flex = carroAtualizado.Flex;
-            carroDesejado.Marca = carroAtualizado.Marca;
-            carroDesejado.Modelo = carroAtualizado.Modelo;
-            carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
             _conexao.Update(carroAtualizado);
             return carroAtualizado;
@@ -56,16 +50,9 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Remover(int Id)
         {
-            try
-            {
                 _conexao.Carro
                  .Where(carro => carro.Id == Id)
                  .Delete();
-            }
-            catch
-            {
-                throw new Exception("Não é possivel remover um carro que está atribuido a uma venda.");
-            }
         }
 
         private IQueryable<Carro> FiltroParaBusca(FiltroCarro? filtroCarro)
