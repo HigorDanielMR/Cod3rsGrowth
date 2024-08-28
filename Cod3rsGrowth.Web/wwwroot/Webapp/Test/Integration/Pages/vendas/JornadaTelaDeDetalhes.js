@@ -12,7 +12,7 @@
 			componentConfig: {
 				name: "ui5/carro"
 			},
-			hash: "detalhes/1"
+			hash: "detalhes/91"
 		});
 		Then.naTelaDeDetalhes.euVerificoSeOIdEstaComoOEsperado();
 		Then.naTelaDeDetalhes.euVerificoSeNomeEstaComoOEsperado();

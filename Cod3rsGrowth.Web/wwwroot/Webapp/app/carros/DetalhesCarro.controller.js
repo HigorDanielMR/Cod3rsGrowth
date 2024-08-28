@@ -1,11 +1,10 @@
 sap.ui.define([
     "ui5/carro/app/common/BaseController",
     "ui5/carro/model/formatter",
-    "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox"
 
-], function (BaseController, Formatter, History, JSONModel, MessageBox) {
+], function (BaseController, Formatter, JSONModel, MessageBox) {
     "use strict";
 
     let idCarro;
@@ -26,7 +25,7 @@ sap.ui.define([
 
         aoCoincidirRota() {
             this.processarEvento(() => {
-                const rota = this.getOwnerComponent().getRouter();
+                const rota = this.getRouter();
                 rota.getRoute(rotaDetalhe).attachMatched(this._carregarCarro, this);
             });
         },
@@ -36,19 +35,15 @@ sap.ui.define([
         },
 
         _carregarCarro(oEvent) {
-            let idDesejado = oEvent.getParameter(parametroArgumento).id;
-            idCarro = idDesejado;
-            let query = urlCarro + idDesejado;
-            let sucesso = true;
+            idCarro = oEvent.getParameter(parametroArgumento).id;
+            let query = urlCarro + idCarro;
 
             fetch(query)
                 .then((res) => {
-                    if (!res.ok)
-                        sucesso = false;
                     return res.json()
                 })
                 .then((carro) => {
-                    if (sucesso) {
+                    if (!carro.Detail) {
                         const jsonModel = new JSONModel(carro)
                         this.getView().setModel(jsonModel, modeloCarro);
                     }
@@ -89,7 +84,7 @@ sap.ui.define([
 
                     })
                     .then(data => {
-                        if (data) this._erroNaRequisicaoDaApi(data);
+                        if (data.Detail) this._erroNaRequisicaoDaApi(data);
                     });
             })
         },
@@ -106,8 +101,6 @@ sap.ui.define([
 
         aoClicarVoltarParaTelaDeListagem() {
             this.processarEvento(() => {
-                var history;
-                history = History.getInstance();
                 this.getRouter().navTo(rotaListagemCarros, {}, true);
             })
         },

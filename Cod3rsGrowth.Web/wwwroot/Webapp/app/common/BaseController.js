@@ -1,16 +1,16 @@
 sap.ui.define([
 	"sap/ui/core/mvc/Controller",
-	"sap/ui/core/routing/History",
 	"sap/ui/core/UIComponent",
 	"sap/m/MessageBox"
 
-], function (Controller, History, UIComponent, MessageBox) {
+], function (Controller, UIComponent, MessageBox) {
 	"use strict";
 
 	return Controller.extend("ui5.carro.controller.BaseController", {
 		getRouter() {
 			return UIComponent.getRouterFor(this);
 		},
+
 		processarEvento(action) {
 			try {
 				var promise = action();
@@ -21,6 +21,27 @@ sap.ui.define([
 			} catch (error) {
 				MessageBox.error(error.message);
 			}
+		},
+
+		_requisicaoHttp(url, metodo, objeto, idMessageSucesso, idMessageErro) {
+			fetch(url, {
+				method: metodo,
+				body: JSON.stringify(objeto),
+				headers: { "Content-type": "application/json; charset=UTF-8" }
+			})
+				.then(res => {
+					return res.json();
+				})
+				.then(data => {
+					if (data.Detail) {
+						this._erroNaRequisicaoDaApi(data);
+						this.getView().byId(idMessageErro).setVisible(true);
+					}
+					else {
+						this.getView().byId(idMessageErro).setVisible(false);
+						this.getView().byId(idMessageSucesso).setVisible(true);
+					}
+				})
 		},
 
 		_erroNaRequisicaoDaApi(erroRfc) {

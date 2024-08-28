@@ -2,16 +2,19 @@
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
+using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {
     public class RepositorioCarro : IRepositorioCarro
     {
         private MeuContextoDeDados _conexao;
+        private ServicoVenda _servicoVenda;
 
-        public RepositorioCarro(MeuContextoDeDados meuContextoDeDados)
+        public RepositorioCarro(MeuContextoDeDados meuContextoDeDados, ServicoVenda servicoVenda)
         {
             _conexao = meuContextoDeDados;
+            _servicoVenda = servicoVenda;
         }
 
         public List<Carro> ObterTodos(FiltroCarro? filtroCarro = null)
@@ -61,18 +64,26 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (filtroCarro is null) return query;
 
-            if (filtroCarro.Modelo != null)
+            if (!string.IsNullOrEmpty(filtroCarro.Modelo))
                 query = query.Where(d => d.Modelo.Contains(filtroCarro.Modelo));
 
-            if (filtroCarro.Cor != null)
+            if (filtroCarro.Cor.HasValue)
                 query = query.Where(d => d.Cor == filtroCarro.Cor);
 
-            if (filtroCarro.Marca != null)
+            if (filtroCarro.Marca.HasValue)
                 query = query.Where(d => d.Marca == filtroCarro.Marca);
 
-            if (filtroCarro.Flex != null)
+            if (filtroCarro.Flex.HasValue)
                 query = query.Where(d => d.Flex == filtroCarro.Flex);
 
+            if(filtroCarro.Disponiveis.HasValue){
+                var vendas = _servicoVenda.ObterTodos();
+
+                vendas.ForEach(x => {
+                    query = query
+                    .Where(c => c.Id != x.IdDoCarroVendido);
+                });
+            }
             return query;
         }
     }

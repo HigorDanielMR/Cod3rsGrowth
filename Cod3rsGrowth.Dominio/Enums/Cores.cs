@@ -43,6 +43,6 @@ namespace Cod3rsGrowth.Dominio.Enums
         [Description("Vermelho")]
         Vermelho,
         [Description("Violeta")]
-        Violeta
+            Violeta
     }
 }

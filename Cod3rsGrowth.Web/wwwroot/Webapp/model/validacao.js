@@ -8,15 +8,16 @@
     return {
 
         validarNome(inputNome) {
+            const tamanhoMaximoNome = 100;
             var nome = inputNome.getValue();
             const regexParaConterApenasLetras = /^[a-zA-ZáàâãéèêíïóôõöúçñÁÀÂÃÉÈÊÍÏÓÔÕÖÚÇÑ ]+$/;
             var ehValido = true;
-            if (nome === '') {
+            if (!nome) {
                 inputNome.setValueState(sap.ui.core.ValueState.Error);
                 inputNome.setValueStateText('Nome não pode estar em branco.');
                 ehValido = false;
             }
-            else if (nome.length > 100) {
+            else if (nome.length > tamanhoMaximoNome) {
                 inputNome.setValueState(sap.ui.core.ValueState.Error);
                 inputNome.setValueStateText('Nome não pode ter mais de 100 caracteres.')
                 ehValido = false;
@@ -35,18 +36,19 @@
         },
 
         validarCpf(inputCpf) {
+            const tamanhoPadraoCpf = 11;
             var cpf = inputCpf.getValue();
             const regexParaCaracteresEspeciais = /[\W_]/g;
             const regexParaVerificarSeOsNumerosSaoSequenciais = /^(\d)\1+$/;
             const cpfSemMascara = cpf.replace(regexParaCaracteresEspeciais, "");
             var ehValido = true;
 
-            if (cpfSemMascara === '') {
+            if (!cpfSemMascara) {
                 inputCpf.setValueState(sap.ui.core.ValueState.Error);
                 inputCpf.setValueStateText('CPF não pode estar em branco');
                 ehValido = false;
             }
-            else if (cpfSemMascara.length < 11) {
+            else if (cpfSemMascara.length < tamanhoPadraoCpf) {
                 inputCpf.setValueState(sap.ui.core.ValueState.Error);
                 inputCpf.setValueStateText('CPF incompleto.');
                 ehValido = false;
@@ -65,17 +67,18 @@
         },
 
         validarTelefone(inputTelefone) {
+            const tamanhoPadraoTelefone = 11;
             var telefone = inputTelefone.getValue();
             const regexParaCaracteresEspeciais = /[\W_]/g;
             const telefoneSemMascara = telefone.replace(regexParaCaracteresEspeciais, "");
             var ehValido = true;
 
-            if (telefoneSemMascara === '') {
+            if (!telefoneSemMascara) {
                 inputTelefone.setValueState(sap.ui.core.ValueState.Error);
                 inputTelefone.setValueStateText('Telefone não pode estar em branco');
                 ehValido = false;
             }
-            else if (telefoneSemMascara.length < 11) {
+            else if (telefoneSemMascara.length < tamanhoPadraoTelefone) {
                 inputTelefone.setValueState(sap.ui.core.ValueState.Error);
                 inputTelefone.setValueStateText('Telefone incompleto.');
                 ehValido = false;
@@ -93,7 +96,7 @@
             const regexParaEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
             var ehValido = true;
 
-            if (email === '') {
+            if (!email) {
                 inputEmail.setValueState(sap.ui.core.ValueState.Error);
                 inputEmail.setValueStateText('Email não pode estar em branco');
                 ehValido = false;
@@ -126,7 +129,7 @@
             var limiteMaximoDeCaracteres = 50;
             var ehValido = true;
 
-            if (modelo === '') {
+            if (!modelo) {
                 inputModelo.setValueState(sap.ui.core.ValueState.Error);
                 inputModelo.setValueStateText('Modelo não pode estar em branco.');
                 ehValido = false;
@@ -151,11 +154,10 @@
         validarValorDoCarro(inputValor){
             
             var valor = inputValor.getValue();
-            var regexParaNumeros = /^[0-9]+$/;
             const valorPadrao = 0;
             var ehValido = true;
 
-            if (valor === ''){
+            if (!valor){
                 inputValor.setValueState(sap.ui.core.ValueState.Error);
                 inputValor.setValueStateText('Valor não pode estar vazio.');
                 ehValido = false;

@@ -1,13 +1,13 @@
 ﻿sap.ui.define([
     "ui5/carro/app/common/BaseController",
-    "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
     "ui5/carro/model/formatter",
-    "ui5/carro/model/validacao",
-	"sap/m/MessageBox"
+    "ui5/carro/model/validacao"
 
-], function (BaseController, History, JSONModel, Formatter, validacao, MessageBox) {
+], function (BaseController, JSONModel, Formatter, validacao) {
     "use strict";
+
+    const urlApi= "http://localhost:5071/api/Carros/";
 
     let _rota;
     let idCarro;
@@ -18,18 +18,17 @@
     const idDoInputValor = "InputValor";
     const idDoInputCor = "SelecionarCor";
     const idDoInputModelo = "InputModelo";
+    const recursoCores = urlApi + "Cores";
     const parametroArgumento = "arguments";
+    const recursoMarcas = urlApi + "Marcas";
     const idDoInputMarca = "SelecionarMarca";
     const rotaEditarCarro = "appEditarCarro";
     const rotaCriarCarro = "appAdicionarCarro";
     const rotaListagemCarros = "appListagemCarro";
-    const url= "http://localhost:5071/api/Carros/";
     const idTituloViewCriarCarro = "TituloEditarCarro";
     const textoParaAdicionarTituloEdicao = "Editar Carro";
     const textoParaAdicionarTituloCriacao = "Adicionar Carro";
-    const urlCores = "http://localhost:5071/api/Carros/Cores";
     const idDoMessageStripErroCriarCarro = "erroAoCriarCarro";
-    const urlMarcas = "http://localhost:5071/api/Carros/Marcas";
     const idDoMessageStripErroEditarCarro = "erroAoEditarCarro";
     const idDoMessageStripSucessoCriacao = "sucessoAoCriarCarro";
     const idDoMessageStripSucessoEditar = "sucessoAoEditarCarro";
@@ -43,7 +42,7 @@
 
         aoCoincidirRota() {
             this.processarEvento(() => {
-                var rota = sap.ui.core.UIComponent.getRouterFor(this);
+                var rota = this.getRouter();
                 rota.getRoute(rotaCriarCarro).attachMatched(this._carregarEventosCriar, this);
                 rota.getRoute(rotaEditarCarro).attachMatched(this._carregarEventodEditar, this);
             });
@@ -71,34 +70,46 @@
         },
 
         _limparInputs() {
-            const inputModelo = this.oView.byId(idDoInputModelo);
-            const modelo = inputModelo.setValue(null);
-            inputModelo.setValueState(sap.ui.core.ValueState.None);
-            inputModelo.setValueStateText('');
-            const inputValor = this.oView.byId(idDoInputValor);
-            const valor = inputValor.setValue(null);
-            inputValor.setValueState(sap.ui.core.ValueState.None);
-            inputValor.setValueStateText('');
-            const flex = this.oView.byId(idDoInputFlex).setState(false)
-        },
+            const inputs = [
+                { id: idDoInputModelo },
+                { id: idDoInputValor },
+                { id: idDoInputMarca },
+                { id: idDoInputCor },
+                { id: idDoInputFlex, isSwitch: true }
+            ];
+        
+            inputs.forEach(input => {
+                const element = this.oView.byId(input.id);
+                if (input.isSwitch) {
+                    element.setState(false);
+                } else {
+                    element.setValue(null);
+                    element.setValueState(sap.ui.core.ValueState.None);
+                    element.setValueStateText('');
+                }
+            });
+        },        
 
         _removerMessageStrip(){
-            this.getView().byId(idDoMessageStripErroCriarCarro).setVisible(false);
-            this.getView().byId(idDoMessageStripErroEditarCarro).setVisible(false);
-            this.getView().byId(idDoMessageStripSucessoCriacao).setVisible(false);
-            this.getView().byId(idDoMessageStripSucessoEditar).setVisible(false);
+            const messageStripIds = [
+                idDoMessageStripErroCriarCarro,
+                idDoMessageStripErroEditarCarro,
+                idDoMessageStripSucessoCriacao,
+                idDoMessageStripSucessoEditar
+            ];
+
+            messageStripIds.forEach(id => {
+                this.getView().byId(id).setVisible(false);
+            })
         },
 
         _carregarDescricaoCores(){
-            let sucesso = true;
-            fetch(urlCores)
+            fetch(recursoCores)
                 .then((res) => {
-                    if (!res.ok)
-                        sucesso = false;
                     return res.json()
                 })
                 .then((data) => {
-                    if (sucesso) {
+                    if (!data.Detail) {
                         const cores = data.map((item) => ({ text: item }));
                         this.getView().setModel(new JSONModel({
                             descricao: cores
@@ -107,18 +118,15 @@
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
-                .catch((err) => MessageBox.error(err));
         },
 
         _carregarDescricaoMarcas(){
-            let sucesso = true;
-            fetch(urlMarcas)
+            fetch(recursoMarcas)
                 .then((res) => {
-                    if (!res.ok) sucesso = false;
                     return res.json();
                 })
                 .then((data) => {
-                    if (sucesso) {
+                    if (!data.Detail) {
                         const marcas = data.map((item) => ({ text: item }));
                         this.getView().setModel(new JSONModel({
                             descricao: marcas
@@ -127,71 +135,58 @@
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
-                .catch((err) => MessageBox.error(err));
         },
 
         _mudarTituloDaViewCriar() {
-            var Titulo = this.getView().byId(idTituloViewCriarCarro).setText(textoParaAdicionarTituloCriacao);
-            return Titulo;
+            this.getView().byId(idTituloViewCriarCarro).setText(textoParaAdicionarTituloCriacao);
         },
 
-        aoColetarValorDoVeiculo(){
+        obterValor(){
             var inputValor = this.oView.byId(idDoInputValor);
-            var valor = inputValor.getValue();
-            validacao.validarValorDoCarro(inputValor);
-            return parseFloat(valor);
+            return inputValor;
         },
         
-        aoColetarModelo() {
+        obterModelo() {
             const inputModelo = this.oView.byId(idDoInputModelo);
-            const modelo = inputModelo.getValue();
-            validacao.validarModelo(inputModelo);
-            return modelo;
+            return inputModelo;
         },
 
-        aoColetarMarca(){
-            const marca = this.oView.byId(idDoInputMarca).getSelectedKey();
-            return parseInt(marca);
+        obterMarca(){
+            return parseInt(this.oView.byId(idDoInputMarca).getSelectedKey());
         },
         
-        aoColetarCor(){
-            const cor = this.oView.byId(idDoInputCor).getSelectedKey();
-            return parseInt(cor);
+        obterCor(){
+            return parseInt(this.oView.byId(idDoInputCor).getSelectedKey());
         },
 
-        aoObterSeEhFlex() {
-            const pago = this.oView.byId(idDoInputFlex).getState();
-            return pago;
+        obterFlex() {
+            return this.oView.byId(idDoInputFlex).getState();
         },
 
         aoClicarNoBotaoAdicionarCriarCarro() {
             this.processarEvento(() => {
 
-                var marca = this.aoColetarMarca();
-                var modelo = this.aoColetarModelo();
-                var cor = this.aoColetarCor();
-                var valor = this.aoColetarValorDoVeiculo();
-                var flex = this.aoObterSeEhFlex();
+                var marca = this.obterMarca();
+                var modelo = this.obterModelo().getValue();
+                var cor = this.obterCor();
+                var valor = this.obterValor().getValue();
+                var flex = this.obterFlex();
 
-                const inputModelo = this.oView.byId(idDoInputModelo);
-                const inputValor = this.oView.byId(idDoInputValor);
-
-                let validacaoDados = validacao.validarDadosCarro(inputModelo, inputValor);
-
-                        
-                if(!validacaoDados){
-                    if(_rota === rotaEditarCarro) this.getView().byId(idDoMessageStripErroEditarCarro).setVisible(true);
-                    if(_rota === rotaCriarCarro) this.getView().byId(idDoMessageStripErroCriarCarro).setVisible(true);
+                let resultadoValidacao = validacao.validarDadosCarro(this.obterModelo(), this.obterValor());
+  
+                if(!resultadoValidacao){
+                    _rota === rotaEditarCarro ? this.getView().byId(idDoMessageStripErroEditarCarro).setVisible(true)
+                     : this.getView().byId(idDoMessageStripErroCriarCarro).setVisible(true);
                 } 
-                if(validacaoDados){
+                if(resultadoValidacao){
                     if(_rota === rotaEditarCarro){
-                        const urlEditar = url + idCarro;
+                        const urlEditar = urlApi + idCarro;
                         const carro = {
                             "id": parseInt(idCarro),
                             "marca": marca,
                             "modelo": modelo,
                             "cor": cor,
-                            "valorDoVeiculo": valor,
+                            "valorDoVeiculo": parseFloat(valor),
                             "flex": flex
                         }
                         const metodo = "PATCH"
@@ -202,80 +197,44 @@
                             "marca": marca,
                             "modelo": modelo,
                             "cor": cor,
-                            "valorDoVeiculo": valor,
+                            "valorDoVeiculo": parseFloat(valor),
                             "flex": flex
                         }
                         const metodo = "POST"
-                        this._requisicaoHttp(url, metodo, carro, idDoMessageStripSucessoCriacao, idDoMessageStripErroCriarCarro)
+                        this._requisicaoHttp(urlApi, metodo, carro, idDoMessageStripSucessoCriacao, idDoMessageStripErroCriarCarro)
                     }
                 }
             })
         },
 
-        _requisicaoHttp(url, metodo, carro, idMessageSucesso, idMessageErro) {
-            let sucesso = true;
-
-            fetch(url, {
-                method: metodo,
-                body: JSON.stringify(carro),
-                headers: { "Content-type": "application/json; charset=UTF-8" }
-            })
-                .then(res => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
-                    return res.json();
-                })
-                .then(data => {
-                    if (!sucesso) {
-                        this._erroNaRequisicaoDaApi(data);
-                        this.getView().byId(idMessageErro).setVisible(true);
-                    }
-                    else {
-                        this.getView().byId(idMessageErro).setVisible(false);
-                        this.getView().byId(idMessageSucesso).setVisible(true);
-                    }
-                })
-                .catch(err => { MessageBox.error(err); });
-        },
-
         _mudarTituloDaViewEdicao() {
-            var Titulo = this.getView().byId(idTituloViewCriarCarro).setText(textoParaAdicionarTituloEdicao);
-            return Titulo;
+            this.getView().byId(idTituloViewCriarCarro).setText(textoParaAdicionarTituloEdicao);
         },
         
         _carregarDadosCarro(carro) {
-            const modelo = this.oView.byId(idDoInputModelo).setValue(carro.modelo);
-            const valor = this.oView.byId(idDoInputValor).setValue(carro.valorDoVeiculo);
-            const flex = this.oView.byId(idDoInputFlex).setState(carro.flex);
-            const marca = this.oView.byId(idDoInputMarca).setSelectedKey(carro.marca);
-            const cor = this.oView.byId(idDoInputCor).setSelectedKey(carro.cor);
+            this.oView.byId(idDoInputModelo).setValue(carro.modelo);
+            this.oView.byId(idDoInputValor).setValue(carro.valorDoVeiculo);
+            this.oView.byId(idDoInputFlex).setState(carro.flex);
+            this.oView.byId(idDoInputMarca).setSelectedKey(carro.marca);
+            this.oView.byId(idDoInputCor).setSelectedKey(carro.cor);
         },
         
         _obterCarroPorId(oEvent) {
             idCarro = oEvent.getParameter(parametroArgumento).id;
-            let query = url + idCarro;
-            let sucesso = true;
+            let query = urlApi + idCarro;
         
             fetch(query)
                 .then(res => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
                     return res.json();
                 })
                 .then(carro => {
-                    sucesso ? this._carregarDadosCarro(carro)
-                        : this._erroNaRequisicaoDaApi(carro);
+                    !carro.Detail ? this._carregarDadosCarro(carro)
+                    : this._erroNaRequisicaoDaApi(carro);
                 })
-                .catch(err => { MessageBox.error(err); });
         },
 
         aoClicarBotaoVoltar() {
             this.processarEvento(() => {
-                var history;
-
-                history = History.getInstance();
                 this.getRouter().navTo(rotaListagemCarros, {}, true);
             })
         }

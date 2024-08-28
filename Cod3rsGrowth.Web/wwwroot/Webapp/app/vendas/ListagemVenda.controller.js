@@ -16,9 +16,9 @@ sap.ui.define([
     const quantidadeDeCaracteresDoCpf = 14;
     const quantidadeDeCaracteresDoTelefone = 15;
     const idDoFiltroTelefone = "FiltroTelefone";
-    let url = "http://localhost:5071/api/Vendas";    
     const rotaListagemCarros = "appListagemCarro";
     const rotaAdicionarVenda = "appAdicionarVenda";
+    const urlApi = "http://localhost:5071/api/Vendas";    
 
     return BaseController.extend("ui5.carro.app.vendas.ListagemVenda", {
         formatter: Formatter,
@@ -28,70 +28,59 @@ sap.ui.define([
         },
 
         _carregarListaDeVendas() {
-            let sucesso = true;
-
-            fetch(url)
+            fetch(urlApi)
                 .then((res) => {
-                    if (!res.ok)
-                        sucesso = false;
                     return res.json()
                 })
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
 
-                    sucesso ? this.getView().setModel(jsonModel, modeloVenda)
+                    !data.Detail ? this.getView().setModel(jsonModel, modeloVenda)
                         : this._erroNaRequisicaoDaApi(data);
                 })
-                .catch((err) => MessageBox.error(err));
         },
 
         aoCoincidirRota() {
             this.processarEvento(() => {
-                var rota = sap.ui.core.UIComponent.getRouterFor(this);
+                var rota = this.getRouter();
                 rota.getRoute(rotaListagem).attachMatched(this._carregarListaDeVendas, this);
             });
         },
         
-        aoColetarNome() {
-            const nome = this.oView.byId(idDoFiltroNome).getValue();
-            return nome;
+        obterNome() {
+            return this.oView.byId(idDoFiltroNome).getValue();
         },
 
-        aoColetarCpf() {
+        obterCpf() {
             const cpf = this.oView.byId(idDoFiltroCpf).getValue();
-            if (cpf.length < quantidadeDeCaracteresDoCpf) return '';
-            return cpf;
+            return cpf.length < quantidadeDeCaracteresDoCpf ? '' : cpf;
         },
 
-        aoColetarTelefone() {
+        obterTelefone() {
             const telefone = this.oView.byId(idDoFiltroTelefone).getValue();
-            if (telefone.length < quantidadeDeCaracteresDoTelefone) return '';
-            return telefone;
+            return telefone.length < quantidadeDeCaracteresDoTelefone ? '' : telefone;
         },
 
-        aoColetarDataInicial(oEvent) {
-            let dataInicial = oEvent.getParameter("from");;
-            let dataInicialFormatada = Formatter.formatarData(dataInicial);
-            
-             return dataInicialFormatada;
+        obterDataInicial(oEvent) {
+            const parametroDataInicial = "from";
+            let dataInicial = oEvent.getParameter(parametroDataInicial);            
+             return Formatter.formatarData(dataInicial);
         },
 
-        aoColetarDataFinal(oEvent) {
-            let dataFinal = oEvent.getParameter("to");
-            let dataFinalFormatada = Formatter.formatarData(dataFinal);
-            
-            return dataFinalFormatada;
+        obterDataFinal(oEvent) {
+            const parametroDataFinal = "to";
+            let dataFinal = oEvent.getParameter(parametroDataFinal);
+            return Formatter.formatarData(dataFinal);
         },
 
         aoFiltrar(oEvent) {
             this.processarEvento(() => {
-                let sucesso = true;
-                let urlDoFiltro = url + "?";
-                const cpf = this.aoColetarCpf();
-                const nome = this.aoColetarNome();
-                const telefone = this.aoColetarTelefone();
-                const dataInicial = this.aoColetarDataInicial(oEvent);
-                const dataFinal = this.aoColetarDataFinal(oEvent);
+                let urlDoFiltro = urlApi + "?";
+                const cpf = this.obterCpf();
+                const nome = this.obterNome();
+                const telefone = this.obterTelefone();
+                const dataInicial = this.obterDataInicial(oEvent);
+                const dataFinal = this.obterDataFinal(oEvent);
 
                 if (nome) {
                     urlDoFiltro += "Nome=" + nome + "&";
@@ -119,16 +108,13 @@ sap.ui.define([
 
                 fetch(urlDoFiltro)
                     .then((res) => {
-                        if (!res.ok)
-                            sucesso = false;
                         return res.json()
                     })
                     .then((vendas) => {
                         const jsonModel = new JSONModel(vendas)
-                        sucesso ? this.getView().setModel(jsonModel, modeloVenda)
+                        !vendas.Detail ? this.getView().setModel(jsonModel, modeloVenda)
                             : this._erroNaRequisicaoDaApi(vendas);
                     })
-                    .catch((err) => MessageBox.error(err));
             })
         },
 

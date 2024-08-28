@@ -8,42 +8,42 @@ namespace Cod3rsGrowth.Web.Controllers
     [ApiController]
     public class VendasController : ControllerBase
     {
-        private readonly ServicoVenda _servico;
+        private readonly ServicoVenda _servicoVenda;
 
-        public VendasController(ServicoVenda servico)
+        public VendasController(ServicoVenda servicoVenda)
         {
-            _servico = servico;
+            _servicoVenda = servicoVenda;
         }
 
         [HttpGet]
         public IActionResult ObterTodos([FromQuery] FiltroVenda? filtro)
         {
-            return Ok(_servico.ObterTodos(filtro));
+            return Ok(_servicoVenda.ObterTodos(filtro));
         }
 
         [HttpGet("{Id}")]
         public IActionResult ObterPorId(int Id)
         {
-            return Ok(_servico.ObterPorId(Id));
+            return Ok(_servicoVenda.ObterPorId(Id));
         }
 
         [HttpPost]
         public IActionResult Criar([FromBody] Venda venda)
         {
-            var vendaNova = _servico.Criar(venda);
+            var vendaNova = _servicoVenda.Criar(venda);
             return Created($"api/Venda/{vendaNova.Id}", vendaNova);
         }
 
         [HttpPatch("{Id}")]
         public IActionResult Editar([FromBody] Venda venda)
         {
-            return Ok(_servico.Editar(venda));
+            return Ok(_servicoVenda.Editar(venda));
         }
 
         [HttpDelete("{Id}")]
         public IActionResult Remover(int Id)
         {
-            _servico.Remover(Id);
+            _servicoVenda.Remover(Id);
             return NoContent();
         }
     }

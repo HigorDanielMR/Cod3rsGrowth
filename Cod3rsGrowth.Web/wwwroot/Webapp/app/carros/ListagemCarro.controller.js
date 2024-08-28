@@ -18,10 +18,10 @@ sap.ui.define([
     const rotaListagemVenda = "appListagem";
     const rotaDetalhes = "appDetalhesCarro";
     const rotaListagemCarro = "appListagemCarro";
-    let url = "http://localhost:5071/api/Carros/";    
+    let urlApi = "http://localhost:5071/api/Carros/";    
     const rotaAdicionarCarro = "appAdicionarCarro";
-    const urlCores = "http://localhost:5071/api/Carros/Cores";
-    const urlMarcas = "http://localhost:5071/api/Carros/Marcas";
+    const recursoCores = urlApi + "Cores";
+    const recursoMarcas = urlApi + "Marcas";
 
     return BaseController.extend("ui5.carro.app.carros.ListagemCarro", {
         formatter: Formatter,
@@ -32,7 +32,7 @@ sap.ui.define([
 
         aoCoincidirRota() {
             this.processarEvento(() => {
-                var rota = sap.ui.core.UIComponent.getRouterFor(this);
+                var rota = this.getRouter();
                 rota.getRoute(rotaListagemCarro).attachMatched(this._carregarEventos, this);
             });
         },
@@ -44,33 +44,25 @@ sap.ui.define([
         },
 
         _carregarListaDeCarros() {
-            let sucesso = true;
-            fetch(url)
+            fetch(urlApi)
                 .then((res) => {
-                    if (!res.ok) {
-                        sucesso = false;
-                    }
                     return res.json()
                 })
                 .then((carro) => {
                     const jsonModel = new JSONModel(carro)
 
-                    sucesso ? this.getView().setModel(jsonModel, modeloCarro)
+                    !carro.Detail ? this.getView().setModel(jsonModel, modeloCarro)
                         : this._erroNaRequisicaoDaApi(carro);
                 })
-                .catch((err) => MessageBox.error(err));
         },
 
         _carregarDescricaoCores(){
-            let sucesso = true;
-            fetch(urlCores)
+            fetch(recursoCores)
                 .then((res) => {
-                    if (!res.ok)
-                        sucesso = false;
                     return res.json()
                 })
                 .then((data) => {
-                    if (sucesso) {
+                    if (!data.Detail) {
                         const cores = data.map((item) => ({ text: item }));
                         cores.unshift({ text: "Todas" });
         
@@ -86,14 +78,12 @@ sap.ui.define([
         },
 
         _carregarDescricaoMarcas(){
-            let sucesso = true;
-            fetch(urlMarcas)
+            fetch(recursoMarcas)
                 .then((res) => {
-                    if (!res.ok) sucesso = false;
                     return res.json();
                 })
                 .then((data) => {
-                    if (sucesso) {
+                    if (!data.Detail) {
                         const marcas = data.map((item) => ({ text: item }));
                         marcas.unshift({ text: "Todas" });
         
@@ -108,35 +98,30 @@ sap.ui.define([
                 .catch((err) => MessageBox.error(err));
         },        
         
-        aoColetarModelo() {
-            const modelo = this.oView.byId(idDoFiltroModelo).getValue();
-            return modelo;
+        obterModelo() {
+            return this.oView.byId(idDoFiltroModelo).getValue();
         },
 
-        aoColetarMarca(){
-            const marca = this.oView.byId(idDoFiltroMarca).getSelectedKey();
-            return marca;
+        obterMarca(){
+            return this.oView.byId(idDoFiltroMarca).getSelectedKey();
         },
         
-        aoColetarCor(){
-            const cor = this.oView.byId(idDoFiltroCor).getSelectedKey();
-            return cor;
+        obterCor(){
+            return this.oView.byId(idDoFiltroCor).getSelectedKey();
         },
 
-        aoColetarSeEhFlex(){
+        obterFlex(){
             const flex = this.oView.byId(idDoFiltroFlex).getSelectedKey();
-            const flexFormatado = Formatter.formatarFlexFiltro(flex)
-            return flexFormatado;
+            return Formatter.formatarFlexFiltro(flex);
         },
 
         aoFiltrarCarro() {
             this.processarEvento(() => {
-                let sucesso = true;
-                let urlDoFiltro = url + "?";
-                let modelo = this.aoColetarModelo();
-                let marca = this.aoColetarMarca();
-                let cor = this.aoColetarCor();
-                let flex = this.aoColetarSeEhFlex();
+                let urlDoFiltro = urlApi + "?";
+                let modelo = this.obterModelo();
+                let marca = this.obterMarca();
+                let cor = this.obterCor();
+                let flex = this.obterFlex();
 
                 if (cor === "Todas"){
                     cor = null;
@@ -160,17 +145,14 @@ sap.ui.define([
 
                 fetch(urlDoFiltro)
                     .then((res) => {
-                        if (!res.ok)
-                            sucesso = false;
                         return res.json()
                     })
                     .then((carros) => {
                         const jsonModel = new JSONModel(carros)
 
-                        sucesso ? this.getView().setModel(jsonModel, modeloCarro)
+                        !carros.Detail ? this.getView().setModel(jsonModel, modeloCarro)
                             : this._erroNaRequisicaoDaApi(carros);
                     })
-                    .catch((err) => MessageBox.error(err));
             })
         },
 

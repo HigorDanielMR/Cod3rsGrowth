@@ -1,11 +1,10 @@
 ﻿sap.ui.define([
     "ui5/carro/app/common/BaseController",
     "ui5/carro/model/formatter",
-    "sap/ui/core/routing/History",
     "sap/ui/model/json/JSONModel",
     "sap/m/MessageBox"
 
-], function (BaseController, Formatter, History, JSONModel, MessageBox) {
+], function (BaseController, Formatter, JSONModel, MessageBox) {
     "use strict";
 
     let idCarro;
@@ -30,7 +29,7 @@
 
         aoCoincidirRota() {
             this.processarEvento(() => {
-                const rota = this.getOwnerComponent().getRouter();
+                const rota = this.getRouter();
                 rota.getRoute(rotaDetalhe).attachMatched(this._carregarEventos, this);
             });
         },
@@ -40,22 +39,17 @@
         },
 
         _obterVendaPorId(oEvent) {
-            let idDesejado = oEvent.getParameter(parametroArgumento).id;
-            let query = urlVenda + idDesejado;
-            idVenda = idDesejado;
-            let sucesso = true;
+            idVenda = oEvent.getParameter(parametroArgumento).id;
+            let query = urlVenda + idVenda;
 
             fetch(query)
                 .then((res) => {
-                    if (!res.ok)
-                        sucesso = false;
                     return res.json()
                 })
                 .then((venda) => {
-                    if(sucesso){
+                    if(!venda.Detail){
                         const jsonModel = new JSONModel(venda)
-                        let id = this._carregarIdCarro(venda);
-                        idCarro = id;
+                        idCarro = this._carregarIdCarro(venda);
                         this._carregarCarroAssociado(idCarro);
                         this.getView().setModel(jsonModel, modeloVenda);
                     } 
@@ -95,7 +89,7 @@
                             : res.json()
 
                     }).then(data => {
-                        if (data) this._erroNaRequisicaoDaApi(data);
+                        if (data.Detail) this._erroNaRequisicaoDaApi(data);
                     });
             })
         },
@@ -111,18 +105,16 @@
         },
 
         _carregarCarroAssociado(id){
-            let sucesso = true;
             let query = urlCarro + id;
 
             fetch(query)
                 .then((res) => {
-                    if (!res.ok) sucesso = false;
                     return res.json()
                 })
                 .then((carro) => {
                     const jsonModel = new JSONModel(carro)
 
-                    sucesso ? this.getView().setModel(jsonModel, modeloCarro)
+                    !carro.Detail ? this.getView().setModel(jsonModel, modeloCarro)
                         : this._erroNaRequisicaoDaApi(carro);
                 });
         },
@@ -133,8 +125,6 @@
 
         aoClicarVoltarParaTelaDeListagem() {
             this.processarEvento(() => {
-                var history;
-                history = History.getInstance();
                 this.getRouter().navTo(rotaListagem, {}, true);
             })
         },

@@ -12,9 +12,9 @@ namespace Cod3rsGrowth.Forms
         private List<Carro> _carros = new List<Carro>();
         private List<string> comboBoxSelecionarCarro = new List<string>();
 
-        public FormModificarVenda(ServicoVenda servico, ServicoCarro servicoCarro)
+        public FormModificarVenda(ServicoVenda servicoVenda, ServicoCarro servicoCarro)
         {
-            _servicoVenda = servico;
+            _servicoVenda = servicoVenda;
             _servicoCarro = servicoCarro;
 
             InitializeComponent();

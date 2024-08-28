@@ -49,7 +49,7 @@
             },
             assertions: {
                 euVerificoSeOIdEstaComoOEsperado() {
-                    var idEsperado = "1"
+                    var idEsperado = "91"
                     return this.waitFor({
                         id: idDaTagTextID,
                         viewName: viewDetalhes,

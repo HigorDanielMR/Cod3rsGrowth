@@ -9,5 +9,6 @@ namespace Cod3rsGrowth.Dominio.Entidades
         public string? Modelo { get; set; }
         public Cores? Cor { get; set; }
         public bool? Flex { get; set; }
+        public bool? Disponiveis { get; set;}
     }
 }
