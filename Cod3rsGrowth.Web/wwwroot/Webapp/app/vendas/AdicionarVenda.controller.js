@@ -91,6 +91,8 @@
                     elemento.setValueStateText('');
                 }
             });
+
+            this.oView.byId(ID_OBJECT_STATUS_CARRO_NAO_SELECIONADO).setVisible(false)
         },
 
 
@@ -214,7 +216,7 @@
             else{
                 this.oView.byId(ID_OBJECT_STATUS_CARRO_NAO_SELECIONADO).setVisible(false);
             }
-            
+
             const CarroSelecionado = ListaComCarroSelecionado[PRIMEIRO_CARRO];
             const ContextoAssociado = CarroSelecionado.getBindingContext(MODELO_CARRO);
             const Carro = ContextoAssociado.getObject();
