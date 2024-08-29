@@ -1,27 +1,26 @@
 sap.ui.define([
     "ui5/carro/app/common/BaseController",
     "sap/ui/model/json/JSONModel",
-    "ui5/carro/model/formatter",
-    "sap/m/MessageBox"
+    "ui5/carro/model/formatter"
 
-], function (BaseController, JSONModel, Formatter, MessageBox) {
+], function (BaseController, JSONModel, Formatter) {
     "use strict";
 
     const id = "id";    
-    const modeloCores = "Cores";
-    const modeloCarro = "Carros";
-    const modeloMarcas = "Marcas";
-    const idDoFiltroFlex = "FiltroFlex";
-    const idDoFiltroCor = "FiltroCores";
-    const idDoFiltroMarca = "FiltroMarcas";
-    const idDoFiltroModelo = "FiltroModelo";
-    const rotaListagemVenda = "appListagem";
-    const rotaDetalhes = "appDetalhesCarro";
-    const rotaListagemCarro = "appListagemCarro";
-    let urlApi = "http://localhost:5071/api/Carros/";    
-    const rotaAdicionarCarro = "appAdicionarCarro";
-    const recursoCores = urlApi + "Cores";
-    const recursoMarcas = urlApi + "Marcas";
+    const MODELO_CORES = "Cores";
+    const MODELO_CARRO = "Carros";
+    const MODELO_MARCAS = "Marcas";
+    const ID_DO_FILTRO_FLEX = "FiltroFlex";
+    const ID_DO_FILTRO_COR = "FiltroCores";
+    const ID_DO_FILTRO_MARCA = "FiltroMarcas";
+    const ID_DO_FILTRO_MODELO = "FiltroModelo";
+    const ROTA_LISTAGEM_VENDA = "appListagem";
+    const ROTA_DETALHES = "appDetalhesCarro";
+    const ROTA_LISTAGEM_CARRO = "appListagemCarro";
+    const ROTA_ADICIONAR_CARRO = "appAdicionarCarro";
+    let URL_API = "http://localhost:5071/api/Carros/";    
+    const RECURSOS_CORES = URL_API + "Cores";
+    const RECURSOS_MARCAS = URL_API + "Marcas";
 
     return BaseController.extend("ui5.carro.app.carros.ListagemCarro", {
         formatter: Formatter,
@@ -33,7 +32,7 @@ sap.ui.define([
         aoCoincidirRota() {
             this.processarEvento(() => {
                 var rota = this.getRouter();
-                rota.getRoute(rotaListagemCarro).attachMatched(this._carregarEventos, this);
+                rota.getRoute(ROTA_LISTAGEM_CARRO).attachMatched(this._carregarEventos, this);
             });
         },
 
@@ -44,20 +43,20 @@ sap.ui.define([
         },
 
         _carregarListaDeCarros() {
-            fetch(urlApi)
+            fetch(URL_API)
                 .then((res) => {
                     return res.json()
                 })
                 .then((carro) => {
                     const jsonModel = new JSONModel(carro)
 
-                    !carro.Detail ? this.getView().setModel(jsonModel, modeloCarro)
+                    !carro.Detail ? this.getView().setModel(jsonModel, MODELO_CARRO)
                         : this._erroNaRequisicaoDaApi(carro);
                 })
         },
 
         _carregarDescricaoCores(){
-            fetch(recursoCores)
+            fetch(RECURSOS_CORES)
                 .then((res) => {
                     return res.json()
                 })
@@ -68,17 +67,16 @@ sap.ui.define([
         
                         this.getView().setModel(new JSONModel({
                             descricao: cores
-                        }), modeloCores);
+                        }), MODELO_CORES);
                     }
                     else {
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
-                .catch((err) => MessageBox.error(err));
         },
 
         _carregarDescricaoMarcas(){
-            fetch(recursoMarcas)
+            fetch(RECURSOS_MARCAS)
                 .then((res) => {
                     return res.json();
                 })
@@ -89,35 +87,34 @@ sap.ui.define([
         
                         this.getView().setModel(new JSONModel({
                             descricao: marcas
-                        }), modeloMarcas);
+                        }), MODELO_MARCAS);
                     }
                     else {
                         this._erroNaRequisicaoDaApi(data);
                     }
                 })
-                .catch((err) => MessageBox.error(err));
         },        
         
         obterModelo() {
-            return this.oView.byId(idDoFiltroModelo).getValue();
+            return this.oView.byId(ID_DO_FILTRO_MODELO).getValue();
         },
 
         obterMarca(){
-            return this.oView.byId(idDoFiltroMarca).getSelectedKey();
+            return this.oView.byId(ID_DO_FILTRO_MARCA).getSelectedKey();
         },
         
         obterCor(){
-            return this.oView.byId(idDoFiltroCor).getSelectedKey();
+            return this.oView.byId(ID_DO_FILTRO_COR).getSelectedKey();
         },
 
         obterFlex(){
-            const flex = this.oView.byId(idDoFiltroFlex).getSelectedKey();
+            const flex = this.oView.byId(ID_DO_FILTRO_FLEX).getSelectedKey();
             return Formatter.formatarFlexFiltro(flex);
         },
 
         aoFiltrarCarro() {
             this.processarEvento(() => {
-                let urlDoFiltro = urlApi + "?";
+                let urlDoFiltro = URL_API + "?";
                 let modelo = this.obterModelo();
                 let marca = this.obterMarca();
                 let cor = this.obterCor();
@@ -150,7 +147,7 @@ sap.ui.define([
                     .then((carros) => {
                         const jsonModel = new JSONModel(carros)
 
-                        !carros.Detail ? this.getView().setModel(jsonModel, modeloCarro)
+                        !carros.Detail ? this.getView().setModel(jsonModel, MODELO_CARRO)
                             : this._erroNaRequisicaoDaApi(carros);
                     })
             })
@@ -158,21 +155,21 @@ sap.ui.define([
 
         aoClicarDeveIParaAListagemVendas(){
             this.processarEvento(() => {
-                this.getRouter().navTo(rotaListagemVenda, {}, true);  
+                this.getRouter().navTo(ROTA_LISTAGEM_VENDA, {}, true);  
             })
         },
 
         aoClicarNoBotaoAdicionarCarro() {
             this.processarEvento(() => {
-                this.getRouter().navTo(rotaAdicionarCarro, {}, true);  
+                this.getRouter().navTo(ROTA_ADICIONAR_CARRO, {}, true);  
             })
         },
 
         aoPressionar(oEvent) {
             const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo(rotaDetalhes, {
-                id: window.encodeURIComponent(oItem.getBindingContext(modeloCarro).getProperty(id))
+            oRouter.navTo(ROTA_DETALHES, {
+                id: window.encodeURIComponent(oItem.getBindingContext(MODELO_CARRO).getProperty(id))
             });
         }
     });

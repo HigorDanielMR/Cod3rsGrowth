@@ -1,18 +1,17 @@
 sap.ui.define([
     'sap/ui/test/Opa5',
     'sap/ui/test/matchers/PropertyStrictEquals',
-    "sap/ui/test/actions/Press",
-    "sap/ui/test/actions/EnterText"
+    "sap/ui/test/actions/Press"
 
-], function (Opa5, PropertyStrictEquals, Press, EnterText) {
+], function (Opa5, PropertyStrictEquals, Press) {
     'use strict';
 
-    const contextoVendas = "Vendas";
-    const idDaTabela = "TabelaVendas";
-    const idBotaoRemover = "botaoRemover";
-    const idDaTagTextNome = "nomeDetalhes";
-    const viewDetalhes = "vendas.Detalhes";
-    const viewListagem = "vendas.ListagemVenda";
+    const CONTEXTO_VENDAS = "Vendas";
+    const ID_DA_TABELA = "TabelaVendas";
+    const VIEW_DETALHES = "vendas.Detalhes";
+    const ID_BOTAO_REMOVER = "botaoRemover";
+    const ID_DA_TAG_TEXT_NOME = "nomeDetalhes";
+    const VIEW_LISTAGEM = "vendas.ListagemVenda";
 
     Opa5.createPageObjects({
         naTelaDeDetalhesRemover: {
@@ -28,7 +27,7 @@ sap.ui.define([
                     const nomeDesejado = "Teste Remover";
                     return this.waitFor({
                         controlType: "sap.m.Text",
-                        viewName: viewListagem,
+                        viewName: VIEW_LISTAGEM,
                         matchers: [
                             new PropertyStrictEquals({
                                 name: propriedadeDesejada,
@@ -41,8 +40,8 @@ sap.ui.define([
                 },
                 euClicoNoBotaoRemover() {
                     return this.waitFor({
-                        viewName: viewDetalhes,
-                        id: idBotaoRemover,
+                        viewName: VIEW_DETALHES,
+                        id: ID_BOTAO_REMOVER,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
                     })
@@ -50,7 +49,7 @@ sap.ui.define([
                 euClicoNoBotaoSimDaMessageBox(){
                     const botaoSimMessageBox = "Sim";
                     return this.waitFor({
-                        viewName: viewDetalhes,
+                        viewName: VIEW_DETALHES,
                         searchOpenDialogs: true, 
                         controlType: "sap.m.Button", 
                         success(aButtons) {
@@ -67,7 +66,7 @@ sap.ui.define([
                 euClicoNoBotaoOkDaMessageBox(){
                     const botaoNaoMessageBox = "Ok";
                     return this.waitFor({
-                        viewName: viewDetalhes,
+                        viewName: VIEW_DETALHES,
                         searchOpenDialogs: true, 
                         controlType: "sap.m.Button", 
                         success(aButtons) {
@@ -86,8 +85,8 @@ sap.ui.define([
                 euVerificoSeNomeEstaComoOEsperado() {
                     var nomeEsperado = "Teste Remover"
                     return this.waitFor({
-                        id: idDaTagTextNome,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_NOME,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success: function (texto) {
                             var nomePreenchido = texto.getText();
@@ -101,12 +100,12 @@ sap.ui.define([
                     const nomeDesejado = 'Teste Remover';
                     const propriedadeDesejada = "nome";
                     return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM,
+                        id: ID_DA_TABELA,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_VENDAS).getProperty(propriedadeDesejada);
 
                                 return itemDesejado === nomeDesejado;
                             });

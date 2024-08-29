@@ -10,19 +10,19 @@
 ], (Opa5, EnterText, Press, PropertyStrictEquals, Properties, Ancestor) => {
     "use strict";
 
-    const valorDesejado = "814950";
-    const indexDaCorDesejada = "4";
-    const indexDaMarcaDesejada = "2";
-    const idDoSwitchFlex = "InputFlex"
-    const idDoInputValor = "InputValor";
-    const idDoSelectCor = "SelecionarCor";
-    const idDoInputModelo = "InputModelo";
-    const modeloDesejado = "M3 Competition";
-    const idDoSelectMarca = "SelecionarMarca";
-    const idDoBotaoAdicionarCarro = "adicionarCarro";
-    const viewAdicionarCarro = "carros.AdicionarCarro";
-    const idDoMessageStripSucessoAoCriarCarro = "sucessoAoCriarCarro";
-    const idDoMessageStripErroAoCriarCarro = "erroAoCriarCarro";
+    const VALOR_DESEJADO = "814950";
+    const INDEX_DA_COR_DESEJADA = "4";
+    const INDEX_DA_MARCA_DESEJADA = "2";
+    const ID_DO_SWITCH_FLEX = "InputFlex"
+    const ID_DO_INPUT_VALOR = "InputValor";
+    const ID_DO_SELECT_COR = "SelecionarCor";
+    const ID_DO_INPUT_MODELO = "InputModelo";
+    const MODELO_DESEJADO = "M3 Competition";
+    const ID_DO_SELECT_MARCA = "SelecionarMarca";
+    const ID_DO_BOTAO_ADICIONAR_CARRO = "adicionarCarro";
+    const VIEW_ADICIONAR_CARRO = "carros.AdicionarCarro";
+    const ID_DO_MESSAGE_STRIP_ERRO_CRIAR_CARRO= "erroAoCriarCarro";
+    const ID_DO_MESSAGE_STRIP_SUCESSO_AO_CRIAR_CARRO = "sucessoAoCriarCarro";
 
     Opa5.createPageObjects({
         naTelaDeAdicionarCarro: {
@@ -35,10 +35,10 @@
             actions: {
                 euPreenchoOInputDoModelo() {
                     return this.waitFor({
-                        id: idDoInputModelo,
-                        viewName: viewAdicionarCarro,
+                        id: ID_DO_INPUT_MODELO,
+                        viewName: VIEW_ADICIONAR_CARRO,
                         actions: new EnterText({
-                            text: modeloDesejado
+                            text: MODELO_DESEJADO
                         }),
                         errorMessage: "Input não encontrado."
                     });
@@ -46,10 +46,10 @@
 
                 euPreenchoOInputDoValor() {
                     return this.waitFor({
-                        id: idDoInputValor,
-                        viewName: viewAdicionarCarro,
+                        id: ID_DO_INPUT_VALOR,
+                        viewName: VIEW_ADICIONAR_CARRO,
                         actions: new EnterText({
-                            text: valorDesejado
+                            text: VALOR_DESEJADO
                         }),
                         errorMessage: "Input não encontrado."
                     })
@@ -57,15 +57,15 @@
 
                 euClicoNoSelectESelecionoACorDesejada() {
                     return this.waitFor({
-                        id: idDoSelectCor,
-                        viewName: viewAdicionarCarro,
+                        id: ID_DO_SELECT_COR,
+                        viewName: VIEW_ADICIONAR_CARRO,
                         actions: new Press(),
                         success(oSelect) {
                             this.waitFor({
                                 controlType: "sap.ui.core.Item",
                                 matchers: [
                                     new Ancestor(oSelect),
-                                    new Properties({ key: indexDaCorDesejada })
+                                    new Properties({ key: INDEX_DA_COR_DESEJADA })
                                 ],
                                 actions: new Press(),
                                 errorMessage: "Cor não encontrada."
@@ -77,15 +77,15 @@
 
                 euCliCoNoSelectESelecionoAMarcaDesejada() {
                     return this.waitFor({
-                        id: idDoSelectMarca,
-                        viewName: viewAdicionarCarro,
+                        id: ID_DO_SELECT_MARCA,
+                        viewName: VIEW_ADICIONAR_CARRO,
                         actions: new Press(),
                         success(oSelect) {
                             this.waitFor({
                                 controlType: "sap.ui.core.Item",
                                 matchers: [
                                     new Ancestor(oSelect),
-                                    new Properties({ key: indexDaMarcaDesejada })
+                                    new Properties({ key: INDEX_DA_MARCA_DESEJADA })
                                 ],
                                 actions: new Press(),
                                 errorMessage: "Marca não encontrada."
@@ -97,8 +97,8 @@
 
                 euClicoNoSeletESelecionoOTipoFlexDesejado() {
                     return this.waitFor({
-                        id: idDoSwitchFlex,
-                        viewName: viewAdicionarCarro,
+                        id: ID_DO_SWITCH_FLEX,
+                        viewName: VIEW_ADICIONAR_CARRO,
                         actions: new Press(),
                         errorMessage: "Switch não encontrado."
                     });
@@ -106,8 +106,8 @@
 
                 euClicoNoBotaoAdicionarCarro() {
                     return this.waitFor({
-                        id: idDoBotaoAdicionarCarro,
-                        viewName: viewAdicionarCarro,
+                        id: ID_DO_BOTAO_ADICIONAR_CARRO,
+                        viewName: VIEW_ADICIONAR_CARRO,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
                     })
@@ -117,13 +117,13 @@
             assertions: {
                 euVerificoSeAMessageStripDeErroAoCriarCarroFoiExibida(){
                     const propriedadeDesejada = "visible";
-                    const valorDesejado = true;
+                    const VALOR_DESEJADO = true;
                     return this.waitFor({
-                        viewName: viewAdicionarCarro,
-                        id: idDoMessageStripErroAoCriarCarro,
+                        viewName: VIEW_ADICIONAR_CARRO,
+                        id: ID_DO_MESSAGE_STRIP_ERRO_CRIAR_CARRO,
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: valorDesejado
+                            value: VALOR_DESEJADO
                         }),
                         success() {
                             Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
@@ -133,13 +133,13 @@
                 },
                 euVerificoSeAMessageStripDeCarroCriadoComSucessoFoiExibida() {
                     const propriedadeDesejada = "visible";
-                    const valorDesejado = true;
+                    const VALOR_DESEJADO = true;
                     return this.waitFor({
-                        viewName: viewAdicionarCarro,
-                        id: idDoMessageStripSucessoAoCriarCarro,
+                        viewName: VIEW_ADICIONAR_CARRO,
+                        id: ID_DO_MESSAGE_STRIP_SUCESSO_AO_CRIAR_CARRO,
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: valorDesejado
+                            value: VALOR_DESEJADO
                         }),
                         success() {
                             Opa5.assert.ok(true, `Message strip aberta com sucesso.`)

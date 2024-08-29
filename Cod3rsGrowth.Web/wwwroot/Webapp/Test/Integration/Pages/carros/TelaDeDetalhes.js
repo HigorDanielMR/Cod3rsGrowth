@@ -6,11 +6,11 @@ sap.ui.define([
 ], function (Opa5, PropertyStrictEquals, Press) {
     'use strict';
 
-    const idDaTagTextID = "idCarro";
-    const idDaTagTextModelo = "idModelo";
-    const viewDetalhes = "carros.DetalhesCarro";
-    const viewListagem = "carros.ListagemCarro";
-    const idBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
+    const ID_DA_TAG_TEXT_ID = "idCarro";
+    const ID_DA_TAG_TEXT_MODELO = "idModelo";
+    const VIEW_DETALHES = "carros.DetalhesCarro";
+    const VIEW_LISTAGEM = "carros.ListagemCarro";
+    const ID_BOTAO_VOLTAR_PARA_TELA_DE_LISTAGEM = "voltarParaAListagem";
 
     Opa5.createPageObjects({
         naTelaDeDetalhesCarro: {
@@ -23,8 +23,8 @@ sap.ui.define([
             actions: {
                 euClicoNoBotaoVoltarParaATelaDeListagem() {
                     return this.waitFor({
-                        id: idBotaoVoltarParaTelaDeListagem,
-                        viewName: viewDetalhes,
+                        id: ID_BOTAO_VOLTAR_PARA_TELA_DE_LISTAGEM,
+                        viewName: VIEW_DETALHES,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado"
                     })
@@ -32,14 +32,14 @@ sap.ui.define([
 
                 euClicoNoCarroDesejado() {
                     const propriedadeDesejada = "text";
-                    const modeloDesejado = "Supra";
+                    const MODELO_DESEJADO = "Supra";
                     return this.waitFor({
                         controlType: "sap.m.Text",
-                        viewName: viewListagem,
+                        viewName: VIEW_LISTAGEM,
                         matchers: [
                             new PropertyStrictEquals({
                                 name: propriedadeDesejada,
-                                value: modeloDesejado
+                                value: MODELO_DESEJADO
                             })
                         ],
                         actions: new Press(),
@@ -51,8 +51,8 @@ sap.ui.define([
                 euVerificoSeOIdEstaComoOEsperado() {
                     var idEsperado = "1"
                     return this.waitFor({
-                        id: idDaTagTextID,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_ID,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success(texto) {
                             var idColetado = texto.getText();
@@ -65,8 +65,8 @@ sap.ui.define([
                 euVerificoSeModeloEstaComoOEsperado() {
                     var modeloEsperado = "Skyline"
                     return this.waitFor({
-                        id: idDaTagTextModelo,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_MODELO,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success: function (texto) {
                             var modeloPreenchido = texto.getText();
@@ -79,8 +79,8 @@ sap.ui.define([
                 euVerificoSeOIdDoSegundoItemDaListaEstaComoOEsperado() {
                     var idEsperado = "2"
                     return this.waitFor({
-                        id: idDaTagTextID,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_ID,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success(texto) {
                             var idColetado = texto.getText();
@@ -93,8 +93,8 @@ sap.ui.define([
                 euVerificoSeModeloDoSegundoItemDaListaEstaComoOEsperado() {
                     var modeloEsperado = "Supra"
                     return this.waitFor({
-                        id: idDaTagTextModelo,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_MODELO,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success: function (texto) {
                             var modeloPreenchido = texto.getText();

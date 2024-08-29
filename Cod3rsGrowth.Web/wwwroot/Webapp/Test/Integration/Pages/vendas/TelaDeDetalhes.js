@@ -6,11 +6,11 @@
 ], function (Opa5, PropertyStrictEquals, Press) {
     'use strict';
 
-    const idDaTagTextID = "idDetalhes";
-    const viewDetalhes = "vendas.Detalhes";
-    const idDaTagTextNome = "nomeDetalhes";
-    const viewListagem = "vendas.ListagemVenda";
-    const idBotaoVoltarParaTelaDeListagem = "voltarParaAListagem";
+    const ID_DA_TAG_TEXT_ID = "idDetalhes";
+    const VIEW_DETALHES = "vendas.Detalhes";
+    const ID_DA_TAG_TEXT_NOME = "nomeDetalhes";
+    const VIEW_LISTAGEM = "vendas.ListagemVenda";
+    const ID_BOTAO_VOLTAR_PARA_TELA_DE_LISTAGEM = "voltarParaAListagem";
 
     Opa5.createPageObjects({
         naTelaDeDetalhes: {
@@ -23,8 +23,8 @@
             actions: {
                 euClicoNoBotaoVoltarParaATelaDeListagem() {
                     return this.waitFor({
-                        id: idBotaoVoltarParaTelaDeListagem,
-                        viewName: viewDetalhes,
+                        id: ID_BOTAO_VOLTAR_PARA_TELA_DE_LISTAGEM,
+                        viewName: VIEW_DETALHES,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado"
                     })
@@ -35,7 +35,7 @@
                     const nomeDesejado = "Higor";
                     return this.waitFor({
                         controlType: "sap.m.Text",
-                        viewName: viewListagem,
+                        viewName: VIEW_LISTAGEM,
                         matchers: [
                             new PropertyStrictEquals({
                                 name: propriedadeDesejada,
@@ -51,8 +51,8 @@
                 euVerificoSeOIdEstaComoOEsperado() {
                     var idEsperado = "91"
                     return this.waitFor({
-                        id: idDaTagTextID,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_ID,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success(texto) {
                             var idColetado = texto.getText();
@@ -65,8 +65,8 @@
                 euVerificoSeNomeEstaComoOEsperado() {
                     var nomeEsperado = "Adriana"
                     return this.waitFor({
-                        id: idDaTagTextNome,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_NOME,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success: function (texto) {
                             var nomePreenchido = texto.getText();
@@ -79,8 +79,8 @@
                 euVerificoSeOIdDoSegundoItemDaListaEstaComoOEsperado() {
                     var idEsperado = "2"
                     return this.waitFor({
-                        id: idDaTagTextID,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_ID,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success(texto) {
                             var idColetado = texto.getText();
@@ -93,8 +93,8 @@
                 euVerificoSeNomeDopSegundoItemDaListaEstaComoOEsperado() {
                     var nomeEsperado = "Higor"
                     return this.waitFor({
-                        id: idDaTagTextNome,
-                        viewName: viewDetalhes,
+                        id: ID_DA_TAG_TEXT_NOME,
+                        viewName: VIEW_DETALHES,
                         controlType: "sap.m.Text",
                         success: function (texto) {
                             var nomePreenchido = texto.getText();

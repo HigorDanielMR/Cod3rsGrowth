@@ -1,24 +1,21 @@
 sap.ui.define([
     "ui5/carro/app/common/BaseController",
     "sap/ui/model/json/JSONModel",
-    "ui5/carro/model/formatter",
-    "sap/m/MessageBox"
+    "ui5/carro/model/formatter"
 
-], function (BaseController, JSONModel, Formatter, MessageBox) {
+], function (BaseController, JSONModel, Formatter) {
     "use strict";
 
-    const id = "id";
-    const modeloVenda = "Vendas";
-    const idDoFiltroCpf = "FiltroCpf";
-    const rotaListagem = "appListagem";
-    const rotaDetalhes = "appDetalhes";
-    const idDoFiltroNome = "FiltroNome";
-    const quantidadeDeCaracteresDoCpf = 14;
-    const quantidadeDeCaracteresDoTelefone = 15;
-    const idDoFiltroTelefone = "FiltroTelefone";
-    const rotaListagemCarros = "appListagemCarro";
-    const rotaAdicionarVenda = "appAdicionarVenda";
-    const urlApi = "http://localhost:5071/api/Vendas";    
+    const ID = "id";
+    const MODELO_VENDA = "Vendas";
+    const ROTA_LISTAGEM = "appListagem";
+    const ROTA_DETALHES = "appDetalhes";
+    const ID_DO_FILTRO_CPF = "FiltroCpf";
+    const ID_DO_FILTRO_NOME = "FiltroNome";
+    const ID_DO_FILTRO_TELEFONE = "FiltroTelefone";
+    const ROTA_LISTAGEM_CARROS = "appListagemCarro";
+    const ROTA_ADICIONAR_VENDA = "appAdicionarVenda";
+    const URL_API = "http://localhost:5071/api/Vendas";    
 
     return BaseController.extend("ui5.carro.app.vendas.ListagemVenda", {
         formatter: Formatter,
@@ -28,14 +25,14 @@ sap.ui.define([
         },
 
         _carregarListaDeVendas() {
-            fetch(urlApi)
+            fetch(URL_API)
                 .then((res) => {
                     return res.json()
                 })
                 .then((data) => {
                     const jsonModel = new JSONModel(data)
 
-                    !data.Detail ? this.getView().setModel(jsonModel, modeloVenda)
+                    !data.Detail ? this.getView().setModel(jsonModel, MODELO_VENDA)
                         : this._erroNaRequisicaoDaApi(data);
                 })
         },
@@ -43,21 +40,23 @@ sap.ui.define([
         aoCoincidirRota() {
             this.processarEvento(() => {
                 var rota = this.getRouter();
-                rota.getRoute(rotaListagem).attachMatched(this._carregarListaDeVendas, this);
+                rota.getRoute(ROTA_LISTAGEM).attachMatched(this._carregarListaDeVendas, this);
             });
         },
         
         obterNome() {
-            return this.oView.byId(idDoFiltroNome).getValue();
+            return this.oView.byId(ID_DO_FILTRO_NOME).getValue();
         },
 
         obterCpf() {
-            const cpf = this.oView.byId(idDoFiltroCpf).getValue();
+            const quantidadeDeCaracteresDoCpf = 14;
+            const cpf = this.oView.byId(ID_DO_FILTRO_CPF).getValue();
             return cpf.length < quantidadeDeCaracteresDoCpf ? '' : cpf;
         },
 
         obterTelefone() {
-            const telefone = this.oView.byId(idDoFiltroTelefone).getValue();
+            const quantidadeDeCaracteresDoTelefone = 15;
+            const telefone = this.oView.byId(ID_DO_FILTRO_TELEFONE).getValue();
             return telefone.length < quantidadeDeCaracteresDoTelefone ? '' : telefone;
         },
 
@@ -75,7 +74,7 @@ sap.ui.define([
 
         aoFiltrar(oEvent) {
             this.processarEvento(() => {
-                let urlDoFiltro = urlApi + "?";
+                let urlDoFiltro = URL_API + "?";
                 const cpf = this.obterCpf();
                 const nome = this.obterNome();
                 const telefone = this.obterTelefone();
@@ -112,7 +111,7 @@ sap.ui.define([
                     })
                     .then((vendas) => {
                         const jsonModel = new JSONModel(vendas)
-                        !vendas.Detail ? this.getView().setModel(jsonModel, modeloVenda)
+                        !vendas.Detail ? this.getView().setModel(jsonModel, MODELO_VENDA)
                             : this._erroNaRequisicaoDaApi(vendas);
                     })
             })
@@ -120,21 +119,21 @@ sap.ui.define([
 
         adicionarVenda() {
             this.processarEvento(() => {
-                this.getRouter().navTo(rotaAdicionarVenda, {}, true);  
+                this.getRouter().navTo(ROTA_ADICIONAR_VENDA, {}, true);  
             })
         },
 
         aoClicarDeveIParaAListagemCarro(){
             this.processarEvento(() => {
-                this.getRouter().navTo(rotaListagemCarros, {}, true);  
+                this.getRouter().navTo(ROTA_LISTAGEM_CARROS, {}, true);  
             })
         },
 
         aoPressionar(oEvent) {
             const oItem = oEvent.getSource();
             const oRouter = this.getOwnerComponent().getRouter();
-            oRouter.navTo(rotaDetalhes, {
-                id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(id))
+            oRouter.navTo(ROTA_DETALHES, {
+                id: window.encodeURIComponent(oItem.getBindingContext(MODELO_VENDA).getProperty(ID))
             });
         }
     });

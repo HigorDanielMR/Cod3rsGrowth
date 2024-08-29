@@ -9,17 +9,17 @@
 ], (Opa5, EnterText, Press, Properties, Ancestor) => {
     "use strict";
 
-    const contextoCarros = "Carros";
-    const idDaTabela = "TabelaCarros";
-    const idDoFiltroModelo = "FiltroModelo";
-    const viewListagemCarro = "carros.ListagemCarro";
-    const modeloDesejado = "Supra";
-    const idDoSelectFiltroCores = "FiltroCores";
-    const indexCorDeseada = "2";
-    const idDoSelectFiltroMarca = "FiltroMarcas";
-    const indexDaMarcaDesejada = "1";
-    const idDoSelectFiltroFlex = "FiltroFlex";
-    const valorFlexDesejado = "true";
+    const INDEX_COR_DESEJADA = "2";
+    const MODELO_DESEJADO = "Supra";
+    const CONTEXTO_CARROS = "Carros";
+    const VALOR_FLEX_DESEJADO = "true";
+    const INDEX_DA_MARCA_DESEJADA = "1";
+    const ID_DA_TABELA = "TabelaCarros";
+    const ID_DO_FILTRO_MODELO = "FiltroModelo";
+    const ID_DO_SELECT_FILTRO_FLEX = "FiltroFlex";
+    const ID_DO_SELECT_FILTRO_CORES = "FiltroCores";
+    const ID_DO_SELECT_FILTRO_MARCA = "FiltroMarcas";
+    const VIEW_LISTAGEM_CARRO = "carros.ListagemCarro";
 
     Opa5.createPageObjects({
         naTelaDeDetalhesListagemCarro: {
@@ -32,10 +32,10 @@
             actions: {
                 euPreenchoOInputDoFiltroModelo() {
                     return this.waitFor({
-                        id: idDoFiltroModelo,
-                        viewName: viewListagemCarro,
+                        id: ID_DO_FILTRO_MODELO,
+                        viewName: VIEW_LISTAGEM_CARRO,
                         actions: new EnterText({
-                            text: modeloDesejado
+                            text: MODELO_DESEJADO
                         }),
                         errorMessage: "Input não encontrado."
                     });
@@ -43,15 +43,15 @@
 
                 euClicoNoSelectESelecionoACorDesejada() {
                     return this.waitFor({
-                        id: idDoSelectFiltroCores,
-                        viewName: viewListagemCarro,
+                        id: ID_DO_SELECT_FILTRO_CORES,
+                        viewName: VIEW_LISTAGEM_CARRO,
                         actions: new Press(),
                         success(oSelect) {
                             this.waitFor({
                                 controlType: "sap.ui.core.Item",
                                 matchers: [
                                     new Ancestor(oSelect),
-                                    new Properties({ key: indexCorDeseada })
+                                    new Properties({ key: INDEX_COR_DESEJADA })
                                 ],
                                 actions: new Press(),
                                 errorMessage: "Cor não encontrada."
@@ -63,15 +63,15 @@
 
                 euCliCoNoSelectESelecionoAMarcaDesejada() {
                     return this.waitFor({
-                        id: idDoSelectFiltroMarca,
-                        viewName: viewListagemCarro,
+                        id: ID_DO_SELECT_FILTRO_MARCA,
+                        viewName: VIEW_LISTAGEM_CARRO,
                         actions: new Press(),
                         success(oSelect) {
                             this.waitFor({
                                 controlType: "sap.ui.core.Item",
                                 matchers: [
                                     new Ancestor(oSelect),
-                                    new Properties({ key: indexDaMarcaDesejada })
+                                    new Properties({ key: INDEX_DA_MARCA_DESEJADA })
                                 ],
                                 actions: new Press(),
                                 errorMessage: "Marca não encontrada."
@@ -83,15 +83,15 @@
 
                 euClicoNoSeletESelecionoOTipoFlexDesejado() {
                     return this.waitFor({
-                        id: idDoSelectFiltroFlex,
-                        viewName: viewListagemCarro,
+                        id: ID_DO_SELECT_FILTRO_FLEX,
+                        viewName: VIEW_LISTAGEM_CARRO,
                         actions: new Press(),
                         success(oSelect) {
                             this.waitFor({
                                 controlType: "sap.ui.core.Item",
                                 matchers: [
                                     new Ancestor(oSelect),
-                                    new Properties({ key: valorFlexDesejado })
+                                    new Properties({ key: VALOR_FLEX_DESEJADO })
                                 ],
                                 actions: new Press(),
                                 errorMessage: "Flex sim não encontrada."
@@ -104,17 +104,17 @@
 
             assertions: {
                 euVerificoSeATabelaFoiFiltradaComoOEsperadoModelo() {
-                    const modeloDesejado = 'Supra';
+                    const MODELO_DESEJADO = 'Supra';
                     const propriedadeDesejada = "modelo";
                     return this.waitFor({
-                        viewName: viewListagemCarro,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM_CARRO,
+                        id: ID_DA_TABELA,
                         success(oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoCarros).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_CARROS).getProperty(propriedadeDesejada);
 
-                                return itemDesejado === modeloDesejado;
+                                return itemDesejado === MODELO_DESEJADO;
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);
                         },
@@ -126,12 +126,12 @@
                     const corDesejada = 2;
                     const propriedadeDesejada = "cor";
                     return this.waitFor({
-                        viewName: viewListagemCarro,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM_CARRO,
+                        id: ID_DA_TABELA,
                         success(oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoCarros).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_CARROS).getProperty(propriedadeDesejada);
 
                                 return itemDesejado === corDesejada;
                             });
@@ -145,12 +145,12 @@
                     const marcaDesejada = 1;
                     const propriedadeDesejada = "marca";
                     return this.waitFor({
-                        viewName: viewListagemCarro,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM_CARRO,
+                        id: ID_DA_TABELA,
                         success(oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoCarros).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_CARROS).getProperty(propriedadeDesejada);
 
                                 return itemDesejado === marcaDesejada;
                             });
@@ -164,12 +164,12 @@
                     const flexDesejado = true;
                     const propriedadeDesejada = "flex";
                     return this.waitFor({
-                        viewName: viewListagemCarro,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM_CARRO,
+                        id: ID_DA_TABELA,
                         success(oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoCarros).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_CARROS).getProperty(propriedadeDesejada);
 
                                 return itemDesejado === flexDesejado;
                             });

@@ -1,8 +1,8 @@
 ﻿using LinqToDB;
 using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
-using Cod3rsGrowth.Servicos.Servicos;
 
 namespace Cod3rsGrowth.Infra.Repositorios
 {

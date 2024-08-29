@@ -8,23 +8,17 @@ sap.ui.define([
 ], (Opa5, EnterText, Press, PropertyStrictEquals) => {
     "use strict";
 
-    const propriedadeCpf = "cpf";
-    const propriedadeNome = "nome";
-    const contextoVendas = "Vendas";
-    const nomeParaInserir = "Adriana";
-    const idDaTabela = "TabelaVendas";
-    const idDoFiltroCpf = "FiltroCpf";
-    const idDoFiltroData = "FiltroData";
-    const idDoFiltroNome = "FiltroNome";
-    const cpfParaInserir = "54651651651";
-    const propriedadeTelefone = "telefone";
-    const telefoneParaInserir = "65165161651";
-    const idDoFiltroTelefone = "FiltroTelefone";
-    const viewListagem = "vendas.ListagemVenda";
-    const propriedadeDataDeCompra = "dataDeCompra";
-    const dataParaInserir = "04/07/2024-18/07/2024";
-    const idDoFiltroDataInicial = "FiltroDataInicial";
-    const idDoBotaoAdicionarVenda = "botaoAdicionarVenda";
+    const CONTEXTO_VENDAS = "Vendas";
+    const NOME_PARA_INSERIR = "Adriana";
+    const ID_DA_TABELA = "TabelaVendas";
+    const ID_DO_FILTRO_CPF = "FiltroCpf";
+    const ID_DO_FILTRO_DATA = "FiltroData";
+    const ID_DO_FILTRO_NOME = "FiltroNome";
+    const CPF_PARA_INSERIR = "54651651651";
+    const TELEFONE_PARA_INSERIR = "65165161651";
+    const VIEW_LISTAGEM = "vendas.ListagemVenda";
+    const ID_DO_FILTRO_TELEFONE = "FiltroTelefone";
+    const DATA_PARA_INSERIR = "04/07/2024-18/07/2024";
 
     Opa5.createPageObjects({
         naTelaDeListagem: {
@@ -37,10 +31,10 @@ sap.ui.define([
             actions: {
                 euPreenchoOInputDoFiltroNome() {
                     return this.waitFor({
-                        id: idDoFiltroNome,
-                        viewName: viewListagem,
+                        id: ID_DO_FILTRO_NOME,
+                        viewName: VIEW_LISTAGEM,
                         actions: new EnterText({
-                            text: nomeParaInserir
+                            text: NOME_PARA_INSERIR
                         }),
                         errorMessage: "Input não encontrado."
                     });
@@ -48,10 +42,10 @@ sap.ui.define([
 
                 euPreenchoOInputDoFiltroCpf() {
                     return this.waitFor({
-                        id: idDoFiltroCpf,
-                        viewName: viewListagem,
+                        id: ID_DO_FILTRO_CPF,
+                        viewName: VIEW_LISTAGEM,
                         actions: new EnterText({
-                            text: cpfParaInserir
+                            text: CPF_PARA_INSERIR
                         }),
                         errorMessage: "Input não encontrado."
                     });
@@ -59,10 +53,10 @@ sap.ui.define([
 
                 euPreenchoOInputDoFiltroTelefone() {
                     return this.waitFor({
-                        id: idDoFiltroTelefone,
-                        viewName: viewListagem,
+                        id: ID_DO_FILTRO_TELEFONE,
+                        viewName: VIEW_LISTAGEM,
                         actions: new EnterText({
-                            text: telefoneParaInserir
+                            text: TELEFONE_PARA_INSERIR
                         }),
                         errorMessage: "Input não encontrado."
                     });
@@ -70,10 +64,10 @@ sap.ui.define([
 
                 euClicoNoIconeDoDateRangeSelection() {
                     return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDoFiltroData,
+                        viewName: VIEW_LISTAGEM,
+                        id: ID_DO_FILTRO_DATA,
                         actions: new EnterText({
-                            text: dataParaInserir
+                            text: DATA_PARA_INSERIR
                         }),
                         errorMessage: "Input não encontrado."
                     });
@@ -85,12 +79,12 @@ sap.ui.define([
                     const nomeDesejado = 'Adriana';
                     const propriedadeDesejada = "nome";
                     return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM,
+                        id: ID_DA_TABELA,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_VENDAS).getProperty(propriedadeDesejada);
 
                                 return itemDesejado === nomeDesejado;
                             });
@@ -104,12 +98,12 @@ sap.ui.define([
                     const propiedadeDesejada = "cpf";
                     const cpfDesejado = '546.516.516-51';
                     return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM,
+                        id: ID_DA_TABELA,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propiedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_VENDAS).getProperty(propiedadeDesejada);
 
                                 return itemDesejado === cpfDesejado;
                             });
@@ -124,12 +118,12 @@ sap.ui.define([
                     const telefoneDesejado = '(65) 16516-1651';
 
                     return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM,
+                        id: ID_DA_TABELA,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_VENDAS).getProperty(propriedadeDesejada);
 
                                 return itemDesejado === telefoneDesejado;
                             });
@@ -143,12 +137,12 @@ sap.ui.define([
                     const dataDesejada = '2024-07-18';
                     const propriedadeDesejada = "dataDeCompra";
                     return this.waitFor({
-                        viewName: viewListagem,
-                        id: idDaTabela,
+                        viewName: VIEW_LISTAGEM,
+                        id: ID_DA_TABELA,
                         success: function (oTable) {
                             var items = oTable.getItems();
                             var verificarItems = items.some((item, indice, lista) => {
-                                var itemDesejado = lista[indice].getBindingContext(contextoVendas).getProperty(propriedadeDesejada);
+                                var itemDesejado = lista[indice].getBindingContext(CONTEXTO_VENDAS).getProperty(propriedadeDesejada);
                                 return itemDesejado <= dataDesejada;
                             });
                             Opa5.assert.ok(verificarItems, `A pagina contem os items esperados`);

@@ -7,14 +7,14 @@
 ], function (Opa5, PropertyStrictEquals, Press, EnterText) {
     'use strict';
 
-    const nomePropriedadeText = "text";
-    const viewCriacao = "vendas.AdicionarVenda";
-    const nomeParaInserirEditar = "Vitor Godoi";
-    const idInputNomeTelaDeEditar = "InputNome";
-    const idDaTabelaCarros = "TabelaCarrosDisponiveis";
-    const idDoMessageStripErroAoEditarVenda = "erroEditarVenda";
-    const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao";
-    const idDoMessageStripSucessoAoEditarVenda = "sucessoAoEditarVenda";
+    const NOME_PROPRIEDADE_TEXT = "text";
+    const VIEW_CRIACAO = "vendas.AdicionarVenda";
+    const NOME_PARA_INSERIR_EDITAR = "Vitor Godoi";
+    const ID_INPUT_NOME_TELA_DE_EDITAR = "InputNome";
+    const ID_DA_TABELA_CARROS = "TabelaCarrosDisponiveis";
+    const ID_DO_MESSAGE_STRIP_ERRO_AO_EDITAR_VENDA = "erroEditarVenda";
+    const ID_DO_BOTAO_ADICIONAR_VENDA_CRIACAO = "AdicionarVendaCriacao";
+    const ID_DO_MESSAGE_STRIP_SUCESSO_AO_EDITAR_VENDA = "sucessoAoEditarVenda";
     
     Opa5.createPageObjects({
         naTelaDeEdicao: {
@@ -28,8 +28,8 @@
                 euLimpoOInputNome(){
                     const nomeVazio = "";
                     return this.waitFor({
-                        id: idInputNomeTelaDeEditar,
-                        viewName: viewCriacao,
+                        id: ID_INPUT_NOME_TELA_DE_EDITAR,
+                        viewName: VIEW_CRIACAO,
                         actions: new EnterText({
                             text: nomeVazio
                         }),
@@ -38,10 +38,10 @@
                 },
                 euInsiroONomeNoInputNome() {
                     return this.waitFor({
-                        id: idInputNomeTelaDeEditar,
-                        viewName: viewCriacao,
+                        id: ID_INPUT_NOME_TELA_DE_EDITAR,
+                        viewName: VIEW_CRIACAO,
                         actions: new EnterText({
-                            text: nomeParaInserirEditar
+                            text: NOME_PARA_INSERIR_EDITAR
                         }),
                         errorMessage: "Input não encontrado."
                     })
@@ -51,7 +51,7 @@
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         matchers: new PropertyStrictEquals({
-                            name: nomePropriedadeText,
+                            name: NOME_PROPRIEDADE_TEXT,
                             value: nomeDoCarroDesejado
                         }),
                         actions: new Press(),
@@ -61,8 +61,8 @@
 
                 euClicoNoBotaoAdicionarDaTelaDeEditar() {
                     return this.waitFor({
-                        id: idDoBotaoAdicionarVendaCriacao,
-                        viewName: viewCriacao,
+                        id: ID_DO_BOTAO_ADICIONAR_VENDA_CRIACAO,
+                        viewName: VIEW_CRIACAO,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
                     })
@@ -72,13 +72,13 @@
             assertions: {
                 euVerificoSeAMessageStripDeErroAoEditarVendaFoiExibida(){
                     const propriedadeDesejada = "visible";
-                    const valorDesejado = true;
+                    const VALOR_DESEJADO = true;
                     return this.waitFor({
-                        viewName: viewCriacao,
-                        id: idDoMessageStripErroAoEditarVenda,
+                        viewName: VIEW_CRIACAO,
+                        id: ID_DO_MESSAGE_STRIP_ERRO_AO_EDITAR_VENDA,
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: valorDesejado
+                            value: VALOR_DESEJADO
                         }),
                         success() {
                             Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
@@ -90,8 +90,8 @@
                 euVereificoSeATabelaFoiPressionada() {
                     const tiveUmItem = 1;
                     return this.waitFor({
-                        viewName: viewCriacao,
-                        id: idDaTabelaCarros,
+                        viewName: VIEW_CRIACAO,
+                        id: ID_DA_TABELA_CARROS,
                         success(tabela) {
                             var itemsSelecionados = tabela.getSelectedItems();
                             var verificarItems = itemsSelecionados.every(() => {
@@ -106,13 +106,13 @@
                 },
                 euVerificoSeAMessageStripDeSucessoAoEditarVendaFoiExibida(){
                     const propriedadeDesejada = "visible";
-                    const valorDesejado = true;
+                    const VALOR_DESEJADO = true;
                     return this.waitFor({
-                        viewName: viewCriacao,
-                        id: idDoMessageStripSucessoAoEditarVenda,
+                        viewName: VIEW_CRIACAO,
+                        id: ID_DO_MESSAGE_STRIP_SUCESSO_AO_EDITAR_VENDA,
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: valorDesejado
+                            value: VALOR_DESEJADO
                         }),
                         success() {
                             Opa5.assert.ok(true, `Message strip aberta com sucesso.`)

@@ -59,64 +59,36 @@
         },
 
         formatarMarcaParaInteiro(Marca){
-            switch (Marca) {
-                case "Audi":
-                    return 0;
-                case 'Bentley':
-                    return 1;
-                case "BMW":
-                    return 2;
-                case "Bugatti":
-                    return 3;
-                case "Chevrolet":
-                    return 4;
-                case "Ferrari":
-                    return 5;
-                case "Fiat":
-                    return 6;
-                case "Ford":
-                    return 7;
-                case "Honda":
-                    return 8;
-                case "Hyundai":
-                    return 9;
-                case "Jaguar":
-                    return 10;
-                case "Kia":
-                    return 11;
-                case 'Lamborghini':
-                    return 12;
-                case "Land Rover":
-                    return 13;
-                case "Maserati":
-                    return 14;
-                case "Mercedes":
-                    return 15;
-                case "Mitsubishi":
-                    return 16;
-                case "Nissan":
-                    return 17;
-                case "Peugeot":
-                    return 18;
-                case "Porsche":
-                    return 19;
-                case "Renault":
-                    return 20;
-                case "Rolls Royce":
-                    return 21;
-                case "Subaru":
-                    return 22;
-                case "Tesla":
-                    return 23;
-                case "Toyota":
-                    return 24;
-                case "Volkswagen":
-                    return 25;
-                case "Todos":
-                    return null;
-                default:
-                    return Marca;
-            }
+            const marcas = {
+               "Audi": 0,
+               "Bentley": 1,
+               "BMW": 2,
+               "Bugatti": 3,
+               "Chevrolet": 4,
+               "Ferrari": 5,
+               "Fiat": 6,
+               "Ford": 7,
+               "Honda": 8,
+               "Hyundai": 9,
+               "Jaguar" :10, 
+               "Kia" :11, 
+               "Lamborghini" :12, 
+               "LandRover" :13, 
+               "Maserati" :14, 
+               "Mercedes" :15, 
+               "Mitsubishi" :16, 
+               "Nissan" :17, 
+               "Peugeot" :18, 
+               "Porsche" :19, 
+               "Renault" :20, 
+               "RollsRoyce" :21, 
+               "Subaru" :22, 
+               "Tesla" :23, 
+               "Toyota" :24, 
+               "Volkswagen" :25
+            };
+
+            return marcas[Marca]
         },
 
         formatarMarca(Marca) {
@@ -154,56 +126,30 @@
         },
 
         formatarCorParaInteiro(Cor){
-            switch (Cor) {
-                case "Amarelo":
-                    return 0;
-                case "Azul":
-                    return 1;
-                case "Bege":
-                    return 2;
-                case "Bordô":
-                    return 3;
-                case "Branco":
-                    return 4;
-                case "Cinza":
-                    return 5;
-                case "Ciano":
-                    return 6;
-                case "Dourado":
-                    return 7;
-                case "Grafite":
-                    return 8;
-                case "Laranja":
-                    return 9;
-                case "Magenta":
-                    return 10;
-                case "Marrom":
-                    return 11;
-                case "Prata":
-                    return 12;
-                case "Prateado":
-                    return 13;
-                case "Preto":
-                    return 14;
-                case "Preto":
-                    return 15;
-                case "Rosa":
-                    return 16;
-                case "Roxo":
-                    return 17;
-                case "Turquesa":
-                    return 18;
-                case "Verde":
-                    return 19;
-                case "Vermelho":
-                    return 20;
-                case "Violeta":
-                    return 21;
-                case "Todos":
-                    return null;
-                default:
-                    return Cor;
-            }
+            const cores = {
+                "Amarelo": 0,
+                "Azul": 1, 
+                "Bege": 2, 
+                "Bordo": 3, 
+                "Branco": 4, 
+                "Cinza": 5, 
+                "Ciano": 6, 
+                "Dourado": 7, 
+                "Grafite": 8, 
+                "Laranja": 9, 
+                "Magenta": 10,
+                "Marrom": 11,
+                "Prata": 12,
+                "Preto": 13,
+                "Rosa": 14,
+                "Roxo": 15,
+                "Turquesa": 16,
+                "Verde": 17,
+                "Vermelho": 18,
+                "Violeta": 19
+            };
+            
+            return cores[Cor];
         },
 
         formatarCor(Cor) {

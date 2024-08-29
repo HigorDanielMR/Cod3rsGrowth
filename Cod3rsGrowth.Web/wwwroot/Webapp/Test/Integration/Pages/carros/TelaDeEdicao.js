@@ -10,14 +10,14 @@ sap.ui.define([
 ], function (Opa5, PropertyStrictEquals, Properties, Press, EnterText, Ancestor) {
     'use strict';
     
-    const indexDaMarcaDesejada = "0";
-    const modeloParaInserirEditar = "A3";
-    const idDoSelectMarca = "SelecionarMarca";
-    const viewEdicao = "carros.AdicionarCarro";
-    const idInputModeloTelaDeEditar = "InputModelo";
-    const idDoBotaoAdicionarCarro = "adicionarCarro";
-    const idDoMessageStripSucessoEditar = "sucessoAoEditarCarro";
-    const idDoMessageStripErroAoEditarCarro = "erroAoEditarCarro"
+    const INDEX_DA_MARCA_DESEJADA = "0";
+    const MODELO_PARA_INSERIR_EDITAR = "A3";
+    const VIEW_EDICAO = "carros.AdicionarCarro";
+    const ID_DO_SELECT_MARCA = "SelecionarMarca";
+    const ID_INPUT_MODELO_TELA_DE_EDITAR = "InputModelo";
+    const ID_DO_BOTAO_ADICIONAR_CARRO = "adicionarCarro";
+    const ID_DO_MESSAGE_STRIP_SUCESSO_EDITAR = "sucessoAoEditarCarro";
+    const ID_DO_MESSAGE_STRIP_ERRO_AO_EDITAR_CARRO = "erroAoEditarCarro";
     
     Opa5.createPageObjects({
         naTelaDeEdicaoCarro: {
@@ -31,8 +31,8 @@ sap.ui.define([
                 euLimpoModeloDoInput(){
                     const modeloVazio = "";
                     return this.waitFor({
-                        id: idInputModeloTelaDeEditar,
-                        viewName: viewEdicao,
+                        id: ID_INPUT_MODELO_TELA_DE_EDITAR,
+                        viewName: VIEW_EDICAO,
                         actions: new EnterText({
                             text: modeloVazio
                         }),
@@ -41,25 +41,25 @@ sap.ui.define([
                 },
                 euInsiroOModeloNoInput() {
                     return this.waitFor({
-                        id: idInputModeloTelaDeEditar,
-                        viewName: viewEdicao,
+                        id: ID_INPUT_MODELO_TELA_DE_EDITAR,
+                        viewName: VIEW_EDICAO,
                         actions: new EnterText({
-                            text: modeloParaInserirEditar
+                            text: MODELO_PARA_INSERIR_EDITAR
                         }),
                         errorMessage: "Input não encontrado."
                     })
                 },
                 euSelecionoAMarcaDesejada() {
                     return this.waitFor({
-                        id: idDoSelectMarca,
-                        viewName: viewEdicao,
+                        id: ID_DO_SELECT_MARCA,
+                        viewName: VIEW_EDICAO,
                         actions: new Press(),
                         success(oSelect) {
                             this.waitFor({
                                 controlType: "sap.ui.core.Item",
                                 matchers: [
                                     new Ancestor(oSelect),
-                                    new Properties({ key: indexDaMarcaDesejada })
+                                    new Properties({ key: INDEX_DA_MARCA_DESEJADA })
                                 ],
                                 actions: new Press(),
                                 errorMessage: "Marca não encontrada."
@@ -71,8 +71,8 @@ sap.ui.define([
 
                 euClicoNoBotaoAdicionarDaTelaDeEditar() {
                     return this.waitFor({
-                        id: idDoBotaoAdicionarCarro,
-                        viewName: viewEdicao,
+                        id: ID_DO_BOTAO_ADICIONAR_CARRO,
+                        viewName: VIEW_EDICAO,
                         actions: new Press(),
                         errorMessage: "Botão não encontrado."
                     })
@@ -81,13 +81,13 @@ sap.ui.define([
             assertions: {
                 euVerificoSeAMessageStripDeErroAoEditarCarroFoiExibida(){
                     const propriedadeDesejada = "visible";
-                    const valorDesejado = true;
+                    const VALOR_DESEJADO = true;
                     return this.waitFor({
-                        viewName: viewEdicao,
-                        id: idDoMessageStripErroAoEditarCarro,
+                        viewName: VIEW_EDICAO,
+                        id: ID_DO_MESSAGE_STRIP_ERRO_AO_EDITAR_CARRO,
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: valorDesejado
+                            value: VALOR_DESEJADO
                         }),
                         success() {
                             Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
@@ -97,13 +97,13 @@ sap.ui.define([
                 },
                 euVerificoSeOMessageStripDeSUcessoFoiExibido() {
                     const propriedadeDesejada = "visible";
-                    const valorDesejado = true;
+                    const VALOR_DESEJADO = true;
                     return this.waitFor({
-                        viewName: viewEdicao,
-                        id: idDoMessageStripSucessoEditar,
+                        viewName: VIEW_EDICAO,
+                        id: ID_DO_MESSAGE_STRIP_SUCESSO_EDITAR,
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: valorDesejado
+                            value: VALOR_DESEJADO
                         }),
                         success() {
                             Opa5.assert.ok(true, `Message strip aberta com sucesso.`)

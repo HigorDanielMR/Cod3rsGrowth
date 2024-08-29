@@ -7,24 +7,24 @@
 ], function (Opa5, EnterText, Press, PropertyStrictEquals) {
     "use strict";
 
-    const idInputCpfTelaDeCriacao = "InputCpf";
-    const viewCriacao = "vendas.AdicionarVenda";
-    const cpfParaInserirCriacao = "12345678911";
-    const idInputPagoTelaDeCriacao = "InputPago";
-    const idInputNomeTelaDeCriacao = "InputNome";
-    const nomeParaInserirCriacao = "Teste Remover";
-    const idInputEmailTelaDeCriacao = "InputEmail";
-    const telefoneParaInserirCriacao = "62992810844";
-    const emailParaInserirCriacao = "teste@gmail.com";
-    const idDaTabelaCarros = "TabelaCarrosDisponiveis";
-    const idInputTelefoneTelaDeCriacao = "InputTelefone";
-    const idDoMessageStripErroAoCriarVenda = "erroCriarVenda";
-    const idDoBotaoAdicionarVendaCriacao = "AdicionarVendaCriacao";
-    const menssagemErroInputNaoEncontrado = "Input não encontrado.";
-    const menssagemDeErroBotaoNaoEncontrado = "Botão não encontrado.";
-    const menssagemDeErroTabelaNaoEncontrada = "Tabela não contém carros.";
-    const menssagemDeErroOCarroNaoFoiSelecionado = "Carro não selecionado";
-    const idDoMessageStripSucessoAoCriarCarro = "sucessoAoCriarVenda";
+    const VIEW_CRIACAO = "vendas.AdicionarVenda";
+    const CPF_PARA_INSERIR_CRIACAO = "12345678911";
+    const ID_INPUT_CPF_TELA_DE_CRIACAO = "InputCpf";
+    const ID_INPUT_PAGO_TELA_DE_CRIACAO = "InputPago";
+    const ID_INPUT_NOME_TELA_DE_CRIACAO = "InputNome";
+    const NOME_PARA_INSERIR_CRIACAO = "Teste Remover";
+    const ID_INPUT_EMAIL_TELA_DE_CRIACAO = "InputEmail";
+    const TELEFONE_PARA_INSERIR_CRIACAO = "62992810844";
+    const EMAIL_PARA_INSERIR_CRIACAO = "teste@gmail.com";
+    const ID_DA_TABELA_CARROS = "TabelaCarrosDisponiveis";
+    const ID_INPUT_TELEFONE_TELA_DE_CRIACAO = "InputTelefone";
+    const ID_DO_MESSAGE_STRIP_ERRO_AO_CRIAR_VENDA = "erroCriarVenda";
+    const MENSAGEM_ERRO_INPUT_NAO_ENCONTRADO = "Input não encontrado.";
+    const MENSAGEM_ERRO_BOTAO_NAO_ENCONTRADO = "Botão não encontrado.";
+    const ID_DO_BOTAO_ADICIONAR_VENDA_CRIACAO = "AdicionarVendaCriacao";
+    const MENSAGEM_ERRO_TABELA_NAO_ENCONTRADA = "Tabela não contém carros.";
+    const ID_DO_MESSAGE_STRIP_SUCESSO_AO_CRIAR_CARRO = "sucessoAoCriarVenda";
+    const MENSAGEM_ERRO_O_CARRO_NAO_FOI_SELECIONADO = "Carro não selecionado";
     
     Opa5.createPageObjects({
         naTelaDeCriacao: {
@@ -37,76 +37,76 @@
             actions: {
                 euInsiroONomeNoInputNome() {
                     return this.waitFor({
-                        id: idInputNomeTelaDeCriacao,
-                        viewName: viewCriacao,
+                        id: ID_INPUT_NOME_TELA_DE_CRIACAO,
+                        viewName: VIEW_CRIACAO,
                         actions: new EnterText({
-                            text: nomeParaInserirCriacao
+                            text: NOME_PARA_INSERIR_CRIACAO
                         }),
-                        errorMessage: menssagemErroInputNaoEncontrado
+                        errorMessage: MENSAGEM_ERRO_INPUT_NAO_ENCONTRADO
                     })
                 },
 
                 euInsiroOCpfNoInputCpf() {
                     return this.waitFor({
-                        id: idInputCpfTelaDeCriacao,
-                        viewName: viewCriacao,
+                        id: ID_INPUT_CPF_TELA_DE_CRIACAO,
+                        viewName: VIEW_CRIACAO,
                         actions: new EnterText({
-                            text: cpfParaInserirCriacao
+                            text: CPF_PARA_INSERIR_CRIACAO
                         }),
-                        errorMessage: menssagemErroInputNaoEncontrado
+                        errorMessage: MENSAGEM_ERRO_INPUT_NAO_ENCONTRADO
                     })
                 },
 
                 euInsiroOEmailNoInputEmail() {
                     return this.waitFor({
-                        id: idInputEmailTelaDeCriacao,
-                        viewName: viewCriacao,
+                        id: ID_INPUT_EMAIL_TELA_DE_CRIACAO,
+                        viewName: VIEW_CRIACAO,
                         actions: new EnterText({
-                            text: emailParaInserirCriacao
+                            text: EMAIL_PARA_INSERIR_CRIACAO
                         }),
-                        errorMessage: menssagemErroInputNaoEncontrado
+                        errorMessage: MENSAGEM_ERRO_INPUT_NAO_ENCONTRADO
                     })
                 },
 
                 euInsiroOTelefoneNoInputTelefone() {
                     return this.waitFor({
-                        id: idInputTelefoneTelaDeCriacao,
-                        viewName: viewCriacao,
+                        id: ID_INPUT_TELEFONE_TELA_DE_CRIACAO,
+                        viewName: VIEW_CRIACAO,
                         actions: new EnterText({
-                            text: telefoneParaInserirCriacao
+                            text: TELEFONE_PARA_INSERIR_CRIACAO
                         }),
-                        errorMessage: menssagemErroInputNaoEncontrado
+                        errorMessage: MENSAGEM_ERRO_INPUT_NAO_ENCONTRADO
                     })
                 },
 
                 euClicoNoInputPago() {
                     return this.waitFor({
-                        id: idInputPagoTelaDeCriacao,
-                        viewName: viewCriacao,
+                        id: ID_INPUT_PAGO_TELA_DE_CRIACAO,
+                        viewName: VIEW_CRIACAO,
                         actions: new Press(),
-                        errorMessage: menssagemErroInputNaoEncontrado
+                        errorMessage: MENSAGEM_ERRO_INPUT_NAO_ENCONTRADO
                     })
                 },
                 euSelecionoOItemNaTabela() {
                     const propriedadeDesejada = "text";
-                    const modeloDesejado = "Teste";
+                    const MODELO_DESEJADO = "Teste";
                     return this.waitFor({
                         controlType: "sap.m.Text",
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: modeloDesejado
+                            value: MODELO_DESEJADO
                         }),
                         actions: new Press(),
-                        errorMessage: menssagemDeErroTabelaNaoEncontrada
+                        errorMessage: MENSAGEM_ERRO_TABELA_NAO_ENCONTRADA
                     })
                 },
 
                 euClicoNoBotaoAdicionarDaTelaDeCriacao() {
                     return this.waitFor({
-                        id: idDoBotaoAdicionarVendaCriacao,
-                        viewName: viewCriacao,
+                        id: ID_DO_BOTAO_ADICIONAR_VENDA_CRIACAO,
+                        viewName: VIEW_CRIACAO,
                         actions: new Press(),
-                        errorMessage: menssagemDeErroBotaoNaoEncontrado
+                        errorMessage: MENSAGEM_ERRO_BOTAO_NAO_ENCONTRADO
                     })
                 }
             },
@@ -115,13 +115,13 @@
 
                 euVerificoSeAMessageStripDeErroAoCriarVendaFoiExibida(){
                     const propriedadeDesejada = "visible";
-                    const valorDesejado = true;
+                    const VALOR_DESEJADO = true;
                     return this.waitFor({
-                        viewName: viewCriacao,
-                        id: idDoMessageStripErroAoCriarVenda,
+                        viewName: VIEW_CRIACAO,
+                        id: ID_DO_MESSAGE_STRIP_ERRO_AO_CRIAR_VENDA,
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: valorDesejado
+                            value: VALOR_DESEJADO
                         }),
                         success() {
                             Opa5.assert.ok(true, `Message strip aberta com sucesso.`)
@@ -133,8 +133,8 @@
                 euVerificoSeOcarroFoiSelecionado() {
                     const tiveUmItem = 1;
                     return this.waitFor({
-                        viewName: viewCriacao,
-                        id: idDaTabelaCarros,
+                        viewName: VIEW_CRIACAO,
+                        id: ID_DA_TABELA_CARROS,
                         success(tabela) {
                             var itemsSelecionados = tabela.getSelectedItems();
                             var verificarItems = itemsSelecionados.every(() => {
@@ -144,19 +144,19 @@
                             });
                             Opa5.assert.ok(verificarItems, `Carro selecionado com sucesso.`);
                         },
-                        errorMessage: menssagemDeErroOCarroNaoFoiSelecionado
+                        errorMessage: MENSAGEM_ERRO_O_CARRO_NAO_FOI_SELECIONADO
                     })
                 },
 
                 euVerificoSeAMessageStripDeSucessoAoCriarVendaFoiExibida(){
                     const propriedadeDesejada = "visible";
-                    const valorDesejado = true;
+                    const VALOR_DESEJADO = true;
                     return this.waitFor({
-                        viewName: viewCriacao,
-                        id: idDoMessageStripSucessoAoCriarCarro,
+                        viewName: VIEW_CRIACAO,
+                        id: ID_DO_MESSAGE_STRIP_SUCESSO_AO_CRIAR_CARRO,
                         matchers: new PropertyStrictEquals({
                             name: propriedadeDesejada,
-                            value: valorDesejado
+                            value: VALOR_DESEJADO
                         }),
                         success() {
                             Opa5.assert.ok(true, `Message strip aberta com sucesso.`)

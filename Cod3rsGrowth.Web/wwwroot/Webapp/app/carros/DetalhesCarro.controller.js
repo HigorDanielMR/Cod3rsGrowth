@@ -8,13 +8,13 @@ sap.ui.define([
     "use strict";
 
     let idCarro;
-    const modeloCarro = "Carro";
-    const metodoDelete = "DELETE";
-    const rotaDetalhe = "appDetalhesCarro";
-    const parametroArgumento = "arguments";
-    const rotaEditarCarro = "appEditarCarro";
-    const rotaListagemCarros = "appListagemCarro";
-    const urlCarro = "http://localhost:5071/api/Carros/";
+    const MODELO_CARRO = "Carro";
+    const METODO_DELETE = "DELETE";
+    const ROTA_DETALHES = "appDetalhesCarro";
+    const PARAMETRO_ARGUMENTOS = "arguments";
+    const ROTA_EDITAR_CARRO = "appEditarCarro";
+    const ROTA_LISTAGEM_CARROS = "appListagemCarro";
+    const URL_CARRO = "http://localhost:5071/api/Carros/";
 
     return BaseController.extend("ui5.carro.app.carros.DetalhesCarro", {
         formatter: Formatter,
@@ -26,7 +26,7 @@ sap.ui.define([
         aoCoincidirRota() {
             this.processarEvento(() => {
                 const rota = this.getRouter();
-                rota.getRoute(rotaDetalhe).attachMatched(this._carregarCarro, this);
+                rota.getRoute(ROTA_DETALHES).attachMatched(this._carregarCarro, this);
             });
         },
 
@@ -35,8 +35,8 @@ sap.ui.define([
         },
 
         _carregarCarro(oEvent) {
-            idCarro = oEvent.getParameter(parametroArgumento).id;
-            let query = urlCarro + idCarro;
+            idCarro = oEvent.getParameter(PARAMETRO_ARGUMENTOS).id;
+            let query = URL_CARRO + idCarro;
 
             fetch(query)
                 .then((res) => {
@@ -45,7 +45,7 @@ sap.ui.define([
                 .then((carro) => {
                     if (!carro.Detail) {
                         const jsonModel = new JSONModel(carro)
-                        this.getView().setModel(jsonModel, modeloCarro);
+                        this.getView().setModel(jsonModel, MODELO_CARRO);
                     }
                     else this._erroNaRequisicaoDaApi(carro);
                 });
@@ -60,7 +60,7 @@ sap.ui.define([
                         actions: [MessageBox.Action.NO, MessageBox.Action.YES],
                         onClose: (action) => {
                             if (action === MessageBox.Action.YES) {
-                                this._remover(urlCarro, metodoDelete, idCarro);
+                                this._remover(URL_CARRO, METODO_DELETE, idCarro);
                             }
                         }
                     }
@@ -94,14 +94,14 @@ sap.ui.define([
                 actions: ["Ok"],
                 title: "Sucesso",
                 onClose:() => {
-                    this.getRouter().navTo(rotaListagemCarros, {}, true);
+                    this.getRouter().navTo(ROTA_LISTAGEM_CARROS, {}, true);
                 }
             });
         },
 
         aoClicarVoltarParaTelaDeListagem() {
             this.processarEvento(() => {
-                this.getRouter().navTo(rotaListagemCarros, {}, true);
+                this.getRouter().navTo(ROTA_LISTAGEM_CARROS, {}, true);
             })
         },
         
@@ -109,7 +109,7 @@ sap.ui.define([
             this.processarEvento(() =>{
                 const oItem = oEvent.getSource();
                 const oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo(rotaEditarCarro, {
+                oRouter.navTo(ROTA_EDITAR_CARRO, {
                     id: oItem._getPropertiesToPropagate().oModels.Carro.oData.id
                 });
             })

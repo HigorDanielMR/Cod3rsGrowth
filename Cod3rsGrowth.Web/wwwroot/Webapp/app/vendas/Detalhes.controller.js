@@ -9,16 +9,16 @@
 
     let idCarro;
     let idVenda;
-    const id = "id";
-    const modeloVenda = "Venda";
-    const modeloCarro = "Carro";
-    const metodoDelete = "DELETE";
-    const rotaDetalhe = "appDetalhes";
-    const rotaListagem = "appListagem";
-    const parametroArgumento = "arguments";
-    const rotaEditarVenda = "appEditarVenda";
-    const urlVenda = "http://localhost:5071/api/Vendas/";
-    const urlCarro = "http://localhost:5071/api/Carros/";
+    const ID = "id";
+    const MODELO_VENDA = "Venda";
+    const MODELO_CARRO = "Carro";
+    const METODO_DELETE = "DELETE";
+    const ROTA_DETALHES = "appDetalhes";
+    const ROTA_LISTAGEM = "appListagem";
+    const PARAMETRO_ARGUMENTOS = "arguments";
+    const ROTA_EDITAR_VENDA = "appEditarVenda";
+    const URL_VENDA = "http://localhost:5071/api/Vendas/";
+    const URL_CARRO = "http://localhost:5071/api/Carros/";
 
     return BaseController.extend("ui5.carro.app.vendas.Detalhes", {
         formatter: Formatter,
@@ -30,7 +30,7 @@
         aoCoincidirRota() {
             this.processarEvento(() => {
                 const rota = this.getRouter();
-                rota.getRoute(rotaDetalhe).attachMatched(this._carregarEventos, this);
+                rota.getRoute(ROTA_DETALHES).attachMatched(this._carregarEventos, this);
             });
         },
 
@@ -39,8 +39,8 @@
         },
 
         _obterVendaPorId(oEvent) {
-            idVenda = oEvent.getParameter(parametroArgumento).id;
-            let query = urlVenda + idVenda;
+            idVenda = oEvent.getParameter(PARAMETRO_ARGUMENTOS).id;
+            let query = URL_VENDA + idVenda;
 
             fetch(query)
                 .then((res) => {
@@ -51,7 +51,7 @@
                         const jsonModel = new JSONModel(venda)
                         idCarro = this._carregarIdCarro(venda);
                         this._carregarCarroAssociado(idCarro);
-                        this.getView().setModel(jsonModel, modeloVenda);
+                        this.getView().setModel(jsonModel, MODELO_VENDA);
                     } 
                     else this._erroNaRequisicaoDaApi(venda);
                 });
@@ -66,7 +66,7 @@
                         actions: [MessageBox.Action.NO, MessageBox.Action.YES],
                         onClose:(oAction) => {
                             if (oAction === MessageBox.Action.YES) {
-                                this._remover(urlVenda, metodoDelete, idVenda);
+                                this._remover(URL_VENDA, METODO_DELETE, idVenda);
                             }
                         }
                     }
@@ -99,13 +99,13 @@
                 actions: ["Ok"],
                 title: "Sucesso",
                 onClose:() => {
-                    this.getRouter().navTo(rotaListagem, {}, true);
+                    this.getRouter().navTo(ROTA_LISTAGEM, {}, true);
                 }
             });
         },
 
         _carregarCarroAssociado(id){
-            let query = urlCarro + id;
+            let query = URL_CARRO + id;
 
             fetch(query)
                 .then((res) => {
@@ -114,7 +114,7 @@
                 .then((carro) => {
                     const jsonModel = new JSONModel(carro)
 
-                    !carro.Detail ? this.getView().setModel(jsonModel, modeloCarro)
+                    !carro.Detail ? this.getView().setModel(jsonModel, MODELO_CARRO)
                         : this._erroNaRequisicaoDaApi(carro);
                 });
         },
@@ -125,7 +125,7 @@
 
         aoClicarVoltarParaTelaDeListagem() {
             this.processarEvento(() => {
-                this.getRouter().navTo(rotaListagem, {}, true);
+                this.getRouter().navTo(ROTA_LISTAGEM, {}, true);
             })
         },
 
@@ -133,8 +133,8 @@
             this.processarEvento(() => { 
                 const oItem = oEvent.getSource(); 
                 const oRouter = this.getOwnerComponent().getRouter();
-                oRouter.navTo(rotaEditarVenda, {
-                    id: window.encodeURIComponent(oItem.getBindingContext(modeloVenda).getProperty(id))
+                oRouter.navTo(ROTA_EDITAR_VENDA, {
+                    id: window.encodeURIComponent(oItem.getBindingContext(MODELO_VENDA).getProperty(ID))
                 });
             })
         }

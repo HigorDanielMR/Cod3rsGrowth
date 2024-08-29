@@ -5,7 +5,7 @@
     "use strict";
 
     const voltarUmaPagina = -1;
-    const RotaListagem = "appListagem";
+    const ROTA_LISTAGEM = "appListagem";
 
     return BaseController.extend("ui5.carro.Controller.NotFound", {
         onInit() {
@@ -20,7 +20,7 @@
                 if (previousHash !== undefined) {
                     window.history.go(voltarUmaPagina);
                 } else {
-                    this.getRouter().navTo(RotaListagem, {}, true);
+                    this.getRouter().navTo(ROTA_LISTAGEM, {}, true);
                 }
             })
         }
