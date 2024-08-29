@@ -7,7 +7,7 @@
 ], function (BaseController, JSONModel, Formatter, validacao) {
     "use strict";
 
-    const URL_API= "http://localhost:5071/api/Carros/";
+    const urlApi= "http://localhost:5071/api/Carros/";
 
     let _rota;
     let idCarro;
@@ -18,9 +18,9 @@
     const ID_DO_INPUT_VALOR = "InputValor";
     const ID_DO_INPUT_COR = "SelecionarCor";
     const ID_DO_INPUT_MODELO = "InputModelo";
-    const RECURSOS_CORES = URL_API + "Cores";
+    const RECURSOS_CORES = urlApi + "Cores";
     const PARAMETRO_ARGUMENTOS = "arguments";
-    const RECURSOS_MARCAS = URL_API + "Marcas";
+    const RECURSOS_MARCAS = urlApi + "Marcas";
     const ID_DO_INPUT_MARCA = "SelecionarMarca";
     const ROTA_EDITAR_CARRO = "appEditarCarro";
     const ROTA_CRIAR_CARRO = "appAdicionarCarro";
@@ -49,7 +49,7 @@
         },
 
         _carregarEventodEditar(oEvent) {
-            this._mudarTituloDaVIEW_EDICAO();
+            this._mudarTituloDaViewEdicao();
             this._removerMessageStrip();
             this._limparInputs();
             this._obterCarroPorId(oEvent);
@@ -180,7 +180,7 @@
                 } 
                 if(resultadoValidacao){
                     if(_rota === ROTA_EDITAR_CARRO){
-                        const urlEditar = URL_API + idCarro;
+                        const urlEditar = urlApi + idCarro;
                         const carro = {
                             "id": parseInt(idCarro),
                             "marca": marca,
@@ -201,13 +201,13 @@
                             "flex": flex
                         }
                         const metodo = "POST"
-                        this._requisicaoHttp(URL_API, metodo, carro, ID_DO_MESSAGE_STRIP_SUCESSO_CRIACAO, ID_DO_MESSAGE_STRIP_ERRO_CRIAR_CARRO)
+                        this._requisicaoHttp(urlApi, metodo, carro, ID_DO_MESSAGE_STRIP_SUCESSO_CRIACAO, ID_DO_MESSAGE_STRIP_ERRO_CRIAR_CARRO)
                     }
                 }
             })
         },
 
-        _mudarTituloDaVIEW_EDICAO() {
+        _mudarTituloDaViewEdicao() {
             this.getView().byId(ID_TITULO_VIEW_CRIAR_CARRO).setText(TEXTO_PARA_ADICIONAR_TITULO_EDICAO);
         },
         
@@ -221,7 +221,7 @@
         
         _obterCarroPorId(oEvent) {
             idCarro = oEvent.getParameter(PARAMETRO_ARGUMENTOS).id;
-            let query = URL_API + idCarro;
+            let query = urlApi + idCarro;
         
             fetch(query)
                 .then(res => {

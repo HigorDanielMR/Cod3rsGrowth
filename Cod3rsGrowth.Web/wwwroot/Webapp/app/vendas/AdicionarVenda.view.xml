@@ -75,7 +75,7 @@
 								<f:formElements>
 									<f:FormElement label="{i18n>TelaDeCriacaoVenda.Nome}">
 										<f:fields>
-											<Input width="400px" id="InputNome" change=".aoColetarNome" required="true"/>
+											<Input width="400px" id="InputNome" change=".aoColetarNome" required="true" maxLength="100"/>
 										</f:fields>
 									</f:FormElement>
 									

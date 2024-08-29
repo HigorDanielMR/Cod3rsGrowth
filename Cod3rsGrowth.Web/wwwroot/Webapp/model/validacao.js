@@ -156,6 +156,7 @@
             var valor = inputValor.getValue();
             const valorPadrao = 0;
             var ehValido = true;
+            const tamanhoMaximoValor = 15;
 
             if (!valor){
                 inputValor.setValueState(sap.ui.core.ValueState.Error);
@@ -165,6 +166,11 @@
             else if(valor.length < valorPadrao){
                 inputValor.setValueState(sap.ui.core.ValueState.Error);
                 inputValor.setValueStateText('Valor deve ser maior ou igual a 0.');
+                ehValido = false;
+            }
+            else if(valor.length > tamanhoMaximoValor){
+                inputValor.setValueState(sap.ui.core.ValueState.Error);
+                inputValor.setValueStateText('Valor não pode passar de um trilhão.');
                 ehValido = false;
             }
             else {

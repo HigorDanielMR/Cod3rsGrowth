@@ -35,6 +35,7 @@ sap.ui.define([
 				.then(data => {
 					if (data.Detail) {
 						this._erroNaRequisicaoDaApi(data);
+						this.getView().byId(idMessageSucesso).setVisible(false);
 						this.getView().byId(idMessageErro).setVisible(true);
 					}
 					else {
@@ -42,6 +43,7 @@ sap.ui.define([
 						this.getView().byId(idMessageSucesso).setVisible(true);
 					}
 				})
+                .catch((err) => MessageBox.error(err));
 		},
 
 		_erroNaRequisicaoDaApi(erroRfc) {
