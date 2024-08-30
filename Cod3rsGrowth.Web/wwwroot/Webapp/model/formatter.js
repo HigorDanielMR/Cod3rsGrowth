@@ -94,6 +94,7 @@
         formatarMarca(Marca) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             const marcas = {
+                null: "Todas",
                 0: "Audi",
                 1: "Bentley",
                 2: "BMW",
@@ -130,7 +131,7 @@
                 "Amarelo": 0,
                 "Azul": 1, 
                 "Bege": 2, 
-                "Bordô": 3, 
+                "Bordo": 3, 
                 "Branco": 4, 
                 "Cinza": 5, 
                 "Ciano": 6, 
@@ -155,10 +156,11 @@
         formatarCor(Cor) {
             const oResourceBundle = this.getOwnerComponent().getModel("i18n").getResourceBundle();
             const cores = {
+                null: "Todas",
                 0: "Amarelo",
                 1: "Azul",
                 2: "Bege",
-                3: "Bordô",
+                3: "Bordo",
                 4: "Branco",
                 5: "Cinza",
                 6: "Ciano",
