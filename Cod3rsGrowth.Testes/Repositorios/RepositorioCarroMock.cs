@@ -32,13 +32,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             var carroDesejado = ObterPorId(carroAtualizado.Id);
 
-            carroDesejado.Cor = carroAtualizado.Cor;
-            carroDesejado.Flex = carroAtualizado.Flex;
-            carroDesejado.Marca = carroAtualizado.Marca;
-            carroDesejado.Modelo = carroAtualizado.Modelo;
-            carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
-
-            return carroDesejado;
+            return carroAtualizado;
         }
         public void Remover(int Id)
         {

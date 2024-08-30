@@ -7,11 +7,11 @@ namespace Cod3rsGrowth.Servicos.Validadores
 {
     public class ValidacoesVenda : AbstractValidator<Venda>
     {
-        private readonly IRepositorioVenda _repositorio;
+        private readonly IRepositorioVenda _repositorioVenda;
 
-        public ValidacoesVenda(IRepositorioVenda repositorio)
+        public ValidacoesVenda(IRepositorioVenda repositorioVenda)
         {
-            _repositorio = repositorio;
+            _repositorioVenda = repositorioVenda;
             var limiteMaximoDeCaracteres = 100;
             var regexParaConterApenasLetras = "^[a-zA-ZÀ-ú ]+$";
 
@@ -83,7 +83,7 @@ namespace Cod3rsGrowth.Servicos.Validadores
 
         private bool ValidarDataDeCompra(Venda venda)
         {
-            var vendaDobanco = _repositorio.ObterPorId(venda.Id);
+            var vendaDobanco = _repositorioVenda.ObterPorId(venda.Id);
             return venda.DataDeCompra == vendaDobanco.DataDeCompra;
         }
     }

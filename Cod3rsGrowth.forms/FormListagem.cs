@@ -1,10 +1,8 @@
 using Cod3rsGrowth.Forms;
-using System.Globalization;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 using Microsoft.IdentityModel.Tokens;
-using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.forms
 {
@@ -112,6 +110,8 @@ namespace Cod3rsGrowth.forms
 
         private void AoClicarNoBotaoFiltrarNaTabelaVenda(object sender, EventArgs e)
         {
+            var mascaraData = "  /  /";
+            var mascaraCpf = "   .   .   -";
             try
             {
                 if (!txtProcurarNome.Text.IsNullOrEmpty())
@@ -119,15 +119,15 @@ namespace Cod3rsGrowth.forms
                     _filtroVenda.Nome = txtProcurarNome.Text;
                 }
 
-                if (!textBoxDataInicialVenda.Text.IsNullOrEmpty() && textBoxDataInicialVenda.Text != "  /  /")
+                if (!textBoxDataInicialVenda.Text.IsNullOrEmpty() && textBoxDataInicialVenda.Text != mascaraData)
                 {
-                    _filtroVenda.DataDeCompraInicial = DateTime.ParseExact(textBoxDataInicialVenda.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    _filtroVenda.DataDeCompraInicial = textBoxDataInicialVenda.Text;
                     
                 }
 
-                if (!textBoxDataFinalVenda.Text.IsNullOrEmpty() && textBoxDataFinalVenda.Text != "  /  /")
+                if (!textBoxDataFinalVenda.Text.IsNullOrEmpty() && textBoxDataFinalVenda.Text != mascaraData)
                 {
-                    _filtroVenda.DataDeCompraFinal = DateTime.ParseExact(textBoxDataFinalVenda.Text, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    _filtroVenda.DataDeCompraFinal = textBoxDataFinalVenda.Text;
                 }
 
                 if (!txtProcurarEmail.Text.IsNullOrEmpty())
@@ -135,7 +135,7 @@ namespace Cod3rsGrowth.forms
                     _filtroVenda.Email = txtProcurarEmail.Text;
                 }
 
-                if (!procurarCpf.Text.IsNullOrEmpty() && procurarCpf.Text != "   .   .   -")
+                if (!procurarCpf.Text.IsNullOrEmpty() && procurarCpf.Text != mascaraCpf)
                 {
                     _filtroVenda.Cpf = procurarCpf.Text;
                 }
@@ -215,7 +215,7 @@ namespace Cod3rsGrowth.forms
 
                     DialogResult resultado = MessageBox.Show($"Deseja excluir permanentemente a venda do ID {idDaVendaSelecionada}?", "Remover Venda", MessageBoxButtons.YesNo);
 
-                    DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir também permanentemente o carro ID {idDoCarroSelecionado} que está associado a venda ID {idDaVendaSelecionada}?", "Remover Carro", MessageBoxButtons.YesNo);
+                    DialogResult resultadoRemoverCarro = MessageBox.Show($"Deseja excluir tambï¿½m permanentemente o carro ID {idDoCarroSelecionado} que estï¿½ associado a venda ID {idDaVendaSelecionada}?", "Remover Carro", MessageBoxButtons.YesNo);
 
                     if (resultado == DialogResult.Yes && resultadoRemoverCarro == DialogResult.Yes)
                     {
@@ -231,7 +231,7 @@ namespace Cod3rsGrowth.forms
                 }
                 else
                 {
-                    MessageBox.Show("Não é possível remover, pois, a lista está vazia.", "Erro ao remover Venda");
+                    MessageBox.Show("Nï¿½o ï¿½ possï¿½vel remover, pois, a lista estï¿½ vazia.", "Erro ao remover Venda");
                 }
             }
             catch (Exception ex)
@@ -261,7 +261,7 @@ namespace Cod3rsGrowth.forms
                 }
                 else
                 {
-                    MessageBox.Show("Não é possível remover, pois, a lista está vazia.", "Erro ao remover Carro");
+                    MessageBox.Show("Nï¿½o ï¿½ possï¿½vel remover, pois, a lista estï¿½ vazia.", "Erro ao remover Carro");
                 }
             }
             catch (Exception ex)
@@ -290,12 +290,12 @@ namespace Cod3rsGrowth.forms
                 }
                 else
                 {
-                    MessageBox.Show("Não é possível editar, pois, a lista está vazia.", "Erro ao editar Venda");
+                    MessageBox.Show("Nï¿½o ï¿½ possï¿½vel editar, pois, a lista estï¿½ vazia.", "Erro ao editar Venda");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição de venda");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de ediï¿½ï¿½o de venda");
             }
         }
 
@@ -320,12 +320,12 @@ namespace Cod3rsGrowth.forms
                 }
                 else
                 {
-                    MessageBox.Show("Não é possível editar, pois, a lista está vazia.", "Erro ao editar Carro");
+                    MessageBox.Show("Nï¿½o ï¿½ possï¿½vel editar, pois, a lista estï¿½ vazia.", "Erro ao editar Carro");
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de edição carro");
+                MessageBox.Show($"{ex.Message}", "Erro ao tentar abrir tela de ediï¿½ï¿½o carro");
             }
         }
 
