@@ -32,15 +32,7 @@ namespace Cod3rsGrowth.Testes.Repositorios
         {
             var vendaDesejada = ObterPorId(vendaAtualizada.Id);
 
-            vendaDesejada.Cpf = vendaAtualizada.Cpf;
-            vendaDesejada.Pago = vendaAtualizada.Pago;
-            vendaDesejada.Nome = vendaAtualizada.Nome;
-            vendaDesejada.Email = vendaAtualizada.Email;
-            vendaDesejada.Telefone = vendaAtualizada.Telefone;
-            vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
-            vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
-
-            return vendaDesejada;
+            return vendaAtualizada;
         }
 
         public void Remover(int Id)

@@ -29,7 +29,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
                         select p;
 
             var resultado = query.FirstOrDefault()
-                ?? throw new Exception($"Carro com ID {IdDeBusca} não encontrado.");
+                ?? throw new Exception($"Venda com ID {IdDeBusca} não encontrada.");
 
             return resultado;
         }
@@ -44,16 +44,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
         {
             var vendaDesejada = ObterPorId(vendaAtualizada.Id);
 
-            vendaDesejada.Cpf = vendaAtualizada.Cpf;
-            vendaDesejada.Pago = vendaAtualizada.Pago;
-            vendaDesejada.Nome = vendaAtualizada.Nome;
-            vendaDesejada.Email = vendaAtualizada.Email;
-            vendaDesejada.Telefone = vendaAtualizada.Telefone;
-            vendaDesejada.ValorTotal = vendaAtualizada.ValorTotal;
-            vendaDesejada.DataDeCompra = vendaAtualizada.DataDeCompra;
-            vendaDesejada.IdDoCarroVendido = vendaAtualizada.IdDoCarroVendido;
-
-            _conexao.Update(vendaDesejada);
+            _conexao.Update(vendaAtualizada);
             return vendaAtualizada;
         }
 
@@ -70,26 +61,38 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (filtroVenda is null) return query;
 
-            if (filtroVenda.Nome != null)
+            if (!string.IsNullOrEmpty(filtroVenda.Nome))
                 query = query.Where(d => d.Nome.Contains(filtroVenda.Nome));
 
-            if (filtroVenda.Cpf != null)
+            if (!string.IsNullOrEmpty(filtroVenda.Cpf))
                 query = query.Where(d => d.Cpf == filtroVenda.Cpf);
 
-            if (filtroVenda.DataDeCompraInicial != null)
-                query = query.Where(d => d.DataDeCompra.Date >= filtroVenda.DataDeCompraInicial);
+            if (!string.IsNullOrEmpty(filtroVenda.DataDeCompraInicial))
+            {
+                DateTime dataInicial;
+                if (DateTime.TryParse(filtroVenda.DataDeCompraInicial, out dataInicial))
+                {
+                    query = query.Where(d => d.DataDeCompra.Date >= dataInicial.Date);
+                }
+            }
 
-            if (filtroVenda.DataDeCompraFinal != null)
-                query = query.Where(d => d.DataDeCompra.Date <= filtroVenda.DataDeCompraFinal);
-
-            if (filtroVenda.Telefone != null)
-                query = query.Where(d => d.Telefone == filtroVenda.Telefone);
+            if (!string.IsNullOrEmpty(filtroVenda.DataDeCompraFinal))
+            {
+                DateTime dataFinal;
+                if (DateTime.TryParse(filtroVenda.DataDeCompraFinal, out dataFinal))
+                {
+                    query = query.Where(d => d.DataDeCompra.Date <= dataFinal.Date);
+                }
+            }
 
             if (filtroVenda.Email != null)
                 query = query.Where(d => d.Email.Contains(filtroVenda.Email));
 
             if (filtroVenda.IdDoCarroVendido != null)
                 query = query.Where(d => d.IdDoCarroVendido == filtroVenda.IdDoCarroVendido);
+
+            if (!string.IsNullOrEmpty(filtroVenda.Telefone))
+                query = query.Where(d => d.Telefone == filtroVenda.Telefone);
 
             return query;
         }

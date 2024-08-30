@@ -7,11 +7,13 @@ namespace Cod3rsGrowth.Servicos.Servicos
 {
     public class ServicoCarro
     {
+        private ServicoVenda _servicoVenda;
         private ValidacoesCarro _validadorCarro;
         private readonly IRepositorioCarro _repositorioCarro;
 
-        public ServicoCarro(IRepositorioCarro repositorioCarro, ValidacoesCarro validadorCarro)
+        public ServicoCarro(IRepositorioCarro repositorioCarro, ValidacoesCarro validadorCarro, ServicoVenda servicoVenda)
         {
+            _servicoVenda = servicoVenda;
             _validadorCarro = validadorCarro;
             _repositorioCarro = repositorioCarro;
         }
@@ -52,9 +54,22 @@ namespace Cod3rsGrowth.Servicos.Servicos
             return _repositorioCarro.Editar(carro);
         }
 
-        public void Remover(int IdDeRemocao)
+        public void Remover(int idDeRemocao)
         {
-            _repositorioCarro.Remover(IdDeRemocao);
+            Carro carro = ObterPorId(idDeRemocao);
+
+            List<Venda> vendas = _servicoVenda.ObterTodos();
+
+            var vendasAssociadas = vendas
+                .Where(x => x.IdDoCarroVendido == idDeRemocao)
+                .ToList();
+
+            if (vendasAssociadas.Any())
+            {
+                throw new Exception($"Não é possível remover o carro no momento, pois ele está vinculado à venda com ID: {vendasAssociadas.FirstOrDefault().Id}.");
+            }
+
+            _repositorioCarro.Remover(idDeRemocao);
         }
     }
 }

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
 
@@ -8,29 +9,46 @@ namespace Cod3rsGrowth.Web.Controllers
     [ApiController]
     public class CarrosController : ControllerBase
     {
-        private readonly ServicoCarro _servico;
+        private readonly ServicoCarro _servicoCarro;
+        private readonly ServicoVenda _servicoVenda;
 
-        public CarrosController(ServicoCarro servico)
+        public CarrosController(ServicoCarro servicoCarro, ServicoVenda servicoVenda)
         {
-            _servico = servico;
+            _servicoCarro = servicoCarro;
+            _servicoVenda = servicoVenda;
         }
 
         [HttpGet]
         public IActionResult ObterTodos([FromQuery] FiltroCarro? filtro)
         {
-            return Ok(_servico.ObterTodos(filtro));
-        }
+            return Ok(_servicoCarro.ObterTodos(filtro));
+        }   
 
         [HttpGet("{Id}")]
         public IActionResult ObterPorId(int Id)
         {
-            return Ok(_servico.ObterPorId(Id));
+            var carroDesejado = _servicoCarro.ObterPorId(Id);
+            return Ok(carroDesejado);
+        }
+
+        [HttpGet("Cores")]
+        public IActionResult ObterDescricaoCores()
+        {
+            var cores = ObterEnums.ObterDescricaoEnums<Cores>();
+            return Ok(cores);
+        }
+
+        [HttpGet("Marcas")]
+        public IActionResult ObterDescricaoMarcas()
+        {
+            var marcas = ObterEnums.ObterDescricaoEnums<Marcas>();
+            return Ok(marcas);
         }
 
         [HttpPost]
         public IActionResult Criar([FromBody] Carro carro)
         {
-             var carroNovo = _servico.Criar(carro);
+             var carroNovo = _servicoCarro.Criar(carro);
             return Created($"api/Carro/{carroNovo.Id}", carroNovo);
 
         }
@@ -38,14 +56,13 @@ namespace Cod3rsGrowth.Web.Controllers
         [HttpPatch("{Id}")]
         public IActionResult Editar([FromBody] Carro carro)
         {
-            _servico.Editar(carro);
-            return Ok();
+            return Ok(_servicoCarro.Editar(carro));
         }
 
         [HttpDelete("{Id}")]
         public IActionResult Remover(int Id)
         {
-            _servico.Remover(Id);
+            _servicoCarro.Remover(Id);
             return NoContent();
         }
     }

@@ -3,7 +3,6 @@ using System.Globalization;
 using Cod3rsGrowth.Dominio.Enums;
 using Cod3rsGrowth.Dominio.Entidades;
 using Cod3rsGrowth.Servicos.Servicos;
-using Cod3rsGrowth.Servicos.Validadores;
 
 namespace Cod3rsGrowth.Forms
 {
@@ -12,9 +11,9 @@ namespace Cod3rsGrowth.Forms
         private Carro _carro;
         private ServicoCarro _servicoCarro;
 
-        public FormModificarCarro(ServicoCarro servico)
+        public FormModificarCarro(ServicoCarro servicoCarro)
         {
-            _servicoCarro = servico;
+            _servicoCarro = servicoCarro;
 
             InitializeComponent();
         }

@@ -1,5 +1,6 @@
 ﻿using LinqToDB;
 using Cod3rsGrowth.Dominio.Entidades;
+using Cod3rsGrowth.Servicos.Servicos;
 using Cod3rsGrowth.Dominio.Interfaces;
 using Cod3rsGrowth.Infra.ConexaoComBanco;
 
@@ -8,10 +9,12 @@ namespace Cod3rsGrowth.Infra.Repositorios
     public class RepositorioCarro : IRepositorioCarro
     {
         private MeuContextoDeDados _conexao;
+        private ServicoVenda _servicoVenda;
 
-        public RepositorioCarro(MeuContextoDeDados meuContextoDeDados)
+        public RepositorioCarro(MeuContextoDeDados meuContextoDeDados, ServicoVenda servicoVenda)
         {
             _conexao = meuContextoDeDados;
+            _servicoVenda = servicoVenda;
         }
 
         public List<Carro> ObterTodos(FiltroCarro? filtroCarro = null)
@@ -36,19 +39,13 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public Carro Criar(Carro carro)
         {
-            var idDoCarroNoBanco = _conexao.InsertWithInt32Identity(carro);
-            return ObterPorId(idDoCarroNoBanco);
+            carro.Id = _conexao.InsertWithInt32Identity(carro);
+            return carro;
         }
 
         public Carro Editar(Carro carroAtualizado)
         {
             var carroDesejado = ObterPorId(carroAtualizado.Id);
-
-            carroDesejado.Cor = carroAtualizado.Cor;
-            carroDesejado.Flex = carroAtualizado.Flex;
-            carroDesejado.Marca = carroAtualizado.Marca;
-            carroDesejado.Modelo = carroAtualizado.Modelo;
-            carroDesejado.ValorDoVeiculo = carroAtualizado.ValorDoVeiculo;
 
             _conexao.Update(carroAtualizado);
             return carroAtualizado;
@@ -56,7 +53,7 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
         public void Remover(int Id)
         {
-            _conexao.Carro
+                _conexao.Carro
                  .Where(carro => carro.Id == Id)
                  .Delete();
         }
@@ -67,18 +64,26 @@ namespace Cod3rsGrowth.Infra.Repositorios
 
             if (filtroCarro is null) return query;
 
-            if (filtroCarro.Modelo != null)
+            if (!string.IsNullOrEmpty(filtroCarro.Modelo))
                 query = query.Where(d => d.Modelo.Contains(filtroCarro.Modelo));
 
-            if (filtroCarro.Cor != null)
+            if (filtroCarro.Cor.HasValue)
                 query = query.Where(d => d.Cor == filtroCarro.Cor);
 
-            if (filtroCarro.Marca != null)
+            if (filtroCarro.Marca.HasValue)
                 query = query.Where(d => d.Marca == filtroCarro.Marca);
 
-            if (filtroCarro.Flex != null)
+            if (filtroCarro.Flex.HasValue)
                 query = query.Where(d => d.Flex == filtroCarro.Flex);
 
+            if(filtroCarro.Disponiveis.HasValue){
+                var vendas = _servicoVenda.ObterTodos();
+
+                vendas.ForEach(x => {
+                    query = query
+                    .Where(c => c.Id != x.IdDoCarroVendido);
+                });
+            }
             return query;
         }
     }

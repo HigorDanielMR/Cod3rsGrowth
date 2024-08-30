@@ -1,0 +1,111 @@
+﻿<mvc:View
+	controllerName="ui5.carro.app.vendas.ListagemVenda"
+	xmlns="sap.m"
+	xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:tnt="sap.tnt">
+
+	<Page showHeader="false">
+		<Toolbar>
+			<Button text="{i18n>Botao.ListagemCarros}" press=".aoClicarDeveIParaAListagemCarro"/>
+			<ToolbarSpacer width="400px"/>
+			<Title text="{i18n>ListagemVendas.ListagemDeVendas}" width="100%"/>
+			<Button icon="sap-icon://add" text="{i18n>Botao.Adicionar}" press=".adicionarVenda" id="botaoAdicionarVenda"/>
+		 </Toolbar>
+		<Panel height="360px">
+			<Table
+				alternateRowColors="true"
+				id="TabelaVendas"
+				width="auto"
+				selectionChange="carregarListaDeVendas"
+				items="{path: 'Vendas>/'}">
+				<headerToolbar>
+				 <Toolbar height="55px">
+					<ToolbarSpacer/>
+					<core:Icon src="sap-icon://add-filter" color="Tile"/>
+					<Text text="{i18n>Filtros.Filtros}: "/>
+					<Input width="auto" id="FiltroNome" placeholder="{i18n>Input.Nome}" liveChange=".aoFiltrar"/>
+					<MaskInput mask="999.999.999-99" width="140px" id="FiltroCpf" placeholder="{i18n>Input.CPF}" change=".aoFiltrar"/>
+					<MaskInput mask="(99) 99999-9999" width="140px" id="FiltroTelefone" placeholder="{i18n>Input.Telefone}" change=".aoFiltrar"/>
+					<DateRangeSelection id="FiltroData" width="230px" placeholder="{i18n>ListagemVendas.PlaceHolderDataRangeSelection}"
+						value= "{
+							'type': 'sap.ui.model.type.DateInterval',
+							'formatOptions': {
+								'pattern': 'dd/MM/yyyy'
+							},
+							'parts': [
+								{
+									'type': 'sap.ui.model.type.Date',
+									'path': '/start'
+								},
+								{
+									'type': 'sap.ui.model.type.Date',
+									'path': '/end'
+								}
+							]
+						}"
+						change="aoFiltrar"/>
+				 </Toolbar>
+			  </headerToolbar>
+				<columns>
+					<Column width="50px">
+						<Text text="{i18n>Coluna.ID}"/>
+					</Column>
+					<Column width="auto">
+						<Text text="{i18n>Coluna.Nome}"/>
+					</Column>
+					<Column >
+						<Text text="{i18n>Coluna.CPF}"/>
+					</Column>
+					<Column width="200px">
+						<Text text="{i18n>Coluna.Email}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>Coluna.Telefone}" />
+					</Column>
+					<Column>
+						<Text text="{i18n>Coluna.DataDeCompra}" />
+					</Column>
+					<Column >
+						<Text text="{i18n>Coluna.ValorTotal}" />
+					</Column>
+					<Column>
+						<Text text="{i18n>Coluna.Pago}" />
+					</Column>
+				</columns>
+				<items>
+					<ColumnListItem
+						type="Navigation"
+						press=".aoPressionar">
+						<cells>
+							<Text text="{Vendas>id}" />
+							<Text text="{Vendas>nome}" />
+							<Text text="{Vendas>cpf}" />
+							<Text text="{Vendas>email}" />
+							<Text text="{Vendas>telefone}" />
+							<Text text="{
+								path: 'Vendas>dataDeCompra',
+								type: 'sap.ui.model.type.Date',
+								formatOptions: {
+								  source: {
+									pattern: 'yyyy-MM-ddTHH:mm:ss'
+								  },
+								  pattern: 'dd/MM/yyyy'
+								}
+							  }" />
+							<Text text="{
+								  path:'Vendas>valorTotal',
+								  formatter: '.formatter.formatarValorDaMoeda'
+								  }"/>
+							<ObjectStatus
+								text="{ path: 'Vendas>pago', formatter: '.formatter.alterarStatusDoPagamento' }"
+								state="{= ${Vendas>pago} === false ? 'Error' : 'Success'}"
+							/>
+
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+		</Panel>
+	</Page>
+</mvc:View>

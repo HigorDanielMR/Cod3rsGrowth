@@ -38,7 +38,7 @@ namespace Cod3rsGrowth.Web.DetalhesDosProblemas
                             problemDetails.Title = "Erro de requisição de tarefas";
                             problemDetails.Status = StatusCodes.Status500InternalServerError;
                             problemDetails.Detail = excecao.StackTrace;
-                            problemDetails.Extensions["Erros inesperados: "] = excecao.Message.Split("\r\n");
+                            problemDetails.Extensions["Erros"] = excecao.Message.Split("\r\n");
                         }
 
                         context.Response.StatusCode = problemDetails.Status.Value;
